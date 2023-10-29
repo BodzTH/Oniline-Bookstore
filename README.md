@@ -1,2 +1,2 @@
-# SIS-for-GU
- Student Information System is a system to store and organize student information, such as personal details, academic records and provides access for students to view available courses, drop or add courses.
+# Online-Bookstore
+ A bookstore that provides buy, sell and rent multiple genres of books as an online service. 
