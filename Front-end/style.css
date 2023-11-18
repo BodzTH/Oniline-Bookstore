@@ -1,0 +1,33 @@
+body{
+    display: flex;
+    justify-content:center;
+    font-family: 'Roboto', sans-serif;
+    background: #ffffff;
+    color-scheme: rgb(255, 255, 255);
+    color: #ffffff;
+
+}
+.centerdb{
+    width: 50%;
+    height: 500px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    position: relative;
+    margin-top: 8%;
+
+
+}
+.box{
+    width: 100%; /* Adjust width as needed */
+    height: 100%; /* Adjust height as needed */
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    
+}
