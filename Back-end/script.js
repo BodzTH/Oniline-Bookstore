@@ -1,14 +1,22 @@
-let booksCard=[{
-    image:"link",
-    categori:"sting",
-    BookName:"string" ,
+let bookscard=[{
+    categori:"action",
+    BookName:"my journy" ,
     rating:
     {
-        stars:"int",
-        count:"int"
+        stars:4.5,
+        count:80
     },
-    price:"int"
+    priceCents:1000
 }]
-array.forEach(book => {
-    
+console.log("omar")
+ let productsHTML=``
+bookscard.forEach(book => {
+    productsHTML+=`
+    <div>${book.BookName}</div>
+    <div>${book.rating.count}</div>
+    <div>${book.priceCents/100}</div>
+`
 });
+document.querySelector(".js-products-grid").innerHTML=productsHTML;
+console.log("omar")
+console.log(productsHTML);
