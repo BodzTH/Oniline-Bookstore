@@ -1,8 +1,3 @@
-function Greeting({ name }) {
-    return <h1>Hello, {name}</h1>;
-  }
-  
-  export default function App() {
-    return <Greeting name="world" />
-  }
-  
+let x="Let";
+console.log(`omar is ${x} `)
+console.log(`omar is the best`)
