@@ -7,6 +7,15 @@ let bookscard=[{
         count:80
     },
     priceCents:1000
+},{
+    categori:"action",
+    BookName:"my journy" ,
+    rating:
+    {
+        stars:4.5,
+        count:80
+    },
+    priceCents:1000
 }]
 console.log("omar")
  let productsHTML=``
