@@ -1,26 +1,6 @@
-let bookscard=[{
-    id:1,
-    categori:"action",
-    BookName:"my journy" ,
-    rating:
-    {
-        stars:4.5,
-        count:80
-    },
-    priceCents:1000,
-    instock:10,
-    sold:2,
-},{
-    id:2,
-    categori:"action",
-    BookName:"journey to the center of the earth" ,
-    rating:
-    {
-        stars:4.5,
-        count:80
-    },
-    priceCents:1000
-}]
+import { cart } from './cart.js';
+import { bookscard } from './books.js';
+
  let productsHTML=``
 bookscard.forEach(book => {
     productsHTML+=`
@@ -60,9 +40,6 @@ document.querySelectorAll(".js-add-to-cart").forEach(button => {
             cartQuantity += book.quantity
         });
         document.querySelector(".js-cart-qantity").innerHTML=cartQuantity
-        console.log(cartQuantity)
-
-        console.log(cart)
         
     })
 
