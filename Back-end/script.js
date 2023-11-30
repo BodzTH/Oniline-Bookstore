@@ -1,10 +1,6 @@
 import { cart,removeBook, saveToStorage} from './cart.js';
 import { bookscard } from './books.js';
-localStorage.removeItem('cart')
 let cartQuantity=0;
-cart.forEach(book => {
-    cartQuantity += book.quantity
-});
 
 cart.forEach(book => {
     cartQuantity += book.quantity
@@ -18,6 +14,7 @@ bookscard.forEach(book => {
     <div>${book.rating.count}</div>
     <div>${book.priceCents/100}</div>
     <button class="js-add-to-cart" data-book-id="${book.id}" >add to cart</button>
+    
     
 `
 });
@@ -42,7 +39,8 @@ document.querySelectorAll(".js-add-to-cart").forEach(button => {
         {
         cart.push({
             id:bookid,
-            quantity:1
+            quantity:1,
+            deliveryOptionId:'1' 
         })
         }
         saveToStorage();
