@@ -1,5 +1,11 @@
-import { cart } from './cart.js';
+import { cart,removeBook, saveToStorage} from './cart.js';
 import { bookscard } from './books.js';
+localStorage.removeItem('cart')
+let cartQuantity=0;
+cart.forEach(book => {
+    cartQuantity += book.quantity
+});
+document.querySelector(".js-cart-qantity").innerHTML=cartQuantity
 
  let productsHTML=``
 bookscard.forEach(book => {
@@ -14,10 +20,10 @@ bookscard.forEach(book => {
 document.querySelector(".js-products-grid").innerHTML=productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach(button => {
     button.addEventListener('click',() =>{
-        const bookid =button.dataset.bookId
+        const bookid =Number(button.dataset.bookId)
         let matchingBook;
         cart.forEach(book => {
-            if(bookid==book.ID)
+            if(bookid===book.id)
             {
                 
                 matchingBook=book
@@ -31,15 +37,17 @@ document.querySelectorAll(".js-add-to-cart").forEach(button => {
         else
         {
         cart.push({
-            ID:bookid,
+            id:bookid,
             quantity:1
         })
         }
-        let cartQuantity=0;
+        saveToStorage();
+        cartQuantity=0
         cart.forEach(book => {
             cartQuantity += book.quantity
         });
         document.querySelector(".js-cart-qantity").innerHTML=cartQuantity
+        console.log(cart)
         
     })
 
