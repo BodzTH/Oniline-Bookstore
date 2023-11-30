@@ -5,6 +5,10 @@ let cartQuantity=0;
 cart.forEach(book => {
     cartQuantity += book.quantity
 });
+
+cart.forEach(book => {
+    cartQuantity += book.quantity
+});
 document.querySelector(".js-cart-qantity").innerHTML=cartQuantity
 
  let productsHTML=``
