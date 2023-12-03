@@ -9,7 +9,7 @@ function SearchFound( {book_name, book_description, image, price, books, book_ty
         <div>
 
             {/* Book found text content */}
-            <section>
+            <section className="">
                     
                     <h1>{book_name}</h1>
     
