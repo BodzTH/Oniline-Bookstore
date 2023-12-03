@@ -1,4 +1,4 @@
-import CategoriesRow from "@/components/CategoriesRow";
+import CategoryRow from "@/components/CategoryRow";
 
 function Home() {
   return (
@@ -6,7 +6,7 @@ function Home() {
 
 <section>
 
-<CategoriesRow title={"English Books"} books={["lol"]} name={"DEad"} image={""} price={"500"} cart={"ss"}/>
+<CategoryRow title={"English Books"} books={['/','/','/']} book_name={"The idiot brain"} image={""} price={"500"} cart={'/'}/>
 
 </section>  
       
