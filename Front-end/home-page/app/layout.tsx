@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
+import Header from '@/components/Header'
 
 
 
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   },
   title: 'Bookz',
   description: 'Bookz is a book review site.',
+  
 }
 
 export default function RootLayout({
@@ -25,7 +27,9 @@ export default function RootLayout({
 
       <Navbar />
 
+      <Header/>
       <main>
+        
         {children}
       </main>
 

@@ -4,16 +4,18 @@ import { NavLinks } from '@/constants';
 
 function Navbar() {
  return (
-  <nav className='flexBetween navbar'>
-    <div className='flex-1 flexStart gap-10'>
+  <nav className=' flexBetween navbar'>
+    <div className='flex-1 flexStart'>
       <Link href="/">
-        <Image 
+        <Image className='' 
            src="/logo.svg" alt="Bookz"
-           width={115}
-           height={43}
+           width={100}
+           height={52}
+           
            />
+
       </Link>
-      <ul className='xl:flex hidden gap-7 text-sm font-medium'>
+      <ul className=' flexBetween m-10 gap-7 text-sm font-medium'>
         {
           NavLinks.map((link) => (
             <Link href={link.href} key={link.key}>

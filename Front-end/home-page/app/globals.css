@@ -98,5 +98,13 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply py-5 px-8 border-b  gap-4;
+  @apply border-b border-border-color bg-background-color;
+}
+
+.shadowbox {
+  @apply [box-shadow:0px_8px_20px_0px_rgba(25,_25,_25,_0.20)];
+}
+
+.borders{
+  @apply box-border border border-background-color;
 }
