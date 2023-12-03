@@ -15,6 +15,5 @@ export type SearchProbs = {
   price: string;
   books: string[];
   book_type: string;
-  
 
 };
