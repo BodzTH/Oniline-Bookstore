@@ -1,3 +1,4 @@
+
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
@@ -7,11 +8,12 @@ var con = mysql.createConnection({
   database: "booksdb"
 });
 
-const data=[]
 con.connect(function(err) {
   if (err) throw err;
   con.query("SELECT * FROM books", function (err, result, fields) {
     if (err) throw err;
-    console.log(result[0].id)
+    result.forEach(book => {
+      console.log(book)
+    });
   });
 });
