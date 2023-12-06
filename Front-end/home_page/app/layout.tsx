@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   title: 'Bookz',
   description: 'Bookz is a book review site.',
-  
+
 }
 
 export default function RootLayout({
@@ -25,15 +25,15 @@ export default function RootLayout({
 
       <body >
 
-      <Navbar />
+        <Navbar />
 
-      <Header/>
-      <main>
-        
-        {children}
-      </main>
+        <Header />
+        <main>
 
-      <Footer />
+          {children}
+        </main>
+
+        <Footer />
 
       </body>
 

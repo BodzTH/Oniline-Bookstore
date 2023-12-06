@@ -21,7 +21,7 @@ body {
 }
 
 .flexBetween {
-  @apply flex justify-between items-center ;
+  @apply flex justify-between items-center;
 }
 
 .flexStart {
@@ -81,8 +81,6 @@ body {
   @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5;
 }
 
-
-
 /* Footer */
 .footer {
   @apply flex-col paddings w-full gap-20 border-t border;
@@ -105,6 +103,6 @@ body {
   @apply [box-shadow:0px_8px_20px_0px_rgba(25,_25,_25,_0.20)];
 }
 
-.borders{
+.borders {
   @apply box-border border border-background-color;
 }

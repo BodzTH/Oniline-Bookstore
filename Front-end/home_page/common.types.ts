@@ -5,7 +5,6 @@ export type RowProps = {
   price: number;
   cart: string;
   books: string[];
-
 };
 
 export type SearchProbs = {
@@ -15,11 +14,9 @@ export type SearchProbs = {
   price: number;
   books: string[];
   book_type: string;
-
 };
 
 export type FooterProbs = {
   text: string;
   num: number;
-
 };
