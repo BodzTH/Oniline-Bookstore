@@ -1,7 +1,8 @@
-import CategoryRow, { RowProps } from "@/components/CategoryRow";
+import CategoryRow from "@/components/CategoryRow";
+import { BookProbs } from "@/common.types";
 import Image from "next/image";
 
-function BookCard({ title, book_name, image, price, cart, books }: RowProps) {
+function BookCard({ title, book_name, image, price, cart, books }: BookProbs) {
     return (
         <>
             <div>
@@ -18,7 +19,7 @@ function BookCard({ title, book_name, image, price, cart, books }: RowProps) {
                     <h1>{price}</h1>
                 </div>
                 <div>
-                    <h1>{cart}</h1>
+                    <>{cart}</>
                 </div>
                 <div>
                     <h1>{books}</h1>
