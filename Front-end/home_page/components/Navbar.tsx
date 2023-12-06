@@ -2,9 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NavLinks } from '@/constants';
 
+var x: string = "";
 function Navbar() {
   return (
-    <nav className=' flexBetween navbar mb-16 z-20'>
+    <nav className=' flexBetween navbar mb-20 '>
       <div className='flex-1 flexStart'>
         <Link href="/">
           <Image className='ml-6'
@@ -24,8 +25,20 @@ function Navbar() {
               </Link>
             ))}
         </ul>
-      </div>
-      <div className='gap-4 flex justify-center items-center'>
+        <div className='flexBetween '>
+          <button>
+            <Link href={"/searchfound"} className='px-5'>
+              <Image
+                src="/search.svg" alt="Bookz"
+                width={23}
+                height={15}
+              />
+            </Link>
+          </button>
+
+          <input type="search" className='searchbar text-center placeholder:text-border-color' placeholder='Search'  />
+        </div>
+
 
       </div>
     </nav>
