@@ -30,10 +30,10 @@ module.exports = {
         "127": "127px",
       },
       colors: {
-        "background-color": "#c4b2a4",
-        "text-cart-color": "#efeae4",
-        "border-color": "#191919",
-        "globe-background-color": "#efeae4",
+        "background-color": "#61A2B6A6",
+        "text-cart-color": "#ffffff",
+        "border-color": "#000000",
+        "globe-background-color": "#ffffff",
       },
       boxShadow: {
         menu: "0px 159px 95px rgba(13,12,34,0.01), 0px 71px 71px rgba(13,12,34,0.02), 0px 18px 39px rgba(13,12,34,0.02), 0px 0px 0px rgba(13,12,34,0.02)",
