@@ -12,8 +12,8 @@
 
 body {
   font-family: Inter;
-  background-color: #efeae4;
-  color: #191919;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .flexCenter {
@@ -110,7 +110,7 @@ body {
 
 /* Shadowing */
 .shadowbox {
-  @apply [box-shadow:0px_8px_20px_0px_rgba(25,_25,_25,_0.20)];
+  @apply [box-shadow:0px_6px_10px_0px_rgba(0,_0,_0,_0.15)];
 }
 
 .borders {
