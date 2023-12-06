@@ -3,6 +3,7 @@ import Categories from "./categories/page";
 import SearchFound from "./searchfound/page";
 import Link from "next/link";
 import { footerLinks } from "@/constants";
+import { link } from "fs";
 
 
 function Home() {
@@ -10,9 +11,10 @@ function Home() {
     <main>
       {/* CategoryRow -- put here iteration func */}
       {
-        footerLinks.map((title) => (
-          <CategoryRow key={title.title} title={title.title} />
-        ))
+        footerLinks.map((title,index) => (
+          <CategoryRow key={index} title={title.title} books={title.links[index+1]} />
+        )  
+        )
       }
 
 

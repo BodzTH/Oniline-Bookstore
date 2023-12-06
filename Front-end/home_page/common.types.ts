@@ -1,10 +1,6 @@
 export type RowProps = {
   title: string;
-  book_name: string;
-  image: string;
-  price: number;
-  cart: string;
-  books: string[];
+  books: string;
 };
 
 export type SearchProbs = {
