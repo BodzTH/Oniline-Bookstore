@@ -28,6 +28,10 @@ body {
   @apply flex items-center justify-start;
 }
 
+.flex-Start {
+  @apply flex justify-start ;
+}
+
 .text-small {
   @apply text-sm font-medium;
 }
@@ -96,9 +100,15 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply border-b border-border-color bg-background-color;
+  @apply border-b border-border-color shadowbox bg-background-color;
 }
 
+/* Side Bar */
+.sidebar {
+  @apply fixed top-0 right-0 h-screen w-60 shadowbox bg-globe-background-color z-50; 
+}
+
+/* Shadowing */
 .shadowbox {
   @apply [box-shadow:0px_8px_20px_0px_rgba(25,_25,_25,_0.20)];
 }
