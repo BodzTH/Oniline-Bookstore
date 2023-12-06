@@ -2,7 +2,7 @@ import SideCategory from "./SideCategory";
 
 function SideBar() {
     return (
-        <div className=" flex-Start p-14 sidebar">
+        <div className=" flex-Start p-14 sidebar ">
             <div>
                 <button>
                     <span>Categories</span>
