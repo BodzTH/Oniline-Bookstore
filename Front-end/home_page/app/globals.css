@@ -29,7 +29,7 @@ body {
 }
 
 .flex-Start {
-  @apply flex justify-start ;
+  @apply flex justify-start;
 }
 
 .text-small {
@@ -100,12 +100,12 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply border-b border-border-color shadowbox bg-background-color;
+  @apply border-b h-20 border-border-color shadowbox bg-background-color;
 }
 
 /* Side Bar */
 .sidebar {
-  @apply fixed top-0 right-0 h-screen w-60 shadowbox bg-globe-background-color z-50; 
+  @apply fixed top-0 right-0 h-screen w-60 shadowbox bg-globe-background-color;
 }
 
 /* Shadowing */
