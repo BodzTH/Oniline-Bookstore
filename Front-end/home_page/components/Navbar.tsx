@@ -36,7 +36,7 @@ function Navbar() {
             </Link>
           </button>
 
-          <input type="search" className='searchbar text-center placeholder:text-border-color' placeholder='Search'  />
+          <input type="search" className='searchbar text-center placeholder:text-border-color' placeholder='Search' />
         </div>
 
 

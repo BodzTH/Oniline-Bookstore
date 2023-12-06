@@ -11,15 +11,15 @@ function Home() {
     <main>
       {/* CategoryRow -- put here iteration func */}
       {
-        footerLinks.map((title,index) => (
-          <CategoryRow key={index} title={title.title} books={title.links[index+1]} />
-        )  
+        footerLinks.map((title, index) => (
+          <CategoryRow key={index} title={title.title} books={title.links[index + 1]} />
+        )
         )
       }
 
 
       <br />
-     
+
 
     </main>
   )
