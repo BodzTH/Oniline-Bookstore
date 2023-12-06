@@ -1,7 +1,7 @@
 import { RowProps } from '@/common.types';
 import Image from 'next/image';
 import Link from 'next/link';
-import BookCard from './catcomp/BookCard';
+import BookCard from './BookCard';
 
 
 function CategoryRow({ title, book_name, image, price, cart, books }: RowProps) {

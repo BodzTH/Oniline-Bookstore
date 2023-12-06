@@ -1,5 +1,5 @@
 import CategoryRow from "@/components/CategoryRow";
-import Categories from "./categories/page";
+import Categories from "./[categories]/page";
 import SearchFound from "./[searchfound]/page";
 import Link from "next/link";
 
