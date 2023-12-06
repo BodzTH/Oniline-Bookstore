@@ -5,10 +5,10 @@ import { FooterProbs } from '@/common.types';
 
 
 function Footer() {
-    return (
-      <footer className="flexStart footer">
-        
-      </footer>
-    )
-   }
-   export default Footer;
+  return (
+    <footer className="flexStart footer">
+
+    </footer>
+  )
+}
+export default Footer;
