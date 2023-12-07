@@ -12,8 +12,8 @@
 
 body {
   font-family: Inter;
-  background-color: #efeae4;
-  color: #191919;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .flexCenter {
@@ -21,11 +21,15 @@ body {
 }
 
 .flexBetween {
-  @apply flex justify-between items-center ;
+  @apply flex justify-between items-center;
 }
 
 .flexStart {
   @apply flex items-center justify-start;
+}
+
+.flex-Start {
+  @apply flex justify-start;
 }
 
 .text-small {
@@ -81,8 +85,6 @@ body {
   @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5;
 }
 
-
-
 /* Footer */
 .footer {
   @apply flex-col paddings w-full gap-20 border-t border;
@@ -98,13 +100,24 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply border-b border-border-color bg-background-color;
+  @apply border-b h-20 border-border-color shadowbox bg-background-color;
 }
 
+/* Side Bar */
+.sidebar {
+  @apply fixed top-0 right-0 h-screen w-60 shadowbox bg-globe-background-color;
+}
+
+/* Shadowing */
 .shadowbox {
-  @apply [box-shadow:0px_8px_20px_0px_rgba(25,_25,_25,_0.20)];
+  @apply [box-shadow:0px_6px_10px_0px_rgba(0,_0,_0,_0.15)];
 }
 
-.borders{
+.borders {
   @apply box-border border border-background-color;
+}
+
+/* Search Bar */
+.searchbar {
+  @apply flex items-center justify-between w-52 h-6 rounded-2xl bg-globe-background-color;
 }
