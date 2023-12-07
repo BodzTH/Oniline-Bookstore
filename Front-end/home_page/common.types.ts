@@ -2,7 +2,12 @@ import { ButtonHTMLAttributes } from "react";
 
 export type RowProps = {
   title: string;
-  books: string;
+};
+export type BooksProbs = {
+  book_name: string;
+  image: string;
+  alt_image: string;
+  price: number;
 };
 
 export type BookProbs = {

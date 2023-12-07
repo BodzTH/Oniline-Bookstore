@@ -1,9 +1,13 @@
+import CatBar from "@/components/CatBar";
 
 function Categories() {
   return (
-    <div>
+    <>
+      <CatBar />
+      <div className=" flexBetween">
 
-    </div>
+      </div>
+    </>
   );
 }
 export default Categories;
