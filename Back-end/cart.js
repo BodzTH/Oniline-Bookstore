@@ -16,6 +16,10 @@ cart=[{
 function increment(){
     console.log("increment")
 }
+
+function increment(){
+    console.log("increment")
+}
 let checkoutHTML=``;
 let totalPrice=0;
 cart.forEach(cartItem => {
