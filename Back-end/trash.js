@@ -16,3 +16,16 @@ con.connect(function(err) {
       console.log(result);
     });
   });
+
+
+  document.querySelector('.js-increment').forEach(incrementButton => {
+    incrementButton.addEventListener('click',() =>{
+        const bookid=button.dataset.bookId
+        cart.forEach(item => {
+            if(bookid=== item.bookid)
+            {
+                item.quantity =+ 1;
+            }
+        })
+    })
+})

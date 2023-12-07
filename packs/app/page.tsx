@@ -1,29 +1,26 @@
 import CategoryRow from "@/components/CategoryRow";
 import Categories from "./categories/page";
-import SearchFound from "./[searchfound]/page";
+import SearchFound from "./searchfound/page";
 import Link from "next/link";
+import { footerLinks } from "@/constants";
+import { link } from "fs";
 
-<SearchFound book_name={"The idiot brain"} book_description={"The idiot brain"} image={""} price={"500"} books={['/','/','/']} book_type={"English"} />
 
 function Home() {
   return (
     <main>
+      {/* CategoryRow -- put here iteration func */}
+      {
+        footerLinks.map((title, index) => (
+          <CategoryRow key={index} title={title.title} books={title.links[index + 1]} />
+        )
+        )
+      }
 
-<section>
 
-<CategoryRow title={"English Books"} books={['/','/','/']} book_name={"The idiot brain"} image={""} price={"500"} cart={'/'}/>
+      <br />
 
 
-<br />
-    <Link href={'/searchfound'}>
-    
-    Search
-    </Link>
-    
-  
-
-</section>  
-      
     </main>
   )
 
