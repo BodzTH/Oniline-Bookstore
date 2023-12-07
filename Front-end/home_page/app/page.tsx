@@ -12,7 +12,7 @@ function Home() {
       {/* CategoryRow -- put here iteration func */}
       {
         footerLinks.map((title, index) => (
-          <CategoryRow key={index} title={title.title} books={title.links[index + 1]} />
+          <CategoryRow key={index} title={title.title} />
         )
         )
       }
