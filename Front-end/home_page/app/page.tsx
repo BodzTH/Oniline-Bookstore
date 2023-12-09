@@ -2,24 +2,32 @@ import CategoryRow from "@/components/CategoryHomeRow";
 import Categories from "./categories/page";
 import SearchFound from "./searchfound/page";
 import Link from "next/link";
-import { footerLinks } from "@/constants";
+import { categoryFilters, footerLinks } from "@/constants";
 import { link } from "fs";
+import BookSection from "@/components/BookHomeCard";
+import CategoryHomeRow from "@/components/CategoryHomeRow";
 
 
 function Home() {
   return (
     <main>
       {/* CategoryRow -- put here iteration func */}
-      {
-        footerLinks.map((title, index) => (
-          <CategoryRow key={index} title={title.title} />
-        )
-        )
-      }
+      <div>
+        <div>
+          {
+            footerLinks.map((title, index) => (
+              <CategoryHomeRow key={index} title={title.title} />
+
+            )
+            )
+
+          }
 
 
-      <br />
 
+        </div>
+
+      </div>
 
     </main>
   )

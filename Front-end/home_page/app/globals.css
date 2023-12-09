@@ -100,7 +100,7 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply border-b h-20 border-border-color shadowbox bg-background-color;
+  @apply border-b h-24 border-border-color shadowbox bg-background-color;
 }
 
 /* Side Bar */
@@ -122,7 +122,7 @@ body {
 
 /* Search Bar */
 .searchbar {
-  @apply flex items-center justify-between w-52 h-6 rounded-2xl bg-globe-background-color;
+  @apply flex items-center justify-between w-96 h-8 rounded-2xl bg-globe-background-color;
 }
 
 /* Category Bar */

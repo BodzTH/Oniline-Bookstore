@@ -1,7 +1,7 @@
-import { BooksProbs } from '@/common.types';
+import { BookCardProbs } from '@/common.types';
 import Image from 'next/image';
 import Link from 'next/link';
-function BookCardCat({ book_name, image, alt_image, price }: BooksProbs) {
+function BookCardCat({ book_name, image, alt_image, price }: BookCardProbs) {
     return (
         <div className="">
             <Link href={'/bookpage'} >

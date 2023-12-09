@@ -1,9 +1,9 @@
-import { RowProps } from '@/common.types';
+import { categoryFilters } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
+import BookHomeCard from './BookHomeCard';
 
-
-function CategoryHomeRow({ title }: RowProps) {
+function CategoryHomeRow({ title }: { title: string }) {
   return (
     <>
       <div>
@@ -15,9 +15,15 @@ function CategoryHomeRow({ title }: RowProps) {
           { /* <BookCard title={''} book_name={''} image={''} price={} cart={''} books={[]} /> */}
 
         </section>
+        <div>
+          {categoryFilters.map((lol, index) => (
+            <BookHomeCard key={index} book_name={lol} alt_image={"dd"} image={"/book.svg"} price={2000} cart={<button>Hello</button>} />
+
+          )
+          )}
+        </div>
       </div>
     </>
   );
 }
 export default CategoryHomeRow;
-export type { RowProps };

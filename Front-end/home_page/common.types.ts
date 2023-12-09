@@ -1,23 +1,28 @@
 import { ButtonHTMLAttributes } from "react";
 
-export type RowProps = {
-  title: string;
-};
-export type BooksProbs = {
+export type BookProbs = {
   book_name: string;
+  book_description: string;
   image: string;
   alt_image: string;
   price: number;
+  cart: ButtonHTMLAttributes<HTMLButtonElement>;
+  author: string;
+  publisher: string;
+};
+ 
+export type CatProps = {
+  title: string;
 };
 
-export type BookProbs = {
-  title: string;
-  books: string;
+export type BookCardProbs = {
   book_name: string;
+  alt_image: string;
   image: string;
   price: number;
   cart: ButtonHTMLAttributes<HTMLButtonElement>;
 };
+
 
 export type SearchProbs = {
   book_name: string;
