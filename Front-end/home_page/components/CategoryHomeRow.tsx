@@ -1,10 +1,9 @@
 import { RowProps } from '@/common.types';
 import Image from 'next/image';
 import Link from 'next/link';
-import BookCard from './BookCard';
 
 
-function CategoryRow({ title }: RowProps) {
+function CategoryHomeRow({ title }: RowProps) {
   return (
     <>
       <div>
@@ -20,5 +19,5 @@ function CategoryRow({ title }: RowProps) {
     </>
   );
 }
-export default CategoryRow;
+export default CategoryHomeRow;
 export type { RowProps };

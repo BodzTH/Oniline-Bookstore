@@ -8,7 +8,7 @@ function SearchFound({ book_name, book_description, image, price, books, book_ty
       {/* Book found box */}
       <div>
 
-        {/* Book found text content */}
+        {/* Book found content */}
         <section className="">
 
           <h1>{book_name}</h1>
@@ -19,14 +19,15 @@ function SearchFound({ book_name, book_description, image, price, books, book_ty
 
           <h4>{book_description}</h4>
 
+          <div>
+
+            <Image src={image} alt="" />
+
+          </div>
+
         </section>
 
-        {/* Book found image content */}
-        <div>
 
-          <Image src={image} alt="" />
-
-        </div>
 
 
       </div>

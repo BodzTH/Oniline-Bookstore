@@ -1,13 +1,12 @@
-import CatBar from "@/components/CatBar";
+import BookCardCat from "@/components/BookCatCard";
 
-function Categories() {
+function Category() {
   return (
-    <>
-      <CatBar />
+    <>     
       <div className=" flexBetween">
-
+        <BookCardCat book_name={""} image={"/noun-side-bar-140257.svg"} alt_image={""} price={0}/>
       </div>
     </>
   );
 }
-export default Categories;
+export default Category;
