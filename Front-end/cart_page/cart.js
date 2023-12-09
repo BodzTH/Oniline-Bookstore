@@ -1,56 +1,41 @@
-let shop = document.getElementById('cart-container');
+import { bookscard } from "../../Back-end/books.js";
+import { cart } from "../../Back-end/cart.js";
 
-let shopItemsData = [{
-    id: "first",
-    name: "Calculus",
-    price: 45,
-    desc: "Study Book",
-    img: '/images/calc.jpeg'
-}, {
-    id: "second",
-    name: "Math",
-    price: 60,
-    desc: "Study Book",
-    img: '/images/math.jpeg'
-}, {
-    id: "third",
-    name: "Physics",
-    price: 20,
-    desc: "Study Book",
-    img: '/images/physics.jpeg'
-}, {
-    id: "fourth",
-    name: "chemistry",
-    price: 30,
-    desc: "Study Book",
-    img: '/images/chemistry.jpeg'
-}];
+let shop = document.getElementById('cart-container');
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 let generatshop = () => {
-    return (shop.innerHTML = shopItemsData.map((x) => {
-        let { id, name, price, desc, img } = x;
+    return (shop.innerHTML = bookscard.map((x) => {
+        let { id, BookName, priceCents,desc, categori, image } = x;
         let search = basket.find((x)=>x.id === id) || [];
         return `
     <div id=product-id-${id} class="item">
-        <img src=${img} alt="Product Image" class="cart-row-img">
-        <h2>${name}</h2>
-        <p>${desc}<p>
+        <div class="details">
+        <img src=${image} alt="Product Image" class="cart-row-img" width="220" height="331" >
+        <div class="name_desc">
+        <h2>${BookName}</h2>
+        <h3>${categori}</h3>
+        <p>${desc}</p>
+        </div>
         <div class="price-quantity">
-            <h2>$ ${price}</h2>
             <div class="buttons">
                <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
                <div id=${id} class="quantity">
-               ${search.item === undefined? 0 : search.item}
+               ${search.item === undefined? 1 : search.item}
                </div>
                <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
             </div>
+            <div class="prices">
+            <h2>$ ${priceCents}</h2>
+            </div>
+        </div>
         </div>
     </div>
     `;
     }).join(""));
 };
+
 
 generatshop();
 

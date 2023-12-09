@@ -1,7 +1,9 @@
 export let bookscard=[{
-    id:1,
-    categori:"action",
-    BookName:"my journy" ,
+    id:"First",
+    image:"../Front-end/cart_page/src/math.jpeg",
+    categori:"Study",
+    BookName:"Mathmatics",
+    desc:"description",
     rating:
     {
         stars:4.5,
@@ -11,9 +13,39 @@ export let bookscard=[{
     instock:10,
     sold:2,
 },{
-    id:2,
-    categori:"action",
-    BookName:"journey to the center of the earth" ,
+    id:"Second",
+    image:"../Front-end/cart_page/src/physics.jpeg",
+    categori:"Study",
+    BookName:"Physics",
+    desc:"description",
+    rating:
+    {
+        stars:4.5,
+        count:80
+    },
+    priceCents:1000,
+    instock:5,
+    sold:1,
+},{
+    id:"Third",
+    image:"../Front-end/cart_page/src/chemistry.jpeg",
+    categori:"Study",
+    BookName:"Chemistry",
+    desc:"description",
+    rating:
+    {
+        stars:4.5,
+        count:80
+    },
+    priceCents:1000,
+    instock:5,
+    sold:1,
+},{
+    id:"fourth",
+    image:"../Front-end/cart_page/src/calc.jpeg",
+    categori:"Study",
+    BookName:"calculas",
+    desc:"description",
     rating:
     {
         stars:4.5,
