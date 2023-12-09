@@ -1,8 +1,7 @@
-import CategoryRow from "@/components/CategoryRow";
 import { BookProbs } from "@/common.types";
 import Image from "next/image";
-
-function BookCard({ title, book_name, image, price, cart, books }: BookProbs) {
+{/* Book item section */ }
+function BookSection({ title, book_name, image, price, cart, books }: BookProbs) {
     return (
         <>
             <div>
@@ -28,4 +27,4 @@ function BookCard({ title, book_name, image, price, cart, books }: BookProbs) {
         </>
     );
 }
-export default BookCard;
+export default BookSection

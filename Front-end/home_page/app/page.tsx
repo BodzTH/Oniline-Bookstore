@@ -1,4 +1,4 @@
-import CategoryRow from "@/components/CategoryRow";
+import CategoryRow from "@/components/CategoryHomeRow";
 import Categories from "./categories/page";
 import SearchFound from "./searchfound/page";
 import Link from "next/link";

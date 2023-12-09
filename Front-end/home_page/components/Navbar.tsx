@@ -15,8 +15,9 @@ function Navbar() {
           />
 
         </Link>
-        {/* p-10 vs ml-10 mr-10*/}
-        <ul className=' flexBetween p-10 gap-7 text-sm font-medium'>
+        {/* p-10 vs ml-10 mr-10 gap?*/}
+        <ul className=' flexBetween p-10 gap-7 font-medium'>
+          {/* dropdown categories */}
           {
             NavLinks.map((link) => (
               <Link href={link.href} key={link.key}>
@@ -25,9 +26,10 @@ function Navbar() {
               </Link>
             ))}
         </ul>
+        {/* Search icon */}
         <div className='flexBetween '>
-          <button>
-            <Link href={"/searchfound"} className='px-5'>
+          <button className='pr-1'>
+            <Link href={"/searchfound"} >
               <Image
                 src="/search.svg" alt="Bookz"
                 width={23}
@@ -35,9 +37,23 @@ function Navbar() {
               />
             </Link>
           </button>
-
+          {/* Search bar */}
           <input type="search" className='searchbar text-center placeholder:text-border-color' placeholder='Search' />
         </div>
+
+        <div className='flexBetween ml-10 '>
+          <button >
+            <Link href={"/cart"}>
+              <Image
+                src="/bookshelf.svg" alt="bookshelficon"
+                width={28}
+                height={18}
+              />
+            </Link>
+          </button>
+        </div>
+
+        
 
 
       </div>

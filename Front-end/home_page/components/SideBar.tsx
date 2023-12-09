@@ -1,4 +1,4 @@
-import SideCategory from "./SideCategory";
+import SideCategory from "./SideBarCat";
 
 function SideBar() {
     return (
