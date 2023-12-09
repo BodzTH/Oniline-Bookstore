@@ -1,3 +1,4 @@
+
 const bookscard = [
   {
     id: 1,
@@ -36,21 +37,21 @@ const bookscard = [
   },
 ];
 
-export const getBookByID = (id) => {
+export const getBookByID = (id: number) => {
   return bookscard.find((book) => book.id === id);
 };
 
-export const getBooksByCategory = (category) => {
+export const getBooksByCategory = (category: string) => {
   return bookscard.filter((book) => book.category === category);
 };
 
-export const getCategories = ()=> {
+export const getCategories = () => {
   const categoriesSet = new Set();
   bookscard.forEach((book) => categoriesSet.add(book.category));
-  return Array.from(categoriesSet) ;
+  return Array.from(categoriesSet);
 };
 
-export const getBooksBySearchQuery = (searchQuery ) => {
+export const getBooksBySearchQuery = (searchQuery: string) => {
   return bookscard.filter((book) => {
     return (
       book.bookName.includes(searchQuery) || book.category.includes(searchQuery)

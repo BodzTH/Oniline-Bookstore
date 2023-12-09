@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { RowProps } from '@/common.types';
+=======
+
+>>>>>>> 924c180 (Update test)
 import Image from 'next/image';
 import Link from 'next/link';
 <<<<<<< HEAD
@@ -7,7 +11,7 @@ import Link from 'next/link';
 function CategoryHomeRow({ title }: RowProps) {
 =======
 import BookHomeCard from './BookHomeCard';
-import { getBooksByCategory } from '@/constants/books';
+import { getBooksByCategory } from '@/constants/index';
 
 function CategoryHomeRow({ title }: { title: string }) {
   const categoryBooks = getBooksByCategory(title);

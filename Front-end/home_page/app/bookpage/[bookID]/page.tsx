@@ -1,6 +1,6 @@
 'use client'
 import { BookProbs } from "@/common.types"
-import { getBookByID } from "@/constants/books"
+import { getBookByID } from "@/constants/index"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 function BookPage() {

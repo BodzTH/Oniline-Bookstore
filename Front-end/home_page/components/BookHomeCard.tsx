@@ -11,7 +11,7 @@ function BookHomeCard({ book_name, image, price, cart, alt_image, id }: BookCard
                     <div>
                         {/* Book image */}
                         <div>
-                            <img src={image} alt={alt_image} width={50} height={50} />
+                            <Image src={image} alt={alt_image} width={50} height={50} />
                         </div>
                         {/* Book content */}
                         <div className="">

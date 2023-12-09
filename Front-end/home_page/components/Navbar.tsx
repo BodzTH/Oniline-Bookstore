@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { NavLinks } from '@/constants';
+import { NavLinks } from '@/constants/test';
 
 var x: string = "";
 function Navbar() {

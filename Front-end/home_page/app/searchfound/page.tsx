@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { SearchProbs } from "@/common.types";
-import { getBooksBySearchQuery } from "@/constants/books";
+import { getBooksBySearchQuery } from "@/constants/index";
 
 function SearchFound({ book_name, book_description, image, price, books, book_type }: SearchProbs) {
   const searchParams = useSearchParams()
   const search = searchParams.get('q')
-  const query = getBooksBySearchQuery(search ?? '')
+  const query = getBooksBySearchQuery(search ?? '3')
   console.log(search)
   console.log(query)
   return (
