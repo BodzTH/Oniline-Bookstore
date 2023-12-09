@@ -15,6 +15,7 @@ export type BookProbs = {
   books: string;
   book_name: string;
   image: string;
+  alt_image: string;
   price: number;
   cart: ButtonHTMLAttributes<HTMLButtonElement>;
   id: number;

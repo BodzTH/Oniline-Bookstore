@@ -1,5 +1,5 @@
 'use client'
-import BookHomeCard from "@/components/BookHomeCard";
+import BookHomeCard from "@/components/BookCard";
 import CategoryHomeRow from "@/components/CategoryHomeRow";
 import { useParams } from "next/navigation";
 

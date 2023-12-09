@@ -1,8 +1,8 @@
-import { BookCardProbs } from "@/common.types";
+import { BookProbs } from "@/common.types";
 import Image from "next/image";
 import Link from "next/link";
 {/* Book item section */ }
-function BookHomeCard({ book_name, image, price, cart, alt_image, id }: BookCardProbs) {
+function BookCard({ book_name, image, price, cart, alt_image, id }: BookProbs) {
     return (
         <>
             <div className="">
@@ -25,4 +25,4 @@ function BookHomeCard({ book_name, image, price, cart, alt_image, id }: BookCard
         </>
     );
 }
-export default BookHomeCard
+export default BookCard
