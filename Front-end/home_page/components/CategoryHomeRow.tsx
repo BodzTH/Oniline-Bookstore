@@ -1,9 +1,17 @@
 import { RowProps } from '@/common.types';
 import Image from 'next/image';
 import Link from 'next/link';
+<<<<<<< HEAD
 
 
 function CategoryHomeRow({ title }: RowProps) {
+=======
+import BookHomeCard from './BookHomeCard';
+import { getBooksByCategory } from '@/constants/books';
+
+function CategoryHomeRow({ title }: { title: string }) {
+  const categoryBooks = getBooksByCategory(title);
+>>>>>>> 7cf3a31 (book card category)
   return (
     <>
       <div>
@@ -15,6 +23,17 @@ function CategoryHomeRow({ title }: RowProps) {
           { /* <BookCard title={''} book_name={''} image={''} price={} cart={''} books={[]} /> */}
 
         </section>
+<<<<<<< HEAD
+=======
+        <div className='flex-1 flex gap-3'>
+          {
+            categoryBooks.map((lol, index) => (
+              <BookHomeCard key={index} book_name={lol.bookName} alt_image={"dd"} image={lol.url} price={lol.price} id={lol.id} cart={<button>Hello</button>} />
+
+            )
+            )}
+        </div>
+>>>>>>> 7cf3a31 (book card category)
       </div>
     </>
   );

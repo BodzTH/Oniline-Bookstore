@@ -2,16 +2,16 @@ import { BookCardProbs } from "@/common.types";
 import Image from "next/image";
 import Link from "next/link";
 {/* Book item section */ }
-function BookHomeCard({ book_name, image, price, cart, alt_image }: BookCardProbs) {
+function BookHomeCard({ book_name, image, price, cart, alt_image, id }: BookCardProbs) {
     return (
         <>
-            <div className="flexStart w-0">
+            <div className="">
 
-                <Link href={'/bookpage'} className="">
+                <Link href={'/bookpage/' + id} className="">
                     <div>
                         {/* Book image */}
                         <div>
-                            <Image src={image} alt={alt_image} width={50} height={50} />
+                            <img src={image} alt={alt_image} width={50} height={50} />
                         </div>
                         {/* Book content */}
                         <div className="">
