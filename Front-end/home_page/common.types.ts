@@ -17,6 +17,7 @@ export type BookProbs = {
   image: string;
   price: number;
   cart: ButtonHTMLAttributes<HTMLButtonElement>;
+  id: number;
 };
 
 export type SearchProbs = {
