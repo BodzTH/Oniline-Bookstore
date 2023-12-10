@@ -5,28 +5,38 @@ let shop = document.getElementById('cart-container');
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 console.log(cart[0].quantity)
 let generatshop = () => {
-    return (shop.innerHTML = bookscard.map((x) => {
-        let { id, BookName, priceCents,desc, categori, image } = x;
-        let search = cart.find((x)=>x.id === id) || [];
+    let matching;
+    return (shop.innerHTML = cart.map((x) => {
+        bookscard.map((book) => {
+            if(x.id != book.id)
+            {
+                return
+            }
+            else{
+                matching=book;
+            }
+        })
+        
+     
         return `
-    <div id=product-id-${id} class="item">
+    <div id=product-id-${matching.id} class="item">
         <div class="details">
-        <img src=${image} alt="Product Image" class="cart-row-img" width="220" height="331" >
+        <img src=${matching.image} alt="Product Image" class="cart-row-img" width="220" height="331" >
         <div class="name_desc">
-        <h2>${BookName}</h2>
-        <h3>${categori}</h3>
-        <p>${desc}</p>
+        <h2>${matching.BookName}</h2>
+        <h3>${matching.categori}</h3>
+        <p>${matching.desc}</p>
         </div>
         <div class="price-quantity">
             <div class="buttons">
-               <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
-               <div id=${id} class="quantity">
-               ${search.item === undefined? 1 : search.item}
+               <i onclick="decrement(${matching.id})" class="bi bi-dash-lg"></i>
+               <div id=${matching.id} class="quantity">
+               ${x.quantity}
                </div>
-               <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
+               <i onclick="increment(${matching.id})" class="bi bi-plus-lg"></i>
             </div>
             <div class="prices">
-            <h2>$ ${priceCents}</h2>
+            <h2>$ ${((matching.priceCents)/100).toFixed(2)}</h2>
             </div>
         </div>
         </div>
@@ -40,7 +50,7 @@ console.log(generatshop());
 
 let increment = (id) => {
     let selectedItem = id;
-    let search = basket.find((y) => y.id === selectedItem.id);
+    let search = cart.find((y) => y.id === selectedItem.id);
     if (search === undefined) {
         basket.push({
             id: selectedItem.id,
@@ -55,7 +65,7 @@ let increment = (id) => {
 };
 let decrement = (id) => {
     let selectedItem = id;
-    let search = basket.find((y) => y.id === selectedItem.id);
+    let search = cart.find((y) => y.id === selectedItem.id);
     if(search === undefined) return
     else if (search.item === 0) {
         return;

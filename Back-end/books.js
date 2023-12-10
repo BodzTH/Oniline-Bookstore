@@ -1,5 +1,5 @@
 export let bookscard=[{
-    id:"First",
+    id:1,
     image:"../Front-end/cart_page/src/math.jpeg",
     categori:"Study",
     BookName:"Mathmatics",
@@ -13,7 +13,7 @@ export let bookscard=[{
     instock:10,
     sold:2,
 },{
-    id:"Second",
+    id:2,
     image:"../Front-end/cart_page/src/physics.jpeg",
     categori:"Study",
     BookName:"Physics",
@@ -27,7 +27,7 @@ export let bookscard=[{
     instock:5,
     sold:1,
 },{
-    id:"Third",
+    id:3,
     image:"../Front-end/cart_page/src/chemistry.jpeg",
     categori:"Study",
     BookName:"Chemistry",
@@ -41,7 +41,7 @@ export let bookscard=[{
     instock:5,
     sold:1,
 },{
-    id:"fourth",
+    id:4,
     image:"../Front-end/cart_page/src/calc.jpeg",
     categori:"Study",
     BookName:"calculas",
