@@ -1,6 +1,5 @@
 import { bookscard } from "../../Back-end/books.js";
 import { cart } from "../../Back-end/cart.js";
-
 let shop = document.getElementById('cart-container');
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 console.log(cart[0].quantity)
@@ -29,14 +28,14 @@ let generatshop = () => {
         </div>
         <div class="price-quantity">
             <div class="buttons">
-               <i onclick="decrement(${matching.id})" class="bi bi-dash-lg"></i>
+               <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
                <div id=${matching.id} class="quantity">
                ${x.quantity}
                </div>
-               <i onclick="increment(${matching.id})" class="bi bi-plus-lg"></i>
+               <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
             </div>
             <div class="prices">
-            <h2>$ ${((matching.priceCents)/100).toFixed(2)}</h2>
+            <h2>$ ${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
             </div>
         </div>
         </div>
@@ -46,7 +45,6 @@ let generatshop = () => {
 };
 
 console.log(generatshop());
-
 
 let increment = (id) => {
     let selectedItem = id;
@@ -63,7 +61,7 @@ let increment = (id) => {
     update(selectedItem.id);
     localStorage.setItem("data", JSON.stringify(basket));
 };
-let decrement = (id) => {
+/*let decrement = (id) => {
     let selectedItem = id;
     let search = cart.find((y) => y.id === selectedItem.id);
     if(search === undefined) return
@@ -86,7 +84,55 @@ let update = (id) => {
 
 let calculation = () => {
     let cartIcon = document.getElementById("cartAmount")
-    cartIcon.innerHTML = basket.map((y) => y.item).reduce((x, y) => x + y, 0);
+    cartIcon.innerHTML = cart.map((y) => y.item).reduce((x, y) => x + y, 0);
 }
 
-calculation();
+calculation();*/
+let decrement_buttons=document.querySelectorAll('.js-decrement')
+decrement_buttons.forEach(button => {
+    button.addEventListener('click',() => {
+    let bookid=button.dataset.bookId
+    cart.map(item => {
+        if(bookid==item.id)
+        {
+        item.quantity-=1
+        console.log(item.quantity)
+        let newTotalPrice=updatePrice(item,bookid)/100
+        console.log(newTotalPrice)
+        }
+    })
+})
+})
+
+let increment_buttons=document.querySelectorAll('.js-increment')
+increment_buttons.forEach(button => {
+    button.addEventListener('click',() => {
+    let bookid=button.dataset.bookId
+    cart.map(item => {
+        if(bookid==item.id)
+        {
+        item.quantity+=1
+        console.log(item.quantity)
+        let newTotalPrice=updatePrice(item,bookid)/100
+        console.log(newTotalPrice)
+        }
+    })
+})
+})
+
+
+function updatePrice(item,id)
+{
+let newTotalPrice;
+bookscard.map(book => {
+if(book.id==id){
+newTotalPrice=item.quantity*book.priceCents
+}
+})
+return newTotalPrice
+}
+
+
+function testFunction(){
+    console.log('test')
+}
