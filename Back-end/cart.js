@@ -13,13 +13,9 @@ cart=[{
         deliveryOptionId:'2'
     }]
 }
-function increment(){
-    console.log("increment")
-}
 
-function increment(){
-    console.log("increment")
-}
+
+
 let checkoutHTML=``;
 let totalPrice=0;
 cart.forEach(cartItem => {
@@ -50,7 +46,10 @@ cart.forEach(cartItem => {
     <div class="cart-row">
     <h2 class="cart-row-title">${matchingBook.BookName}</h2>
     <div class="buttons">
-        <i class="bi bi-dash-lg js-increment" onclick="increment()"  data-book-id="${matchingBook.id}"></i>
+        <i class="bi bi-dash-lg js-increment" onclick="function inc() {
+            console.log("inc")
+        } 
+        inc();"  data-book-id="${matchingBook.id}"></i>
         <div class="quantity">${cartItem.quantity}</div>
         <i class="bi bi-plus-lg"   data-book-id="${matchingBook.id}"></i>
     </div>
@@ -77,5 +76,7 @@ export function saveToStorage()
     localStorage.setItem('cart',JSON.stringify(cart))
 }
 
-
+function inc() {
+    console.log("inc")
+}
 
