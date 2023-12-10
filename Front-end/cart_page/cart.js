@@ -2,13 +2,12 @@ import { bookscard } from "../../Back-end/books.js";
 import { cart } from "../../Back-end/cart.js";
 
 let shop = document.getElementById('cart-container');
-
 let basket = JSON.parse(localStorage.getItem("data")) || [];
-
+console.log(cart[0].quantity)
 let generatshop = () => {
     return (shop.innerHTML = bookscard.map((x) => {
         let { id, BookName, priceCents,desc, categori, image } = x;
-        let search = basket.find((x)=>x.id === id) || [];
+        let search = cart.find((x)=>x.id === id) || [];
         return `
     <div id=product-id-${id} class="item">
         <div class="details">
@@ -36,8 +35,8 @@ let generatshop = () => {
     }).join(""));
 };
 
+console.log(generatshop());
 
-generatshop();
 
 let increment = (id) => {
     let selectedItem = id;
