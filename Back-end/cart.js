@@ -14,7 +14,28 @@ cart=[{
     }]
 }
 
-console.log(cart)
+export function saveToStorage()
+{
+    localStorage.setItem('cart',JSON.stringify(cart))
+}
+export function deleteItem(){
+let delete_buttons=document.querySelectorAll('.js-delete-item')
+delete_buttons.forEach(button => {
+    button.addEventListener('click',() => {
+        const newCart=[];
+        let bookid=button.dataset.bookId
+        console.log(bookid)
+        cart.map(item => {
+            if(bookid != item.id)
+            {
+                newCart.push(item)
+                console.log(item)
+            }
+        })
+        cart=newCart
+        saveToStorage();
+        console.log(cart)
+    })
 
-
-
+})
+}

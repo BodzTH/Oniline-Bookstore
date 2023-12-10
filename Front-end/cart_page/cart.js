@@ -1,7 +1,7 @@
 import { bookscard } from "../../Back-end/books.js";
-import { cart } from "../../Back-end/cart.js";
+import { cart,saveToStorage,deleteItem } from "../../Back-end/cart.js";
+localStorage.clear();
 let shop = document.getElementById('cart-container');
-let basket = JSON.parse(localStorage.getItem("data")) || [];
 console.log(cart[0].quantity)
 let generatshop = () => {
     let matching;
@@ -33,6 +33,7 @@ let generatshop = () => {
                ${x.quantity}
                </div>
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
+               <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
             </div>
             <div class="prices">
             <h2>$ ${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
@@ -46,7 +47,7 @@ let generatshop = () => {
 
 console.log(generatshop());
 
-let increment = (id) => {
+/*let increment = (id) => {
     let selectedItem = id;
     let search = cart.find((y) => y.id === selectedItem.id);
     if (search === undefined) {
@@ -61,7 +62,7 @@ let increment = (id) => {
     update(selectedItem.id);
     localStorage.setItem("data", JSON.stringify(basket));
 };
-/*let decrement = (id) => {
+let decrement = (id) => {
     let selectedItem = id;
     let search = cart.find((y) => y.id === selectedItem.id);
     if(search === undefined) return
@@ -95,10 +96,14 @@ decrement_buttons.forEach(button => {
     cart.map(item => {
         if(bookid==item.id)
         {
+        if(item.quantity>=2)
+        {
         item.quantity-=1
         console.log(item.quantity)
         let newTotalPrice=updatePrice(item,bookid)/100
         console.log(newTotalPrice)
+        saveToStorage();
+        }
         }
     })
 })
@@ -115,10 +120,14 @@ increment_buttons.forEach(button => {
         console.log(item.quantity)
         let newTotalPrice=updatePrice(item,bookid)/100
         console.log(newTotalPrice)
+        saveToStorage();
         }
     })
 })
 })
+
+
+deleteItem()
 
 
 function updatePrice(item,id)
@@ -130,9 +139,4 @@ newTotalPrice=item.quantity*book.priceCents
 }
 })
 return newTotalPrice
-}
-
-
-function testFunction(){
-    console.log('test')
 }
