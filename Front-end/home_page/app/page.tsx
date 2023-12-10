@@ -1,24 +1,31 @@
-import CategoryRow from "@/components/CategoryRow";
-import Categories from "./categories/page";
+import Categories from "./categories/[category]/page";
 import SearchFound from "./searchfound/page";
 import Link from "next/link";
-import { footerLinks } from "@/constants";
 import { link } from "fs";
+import BookSection from "@/components/BookCard";
+import CategoryHomeRow from "@/components/CategoryHomeRow";
+import { getCategories } from "@/constants/index";
+
 
 
 function Home() {
+  const categoires = getCategories()
   return (
     <main>
       {/* CategoryRow -- put here iteration func */}
-      {
-        footerLinks.map((title, index) => (
-          <CategoryRow key={index} title={title.title} />
-        )
-        )
-      }
+      <div>
+        <div>
+          {
+            categoires.map((category, index) => (
+              <CategoryHomeRow key={index} title={category as string} />
 
+            )
+            )
 
-      <br />
+          }
+
+        </div>
+      </div>
 
 
     </main>

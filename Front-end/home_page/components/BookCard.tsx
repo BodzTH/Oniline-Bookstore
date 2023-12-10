@@ -1,31 +1,28 @@
-import CategoryRow from "@/components/CategoryRow";
 import { BookProbs } from "@/common.types";
 import Image from "next/image";
-
-function BookCard({ title, book_name, image, price, cart, books }: BookProbs) {
+import Link from "next/link";
+{/* Book item section */ }
+function BookCard({ book_name, image, price, cart, alt_image, id }: BookProbs) {
     return (
         <>
-            <div>
-                <div>
-                    <h1>{title}</h1>
-                </div>
-                <div>
-                    <h1>{book_name}</h1>
-                </div>
-                <div>
-                    <Image src={image} alt="" />
-                </div>
-                <div>
-                    <h1>{price}</h1>
-                </div>
-                <div>
-                    <>{cart}</>
-                </div>
-                <div>
-                    <h1>{books}</h1>
-                </div>
+            <div className="">
+
+                <Link href={'/bookpage/' + id} className="">
+                    <div>
+                        {/* Book image */}
+                        <div>
+                            <Image src={image} alt={alt_image} width={50} height={50} />
+                        </div>
+                        {/* Book content */}
+                        <div className="">
+                            <h1 className="">{book_name}</h1>
+                            <h1 className="">{price}</h1>
+                        </div>
+                    </div>
+                </Link>
+
             </div>
         </>
     );
 }
-export default BookCard;
+export default BookCard
