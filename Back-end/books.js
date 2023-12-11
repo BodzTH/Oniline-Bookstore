@@ -29,7 +29,7 @@ export let bookscard=[{
     sold:1,
 },{
     id:3,
-    image:"../Front-end/cart_page/src/chemistry.jpeg",
+    image:"src/chemistry.jpeg",
     categori:"Study",
     BookName:"Chemistry",
     desc:"description",
@@ -43,7 +43,7 @@ export let bookscard=[{
     sold:1,
 },{
     id:4,
-    image:"../Front-end/cart_page/src/calc.jpeg",
+    image:"src/calc.jpeg",
     categori:"Study",
     BookName:"calculas",
     desc:"description",
