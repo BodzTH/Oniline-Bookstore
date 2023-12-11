@@ -1,6 +1,7 @@
+
 export let bookscard=[{
     id:1,
-    image:"../Front-end/cart_page/src/math.jpeg",
+    image:'src/math.jpeg',
     categori:"Study",
     BookName:"Mathmatics",
     desc:"description",
@@ -14,7 +15,7 @@ export let bookscard=[{
     sold:2,
 },{
     id:2,
-    image:"../Front-end/cart_page/src/physics.jpeg",
+    image:"src/physics.jpeg",
     categori:"Study",
     BookName:"Physics",
     desc:"description",
