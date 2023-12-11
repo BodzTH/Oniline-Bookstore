@@ -6,7 +6,7 @@ import { FooterProbs } from '@/common.types';
 
 function Footer() {
   return (
-    <footer className="flexStart footer"> footer
+    <footer className="flexStart footer mt-20"> footer
   
       
     </footer>

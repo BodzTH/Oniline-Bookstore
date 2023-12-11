@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { SearchProbs } from "@/common.types"
-function BookItem({ book_name,book_description, image, price, book_type, alt_image }: SearchProbs) {
+import { BookItemProbs, SearchProbs } from "@/common.types"
+function BookItem({ book_name,book_description, image, price, book_type, alt_image, cart }: BookItemProbs) {
   return (
     <div>
       {/* Book found box */}
@@ -13,6 +13,9 @@ function BookItem({ book_name,book_description, image, price, book_type, alt_ima
           <h4>{book_description}</h4>
           <div>
             <Image src={image} alt={alt_image} width={333} height={33} />
+          </div>
+          <div>
+            <>{cart}</>
           </div>
         </section>
       </div>

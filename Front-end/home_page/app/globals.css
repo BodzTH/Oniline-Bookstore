@@ -87,7 +87,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply relative bottom-0 py-4 shadowboxf  w-full gap-20 border-t  border-border-color bg-background-color;
+  @apply relative bottom-0 py-4 shadowboxfooter  w-full gap-20 border-t  border-border-color bg-background-color;
 }
 
 .footer_copyright {
@@ -113,11 +113,16 @@ body {
   @apply [box-shadow:0px_6px_10px_0px_rgba(0,_0,_0,_0.15)];
 }
 /* Shadowing footer */
-.shadowboxf {
+.shadowboxfooter {
   @apply [box-shadow:0px_-6px_10px_0px_rgba(0,_0,_0,_0.15)];
 }
+
+/* Shadowing cat */
+.shadowboxcat {
+  @apply [box-shadow:0px_0px_5px_0px_rgba(0,_0,_0,_0)];
+}
 .borders {
-  @apply box-border border border-background-color;
+  @apply box-border border border-border-color;
 }
 
 /* Search Bar */
