@@ -1,9 +1,15 @@
+'use client'
 import Link from 'next/link';
 import Image from 'next/image';
 import { NavLinks } from '@/constants/test';
+import { useState } from 'react';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import Search from '@/components/Search';
 
-var x: string = "";
 function Navbar() {
+
+ 
+  
   return (
     <nav className=' flexBetween navbar mb-20 '>
       <div className='flex-1 flexStart'>
@@ -28,17 +34,9 @@ function Navbar() {
         </ul>
         {/* Search icon */}
         <div className='flexBetween '>
-          <button className='pr-1'>
-            <Link href={"/searchfound"} >
-              <Image
-                src="/search.svg" alt="Bookz"
-                width={23}
-                height={15}
-              />
-            </Link>
-          </button>
+          
           {/* Search bar */}
-          <input type="search" className='searchbar text-center placeholder:text-border-color' placeholder='Search' />
+          <Search />
         </div>
 
         <div className='flexBetween ml-10 '>
@@ -53,7 +51,7 @@ function Navbar() {
           </button>
         </div>
 
-        
+
 
 
       </div>

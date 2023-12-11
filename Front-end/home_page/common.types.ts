@@ -25,8 +25,8 @@ export type SearchProbs = {
   book_name: string;
   book_description: string;
   image: string;
+  alt_image: string;
   price: number;
-  books: string[];
   book_type: string;
 };
 

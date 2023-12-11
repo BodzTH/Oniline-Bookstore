@@ -1,5 +1,5 @@
 import Categories from "./categories/[category]/page";
-import SearchFound from "./searchfound/page";
+import SearchFound from "./[search]/page";
 import Link from "next/link";
 import { link } from "fs";
 import BookSection from "@/components/BookCard";
