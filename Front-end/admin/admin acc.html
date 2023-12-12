@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory Management</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .tabs {
+            display: flex;
+        }
+
+        .tab {
+            padding: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #ddd;
+        }
+
+        .tab:hover {
+            background-color: #ccc;
+        }
+
+        .tab-content {
+            margin-top: 20px;
+        }
+
+        label, input, button {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, button {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Admin Panel</h1>
+
+<!-- Tabs -->
+<div class="tabs">
+    <div class="tab" onclick="showTab('addNumberTab')">Add Number</div>
+    <div class="tab" onclick="showTab('addNewTab')">Add New Book</div>
+    <div class="tab" onclick="showTab('deleteTab')">Delete Book</div>
+    <div class="tab" onclick="showTab('reduceTab')">Reduce Number</div>
+</div>
+
+<!-- Add Number of Books to Stock -->
+<div id="addNumberTab" class="tab-content">
+    <h2>Add Number of Books to Stock</h2>
+    <label for="bookId">Book ID:</label>
+    <input type="text" id="bookId">
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity">
+    <button onclick="addBooksToStock()">Add to Stock</button>
+</div>
+
+<!-- Add New Book to Stock -->
+<div id="addNewTab" class="tab-content" style="display:none;">
+    <h2>Add New Book to Stock</h2>
+    <label for="bookId">Book ID:</label>
+    <input type="text" id="bookId">
+    <label for="bookName">Book Name:</label>
+    <input type="text" id="bookName">
+    <label for="bookCategory">Book Category:</label>
+    <input type="text" id="bookCategory">
+    <label for="numBooksStore">Number of Books in Store:</label>
+    <input type="number" id="numBooksStore">
+    <label for="numBooksSold">Number of Books Sold:</label>
+    <input type="number" id="numBooksSold">
+    <label for="bookImage">Book Image URL:</label>
+    <input type="text" id="bookImage">
+    <label for="bookPrice">Book Price:</label>
+    <input type="number" id="bookPrice">
+    <label for="bookRating">Book Rating:</label>
+    <input type="number" id="bookRating" step="0.1">
+    <label for="numRatings">Number of Ratings:</label>
+    <input type="number" id="numRatings">
+
+    <button onclick="addNewBookToStock()">Add New Book to Stock</button>
+</div>
+
+<!-- Delete Book from Database -->
+<div id="deleteTab" class="tab-content" style="display:none;">
+    <h2>Delete Book from Database</h2>
+    <label for="deleteBookId">Book ID:</label>
+    <input type="text" id="deleteBookId">
+    <button onclick="deleteBookFromDatabase()">Delete Book</button>
+</div>
+
+<!-- Reduce Number of Books from Stock -->
+<div id="reduceTab" class="tab-content" style="display:none;">
+    <h2>Reduce Number of Books from Stock</h2>
+    <label for="reduceBookId">Book ID:</label>
+    <input type="text" id="reduceBookId">
+    <label for="reduceQuantity">Quantity:</label>
+    <input type="number" id="reduceQuantity">
+    <button onclick="reduceBooksFromStock()">Reduce from Stock</button>
+</div>
+
+<script>
+    function showTab(tabId) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(function (tab) {
+            tab.style.display = 'none';
+        });
+
+        // Show the selected tab
+        document.getElementById(tabId).style.display = 'block';
+    }
+
+</script>
+
+</body>
+</html>
