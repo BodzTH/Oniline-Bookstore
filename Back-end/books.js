@@ -1,4 +1,4 @@
-
+//import { bookid } from "../Front-end/admin/admin.js"
 export let bookscard=[{
     id:1,
     image:'src/math.jpeg',
@@ -56,3 +56,38 @@ export let bookscard=[{
     instock:5,
     sold:1,
 }]
+
+
+/*export function deleteBookFromDatabase(){
+const button =document.querySelector('.js-delete-from-database-button')
+button.addEventListener('click',() => {
+console.log(bookid)   
+const newBooksCard=[]      
+bookscard.forEach(book => {
+    if(bookid != book.id)
+    {
+        
+        newBooksCard.push(book)
+    }
+})
+bookscard=newBooksCard;
+console.log(bookscard)
+})
+
+}*/
+export function deleteBookFromDatabase(){
+const button =document.querySelector('.js-delete-from-database-button')
+button.addEventListener('click', () => {
+    const bookid =document.querySelector('.js-delete-from-database').value
+    console.log(bookid)
+    const newBooksCard=[];
+    bookscard.forEach(book => {
+        if(bookid!=book.id)
+        {
+            newBooksCard.push(book)
+        }
+    })
+    bookscard=newBooksCard
+    console.log(bookscard)
+})
+}
