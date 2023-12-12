@@ -37,7 +37,7 @@ body {
 }
 
 .paddings {
-  @apply lg:px-20 py-6 px-5;
+  @apply lg:px-20 py-8 px-5;
 }
 
 ::-webkit-scrollbar {
@@ -87,7 +87,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply flex-col paddings w-full gap-20 border-t border;
+  @apply relative bottom-0 py-4 shadowboxfooter  w-full gap-20 border-t  border-border-color bg-background-color;
 }
 
 .footer_copyright {
@@ -112,12 +112,25 @@ body {
 .shadowbox {
   @apply [box-shadow:0px_6px_10px_0px_rgba(0,_0,_0,_0.15)];
 }
+/* Shadowing footer */
+.shadowboxfooter {
+  @apply [box-shadow:0px_-6px_10px_0px_rgba(0,_0,_0,_0.15)];
+}
 
+/* Shadowing cat */
+.shadowboxcat {
+  @apply [box-shadow:0px_0px_5px_0px_rgba(0,_0,_0,_0)];
+}
 .borders {
-  @apply box-border border border-background-color;
+  @apply box-border border border-border-color;
 }
 
 /* Search Bar */
 .searchbar {
   @apply flex items-center justify-between w-52 h-6 rounded-2xl bg-globe-background-color;
+}
+
+/* Category Bar */
+.catbar {
+  @apply fixed top-32 left-0 h-screen w-48 ml-4 pb-5 border-l-0 border-x bg-globe-background-color;
 }

@@ -1,98 +1,60 @@
-/*
 
-  This file is used for all backend constants used in the app
-
-*/
-
-export const NavLinks = [
-  { href: "/", key: "Inspiration", text: "Categories" },
-  { href: "/", key: "Find Projects", text: "Contact us" },
-  { href: "/", key: "Learn Development", text: "About" },
+const bookscard = [
+  {
+    id: 1,
+    bookName: "Book 1",
+    category: "Fiction",
+    price: 10.99,
+    url: "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+  },
+  {
+    id: 2,
+    bookName: "Book 2",
+    category: "Non-Fiction",
+    price: 12.99,
+    url: "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+  },
+  {
+    id: 3,
+    bookName: "Book 3",
+    category: "Sci-Fi",
+    price: 15.99,
+    url: "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+  },
+  {
+    id: 4,
+    bookName: "Book 4",
+    category: "Fiction",
+    price: 15.99,
+    url: "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+  },
+  {
+    id: 5,
+    bookName: "Book 5",
+    category: "History",
+    price: 45.99,
+    url: "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+  },
 ];
 
-export const categoryFilters = [
-  "Frontend",
-  "Backend",
-  "Full-Stack",
-  "Mobile",
-  "UI/UX",
-  "Game Dev",
-  "DevOps",
-  "Data Science",
-  "Machine Learning",
-  "Cybersecurity",
-  "Blockchain",
-  "E-commerce",
-  "Chatbots",
-];
+export const getBookByID = (id: number) => {
+  return bookscard.find((book) => book.id === id);
+};
 
-export const footerLinks = [
-  {
-    title: "For developers",
-    links: [
-      "Go Pro!",
-      "Explore development work",
-      "Development blog",
-      "Code podcast",
-      "Open-source projects",
-      "Refer a Friend",
-      "Code of conduct",
-    ],
-  },
-  {
-    title: "Hire developers",
-    links: [
-      "Post a job opening",
-      "Post a freelance project",
-      "Search for developers",
-    ],
-  },
-  {
-    title: "Brands",
-    links: ["Advertise with us"],
-  },
-  {
-    title: "Company",
-    links: [
-      "About",
-      "Careers",
-      "Support",
-      "Media kit",
-      "Testimonials",
-      "API",
-      "Terms of service",
-      "Privacy policy",
-      "Cookie policy",
-    ],
-  },
-  {
-    title: "Directories",
-    links: [
-      "Development jobs",
-      "Developers for hire",
-      "Freelance developers for hire",
-      "Tags",
-      "Places",
-    ],
-  },
-  {
-    title: "Development assets",
-    links: [
-      "Code Marketplace",
-      "GitHub Marketplace",
-      "NPM Registry",
-      "Packagephobia",
-    ],
-  },
-  {
-    title: "Development Resources",
-    links: [
-      "Freelancing",
-      "Development Hiring",
-      "Development Portfolio",
-      "Development Education",
-      "Creative Process",
-      "Development Industry Trends",
-    ],
-  },
-];
+export const getBooksByCategory = (category: string) => {
+  return bookscard.filter((book) => book.category === category);
+};
+
+export const getCategories = () => {
+  const categoriesSet = new Set();
+  bookscard.forEach((book) => categoriesSet.add(book.category));
+  return Array.from(categoriesSet);
+};
+
+export const getBooksBySearchQuery = (searchQuery: string) => {
+  return bookscard.filter((book) => {
+    return (
+      book.bookName.includes(searchQuery) || book.category.includes(searchQuery)
+    );
+  });
+};

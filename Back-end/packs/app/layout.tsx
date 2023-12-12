@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import Header from '@/components/Header'
-import SideBar from '@/components/SideBar'
 
 
 
@@ -28,9 +26,6 @@ export default function RootLayout({
 
         <Navbar />
 
-        <SideBar />
-
-        <Header />
         <main>
           {children}
         </main>
