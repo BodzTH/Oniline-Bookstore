@@ -3,12 +3,6 @@ import { ButtonHTMLAttributes } from "react";
 export type RowProps = {
   title: string;
 };
-export type BooksProbs = {
-  book_name: string;
-  image: string;
-  alt_image: string;
-  price: number;
-};
 
 export type BookProbs = {
   title: string;
@@ -33,4 +27,14 @@ export type SearchProbs = {
 export type FooterProbs = {
   text: string;
   num: number;
+};
+
+export type BookItemProbs = {
+  book_name: string;
+  book_description: string;
+  image: string;
+  alt_image: string;
+  price: number;
+  book_type: string;
+  cart: ButtonHTMLAttributes<HTMLButtonElement>;
 };
