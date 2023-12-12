@@ -1,4 +1,6 @@
 'use client'
+import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js"
+import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js"
 import { BookProbs } from "@/common.types"
 import { getBookByID } from "@/constants/index"
 import Image from "next/image"
@@ -8,13 +10,13 @@ function BookPage() {
   const bookDetails = getBookByID(+bookID)
   return (
     <div>
-      {/* Book item section */ }
+      {/* Book item section */}
       <div>
-        {/* Book image */ }
+        {/* Book image */}
         <div>
           {/* <Image src={} alt={alt_image} width={50} height={50} /> */}
         </div>
-        {/* Book content */ }
+        {/* Book content */}
         <div>
           <div>
             <h1>{bookDetails?.bookName}</h1>
