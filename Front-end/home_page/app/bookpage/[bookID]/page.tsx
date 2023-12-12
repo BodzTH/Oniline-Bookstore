@@ -1,9 +1,5 @@
 'use client'
-import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js"
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js"
-import { BookProbs } from "@/common.types"
-import { getBookByID } from "@/constants/index"
-import Image from "next/image"
+import { getBookByID } from "@/constants/test"
 import { useParams } from "next/navigation"
 function BookPage() {
   const { bookID } = useParams()
@@ -19,8 +15,8 @@ function BookPage() {
         {/* Book content */}
         <div>
           <div>
-            <h1>{bookDetails?.bookName}</h1>
-            <h1>{bookDetails?.price}</h1>
+            <h1>{bookDetails?.BookName}</h1>
+            <h1>{bookDetails?.priceCents}</h1>
             {/* <h1>{bookDetails.}</h1>
             <h1>{publisher}</h1>
             <h1>{book_description}</h1> */}

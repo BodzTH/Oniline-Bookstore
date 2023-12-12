@@ -36,5 +36,8 @@ export type BookItemProbs = {
   alt_image: string;
   price: number;
   book_type: string;
+  author: string;
+  publisher: string;
+  sku: string;
   cart: ButtonHTMLAttributes<HTMLButtonElement>;
 };

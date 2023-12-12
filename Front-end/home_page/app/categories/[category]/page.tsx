@@ -1,7 +1,6 @@
 'use client'
 import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js"
 import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js"
-import BookHomeCard from "@/components/BookCard";
 import CategoryHomeRow from "@/components/CategoryHomeRow";
 import { useParams } from "next/navigation";
 
