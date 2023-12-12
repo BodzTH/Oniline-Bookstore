@@ -1,19 +1,31 @@
 import { bookscard } from "./books.js";
-export let cart = JSON.parse(localStorage.getItem("cart"));
-if (!cart) {
-  cart = [
-    {
-      id: 1,
-      quantity: 4,
-      deliveryOptionId: "1",
-    },
-    {
-      id: 2,
-      quantity: 2,
-      deliveryOptionId: "2",
-    },
-  ];
-}
+let cart = [];
+
+const getCartFromLocalStorage = () => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const storedCart = JSON.parse(localStorage.getItem("cart"));
+    return storedCart || getDefaultCart(); // Use a function for default values
+  } else {
+    return getDefaultCart();
+  }
+};
+
+const getDefaultCart = () => [
+  {
+    id: 1,
+    quantity: 4,
+    deliveryOptionId: "1",
+  },
+  {
+    id: 2,
+    quantity: 2,
+    deliveryOptionId: "2",
+  },
+];
+
+cart = getCartFromLocalStorage();
+
+export { cart, getCartFromLocalStorage };
 
 export function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
