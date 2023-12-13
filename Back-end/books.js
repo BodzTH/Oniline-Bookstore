@@ -4,13 +4,12 @@ export let bookscard = [
     id: 1,
     image:
       "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+    altImage:"alt",  
     categori: "Study",
     BookName: "Mathmatics",
     desc: "description",
-    rating: {
-      stars: 4.5,
-      count: 80,
-    },
+    author:"name of the ather",
+    publisher:"puplisher",
     priceCents: 1000,
     inStock: 10,
     sold: 2,
@@ -19,13 +18,12 @@ export let bookscard = [
     id: 2,
     image:
       "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+    altImage:"alt",
     categori: "Study",
     BookName: "Physics",
     desc: "description",
-    rating: {
-      stars: 4.5,
-      count: 80,
-    },
+    author:"name of the ather",
+    publisher:"puplisher",
     priceCents: 1000,
     instock: 5,
     sold: 1,
@@ -34,13 +32,12 @@ export let bookscard = [
     id: 3,
     image:
       "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+    altImage:"alt",
     categori: "Science",
     BookName: "Chemistry",
     desc: "description",
-    rating: {
-      stars: 4.5,
-      count: 80,
-    },
+    author:"name of the ather",
+    publisher:"puplisher",
     priceCents: 1000,
     instock: 5,
     sold: 1,
@@ -49,13 +46,12 @@ export let bookscard = [
     id: 4,
     image:
       "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+    altImage:"alt",  
     categori: "Study",
     BookName: "calculas",
     desc: "description",
-    rating: {
-      stars: 4.5,
-      count: 80,
-    },
+    author:"name of the ather",
+    publisher:"puplisher",
     priceCents: 1000,
     instock: 5,
     sold: 1,
@@ -112,4 +108,36 @@ export function reduceInStockQuantity() {
     });
   });
   
+}
+
+
+export function addBook()
+{
+  const newBook={};
+  const button=document.querySelector('.js-add-book-button')
+  button.addEventListener('click',()=> {
+    const bookid=Number(document.querySelector('.js-book-id-add-book').value)
+    const bookImage=document.querySelector('.js-image-path-add-book').value
+    const altImage=document.querySelector('.js-alt-image-add-book').value
+    const bookCategory=document.querySelector('.js-book-category-add-book').value
+    const bookName=document.querySelector('.js-book-name-add-book').value
+    const bookDescribtion=document.querySelector('.js-book-describtion-add-book').value
+    const bookAthor=document.querySelector('.js-athor-add-book').value
+    const bookPublischer=document.querySelector('.js-publisher-add-book').value
+    const bookPrice=Number(document.querySelector('.js-price-add-book').value)
+    const inStock=Number(document.querySelector('.js-in-stock-add-book').value)
+    newBook.id=bookid
+    newBook.image=bookImage
+    newBook.altImage=altImage
+    newBook.categori=bookCategory
+    newBook.BookName=bookName
+    newBook.desc=bookDescribtion
+    newBook.author=bookAthor
+    newBook.publisher=bookPublischer
+    newBook.priceCents=bookPrice
+    newBook.inStock=inStock
+    newBook.sold=0
+    bookscard.push(newBook)
+    console.log(bookscard)
+  })
 }
