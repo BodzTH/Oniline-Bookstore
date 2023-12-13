@@ -12,7 +12,7 @@ export let bookscard = [
       count: 80,
     },
     priceCents: 1000,
-    instock: 10,
+    inStock: 10,
     sold: 2,
   },
   {
@@ -62,23 +62,7 @@ export let bookscard = [
   },
 ];
 
-/*export function deleteBookFromDatabase(){
-const button =document.querySelector('.js-delete-from-database-button')
-button.addEventListener('click',() => {
-console.log(bookid)   
-const newBooksCard=[]      
-bookscard.forEach(book => {
-    if(bookid != book.id)
-    {
-        
-        newBooksCard.push(book)
-    }
-})
-bookscard=newBooksCard;
-console.log(bookscard)
-})
 
-}*/
 export function deleteBookFromDatabase() {
   const button = document.querySelector(".js-delete-from-database-button");
   button.addEventListener("click", () => {
@@ -93,4 +77,39 @@ export function deleteBookFromDatabase() {
     bookscard = newBooksCard;
     console.log(bookscard);
   });
+}
+
+
+
+export function addInStockQuantity() {
+  const button = document.querySelector(".js-add-quantity-button");
+  button.addEventListener("click", () => {
+    const bookid = document.querySelector(".js-book-id-add-to-stock").value;
+    console.log(bookid);
+    const quantity=Number(document.querySelector(".js-add-quantity").value);
+    bookscard.forEach((book) => {
+      if (bookid == book.id) {
+        book.inStock += quantity
+        console.log(book.inStock)
+      }
+    });
+  });
+  
+}
+
+
+export function reduceInStockQuantity() {
+  const button = document.querySelector(".js-take-from-stock-button");
+  button.addEventListener("click", () => {
+    const bookid = document.querySelector(".js-book-id-take-from-stock").value;
+    console.log(bookid);
+    const quantity=Number(document.querySelector(".js-reduce-quantity").value);
+    bookscard.forEach((book) => {
+      if (bookid == book.id) {
+        book.inStock -= quantity
+        console.log(book.inStock)
+      }
+    });
+  });
+  
 }

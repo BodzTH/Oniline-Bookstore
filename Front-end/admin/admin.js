@@ -1,2 +1,4 @@
-import { bookscard,deleteBookFromDatabase } from "../../Back-end/books.js"
+import { bookscard,deleteBookFromDatabase, addInStockQuantity, reduceInStockQuantity } from "../../Back-end/books.js"
 deleteBookFromDatabase();
+addInStockQuantity();
+reduceInStockQuantity();
