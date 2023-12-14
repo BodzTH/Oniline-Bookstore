@@ -80,9 +80,7 @@ body {
     border-radius: 15px;
     margin-right: 1rem;
     width: 220px;
-    /* Adjust the size as needed */
     height: 331px;
-    /* Adjust the size as needed */
 }
 
 .buttons {
@@ -90,11 +88,11 @@ body {
     gap: 8px;
     font-size: 16px;
     margin-top: 10px;
+    align-items: center;
 }
 
 .bi-dash-lg,
 .bi-plus-lg {
-    cursor: pointer;
     font-size: 24px;
 }
 
@@ -109,7 +107,6 @@ body {
 .js-delete-item {
     margin-left: auto;
     color: red;
-    cursor: pointer;
 }
 
 .desgin {
@@ -122,20 +119,23 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    /* Optional: Add margin for spacing between items */
+    margin: 0 330px;
 }
 
-.buttons {
-    display: flex;
-    align-items: center;
+.bi-plus-lg {
+    margin-right: 230px;
 }
 
 .quantity {
     margin: 0 10px;
-    /* Optional: Add margin for spacing around the quantity */
 }
 
 .prices {
     display: flex;
     align-items: center;
+    margin-right: 50px;
+}
+
+.prices h2 {
+    margin-right: 5px;
 }
