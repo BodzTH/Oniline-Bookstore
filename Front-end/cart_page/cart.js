@@ -20,7 +20,7 @@ let generatshop = () => {
         return `
     <div id=product-id-${matching.id} class="item">
         <div class="details">
-        <img src=${matching.image} alt="Product Image" class="cart-row-img" width="220" height="331" >
+        <img src=${matching.image} alt="Product Image" class="cart-row-img" >
         <div class="name_desc">
         <h2>${matching.BookName}</h2>
         <h3>${matching.categori}</h3>
@@ -33,10 +33,10 @@ let generatshop = () => {
                ${x.quantity}
                </div>
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
-               <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
             </div>
             <div class="prices">
             <h2>$ ${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
+            <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
             </div>
         </div>
         </div>
