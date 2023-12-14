@@ -1,6 +1,5 @@
-
 import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js";
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
+
 export const NavLinks = [
   { href: "/categories/default", key: "Inspiration", text: "Categories" },
   { href: "/", key: "Find Projects", text: "Contact us" },
@@ -27,3 +26,9 @@ export const getBooksBySearchQuery = (searchQuery) => {
     );
   });
 };
+
+// export const getBooksTOCart = () => {
+//   const bookSet = new Set();
+//   bookscard.forEach((id) => bookSet.add(id.));
+//   return Array.from(bookSet);
+// };
