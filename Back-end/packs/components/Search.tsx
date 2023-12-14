@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -15,11 +14,9 @@ function Search() {
         router.push(`/search?q=${query}`);
     }
 
-
-
     return (
         <>
-            <button className='pr-1' onClick={() => { handleSearch() }}>
+            <button className='pr-1' onClick={handleSearch}>
                 <Link href={`/search?q=${searchTerm}`}>
                     <Image
                         src="/search.svg"
@@ -37,7 +34,6 @@ function Search() {
                 }}
                 value={searchTerm}
             />
-
         </>
     );
 }
