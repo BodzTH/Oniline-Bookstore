@@ -84,18 +84,6 @@ body{
     margin-right: 1rem;
 }
 
-@media (max-width: 1000px){
-    .cart-container {
-        grid-template-columns: repeat(2, 223px);
-    }
-}
-
-@media (max-width: 500px){
-    .cart-container {
-        grid-template-columns: repeat(2, 223px);
-    }
-}
-
 .cart-row-title {
     color: #50bdb8 !important;
     font-family: serif !important;
