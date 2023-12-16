@@ -45,6 +45,23 @@ let generatshop = () => {
     `;
     }).join(""));
 };
+// Message listener for receiving book details from the parent window
+window.addEventListener("message", (event) => {
+  const { action, data } = event.data;
+
+  if (action === "SEND_BOOK_DETAILS") {
+    console.log("Received book details:", data);
+
+    // Add the received data into the existing cart array
+    cart.push(data);
+
+    // Save updated cart data to local storage
+    saveToStorage();
+
+    // Update the cart display with the new data
+    generatshop();
+  }
+});
 
 console.log(generatshop());
 

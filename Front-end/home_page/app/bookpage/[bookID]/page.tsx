@@ -1,42 +1,37 @@
 'use client'
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
-import { saveToStorage } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
-import { getBookByID, getCategories, } from "@/constants/test"
+import { getBookByID } from "@/constants/test"
 import { useParams } from "next/navigation"
-import { useEffect, useRef } from "react";
-import { setLocalStorageItem, getLocalStorageItem, removeLocalStorageItem } from '@/utils/localStorage';
-import Cart from "@/app/cart/page";
+import useStore from '@/cartstore/cartstore';
+import Link from "next/link";
+import { bookscard } from "../../../../../Back-end/books";
+import React, { useContext } from 'react';
+import { IframeContext } from "@/app/cart/page";
 
 function BookPage() {
 
   const { bookID } = useParams()
   const bookDetails = getBookByID(+bookID)
-  const iframeRef = useRef(null);
+
+  const { inc, updateCart } = useStore()
+
+  const iframeRef = useContext(IframeContext);
 
   const sendObjectToIframe = () => {
-    const iframe = iframeRef.current;
 
+
+
+    const objectToSend = {
+      action: 'SEND_BOOK_DETAILS',
+      data: bookscard
+    };
+
+
+    var iframe = parent.window.document.getElementById('framme') as HTMLIFrameElement;
     if (iframe) {
-      const bookDetails = {
-        BookName: 'Example Book',
-        priceCents: 100,
-        categori: 'Example Category',
-        id: 123,
-        image: 'example.jpg'
-      };
-
-      const objectToSend = {
-        action: 'SEND_BOOK_DETAILS',
-        data: bookDetails
-      };
-
-      iframe.contentWindow.postMessage(objectToSend, '*');
-    } else {
-      console.error('Iframe not found');
+      iframe?.contentWindow?.postMessage(objectToSend, '*');
     }
+
   };
-
-
 
 
   return (
@@ -59,12 +54,13 @@ function BookPage() {
           <div>
             {/* <>{cart}</> */}
             <div>
-              <button onClick={sendObjectToIframe}>Send Message to Iframe</button>
-              <iframe className="h-full w-full"
-                ref={iframeRef}
-                title="myIframe"
-                src="http://127.0.0.1:5500/Front-end/cart_page/cart.html"
-              />
+              <div>
+                <button onClick={sendObjectToIframe}>Send Message to Iframe</button>
+                <br />
+
+                <Link href={"/cart"}> press</Link>
+              </div>
+
             </div>
 
           </div>
