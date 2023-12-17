@@ -19,13 +19,13 @@ function Search() {
 
     return (
         <>
-            <button className='pr-1' onClick={() => { handleSearch() }}>
+            <button className='pr-2 flexBetween' onClick={() => { handleSearch() }}>
                 <Link href={`/search?q=${searchTerm}`}>
                     <Image
                         src="/search.svg"
                         alt="Bookz"
-                        width={23}
-                        height={15}
+                        width={32}
+                        height={10}
                     />
                 </Link>
             </button>
