@@ -25,10 +25,11 @@ const getDefaultCart = () => [
 
 cart = getCartFromLocalStorage();
 
+
 export { cart, getCartFromLocalStorage };
 
 export function saveToStorage() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
 export function deleteItem() {
   let delete_buttons = document.querySelectorAll(".js-delete-item");
@@ -44,7 +45,7 @@ export function deleteItem() {
         }
       });
       cart = newCart;
-      saveToStorage();
+      localStorage.setItem('cart', JSON.stringify(cart));
       console.log(cart);
     });
   });

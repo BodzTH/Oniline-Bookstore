@@ -1,9 +1,8 @@
 import { bookscard } from "../../Back-end/books.js";
 import { cart,saveToStorage,deleteItem } from "../../Back-end/cart.js";
-localStorage.clear();
 let shop = document.getElementById('cart-container');
 console.log(cart[0].quantity)
-let generatshop = () => {
+export let generatshop = () => {
     let matching;
     return (shop.innerHTML = cart.map((x) => {
         bookscard.map((book) => {

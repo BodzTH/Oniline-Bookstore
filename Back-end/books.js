@@ -25,7 +25,7 @@ export let bookscard = [
     author:"name of the ather",
     publisher:"puplisher",
     priceCents: 1000,
-    instock: 5,
+    inStock: 5,
     sold: 1,
   },
   {
@@ -39,7 +39,7 @@ export let bookscard = [
     author:"name of the ather",
     publisher:"puplisher",
     priceCents: 1000,
-    instock: 5,
+    inStock: 5,
     sold: 1,
   },
   {
@@ -53,7 +53,7 @@ export let bookscard = [
     author:"name of the ather",
     publisher:"puplisher",
     priceCents: 1000,
-    instock: 5,
+    inStock: 5,
     sold: 1,
   },
 ];
