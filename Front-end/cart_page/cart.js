@@ -19,7 +19,7 @@ export let generatshop = () => {
         return `
     <div id=product-id-${matching.id} class="item">
         <div class="details">
-        <img src=${matching.image} alt="Product Image" class="cart-row-img" width="220" height="331" >
+        <img src=${matching.image} alt="Product Image" class="cart-row-img" >
         <div class="name_desc">
         <h2>${matching.BookName}</h2>
         <h3>${matching.categori}</h3>
@@ -32,17 +32,35 @@ export let generatshop = () => {
                ${x.quantity}
                </div>
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
-               <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
             </div>
             <div class="prices">
-            <h2>$ ${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
+            <h2>$</h2>
+            <h2>${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
             </div>
+            <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
         </div>
         </div>
     </div>
     `;
     }).join(""));
 };
+// Message listener for receiving book details from the parent window
+window.addEventListener("message", (event) => {
+  const { action, data } = event.data;
+
+  if (action === "SEND_BOOK_DETAILS") {
+    console.log("Received book details:", data);
+
+    // Add the received data into the existing cart array
+    cart.push(data);
+
+    // Save updated cart data to local storage
+    saveToStorage();
+
+    // Update the cart display with the new data
+    generatshop();
+  }
+});
 
 console.log(generatshop());
 

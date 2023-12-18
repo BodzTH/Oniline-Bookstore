@@ -1,4 +1,5 @@
 'use client'
+import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
 import { useSearchParams } from "next/navigation";
 import { SearchProbs } from "@/common.types";
 import { getBooksBySearchQuery } from "@/constants/test";
@@ -18,6 +19,8 @@ function SearchFound({ book_description, image, price, book_type, alt_image }: S
       {query.map((book, index) => (
         <BookItem key={index} book_description={""} image={book.image} price={book.priceCents} book_type={book.categori} alt_image={""} book_name={book.BookName} cart={<button></button>} author={""} publisher={""} sku={""} />
       ))}
+
+      
     </div>
   );
 }
