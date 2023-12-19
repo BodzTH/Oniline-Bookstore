@@ -1,40 +1,23 @@
-// Requiring modules
-const express = require('express');
-const app = express();
-const mssql = require("mysql");
+var connection = new ActiveXObject("ADODB.Connection") ;
 
-// Get request
-app.get('/', function (req, res) {
-
-	// Config your database credential
-	const config = {
-		user: 'omar',
-		password: '2003@Ismyyear',
-		server: 'localhost',
-		database: 'booksdb'
-	};
-
-	// Connect to your database
-	mssql.connect(config, function (err) {
-
-		// Create Request object to perform
-		// query operation
-		let request = new mssql.Request();
-
-		// Query to the database and get the records
-		request.query('select * from books',
-			function (err, records) {
-
-				if (err) console.log(err)
-
-				// Send records as a response
-				// to browser
-				res.send(records);
-
-			});
-	});
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "omar",
+  password: "Om@rEssam2003",
+  database: "booksdb"
 });
 
-let server = app.listen(5000, function () {
-	console.log('Server is listening at port 5000...');
-});
+
+connection.Open(con);
+var rs = new ActiveXObject("ADODB.Recordset");
+
+rs.Open("SELECT * FROM books", connection);
+rs.MoveFirst
+while(!rs.eof)
+{
+   document.write(rs.fields(1));
+   rs.movenext;
+}
+
+rs.close;
+connection.close;
