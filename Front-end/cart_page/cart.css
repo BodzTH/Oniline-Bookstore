@@ -15,15 +15,8 @@ body {
     padding: 1rem;
     border: 1px solid #333;
     width: 80%;
-    max-width: 1300px;
     margin: auto;
     margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.col-4 {
     display: flex;
     align-items: center;
 }
@@ -51,11 +44,6 @@ body {
     padding: 20px;
     background-color: #333;
     color: #fff;
-}
-
-.cart-container {
-    display: grid;
-    gap: 10px;
 }
 
 .item {
