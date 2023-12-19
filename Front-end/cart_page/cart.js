@@ -1,5 +1,6 @@
 import { bookscard } from "../../Back-end/books.js";
-import { cart,saveToStorage,deleteItem } from "../../Back-end/cart.js";
+import { cart,saveToStorage,deleteItem, fetchDataAndUpdateLocalStorage } from "../../Back-end/cart.js";
+localStorage.clear();
 let shop = document.getElementById('cart-container');
 console.log(cart[0].quantity)
 export let generatshop = () => {
@@ -44,23 +45,13 @@ export let generatshop = () => {
     `;
     }).join(""));
 };
-// Message listener for receiving book details from the parent window
-window.addEventListener("message", (event) => {
-  const { action, data } = event.data;
 
-  if (action === "SEND_BOOK_DETAILS") {
-    console.log("Received book details:", data);
+window.updateCart1 = function() {
+    const data = JSON.parse(localStorage.getItem('myData'));
+    // Logic to update the UI based on the new data
+};
 
-    // Add the received data into the existing cart array
-    cart.push(data);
-
-    // Save updated cart data to local storage
-    saveToStorage();
-
-    // Update the cart display with the new data
-    generatshop();
-  }
-});
+fetchDataAndUpdateLocalStorage();
 
 console.log(generatshop());
 
