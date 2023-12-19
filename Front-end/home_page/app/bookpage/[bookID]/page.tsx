@@ -5,6 +5,7 @@ import useStore from '@/cartstore/cartstore';
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios"
+import { bookscard } from "@/constants/books";
 
 function BookPage() {
 
@@ -12,14 +13,12 @@ function BookPage() {
   const bookDetails = getBookByID(+bookID)
   const [users, setUsers] = useState([])
   const { inc, updateCart } = useStore()
-  const sendOb = () => {
-    axios.get('http://localhost:3004/api/user')
-      .then(res => {
-        setUsers(res.data)
-      }).catch(err => {
-        console.log(err)
-      })
-  }
+
+  function sendDataToServer(dataObj : any) {
+    axios.post('http://localhost:3004/api/receiveData', {Message:"Hello From Next App"} )
+    .then(response => console.log('Response:', response))
+    .catch(error => console.error('Error:', error));
+}
 
   return (
     <div>
@@ -42,7 +41,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={sendOb} >Send Message to Iframe</button>
+                <button onClick={sendDataToServer} >Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>

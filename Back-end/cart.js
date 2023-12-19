@@ -1,6 +1,18 @@
 import { bookscard } from "./books.js";
 let cart = [];
 
+function fetchDataAndUpdateLocalStorage() {
+  fetch('http://localhost:3004/api/getData')
+  .then(response => response.json())
+  .then(data => {
+      localStorage.setItem('myData', JSON.stringify(data));
+      if (window.updateCart1) window.updateCart1();
+  })
+  .catch(error => console.error('Error:', error));
+}
+export { fetchDataAndUpdateLocalStorage };
+
+
 const getCartFromLocalStorage = () => {
   if (typeof window !== 'undefined' && window.localStorage) {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
