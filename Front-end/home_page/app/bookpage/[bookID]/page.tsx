@@ -13,7 +13,7 @@ function BookPage() {
   const [users, setUsers] = useState([])
   const { inc, updateCart } = useStore()
   const sendOb = () => {
-    axios.get('http://localhost:5500/Front-end/cart_page/cart.html')
+    axios.get('http://localhost:3004/api/user')
       .then(res => {
         setUsers(res.data)
       }).catch(err => {

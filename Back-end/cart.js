@@ -49,3 +49,15 @@ export function deleteItem() {
     });
   });
 }
+
+// Making a request to the server
+fetch('/api/sendData')
+  .then(response => response.json())
+  .then(data => {
+    // Storing received data in local storage
+    localStorage.setItem('serverData', JSON.stringify(data));
+    console.log('Data stored in local storage:', data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
