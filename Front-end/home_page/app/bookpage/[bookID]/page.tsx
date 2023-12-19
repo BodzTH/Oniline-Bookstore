@@ -3,36 +3,23 @@ import { getBookByID } from "@/constants/test"
 import { useParams } from "next/navigation"
 import useStore from '@/cartstore/cartstore';
 import Link from "next/link";
-import { bookscard } from "../../../../../Back-end/books";
-import React, { useContext } from 'react';
-import { IframeContext } from "@/app/cart/page";
+import React, { useContext, useEffect, useState } from 'react';
+import axios from "axios"
 
 function BookPage() {
 
   const { bookID } = useParams()
   const bookDetails = getBookByID(+bookID)
-
+  const [users, setUsers] = useState([])
   const { inc, updateCart } = useStore()
-
-  const iframeRef = useContext(IframeContext);
-
-  const sendObjectToIframe = () => {
-
-
-
-    const objectToSend = {
-      action: 'SEND_BOOK_DETAILS',
-      data: bookscard
-    };
-
-
-    var iframe = parent.window.document.getElementById('framme') as HTMLIFrameElement;
-    if (iframe) {
-      iframe?.contentWindow?.postMessage(objectToSend, '*');
-    }
-
-  };
-
+  const sendOb = () => {
+    axios.get('http://localhost:5500/Front-end/cart_page/cart.html')
+      .then(res => {
+        setUsers(res.data)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
 
   return (
     <div>
@@ -55,7 +42,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={sendObjectToIframe}>Send Message to Iframe</button>
+                <button onClick={sendOb} >Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>
