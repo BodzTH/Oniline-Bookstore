@@ -1,6 +1,6 @@
 import { bookscard } from "../../Back-end/books.js";
 import { cart} from "../../Back-end/cart.js";
-import { orders } from "../../Back-end/orders.js";
+import { orders,saveOrdersToStorage } from "../../Back-end/orders.js";
 
 /*
 <div class="item">
@@ -83,7 +83,9 @@ function setOrder()
         newOrder.countery=document.querySelector('.js-country-set-order').value
         newOrder.city=document.querySelector('.js-city-set-order').value
         newOrder.items=cart;
+        newOrder.status='orderd'
         orders.push(newOrder)
+        saveOrdersToStorage();
         console.log(orders)
         console.log(newOrder.items)
         localStorage.removeItem('cart')

@@ -13,6 +13,7 @@ function fetchDataAndUpdateLocalStorage() {
 export { fetchDataAndUpdateLocalStorage };
 
 
+
 const getCartFromLocalStorage = () => {
   if (typeof window !== 'undefined' && window.localStorage) {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
