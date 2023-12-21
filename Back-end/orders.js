@@ -3,6 +3,8 @@ if(!orders)
 {
     orders=[]
 }
+
+
 export function saveOrdersToStorage() {
     localStorage.setItem('orders', JSON.stringify(orders));
   }
