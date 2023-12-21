@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js";
 import axios from "axios";
 
 let data: any = [];
@@ -7,26 +6,47 @@ axios
   .get("http://localhost:3004/api/getAllBooks")
   .then((response) => {
     data = response.data;
-    // Use data here
+    
   })
   .catch((error) => console.error("Error:", error));
 
 type Store = {
-  message: any;
   bookscard: any;
   count: any;
-  inc: () => void;
-  updateCart: () => void;
-  showData: () => void;
 };
 
 const useStore = create<Store>()((set) => ({
   count: 0,
-  bookscard: bookscard,
-  message: data,
-  inc: () => set((state) => ({ count: state.count + 1 })),
-  updateCart: () => set((state) => ({ bookscard: state.bookscard + 1 })),
-  showData: () => set((state) => ({ message: state.message })),
+  bookscard: data,
 }));
 
+
 export default useStore;
+
+export const getBookByID = (id) => {
+   return data.find((book) => book.id === id);
+};
+
+export const getBooksByCategory = (category) => {
+  return data.filter((book) => book.categori === category);
+};
+
+export const getCategories = () => {
+  const categoriesSet = new Set();
+  data.forEach((book) => categoriesSet.add(book.categori));
+  return Array.from(categoriesSet);
+};
+
+export const getBooksBySearchQuery = (searchQuery) => {
+  return data.filter((book) => {
+    return (
+      book.BookName.includes(searchQuery) || book.categori.includes(searchQuery)
+    );
+  });
+};
+
+export const getBooksTOCart = () => {
+  const bookSet = new Set();
+  data.forEach((id) => bookSet.add(id.id));
+  return Array.from(bookSet);
+};

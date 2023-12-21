@@ -1,11 +1,6 @@
-import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js"
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js"
-import Categories from "./categories/[category]/page";
-import SearchFound from "./[search]/page";
-import Link from "next/link";
-import BookSection from "@/components/BookCard";
+
 import CategoryHomeRow from "@/components/CategoryHomeRow";
-import { getCategories } from "@/constants/test";
+import { getCategories } from "@/cartstore/cartstore";
 
 
 

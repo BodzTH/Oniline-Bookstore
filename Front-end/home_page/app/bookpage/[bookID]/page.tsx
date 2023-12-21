@@ -1,5 +1,5 @@
 'use client'
-import { getBookByID } from "@/constants/test"
+import { getBookByID } from "@/cartstore/cartstore"
 import { useParams } from "next/navigation"
 import useStore from '@/cartstore/cartstore';
 import Link from "next/link";
@@ -11,7 +11,7 @@ function BookPage() {
   const { bookID } = useParams()
   const bookDetails = getBookByID(+bookID)
   const [users, setUsers] = useState([])
-  const { inc, updateCart, showData } = useStore()
+  
 
   function sendDataToServer(dataObj: any) {
     axios.post('http://localhost:3004/api/sendCartItems', {
@@ -22,7 +22,6 @@ function BookPage() {
       .then(response => console.log('Response:', response))
       .catch(error => console.error('Error:', error));
   }
-  console.log(showData);
   return (
     <div>
       {/* Book item section */}
@@ -44,7 +43,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={() => { sendDataToServer({}); inc(); }}>Send Message to Iframe</button>
+                <button onClick={() => { sendDataToServer({}); }}>Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>

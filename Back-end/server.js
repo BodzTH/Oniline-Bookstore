@@ -19,11 +19,11 @@ app.post("/api/sendCartItems", (req, res) => {
 //Data to cart.js
 app.get("/api/getCartItems", (req, res) => {
   res.json(cartItmes);
-  cartItmes={};
+  cartItmes = {};
 });
 
 //Data From cart.js
-app.post("/api/sendAllBooks", (req, res)=>{
+app.post("/api/sendAllBooks", (req, res) => {
   AllBooks = req.body;
   res.json({ message: "Books received" });
 });
