@@ -8,7 +8,7 @@ app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-let cartItmes = []; // Temporarily store data here
+let cartItmes = {}; // Temporarily store data here
 let AllBooks = [];
 //Data From Next
 app.post("/api/sendCartItems", (req, res) => {
@@ -19,6 +19,7 @@ app.post("/api/sendCartItems", (req, res) => {
 //Data to cart.js
 app.get("/api/getCartItems", (req, res) => {
   res.json(cartItmes);
+  cartItmes={};
 });
 
 //Data From cart.js

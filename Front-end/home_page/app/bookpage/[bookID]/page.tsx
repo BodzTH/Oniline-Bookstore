@@ -5,7 +5,7 @@ import useStore from '@/cartstore/cartstore';
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from 'react';
 import axios from "axios"
-import { bookscard } from "@/constants/books";
+import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js";
 
 function BookPage() {
 
@@ -15,7 +15,11 @@ function BookPage() {
   const { inc, updateCart, showData } = useStore()
 
   function sendDataToServer(dataObj: any) {
-    axios.post('http://localhost:3004/api/sendCartItems', { Message: "Hello From Next App" })
+    axios.post('http://localhost:3004/api/sendCartItems', {
+      id: 3,
+      quantity: 9,
+      deliveryOptionId: "1",
+    })
       .then(response => console.log('Response:', response))
       .catch(error => console.error('Error:', error));
   }

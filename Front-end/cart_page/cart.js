@@ -1,5 +1,5 @@
 import { bookscard } from "../../Back-end/books.js";
-import { cart,saveToStorage,deleteItem,fetchDataAndUpdateLocalStorage } from "../../Back-end/cart.js";
+import { cart,saveToStorage,deleteItem } from "../../Back-end/cart.js";
 let shop = document.getElementById('cart-container');
 console.log(cart[0].quantity)
 export let generatshop = () => {
@@ -45,12 +45,6 @@ export let generatshop = () => {
     }).join(""));
 };
 
-window.updateCart1 = function() {
-    const data = JSON.parse(localStorage.getItem('myData'));
-    // Logic to update the UI based on the new data
-};
-
-fetchDataAndUpdateLocalStorage();
 
 console.log(generatshop());
 

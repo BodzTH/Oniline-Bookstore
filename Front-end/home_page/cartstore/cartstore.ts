@@ -26,7 +26,7 @@ const useStore = create<Store>()((set) => ({
   message: data,
   inc: () => set((state) => ({ count: state.count + 1 })),
   updateCart: () => set((state) => ({ bookscard: state.bookscard + 1 })),
-  showData: () => set((state) => ({ message: state.message + "1" })),
+  showData: () => set((state) => ({ message: state.message  })),
 }));
 
 export default useStore;

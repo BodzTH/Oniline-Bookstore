@@ -1,12 +1,14 @@
 import { bookscard } from "./books.js";
 let cart = [];
 
+
+
 fetch("http://localhost:3004/api/sendAllBooks", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
   },
-  body: JSON.stringify({ Message: "Hello From cart.js" }),
+  body: JSON.stringify(bookscard),
 })
   .then((response) => {
     if (!response.ok) {
@@ -22,13 +24,14 @@ function fetchDataAndUpdateLocalStorage() {
   fetch("http://localhost:3004/api/getCartItems")
     .then((response) => response.json())
     .then((data) => {
-      localStorage.setItem("myData", JSON.stringify(data));
-      if (window.updateCart1) window.updateCart1();
+      if (Object.keys(data).length !== 0) {
+        cart.push(data);
+        saveToStorage();
+      }
     })
     .catch((error) => console.error("Error:", error));
 }
 export { fetchDataAndUpdateLocalStorage };
-
 
 const getCartFromLocalStorage = () => {
   if (typeof window !== "undefined" && window.localStorage) {
@@ -42,7 +45,7 @@ const getCartFromLocalStorage = () => {
 const getDefaultCart = () => [
   {
     id: 1,
-    quantity: 4,
+    quantity: 9,
     deliveryOptionId: "1",
   },
   {
@@ -52,13 +55,13 @@ const getDefaultCart = () => [
   },
 ];
 
+fetchDataAndUpdateLocalStorage();
 cart = getCartFromLocalStorage();
-
 
 export { cart, getCartFromLocalStorage };
 
 export function saveToStorage() {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 export function deleteItem() {
   let delete_buttons = document.querySelectorAll(".js-delete-item");
@@ -74,7 +77,7 @@ export function deleteItem() {
         }
       });
       cart = newCart;
-      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(cart));
       console.log(cart);
     });
   });
