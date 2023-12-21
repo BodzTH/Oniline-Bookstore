@@ -1,63 +1,72 @@
 //import { bookid } from "../Front-end/admin/admin.js"
-export let bookscard = [
-  {
-    id: 1,
-    image:
-      "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
-    altImage:"alt",  
-    categori: "Study",
-    BookName: "Mathmatics",
-    desc: "description",
-    author:"name of the ather",
-    publisher:"puplisher",
-    priceCents: 1000,
-    inStock: 10,
-    sold: 2,
-  },
-  {
-    id: 2,
-    image:
-      "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
-    altImage:"alt",
-    categori: "Study",
-    BookName: "Physics",
-    desc: "description",
-    author:"name of the ather",
-    publisher:"puplisher",
-    priceCents: 1000,
-    inStock: 5,
-    sold: 1,
-  },
-  {
-    id: 3,
-    image:
-      "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
-    altImage:"alt",
-    categori: "Science",
-    BookName: "Chemistry",
-    desc: "description",
-    author:"name of the ather",
-    publisher:"puplisher",
-    priceCents: 1000,
-    inStock: 5,
-    sold: 1,
-  },
-  {
-    id: 4,
-    image:
-      "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
-    altImage:"alt",  
-    categori: "Study",
-    BookName: "calculas",
-    desc: "description",
-    author:"name of the ather",
-    publisher:"puplisher",
-    priceCents: 1000,
-    inStock: 5,
-    sold: 1,
-  },
-];
 
+export let bookscard=JSON.parse(localStorage.getItem("books"));
+if(!bookscard)
+{
+  bookscard = [
+    {
+      id: 1,
+      image:
+        "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+      altImage:"alt",  
+      categori: "Study",
+      BookName: "Mathmatics",
+      desc: "description",
+      author:"name of the ather",
+      publisher:"puplisher",
+      priceCents: 1000,
+      inStock: 10,
+      sold: 2,
+    },
+    {
+      id: 2,
+      image:
+        "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+      altImage:"alt",
+      categori: "Study",
+      BookName: "Physics",
+      desc: "description",
+      author:"name of the ather",
+      publisher:"puplisher",
+      priceCents: 1000,
+      inStock: 5,
+      sold: 1,
+    },
+    {
+      id: 3,
+      image:
+        "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+      altImage:"alt",
+      categori: "Science",
+      BookName: "Chemistry",
+      desc: "description",
+      author:"name of the ather",
+      publisher:"puplisher",
+      priceCents: 1000,
+      inStock: 5,
+      sold: 1,
+    },
+    {
+      id: 4,
+      image:
+        "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+      altImage:"alt",  
+      categori: "Study",
+      BookName: "calculas",
+      desc: "description",
+      author:"name of the ather",
+      publisher:"puplisher",
+      priceCents: 1000,
+      inStock: 5,
+      sold: 1,
+    },
+  ];
+}
+
+
+export function saveBooksToStorage() {
+  localStorage.setItem("books", JSON.stringify(bookscard));
+}
 
 export function deleteBookFromDatabase() {
   const button = document.querySelector(".js-delete-from-database-button");
@@ -71,6 +80,7 @@ export function deleteBookFromDatabase() {
       }
     });
     bookscard = newBooksCard;
+    saveBooksToStorage();
     console.log(bookscard);
   });
 }
@@ -86,7 +96,8 @@ export function addInStockQuantity() {
     bookscard.forEach((book) => {
       if (bookid == book.id) {
         book.inStock += quantity
-        console.log(book.inStock)
+        saveBooksToStorage();
+        console.log(bookscard)
       }
     });
   });
@@ -103,7 +114,8 @@ export function reduceInStockQuantity() {
     bookscard.forEach((book) => {
       if (bookid == book.id) {
         book.inStock -= quantity
-        console.log(book.inStock)
+        saveBooksToStorage();
+        console.log(bookscard)
       }
     });
   });
@@ -138,6 +150,7 @@ export function addBook()
     newBook.inStock=inStock
     newBook.sold=0
     bookscard.push(newBook)
+    saveBooksToStorage();
     console.log(bookscard)
   })
 }
