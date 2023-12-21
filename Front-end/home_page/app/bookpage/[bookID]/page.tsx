@@ -3,9 +3,8 @@ import { getBookByID } from "@/constants/test"
 import { useParams } from "next/navigation"
 import useStore from '@/cartstore/cartstore';
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from "axios"
-import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js";
 
 function BookPage() {
 
@@ -45,7 +44,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={sendDataToServer} >Send Message to Iframe</button>
+                <button onClick={() => { sendDataToServer({}); inc(); }}>Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>
