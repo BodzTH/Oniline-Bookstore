@@ -12,14 +12,14 @@ function BookPage() {
   const { bookID } = useParams()
   const bookDetails = getBookByID(+bookID)
   const [users, setUsers] = useState([])
-  const { inc, updateCart } = useStore()
+  const { inc, updateCart, showData } = useStore()
 
-  function sendDataToServer(dataObj : any) {
-    axios.post('http://localhost:3004/api/receiveData', {Message:"Hello From Next App"} )
-    .then(response => console.log('Response:', response))
-    .catch(error => console.error('Error:', error));
-}
-
+  function sendDataToServer(dataObj: any) {
+    axios.post('http://localhost:3004/api/sendCartItems', { Message: "Hello From Next App" })
+      .then(response => console.log('Response:', response))
+      .catch(error => console.error('Error:', error));
+  }
+  console.log(showData);
   return (
     <div>
       {/* Book item section */}

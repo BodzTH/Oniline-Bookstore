@@ -1,21 +1,37 @@
 import { bookscard } from "./books.js";
 let cart = [];
 
-function fetchDataAndUpdateLocalStorage() {
-  fetch('http://localhost:3004/api/getData')
-  .then(response => response.json())
-  .then(data => {
-      localStorage.setItem('myData', JSON.stringify(data));
-      if (window.updateCart1) window.updateCart1();
+fetch("http://localhost:3004/api/sendAllBooks", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ Message: "Hello From cart.js" }),
+})
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok.");
+    }
+    return response.json();
   })
-  .catch(error => console.error('Error:', error));
+  .catch((error) => {
+    console.error("There was a problem with the fetch operation:", error);
+  });
+
+function fetchDataAndUpdateLocalStorage() {
+  fetch("http://localhost:3004/api/getCartItems")
+    .then((response) => response.json())
+    .then((data) => {
+      localStorage.setItem("myData", JSON.stringify(data));
+      if (window.updateCart1) window.updateCart1();
+    })
+    .catch((error) => console.error("Error:", error));
 }
 export { fetchDataAndUpdateLocalStorage };
 
 
-
 const getCartFromLocalStorage = () => {
-  if (typeof window !== 'undefined' && window.localStorage) {
+  if (typeof window !== "undefined" && window.localStorage) {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
     return storedCart || getDefaultCart(); // Use a function for default values
   } else {
@@ -63,15 +79,3 @@ export function deleteItem() {
     });
   });
 }
-
-// Making a request to the server
-fetch('/api/sendData')
-  .then(response => response.json())
-  .then(data => {
-    // Storing received data in local storage
-    localStorage.setItem('serverData', JSON.stringify(data));
-    console.log('Data stored in local storage:', data);
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });

@@ -1,5 +1,5 @@
-const cors = require('cors');
-const express = require('express');
+const cors = require("cors");
+const express = require("express");
 const app = express();
 
 // Enable CORS for all routes
@@ -8,15 +8,28 @@ app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-let storedData = {}; // Temporarily store data here
-
-app.post('/api/receiveData', (req, res) => {
-    storedData = req.body;
-    res.json({ message: 'Data received' });
+let cartItmes = []; // Temporarily store data here
+let AllBooks = [];
+//Data From Next
+app.post("/api/sendCartItems", (req, res) => {
+  cartItmes = req.body;
+  res.json({ message: "Cart Items received" });
 });
 
-app.get('/api/getData', (req, res) => {
-    res.json(storedData);
+//Data to cart.js
+app.get("/api/getCartItems", (req, res) => {
+  res.json(cartItmes);
+});
+
+//Data From cart.js
+app.post("/api/sendAllBooks", (req, res)=>{
+  AllBooks = req.body;
+  res.json({ message: "Books received" });
+});
+
+//Data to Next
+app.get("/api/getAllBooks", (req, res) => {
+  res.json(AllBooks);
 });
 
 const PORT = 3004; // Port number
