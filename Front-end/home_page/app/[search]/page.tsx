@@ -1,8 +1,7 @@
 'use client'
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
 import { useSearchParams } from "next/navigation";
 import { SearchProbs } from "@/common.types";
-import { getBooksBySearchQuery } from "@/constants/test";
+import { getBooksBySearchQuery } from "@/cartstore/cartstore";
 import BookItem from "@/components/BookItem";
 
 function SearchFound({ book_description, image, price, book_type, alt_image }: SearchProbs) {

@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import BookCard from '@/components/BookCard';
-import { getBooksByCategory } from '@/constants/test';
-import { bookscard } from "E:/Semester 5/vscode/web/project/Back-end/books.js"
+import { getBooksByCategory } from '@/cartstore/cartstore';
 function CategoryHomeRow({ title, styl }: { styl: string, title: string }) {
   const categoryBooks = getBooksByCategory(title);
 

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { cart } from "E:/Semester 5/vscode/web/project/Back-end/cart.js";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from 'react';
