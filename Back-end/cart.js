@@ -32,30 +32,38 @@ fetch("http://localhost:3004/api/sendAllBooks", {
     console.error("There was a problem with the fetch operation:", error);
   });
 
-function fetchDataAndUpdateLocalStorage() {
-  fetch("http://localhost:3004/api/getCartItems")
-    .then((response) => response.json())
-    .then((data) => {
-      if (Object.keys(data).length !== 0) {
-       cart.forEach(item => {
-        let matching;
-        if (item.id==data.id)
-        {
-          matching=item;
+  function fetchDataAndUpdateLocalStorage() {
+    fetch("http://localhost:5040/api/getCartItems")
+      .then((response) => response.json())
+      .then((data) => {
+        if (Object.keys(data).length !== 0) {
+          let matching=false;
+          let matchingID;
+          cart.forEach(item => {
+            if(item.id===data.id)
+            {
+              matching=true
+              matchingID=item.id
+            }
+          })
+          if(matching==true)
+          {
+            cart.forEach(item => {
+              if(item.id===matchingID)
+              {
+                item.quantity+=data.quantity
+                document.getElementById(item.id+'-quantity').innerHTML=item.quantity
+              }
+            })
+          }
+          else{
+            cart.push(data)
+          }
+          saveToStorage();
         }
-       })
-       if(matching)
-       {
-        matching.quantity += data.quantity;
-       }
-       else{
-        cart.push(data)
-       }
-        saveToStorage();
-      }
-    })
-    .catch((error) => console.error("Error:", error));
-}
+      })
+      .catch((error) => console.error("Error:", error));
+  }
 export { fetchDataAndUpdateLocalStorage };
 
 
