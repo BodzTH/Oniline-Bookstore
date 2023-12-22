@@ -1,18 +1,6 @@
 import { bookscard } from "../../Back-end/books.js";
-import { cart} from "../../Back-end/cart.js";
 import { orders,saveOrdersToStorage } from "../../Back-end/orders.js";
-
-/*
-<div class="item">
-<img src="images/1.webp">
-<div class="info">
-    <div class="name">PRODUCT 1</div>
-    <div class="price">$22/1 product</div>
-</div>
-<div class="quantity">5</div>
-<div class="returnPrice">$433.3</div>
-</div>*/
-
+import {cart} from "../../Back-end/cart.js"
 
 let items = document.querySelector('.list');
 console.log(cart[0].quantity)
@@ -85,6 +73,7 @@ function setOrder()
         newOrder.items=cart;
         newOrder.status='orderd'
         orders.push(newOrder)
+        localStorage.removeItem('orders')        
         saveOrdersToStorage();
         console.log(orders)
         console.log(newOrder.items)

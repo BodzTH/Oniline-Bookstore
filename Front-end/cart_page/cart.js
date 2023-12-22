@@ -2,20 +2,24 @@ import { bookscard } from "../../Back-end/books.js";
 import { cart,saveToStorage,deleteItem } from "../../Back-end/cart.js";
 let shop = document.getElementById('cart-container');
 console.log(cart[0].quantity)
-export let generatshop = () => {
+ let generatshop = () => {
     let matching;
     return (shop.innerHTML = cart.map((x) => {
+        let checked=false;
         bookscard.map((book) => {
-            if(x.id != book.id)
+            if(x.id != book.id )
             {
+                console.log('not')
                 return
             }
             else{
                 matching=book;
+                checked=true
             }
         })
         
-     
+     if(checked==true){
+        checked=false
         return`
     <div id=product-id-${matching.id} class="item">
         <div class="details">
@@ -41,7 +45,7 @@ export let generatshop = () => {
         </div>
         </div>
     </div>
-    `;
+    `;}
     }).join(""));
 };
 
