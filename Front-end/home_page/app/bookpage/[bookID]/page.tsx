@@ -10,15 +10,14 @@ function BookPage() {
 
   const { bookID } = useParams()
   const bookDetails = getBookByID(+bookID)
-  const [users, setUsers] = useState([])
-  
+  const {count, addToCart,incart} = useStore();
 
-  function sendDataToServer(dataObj: any) {
-    axios.post('http://localhost:3004/api/sendCartItems', {
-      id: 3,
-      quantity: 9,
-      deliveryOptionId: "1",
-    })
+  let quantityCounter = 0;
+  function increaseQuantity(idd: number) {
+    quantityCounter++;
+  }
+  function sendDataToServer(idd: number) {
+    axios.post('http://localhost:3004/api/sendCartItems', { id: idd, quantity: quantityCounter })
       .then(response => console.log('Response:', response))
       .catch(error => console.error('Error:', error));
   }
@@ -43,7 +42,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={() => { sendDataToServer({}); }}>Send Message to Iframe</button>
+                <button onClick={() => { increaseQuantity(+bookID); sendDataToServer(+bookID); addToCart(+bookID) }}>Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>

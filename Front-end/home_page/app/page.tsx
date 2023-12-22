@@ -1,11 +1,15 @@
-
+'use client';
 import CategoryHomeRow from "@/components/CategoryHomeRow";
-import { getCategories } from "@/cartstore/cartstore";
+import useStore, { getCategories } from "@/cartstore/cartstore";
+import { useEffect, useState } from "react";
 
 
 
 function Home() {
+  
   const categoires = getCategories()
+ 
+
   return (
     <main>
       {/* CategoryRow -- put here iteration func */}
