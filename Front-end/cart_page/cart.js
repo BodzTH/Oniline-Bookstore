@@ -34,7 +34,7 @@ export let generatshop = () => {
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
             </div>
             <div class="prices">
-            <h2>$</h2>
+            <h2 class="m">$</h2>
             <h2 id=${matching.id+'-price'} > ${((matching.priceCents*x.quantity)/100).toFixed(2)} </h2>
             </div>
             <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
