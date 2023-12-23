@@ -35,8 +35,8 @@ function Navbar() {
         {/* Title */}
         <div className='flexBetween m-auto'>
           <h1 className='lobester text-3xl flexBetween'>
-              Welcome To Our Bookstore
-            </h1>
+            Welcome To Our Bookstore
+          </h1>
         </div>
         {/* Search block */}
         <div className=' ml-10 gap-x-10 flexBetween mr-7'>
@@ -54,8 +54,8 @@ function Navbar() {
                   width={40}
                   height={10}
                 />
-                <span className=' absolute right-6 top-10 circle-block text-sm'></span>
-               
+                <span className=' absolute right-6 top-10 circle-block text-sm'>{count}</span>
+
               </Link>
             </button>
           </div>
