@@ -38,13 +38,8 @@ console.log(cart[0].quantity)
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
             </div>
             <div class="prices">
-<<<<<<< HEAD
             <h2 class="m">$</h2>
-            <h2 id=${matching.id+'-price'} > ${((matching.priceCents*x.quantity)/100).toFixed(2)} </h2>
-=======
-            <h2>$</h2>
             <h2>${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
->>>>>>> 6922aef7f03dff964a565adfc16c59dd6f3d3697
             </div>
             <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
         </div>
