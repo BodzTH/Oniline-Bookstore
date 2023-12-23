@@ -3,16 +3,7 @@ export let cart = JSON.parse(localStorage.getItem("cart"));;
 if(!cart)
 {
 cart=[
-  {
-    id: 1,
-    quantity: 9,
-    deliveryOptionId: "1",
-  },
-  {
-    id: 2,
-    quantity: 2,
-    deliveryOptionId: "2",
-  },
+
 ];}
 
 function fetchDataAndUpdateLocalStorage() {
@@ -49,30 +40,7 @@ function fetchDataAndUpdateLocalStorage() {
 export { fetchDataAndUpdateLocalStorage };
 
 
-const getCartFromLocalStorage = () => {
-  if (typeof window !== "undefined" && window.localStorage) {
-    const storedCart = JSON.parse(localStorage.getItem("cart"));
-    return storedCart || getDefaultCart(); // Use a function for default values
-  } else {
-    return getDefaultCart();
-  }
-};
-
-const getDefaultCart = () => [
-  {
-    id: 1,
-    quantity: 9,
-    deliveryOptionId: "1",
-  },
-  {
-    id: 2,
-    quantity: 2,
-    deliveryOptionId: "2",
-  },
-];
-
 fetchDataAndUpdateLocalStorage();
-cart = getCartFromLocalStorage();
 
 
 export function saveToStorage() {
