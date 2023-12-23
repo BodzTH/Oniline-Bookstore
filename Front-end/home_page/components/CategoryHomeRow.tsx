@@ -1,6 +1,4 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
 import BookCard from '@/components/BookCard';
 import { getBooksByCategory } from '@/cartstore/cartstore';
 import { Key, useState } from 'react';
@@ -9,7 +7,6 @@ import useStore from '@/cartstore/cartstore';
 function CategoryHomeRow({ title, styl }: { styl: string, title: string }) {
 
   const categoryBooks = getBooksByCategory(title);
-  const {bookscard} = useStore();
 
   return (
     <>

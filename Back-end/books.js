@@ -79,7 +79,6 @@ export function deleteBookFromDatabase() {
       }
     });
     bookscard = newBooksCard;
-    saveBooksToStorage();
     console.log(bookscard);
   });
 }
@@ -100,7 +99,6 @@ export function addInStockQuantity() {
       }
     });
   });
-  
 }
 
 
@@ -117,8 +115,7 @@ export function reduceInStockQuantity() {
         console.log(bookscard)
       }
     });
-  });
-  
+  }); 
 }
 
 

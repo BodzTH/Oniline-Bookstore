@@ -1,4 +1,5 @@
 import { bookscard,deleteBookFromDatabase, addInStockQuantity, reduceInStockQuantity,addBook } from "../../Back-end/books.js"
+import { cart } from "../../Back-end/cart.js"
 
 // Function to perform the POST request
 export const sendAllBooks = () => {
@@ -41,3 +42,12 @@ const runFunctions = async () => {
 
 runFunctions();
 
+function totalCartQuantity() {
+  let total = 0;
+  cart.forEach((item) => {
+    total += item.quantity;
+  });
+  return total;
+}
+
+let totalQuantity=totalCartQuantity();

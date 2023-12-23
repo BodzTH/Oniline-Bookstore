@@ -1,7 +1,6 @@
 import { bookscard } from "../../Back-end/books.js";
 import { cart,saveToStorage,deleteItem } from "../../Back-end/cart.js";
 let shop = document.getElementById('cart-container');
-console.log(cart[0].quantity)
  let generatshop = () => {
     let matching;
     return (shop.innerHTML = cart.map((x) => {
@@ -32,14 +31,14 @@ console.log(cart[0].quantity)
         <div class="price-quantity">
             <div class="buttons">
                <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
-               <div id=${matching.id} class="quantity">
+               <div id=${matching.id+'-quantity'} class="quantity">
                ${x.quantity}
                </div>
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
             </div>
             <div class="prices">
             <h2>$</h2>
-            <h2>${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
+            <h2 id=${matching.id+'-price'} > ${((matching.priceCents*x.quantity)/100).toFixed(2)} </h2>
             </div>
             <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
         </div>
@@ -49,8 +48,12 @@ console.log(cart[0].quantity)
     }).join(""));
 };
 
-
-console.log(generatshop());
+if(cart.length===0){
+shop.innerHTML=`<div>no items to be shown</div>`
+}
+else{
+    console.log(generatshop());
+}
 
 let decrement_buttons=document.querySelectorAll('.js-decrement')
 decrement_buttons.forEach(button => {
@@ -62,8 +65,10 @@ decrement_buttons.forEach(button => {
         if(item.quantity>=2)
         {
         item.quantity-=1
+        document.getElementById(item.id+'-quantity').innerHTML=item.quantity
         console.log(item.quantity)
         let newTotalPrice=updatePrice(item,bookid)/100
+        document.getElementById(item.id+'-price').innerHTML=newTotalPrice    
         console.log(newTotalPrice)
         saveToStorage();
         }
@@ -80,8 +85,10 @@ increment_buttons.forEach(button => {
         if(bookid==item.id)
         {
         item.quantity+=1
+        document.getElementById(item.id+'-quantity').innerHTML=item.quantity
         console.log(item.quantity)
         let newTotalPrice=updatePrice(item,bookid)/100
+        document.getElementById(item.id+'-price').innerHTML=newTotalPrice      
         console.log(newTotalPrice)
         saveToStorage();
         }
