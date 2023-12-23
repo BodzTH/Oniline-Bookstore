@@ -5,7 +5,7 @@ import { useEffect } from "react";
 // Function to fetch data from the API using async/await
 let fetchedData: any = [];
 
-const fetchData = setInterval(async () => {
+setInterval(async () => {
   try {
     const response = await axios.get("http://localhost:3004/api/getAllBooks");
     const data = response.data;

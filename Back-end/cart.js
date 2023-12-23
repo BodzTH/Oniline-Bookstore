@@ -15,40 +15,37 @@ cart=[
   },
 ];}
 
-async function fetchDataAndUpdateLocalStorage() {
-  try {
-    const response = await fetch("http://localhost:5040/api/getCartItems");
-    const data = await response.json();
-
-    if (Object.keys(data).length !== 0) {
-      let matching = false;
-      let matchingID;
-
-      cart.forEach((item) => {
-        if (item.id === data.id) {
-          matching = true;
-          matchingID = item.id;
-        }
-      });
-
-      if (matching === true) {
-        cart.forEach((item) => {
-          if (item.id === matchingID) {
-            item.quantity += data.quantity;
-            document.getElementById(item.id + "-quantity").innerHTML =
-              item.quantity;
+function fetchDataAndUpdateLocalStorage() {
+  setInterval(() => {
+    fetch("http://localhost:3004/api/getCartItems")
+      .then((response) => response.json())
+      .then((data) => {
+        if (Object.keys(data).length !== 0) {
+          let matching = false;
+          let matchingID;
+          cart.forEach((item) => {
+            if (item.id === data.id) {
+              matching = true;
+              matchingID = item.id;
+            }
+          });
+          if (matching == true) {
+            cart.forEach((item) => {
+              if (item.id === matchingID) {
+                item.quantity += data.quantity;
+                document.getElementById(item.id + "-quantity").innerHTML =
+                  item.quantity;
+              }
+            });
+          } else {
+            cart.push(data);
           }
-        });
-      } else {
-        cart.push(data);
-      }
-      saveToStorage();
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
+          saveToStorage();
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }, 6000); // fetch every 6 seconds
 }
-
 export { fetchDataAndUpdateLocalStorage };
 
 
