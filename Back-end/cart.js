@@ -33,7 +33,7 @@ function fetchDataAndUpdateLocalStorage() {
 if (matching == true) {
         cart.forEach((item) => {
           if (item.id === matchingID) {
-            item.quantity += data.quantity;
+            item.quantity = data.quantity;
             document.getElementById(item.id + "-quantity").innerHTML =
               item.quantity;
           }
