@@ -143,7 +143,6 @@ h3 {
 
 .js-delete-item {
     margin-left: auto;
-    color: red;
 }
 
 .desgin {
@@ -178,4 +177,17 @@ h3 {
 
 .m{
     margin-left: 11rem;
+}
+
+button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c82333;
 }
