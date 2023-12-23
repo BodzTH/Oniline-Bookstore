@@ -1,5 +1,4 @@
 //import { bookid } from "../Front-end/admin/admin.js"
-
 export let bookscard=JSON.parse(localStorage.getItem("books"));
 if(!bookscard)
 {

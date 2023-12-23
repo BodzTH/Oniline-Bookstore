@@ -4,11 +4,17 @@ import useStore, { getCategories } from "@/cartstore/cartstore";
 import { useEffect, useState } from "react";
 
 
-
 function Home() {
-  
-  const categoires = getCategories()
- 
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const data = await getCategories();
+      setCategories(data as any);
+    };
+
+    fetchCategories();
+  }, [categories]);
 
   return (
     <main>
@@ -16,7 +22,7 @@ function Home() {
       <div>
         <div>
           {
-            categoires.map((category, index) => (
+            categories.map((category, index) => (
               <CategoryHomeRow key={index} title={category as string} styl={""} />
 
             )

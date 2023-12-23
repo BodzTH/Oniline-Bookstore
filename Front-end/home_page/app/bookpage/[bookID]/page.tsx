@@ -3,24 +3,32 @@ import { getBookByID } from "@/cartstore/cartstore"
 import { useParams } from "next/navigation"
 import useStore from '@/cartstore/cartstore';
 import Link from "next/link";
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import axios from "axios"
-
 function BookPage() {
 
-  const { bookID } = useParams()
-  const bookDetails = getBookByID(+bookID)
-  const {count, addToCart,incart} = useStore();
+  const { bookID } = useParams();
+  const { count, incart, quantity } = useStore();
 
-  let quantityCounter = 0;
-  function increaseQuantity(idd: number) {
-    quantityCounter++;
-  }
-  function sendDataToServer(idd: number) {
-    axios.post('http://localhost:3004/api/sendCartItems', { id: idd, quantity: quantityCounter })
+  const quantityy = quantity
+  function sendDataToServer(idd: number, quantity: number) {
+    axios.post('http://localhost:3004/api/sendCartItems', { id: idd, quantity: quantity })
       .then(response => console.log('Response:', response))
       .catch(error => console.error('Error:', error));
   }
+
+  const [bookDetails, SetbookDetails] = useState([] as any);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const data = await getBookByID(+bookID);
+      SetbookDetails(data as any);
+    };
+
+    fetchCategories();
+  }, [bookDetails, bookID]);
+
+
   return (
     <div>
       {/* Book item section */}
@@ -42,7 +50,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={() => { increaseQuantity(+bookID); sendDataToServer(+bookID); addToCart(+bookID) }}>Send Message to Iframe</button>
+                <button onClick={() => { sendDataToServer(+bookID, quantityy); }}>Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>

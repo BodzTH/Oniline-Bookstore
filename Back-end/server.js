@@ -10,17 +10,6 @@ app.use(express.json());
 
 let cartItmes = {}; // Temporarily store data here
 let AllBooks = [];
-//Data From Next
-app.post("/api/sendCartItems", (req, res) => {
-  cartItmes = req.body;
-  res.json({ message: "Cart Items received" });
-});
-
-//Data to cart.js
-app.get("/api/getCartItems", (req, res) => {
-  res.json(cartItmes);
-  cartItmes = {};
-});
 
 //Data From cart.js
 app.post("/api/sendAllBooks", (req, res) => {
@@ -28,9 +17,23 @@ app.post("/api/sendAllBooks", (req, res) => {
   res.json({ message: "Books received" });
 });
 
+//Data From Next
+app.post("/api/sendCartItems", (req, res) => {
+  cartItmes = req.body;
+  res.json({ message: "Cart Items received" });
+});
+
 //Data to Next
-app.get("/api/getAllBooks", (req, res) => {
-  res.json(AllBooks);
+setInterval(async () => {
+  app.get("/api/getAllBooks", (req, res) => {
+    res.json(AllBooks);
+  });
+}, 5000);
+
+//Data to cart.js
+app.get("/api/getCartItems", (req, res) => {
+  res.json(cartItmes);
+  cartItmes = {};
 });
 
 const PORT = 3004; // Port number

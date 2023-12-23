@@ -2,56 +2,66 @@ import { create } from "zustand";
 import axios from "axios";
 import { useEffect } from "react";
 
-let data: any = [];
-axios
-  .get("http://localhost:3004/api/getAllBooks")
-  .then((response) => {
-    data = response.data;
-    
-  })
-  .catch((error) => console.error("Error:", error));
+// Function to fetch data from the API using async/await
+let fetchedData: any = [];
+
+const fetchData = setInterval(async () => {
+  try {
+    const response = await axios.get("http://localhost:3004/api/getAllBooks");
+    const data = response.data;
+    console.log("Data updated:", data);
+    fetchedData = data;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}, 7000);
 
 type Store = {
   bookscard: any;
-  count: any;
-  incart: any;
-  addToCart: (id: any) => void;
+  count: number;
+  incart: number;
+  quantity: number;
 };
 
+const books: number = 5;
 const useStore = create<Store>()((set) => ({
+  quantity: books,
   count: 0,
-  bookscard: data,
-  incart: [],
-  addToCart: (id) => set((state) => ({ count: state.count + 1, incart: [...state.incart, id] })),
+  bookscard: fetchedData,
+  incart: 0,
 }));
 
 export const getBookByID = (id: number) => {
-  return data.find((book: { id: any; }) => book.id === id);
+  return fetchedData.find((book: { id: any }) => book.id === id);
 };
 
 export const getBooksByCategory = (category: string) => {
- return data.filter((book: { categori: string; }) => book.categori === category);
+  return fetchedData.filter(
+    (book: { categori: string }) => book.categori === category
+  );
 };
 
 export const getCategories = () => {
- const categoriesSet = new Set();
- data.forEach((book: any) => categoriesSet.add(book.categori));
- return Array.from(categoriesSet);
+  const categoriesSet = new Set();
+  fetchedData.forEach((book: any) => categoriesSet.add(book.categori));
+  return Array.from(categoriesSet);
 };
 
 export const getBooksBySearchQuery = (searchQuery: string) => {
- return data.filter((book: { BookName: string | string[]; categori: string | string[]; }) => {
-   return (
-     book.BookName.includes(searchQuery) || book.categori.includes(searchQuery)
-   );
- });
+  return fetchedData.filter(
+    (book: { BookName: string | string[]; categori: string | string[] }) => {
+      return (
+        book.BookName.includes(searchQuery) ||
+        book.categori.includes(searchQuery)
+      );
+    }
+  );
 };
 
 export const getBooksTOCart = () => {
- const bookSet = new Set();
- data.forEach((id: { id: unknown; }) => bookSet.add(id.id));
- return Array.from(bookSet);
+  const bookSet = new Set();
+  fetchedData.forEach((id: { id: unknown }) => bookSet.add(id.id));
+  return Array.from(bookSet);
 };
-
 
 export default useStore;

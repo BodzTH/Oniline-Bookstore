@@ -15,59 +15,67 @@ cart=[
   },
 ];}
 
-fetch("http://localhost:3004/api/sendAllBooks", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(bookscard),
-})
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok.");
-    }
-    return response.json();
-  })
-  .catch((error) => {
-    console.error("There was a problem with the fetch operation:", error);
-  });
+async function fetchDataAndUpdateLocalStorage() {
+  try {
+    const response = await fetch("http://localhost:5040/api/getCartItems");
+    const data = await response.json();
 
-  function fetchDataAndUpdateLocalStorage() {
-    fetch("http://localhost:5040/api/getCartItems")
-      .then((response) => response.json())
-      .then((data) => {
-        if (Object.keys(data).length !== 0) {
-          let matching=false;
-          let matchingID;
-          cart.forEach(item => {
-            if(item.id===data.id)
-            {
-              matching=true
-              matchingID=item.id
-            }
-          })
-          if(matching==true)
-          {
-            cart.forEach(item => {
-              if(item.id===matchingID)
-              {
-                item.quantity+=data.quantity
-                document.getElementById(item.id+'-quantity').innerHTML=item.quantity
-              }
-            })
-          }
-          else{
-            cart.push(data)
-          }
-          saveToStorage();
+    if (Object.keys(data).length !== 0) {
+      let matching = false;
+      let matchingID;
+
+      cart.forEach((item) => {
+        if (item.id === data.id) {
+          matching = true;
+          matchingID = item.id;
         }
-      })
-      .catch((error) => console.error("Error:", error));
+      });
+
+      if (matching === true) {
+        cart.forEach((item) => {
+          if (item.id === matchingID) {
+            item.quantity += data.quantity;
+            document.getElementById(item.id + "-quantity").innerHTML =
+              item.quantity;
+          }
+        });
+      } else {
+        cart.push(data);
+      }
+      saveToStorage();
+    }
+  } catch (error) {
+    console.error("Error:", error);
   }
+}
+
 export { fetchDataAndUpdateLocalStorage };
 
 
+const getCartFromLocalStorage = () => {
+  if (typeof window !== "undefined" && window.localStorage) {
+    const storedCart = JSON.parse(localStorage.getItem("cart"));
+    return storedCart || getDefaultCart(); // Use a function for default values
+  } else {
+    return getDefaultCart();
+  }
+};
+
+const getDefaultCart = () => [
+  {
+    id: 1,
+    quantity: 9,
+    deliveryOptionId: "1",
+  },
+  {
+    id: 2,
+    quantity: 2,
+    deliveryOptionId: "2",
+  },
+];
+
 fetchDataAndUpdateLocalStorage();
+cart = getCartFromLocalStorage();
 
 
 export function saveToStorage() {

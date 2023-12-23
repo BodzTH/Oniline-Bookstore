@@ -32,14 +32,14 @@ console.log(cart[0].quantity)
         <div class="price-quantity">
             <div class="buttons">
                <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
-               <div id=${matching.id+'-quantity'} class="quantity">
+               <div id=${matching.id} class="quantity">
                ${x.quantity}
                </div>
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
             </div>
             <div class="prices">
             <h2>$</h2>
-            <h2 id=${matching.id+'-price'} > ${((matching.priceCents*x.quantity)/100).toFixed(2)} </h2>
+            <h2>${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
             </div>
             <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
         </div>
@@ -62,10 +62,8 @@ decrement_buttons.forEach(button => {
         if(item.quantity>=2)
         {
         item.quantity-=1
-        document.getElementById(item.id+'-quantity').innerHTML=item.quantity
         console.log(item.quantity)
         let newTotalPrice=updatePrice(item,bookid)/100
-        document.getElementById(item.id+'-price').innerHTML=newTotalPrice    
         console.log(newTotalPrice)
         saveToStorage();
         }
@@ -82,10 +80,8 @@ increment_buttons.forEach(button => {
         if(bookid==item.id)
         {
         item.quantity+=1
-        document.getElementById(item.id+'-quantity').innerHTML=item.quantity
         console.log(item.quantity)
         let newTotalPrice=updatePrice(item,bookid)/100
-        document.getElementById(item.id+'-price').innerHTML=newTotalPrice      
         console.log(newTotalPrice)
         saveToStorage();
         }
