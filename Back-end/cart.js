@@ -69,7 +69,7 @@ if (matching == true) {
       }
     })
     .catch((error) => console.error("Error:", error));
-}, 5000); // fetch every 6 seconds
+}, 100); // fetch every 6 seconds
 }
 export { fetchDataAndUpdateLocalStorage };
 

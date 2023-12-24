@@ -22,7 +22,7 @@ function Navbar() {
     fetchAndUpdateQuantity();
 
     // Set up interval to continuously fetch quantity (optional)
-    const interval = setInterval(fetchAndUpdateQuantity, 1000); // Fetch every 5 seconds, for example
+    const interval = setInterval(fetchAndUpdateQuantity, 100); // Fetch every 5 seconds, for example
 
     // Clear interval on component unmount (optional)
     return () => clearInterval(interval);

@@ -65,7 +65,7 @@ function sendTotalQuantity() {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
-  }, 1000);
+  }, 100);
 }
 
 sendTotalQuantity();
