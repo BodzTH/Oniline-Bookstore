@@ -43,13 +43,12 @@ function Home() {
 
 
   return (
-    <main>
-      {/* CategoryRow -- put here iteration func */}
-      <div>
+    <main >
+      <div >
         <div>
           {
             uniqueCategories.map((category: string, index: number) => (
-              <CategoryHomeRow key={index} title={category} styl={""} />
+              <CategoryHomeRow key={index} title={category} stylcat={" border-y-0 border-b line h-12 border-border-color mb-10"} width={300} height={200} stylall={"ml-6"} stylcard={""} />
             ))
 
 
