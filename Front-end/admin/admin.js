@@ -34,6 +34,7 @@ setInterval(async () => {
 
 
   setInterval(async () => {
+    console.log("Sending POST request...");
     fetch("http://localhost:5030/api/sendTotalQuantity", {
       method: "POST",
       headers: {
@@ -53,4 +54,4 @@ setInterval(async () => {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
-  }, 100);
+  }, 5000);

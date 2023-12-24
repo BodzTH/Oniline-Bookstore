@@ -46,6 +46,7 @@ app.get("/api/getAllBooks", (req, res) => {
 //CartItems to cart.js
 app.get("/api/getCartItems", (req, res) => {
   res.json(cartItmes);
+  cartItmes={};
 });
 
 const PORT = 5030; // Port number
