@@ -82,15 +82,26 @@ increment_buttons.forEach(button => {
     button.addEventListener('click',() => {
     let bookid=button.dataset.bookId
     cart.map(item => {
+        let matching;
         if(bookid==item.id)
         {
-        item.quantity+=1
-        document.getElementById(item.id+'-quantity').innerHTML=item.quantity
-        console.log(item.quantity)
-        let newTotalPrice=updatePrice(item,bookid)/100
-        document.getElementById(item.id+'-price').innerHTML=newTotalPrice      
-        console.log(newTotalPrice)
-        saveToStorage();
+        bookscard.forEach(book => {
+            if(book.id==bookid)
+            {
+                matching=book
+            }
+        });
+        if(item.quantity<matching.inStock)
+        {
+            item.quantity+=1
+            document.getElementById(item.id+'-quantity').innerHTML=item.quantity
+            console.log(item.quantity)
+            let newTotalPrice=updatePrice(item,bookid)/100
+            document.getElementById(item.id+'-price').innerHTML=newTotalPrice      
+            console.log(newTotalPrice)
+            saveToStorage();
+        }
+
         }
     })
 })

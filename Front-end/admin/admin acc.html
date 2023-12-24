@@ -67,6 +67,7 @@
     <div class="tab" onclick="showTab('addNewTab')">Add New Book</div>
     <div class="tab" onclick="showTab('deleteTab')">Delete Book</div>
     <div class="tab" onclick="showTab('reduceTab')">Reduce Number</div>
+    <div class="tab" onclick="showTab('ordersTab')">Orders</div>
 </div>
 
 <!-- Add Number of Books to Stock -->
@@ -124,6 +125,13 @@
     <button class="js-take-from-stock-button">Reduce from Stock</button>
 </div>
 
+<!-- Orders Tab -->
+<div id="ordersTab" class="tab-content" style="display:none;">
+    <h2>Orders</h2>
+    <!-- Placeholder content for orders tab -->
+    <p class="js-orders-container">This section is for displaying orders.</p>
+</div>
+
 <script>
     function showTab(tabId) {
         // Hide all tabs
@@ -138,5 +146,6 @@
 </script>
 <script src="../../Back-end/books.js" type="module"></script>
 <script src="admin.js" type="module"></script>
+<script src="orders.js" type="module"></script>
 </body>
 </html>
