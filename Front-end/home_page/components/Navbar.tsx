@@ -3,12 +3,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NavLinks } from '@/constants/test';
 import Search from '@/components/Search';
-import useStore from '@/cartstore/cartstore';
-
+import { fetchQuantity } from '@/cartstore/cartstore';
+import { useState, useEffect, use } from 'react';
 function Navbar() {
+  const [incart, setInCart] = useState(0); // Initialize with 0 or default value
 
+  useEffect(() => {
+    async function fetchAndUpdateQuantity() {
+      try {
+        const newQuantity = await fetchQuantity();
+        setInCart(newQuantity);
+      } catch (error) {
+        // Handle fetch error if needed
+      }
+    }
 
-  const { count } = useStore()
+    // Fetch quantity when the component mounts
+    fetchAndUpdateQuantity();
+
+    // Set up interval to continuously fetch quantity (optional)
+    const interval = setInterval(fetchAndUpdateQuantity, 100); // Fetch every 5 seconds, for example
+
+    // Clear interval on component unmount (optional)
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <nav className=' flexBetween navbar mb-20 '>
@@ -22,7 +40,7 @@ function Navbar() {
 
         </Link>
         {/* p-10 vs ml-10 mr-10 gap?*/}
-        <ul className=' flexBetween pb-10 pt-10 pl-10 mr-10 gap-7 font-medium '>
+        <ul className=' flexBetween pb-10 pt-10 pl-10 mr-10 gap-7 font-medium flex-shrink-0'>
           {/* dropdown categories */}
           {
             NavLinks.map((link) => (
@@ -34,19 +52,19 @@ function Navbar() {
         </ul>
         {/* Title */}
         <div className='flexBetween m-auto'>
-          <h1 className='lobester text-3xl flexBetween'>
+          <h1 className='lobester text-3xl flexBetween flex-shrink-0 m-auto'>
             Welcome To Our Bookstore
           </h1>
         </div>
         {/* Search block */}
-        <div className=' ml-10 gap-x-10 flexBetween mr-7'>
+        <div className=' ml-10 gap-x-10 flexBetween mr-7 flex-shrink-0 '>
           <div className='flexBetween'>
 
             {/* Search bar */}
             <Search />
           </div>
 
-          <div className='flexBetween'>
+          <div className='flexBetween flex-shrink-0'>
             <button className='flexBetween ' >
               <Link href={"/"}>
                 <Image className='max-w-none'
@@ -54,7 +72,7 @@ function Navbar() {
                   width={40}
                   height={10}
                 />
-                <span className=' absolute right-6 top-10 circle-block text-sm'>{count}</span>
+                <span key={1} className=' flexStart circle-block text-sm flex-shrink-0'>{incart}</span>
 
               </Link>
             </button>

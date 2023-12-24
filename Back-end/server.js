@@ -10,33 +10,46 @@ app.use(express.json());
 
 let cartItmes = {}; // Temporarily store data here
 let AllBooks = [];
+let totalQuantity = 0;
 
-//Data From cart.js
+//Books From cart.js
 app.post("/api/sendAllBooks", (req, res) => {
   AllBooks = req.body;
   res.json({ message: "Books received" });
 });
 
-//Data From Next
+//AddToCart From Next
 app.post("/api/sendCartItems", (req, res) => {
   cartItmes = req.body;
   res.json({ message: "Cart Items received" });
 });
 
-//Data to Next
-setInterval(async () => {
-  app.get("/api/getAllBooks", (req, res) => {
-    res.json(AllBooks);
-  });
-}, 5000);
+//TotalQuantity from cart.js
+app.post("/api/sendTotalQuantity", (req, res) => {
+  totalQuantity = parseInt(req.body.quantity);
+  res.json({ message: "Total Quantity received" });
+  console.log(totalQuantity);
+});
 
-//Data to cart.js
+//Total Quantity to Next
+
+app.get("/api/getTotalQuantity", (req, res) => {
+  res.json(totalQuantity);
+});
+
+//Books to Next
+
+app.get("/api/getAllBooks", (req, res) => {
+  res.json(AllBooks);
+});
+
+//CartItems to cart.js
 app.get("/api/getCartItems", (req, res) => {
   res.json(cartItmes);
   cartItmes = {};
 });
 
-const PORT = 3004; // Port number
+const PORT = 5030; // Port number
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

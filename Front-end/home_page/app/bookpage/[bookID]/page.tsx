@@ -8,26 +8,14 @@ import axios from "axios"
 function BookPage() {
 
   const { bookID } = useParams();
-  const { count, incart, quantity } = useStore();
+  const bookDetails = getBookByID(+bookID);
 
-  const quantityy = quantity
+   const no = 1;
   function sendDataToServer(idd: number, quantity: number) {
-    axios.post('http://localhost:3004/api/sendCartItems', { id: idd, quantity: quantity })
+    axios.post('http://localhost:5030/api/sendCartItems', { id: idd, quantity: quantity })
       .then(response => console.log('Response:', response))
       .catch(error => console.error('Error:', error));
   }
-
-  const [bookDetails, SetbookDetails] = useState([] as any);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const data = await getBookByID(+bookID);
-      SetbookDetails(data as any);
-    };
-
-    fetchCategories();
-  }, [bookDetails, bookID]);
-
 
   return (
     <div>
@@ -50,7 +38,7 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={() => { sendDataToServer(+bookID, quantityy); }}>Send Message to Iframe</button>
+                <button onClick={() => { sendDataToServer(+bookID, no); }}>Send Message to Iframe</button>
                 <br />
 
                 <Link href={"/cart"}> press</Link>

@@ -11,8 +11,11 @@ export type BookProbs = {
   image: string;
   alt_image: string;
   price: number;
-  cart: ButtonHTMLAttributes<HTMLButtonElement>;
   id: number;
+  stylcat: string;
+  stylcard: string;
+  width: number;
+  height: number;
 };
 
 export type SearchProbs = {
@@ -39,5 +42,4 @@ export type BookItemProbs = {
   author: string;
   publisher: string;
   sku: string;
-  cart: ButtonHTMLAttributes<HTMLButtonElement>;
 };

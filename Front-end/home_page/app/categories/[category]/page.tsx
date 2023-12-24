@@ -1,9 +1,51 @@
 'use client'
 import CategoryHomeRow from "@/components/CategoryHomeRow";
+import useStore, { fetchBooks, getCategories } from "@/cartstore/cartstore";
+import { Key, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+
+interface Book {
+  id: number;
+  image: string;
+  altImage: string;
+  categori: string;
+  BookName: string;
+  desc: string;
+  author: string;
+  publisher: string;
+  priceCents: number;
+  inStock: number;
+  sold: number;
+}
+
 
 function Category() {
   const { category } = useParams()
+
+
+  const [books, setBooks] = useState<Book[]>([]);
+
+  useEffect(() => {
+    async function fetchAndSetBooks() {
+      try {
+        const fetchedBooks = await fetchBooks();
+        setBooks(fetchedBooks);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+        // Handle error
+      }
+    }
+
+    fetchAndSetBooks();
+
+    const interval = setInterval(fetchAndSetBooks, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+
+  const uniqueCategories = Array.from(new Set(books.map(book => book.categori)));
+
   return (
     <>
       <div className="flex">
@@ -15,7 +57,14 @@ function Category() {
 
         </div>
         <div className="ml-10  ">
-          <CategoryHomeRow styl="mb-5 " title={category as string} />
+          {
+            uniqueCategories.map((category: string, index: number) => (
+              <CategoryHomeRow key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
+            ))
+
+
+          }
+
         </div>
       </div>
     </>
