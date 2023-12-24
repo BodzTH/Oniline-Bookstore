@@ -18,7 +18,7 @@ if(!cart)
 
 function fetchDataAndUpdateLocalStorage() {
   setInterval(() => {
-    fetch("http://localhost:3004/api/getCartItems")
+    fetch("http://localhost:5030/api/getCartItems")
       .then((response) => response.json())
       .then((data) => {
     if (Object.keys(data).length !== 0) {
@@ -33,19 +33,83 @@ function fetchDataAndUpdateLocalStorage() {
 if (matching == true) {
         cart.forEach((item) => {
           if (item.id === matchingID) {
-            item.quantity += data.quantity;
+            item.quantity = data.quantity;
             document.getElementById(item.id + "-quantity").innerHTML =
               item.quantity;
           }
         });
       } else {
         cart.push(data);
+        console.log(cart);
+        let matching;
+        bookscard.forEach(book => {
+          if(data.id==book.id)
+          {
+            matching=book;
+          }
+        })
+        if(cart.length>0)
+        {
+        document.getElementById('cart-container').innerHTML+=`
+        <div id=product-id-${matching.id} class="item">
+            <div class="details">
+            <img src=${matching.image} alt="Product Image" class="cart-row-img" >
+            <div class="name_desc">
+            <h2>${matching.BookName}</h2>
+            <h3>${matching.categori}</h3>
+            <p>${matching.desc}</p>
+            </div>
+            <div class="price-quantity">
+                <div class="buttons">
+                   <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
+                   <div id=${matching.id+'-quantity'} class="quantity">
+                   ${data.quantity}
+                   </div>
+                   <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
+                </div>
+                <div class="prices">
+                <h2 class="m">$</h2>
+                <h2 id=${matching.id+'-price'} > ${((matching.priceCents*data.quantity)/100).toFixed(2)}</h2>
+                </div>
+                <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
+            </div>
+            </div>
+        </div>
+        `}else{
+          document.getElementById('cart-container').innerHTML=`
+          <div id=product-id-${matching.id} class="item">
+              <div class="details">
+              <img src=${matching.image} alt="Product Image" class="cart-row-img" >
+              <div class="name_desc">
+              <h2>${matching.BookName}</h2>
+              <h3>${matching.categori}</h3>
+              <p>${matching.desc}</p>
+              </div>
+              <div class="price-quantity">
+                  <div class="buttons">
+                     <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
+                     <div id=${matching.id+'-quantity'} class="quantity">
+                     ${data.quantity}
+                     </div>
+                     <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
+                  </div>
+                  <div class="prices">
+                  <h2 class="m">$</h2>
+                  <h2 id=${matching.id+'-price'} > ${((matching.priceCents*data.quantity)/100).toFixed(2)}</h2>
+                  </div>
+                  <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
+              </div>
+              </div>
+          </div>
+          `
+        }
+
              }
         saveToStorage();
       }
     })
     .catch((error) => console.error("Error:", error));
-}, 6000); // fetch every 6 seconds
+}, 5000); // fetch every 6 seconds
 }
 export { fetchDataAndUpdateLocalStorage };
 
@@ -82,3 +146,10 @@ export function deleteItem() {
   });
 }
 
+export function totalCartQuantity() {
+  let total = 0;
+  cart.forEach((item) => {
+    total += item.quantity;
+  });
+  return total;
+}

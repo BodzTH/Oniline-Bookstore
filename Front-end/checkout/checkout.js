@@ -60,6 +60,38 @@ cart.map(item => {
 })
 document.querySelector('.totalQuantity').innerHTML=totalQuantity;
 
+const randomId = function(length = 6) {
+    return Math.random().toString(36).substring(2, length+2);
+  };
+
+
+// generate a unique id
+
+
+// check if the id matches any other existing ids provided as an array
+const checkId = function(id, existing = []) {
+    let match = existing.find(function(item) {
+      return item === id;
+    });
+    return match ? false : true;
+  };
+
+  
+const getId = function( length, existing = [] ) {
+    const limit = 100; // max tries to create unique id
+    let attempts = 0; // how many attempts
+    let id = false;
+    while(!id && attempts < limit) {
+      id = randomId(length); // create id
+      if(!checkId(id, existing)) { // check unique
+        id = false; // reset id
+        attempts++; // record failed attempt
+      }
+    }
+    return id; // the id or false if did not get unique after max attempts
+  };
+
+
 function setOrder()
 {
     const newOrder={};
@@ -72,6 +104,7 @@ function setOrder()
         newOrder.city=document.querySelector('.js-city-set-order').value
         newOrder.items=cart;
         newOrder.status='orderd'
+        newOrder.id=getId(10,orders)
         orders.push(newOrder)
         localStorage.removeItem('orders')        
         saveOrdersToStorage();

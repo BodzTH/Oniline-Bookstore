@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap");
 
 @tailwind base;
@@ -15,7 +15,7 @@ body {
   font-family: "normal";
   background-color: #ffffff;
   color: #000000;
-  font-size:larger;
+  font-size: larger;
 }
 
 .lobester {
@@ -33,6 +33,34 @@ body {
   border-radius: 50%; /* Make the element a circle */
 }
 
+.imageHome{
+  
+  border-radius: 24px;
+  width: 250px;
+  height: 250px;
+  flex-shrink: 0;
+  
+  @apply shadowbox flexBetween;
+}
+
+.imageCat{
+  
+}
+.imageSearch{
+  
+}
+
+.bookCardHome {
+  border-radius: 24px;
+  @apply bg-background-color shadowbox;
+  width: 350px;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+.line {
+  width: 1220px;
+}
 .flexCenter {
   @apply flex justify-center items-center;
 }
@@ -117,7 +145,7 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply border-b h-20 border-border-color shadowbox bg-background-color;
+  @apply border-b h-20 border-border-color shadowbox bg-background-color ;
 }
 
 /* Side Bar */

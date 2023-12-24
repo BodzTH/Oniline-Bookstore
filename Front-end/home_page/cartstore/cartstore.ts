@@ -5,27 +5,35 @@ import { useEffect } from "react";
 // Function to fetch data from the API using async/await
 let fetchedData: any = [];
 
-const fetchData = setInterval(async () => {
+export async function fetchBooks(): Promise<any> {
   try {
-    const response = await axios.get("http://localhost:3004/api/getAllBooks");
-    const data = response.data;
-    console.log("Data updated:", data);
-    fetchedData = data;
+    const response = await axios.get<any[]>('http://localhost:5030/api/getAllBooks'); // Replace '/api/quantity' with your API endpoint
+    fetchedData = response.data;
+    return response.data;
   } catch (error) {
-    console.error("Error:", error);
+    console.error('Error fetching quantity:', error);
+    throw error;
   }
-}, 7000);
+}
+
+
+export async function fetchQuantity(): Promise<number> {
+  try {
+    const response = await axios.get<number>('http://localhost:5030/api/getTotalQuantity'); // Replace '/api/quantity' with your API endpoint
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching quantity:', error);
+    throw error;
+  }
+}
 
 type Store = {
   bookscard: any;
   count: number;
   incart: number;
-  quantity: number;
 };
 
-const books: number = 5;
 const useStore = create<Store>()((set) => ({
-  quantity: books,
   count: 0,
   bookscard: fetchedData,
   incart: 0,
@@ -63,5 +71,7 @@ export const getBooksTOCart = () => {
   fetchedData.forEach((id: { id: unknown }) => bookSet.add(id.id));
   return Array.from(bookSet);
 };
+
+
 
 export default useStore;
