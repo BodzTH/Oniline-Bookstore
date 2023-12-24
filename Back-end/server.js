@@ -49,7 +49,7 @@ app.get("/api/getCartItems", (req, res) => {
   cartItmes = {};
 });
 
-const PORT = 3004; // Port number
+const PORT = 5030; // Port number
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

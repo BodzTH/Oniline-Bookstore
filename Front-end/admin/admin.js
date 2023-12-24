@@ -11,7 +11,7 @@ addBook();
 
 // Function to perform the POST request
 setInterval(async () => {
-  fetch("http://localhost:3004/api/sendAllBooks", {
+  fetch("http://localhost:5030/api/sendAllBooks", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ console.log(totalQuantity);
 
 
   setInterval(async () => {
-    fetch("http://localhost:3004/api/sendTotalQuantity", {
+    fetch("http://localhost:5030/api/sendTotalQuantity", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

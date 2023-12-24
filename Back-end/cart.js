@@ -8,7 +8,7 @@ if(!cart)
 
 function fetchDataAndUpdateLocalStorage() {
   setInterval(() => {
-    fetch("http://localhost:3004/api/getCartItems")
+    fetch("http://localhost:5030/api/getCartItems")
       .then((response) => response.json())
       .then((data) => {
     if (Object.keys(data).length !== 0) {

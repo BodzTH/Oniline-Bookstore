@@ -12,7 +12,7 @@ function BookPage() {
 
    const no = 1;
   function sendDataToServer(idd: number, quantity: number) {
-    axios.post('http://localhost:3004/api/sendCartItems', { id: idd, quantity: quantity })
+    axios.post('http://localhost:5030/api/sendCartItems', { id: idd, quantity: quantity })
       .then(response => console.log('Response:', response))
       .catch(error => console.error('Error:', error));
   }
