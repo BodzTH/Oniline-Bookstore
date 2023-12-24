@@ -17,6 +17,7 @@ body {
     background: #e5f5f6;
     border-radius: 15px;
     padding: 1rem;
+    justify-content: space-between;
     border: 1px solid #333;
     width: 80%;
     margin: auto;
@@ -47,16 +48,23 @@ body {
 .items-label,
 .quantity-label,
 .price-label {
+    flex-grow: 1;
+    text-align: center;
     font-size: 20px;
     margin: 0;
 }
 
 .items-label {
-    margin-right: 650px;
+    margin-right: 25%;
 }
 
 .quantity-label {
-    margin-right: 250px;
+    margin-left: 28%;
+}
+
+.price-label{
+    margin-left: 21%;
+    margin-right: 26%;
 }
 
 .cart-title {
