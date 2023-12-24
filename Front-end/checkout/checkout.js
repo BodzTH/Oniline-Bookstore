@@ -26,7 +26,7 @@ console.log(cart[0].quantity)
             <div class="price">$22/1 product</div>
         </div>
         <div class="quantity">${x.quantity}</div>
-        <div class="returnPrice">${((matching.priceCents*x.quantity)/100).toFixed(2)}</div>
+        <div class="returnPrice">$${((matching.priceCents*x.quantity)/100).toFixed(2)}</div>
         </div>
     `;
     }).join(""));
@@ -35,7 +35,7 @@ console.log(cart[0].quantity)
 console.log(generatCheckout());
 
 const totalPrice=document.querySelector('.totalPrice')
-totalPrice.innerHTML=getTotalPrice()
+totalPrice.innerHTML='$'+getTotalPrice()
 function getTotalPrice()
 {
     let totaPrice=0;
