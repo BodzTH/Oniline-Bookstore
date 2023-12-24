@@ -2,8 +2,7 @@ import { bookscard } from "./books.js";
 export let cart = JSON.parse(localStorage.getItem("cart"));;
 if(!cart)
 {
-  cart=[
-  ];
+  cart=[];
 }
 
 function fetchDataAndUpdateLocalStorage() {
@@ -99,7 +98,7 @@ if (matching == true) {
       }
     })
     .catch((error) => console.error("Error:", error));
-}, 100); // fetch every 6 seconds
+}, 5000); // fetch every 6 seconds
 }
 export { fetchDataAndUpdateLocalStorage };
 
@@ -136,3 +135,10 @@ export function deleteItem() {
   });
 }
 
+export function totalCartQuantity() {
+  let total = 0;
+  cart.forEach((item) => {
+    total += item.quantity;
+  });
+  return total;
+}

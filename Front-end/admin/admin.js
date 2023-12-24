@@ -1,5 +1,5 @@
 import {bookscard, deleteBookFromDatabase, addInStockQuantity, reduceInStockQuantity, addBook} from "../../Back-end/books.js";
-import { cart } from "../../Back-end/cart.js";
+import { totalCartQuantity } from "../../Back-end/cart.js";
 
 deleteBookFromDatabase();
 
@@ -32,17 +32,10 @@ setInterval(async () => {
     });
 }, 1000);
 
-function totalCartQuantity() {
-  let total = 0;
-  cart.forEach((item) => {
-    total += item.quantity;
-  });
-  return total;
-}
 
-let totalQuantity = totalCartQuantity();
 
-console.log(totalQuantity);
+
+
 
 
   setInterval(async () => {
@@ -51,7 +44,7 @@ console.log(totalQuantity);
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ quantity: totalQuantity }),
+      body: JSON.stringify({ quantity: totalCartQuantity() }),
     })
       .then((response) => {
         if (!response.ok) {
