@@ -7,7 +7,7 @@ let fetchedData: any = [];
 
 export async function fetchBooks(): Promise<any> {
   try {
-    const response = await axios.get<any[]>('http://localhost:3004/api/getAllBooks'); // Replace '/api/quantity' with your API endpoint
+    const response = await axios.get<any[]>('http://localhost:5030/api/getAllBooks'); // Replace '/api/quantity' with your API endpoint
     fetchedData = response.data;
     return response.data;
   } catch (error) {
@@ -19,7 +19,7 @@ export async function fetchBooks(): Promise<any> {
 
 export async function fetchQuantity(): Promise<number> {
   try {
-    const response = await axios.get<number>('http://localhost:3004/api/getTotalQuantity'); // Replace '/api/quantity' with your API endpoint
+    const response = await axios.get<number>('http://localhost:5030/api/getTotalQuantity'); // Replace '/api/quantity' with your API endpoint
     return response.data;
   } catch (error) {
     console.error('Error fetching quantity:', error);
