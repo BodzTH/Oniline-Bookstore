@@ -3,16 +3,6 @@ export let cart = JSON.parse(localStorage.getItem("cart"));;
 if(!cart)
 {
   cart=[
-    {
-      id: 1,
-      quantity: 9,
-      deliveryOptionId: "1",
-    },
-    {
-      id: 2,
-      quantity: 2,
-      deliveryOptionId: "2",
-    },
   ];
 }
 
@@ -79,7 +69,7 @@ if (matching == true) {
       }
     })
     .catch((error) => console.error("Error:", error));
-}, 6000); // fetch every 6 seconds
+}, 5000); // fetch every 6 seconds
 }
 export { fetchDataAndUpdateLocalStorage };
 

@@ -1,20 +1,46 @@
 'use client';
 import CategoryHomeRow from "@/components/CategoryHomeRow";
-import useStore, { getCategories } from "@/cartstore/cartstore";
-import { useEffect, useState } from "react";
+import useStore, { fetchBooks, getCategories } from "@/cartstore/cartstore";
+import { Key, useEffect, useState } from "react";
 
+interface Book {
+  id: number;
+  image: string;
+  altImage: string;
+  categori: string;
+  BookName: string;
+  desc: string;
+  author: string;
+  publisher: string;
+  priceCents: number;
+  inStock: number;
+  sold: number;
+}
 
 function Home() {
-  const [categories, setCategories] = useState([]);
+  const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const data = await getCategories();
-      setCategories(data as any);
-    };
+    async function fetchAndSetBooks() {
+      try {
+        const fetchedBooks = await fetchBooks();
+        setBooks(fetchedBooks);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+        // Handle error
+      }
+    }
 
-    fetchCategories();
-  }, [categories]);
+    fetchAndSetBooks();
+
+    const interval = setInterval(fetchAndSetBooks, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+
+  const uniqueCategories = Array.from(new Set(books.map(book => book.categori)));
+
 
   return (
     <main>
@@ -22,11 +48,10 @@ function Home() {
       <div>
         <div>
           {
-            categories.map((category, index) => (
-              <CategoryHomeRow key={index} title={category as string} styl={""} />
+            uniqueCategories.map((category: string, index: number) => (
+              <CategoryHomeRow key={index} title={category} styl={""} />
+            ))
 
-            )
-            )
 
           }
 

@@ -31,10 +31,10 @@ function Search() {
             <input
                 className="searchbar text-center placeholder:text-border-color"
                 placeholder={"Search"}
-                onChange={(e) => {
+                onBlur={(e) => {
                     setSearchTerm(e.target.value); // Update the search term state
                 }}
-                value={searchTerm}
+                defaultValue={searchTerm}
             />
 
         </>

@@ -3,12 +3,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NavLinks } from '@/constants/test';
 import Search from '@/components/Search';
-import useStore from '@/cartstore/cartstore';
-
+import { fetchQuantity } from '@/cartstore/cartstore';
+import { useState, useEffect, use } from 'react';
 function Navbar() {
+  const [incart, setInCart] = useState(0); // Initialize with 0 or default value
 
+  useEffect(() => {
+    async function fetchAndUpdateQuantity() {
+      try {
+        const newQuantity = await fetchQuantity();
+        setInCart(newQuantity);
+      } catch (error) {
+        // Handle fetch error if needed
+      }
+    }
 
-  const { count } = useStore()
+    // Fetch quantity when the component mounts
+    fetchAndUpdateQuantity();
+
+    // Set up interval to continuously fetch quantity (optional)
+    const interval = setInterval(fetchAndUpdateQuantity, 1000); // Fetch every 5 seconds, for example
+
+    // Clear interval on component unmount (optional)
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <nav className=' flexBetween navbar mb-20 '>
@@ -54,7 +72,7 @@ function Navbar() {
                   width={40}
                   height={10}
                 />
-                <span className=' absolute right-6 top-10 circle-block text-sm'>{count}</span>
+                <span key={1} className=' absolute right-6 top-10 circle-block text-sm'>{incart}</span>
 
               </Link>
             </button>
