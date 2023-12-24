@@ -44,7 +44,7 @@ let totalQuantity = totalCartQuantity();
 
 console.log(totalQuantity);
 
-function sendTotalQuantity() {
+
   setInterval(async () => {
     fetch("http://localhost:3004/api/sendTotalQuantity", {
       method: "POST",
@@ -66,6 +66,3 @@ function sendTotalQuantity() {
         console.error("There was a problem with the fetch operation:", error);
       });
   }, 100);
-}
-
-sendTotalQuantity();
