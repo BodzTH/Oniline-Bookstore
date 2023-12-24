@@ -5,6 +5,7 @@ let ordersHTML=``
 orders.forEach(order => {
     ordersHTML+=`
     <div class="js-order">
+    <div class="js-name-order">${order.id}</div>    
     <div class="js-name-order">${order.fullName}</div>
     <div class="js-phone-number-orders">${order.phoneNumber}</div>
     <div class="js-address-orders">${order.address}</div>
@@ -36,3 +37,47 @@ function generateOrders(items){
     })
     return itemHTML
 }
+
+
+
+function editOrder_status(){
+    const button=document.querySelector('.js-edit-order-status-button')
+    button.addEventListener('click',() => {
+        const orderID=document.querySelector('.js-order-id-edit-order-status').value
+        const status=document.querySelector('.js-order-status-edit-order-status').value
+        orders.forEach(order => {
+            if(order.id==orderID)
+            {
+                order.status=status
+                saveOrdersToStorage()
+            }
+        })
+    })
+}
+
+document.querySelector('.js-edit-id-container').innerHTML=`
+<h2>Update Order Status</h2>
+<label for="orderStatusBookId">Order ID:</label>
+<input type="text" id="orderStatusBookId">
+<label for="orderStatus">Order Status:</label>
+<select id="orderStatus">
+    <option value="Orderd">Orderd</option>
+    <option value="Confirmed">Confirmed</option>
+    <option value="Shipped">Shipped</option>
+    <option value="Delivered">Delivered</option>
+    <option value="Canceled">Canceled</option>
+</select>
+<button class="js-edit-order-status-button">Update Status</button>`
+
+document.querySelector('.js-edit-order-status-button').addEventListener('click',() => {
+    console.log('clicked')
+    const orderID=document.querySelector('#orderStatusBookId').value
+    const status=document.querySelector('#orderStatus').value
+    orders.forEach(order => {
+        if(order.id==orderID)
+        {
+            order.status=status
+            saveOrdersToStorage()
+        }
+    })
+})

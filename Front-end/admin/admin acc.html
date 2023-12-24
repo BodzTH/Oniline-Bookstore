@@ -68,6 +68,7 @@
     <div class="tab" onclick="showTab('deleteTab')">Delete Book</div>
     <div class="tab" onclick="showTab('reduceTab')">Reduce Number</div>
     <div class="tab" onclick="showTab('ordersTab')">Orders</div>
+    <div class="tab" onclick="showTab('orderStatusTab')">Order Status</div>
 </div>
 
 <!-- Add Number of Books to Stock -->
@@ -123,6 +124,9 @@
     <label for="reduceQuantity">Quantity:</label>
     <input type="number" id="reduceQuantity" class="js-reduce-quantity">
     <button class="js-take-from-stock-button">Reduce from Stock</button>
+</div>
+
+<div id="orderStatusTab" class="tab-content js-edit-id-container" style="display:none;">
 </div>
 
 <!-- Orders Tab -->

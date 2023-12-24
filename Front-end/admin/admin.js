@@ -33,11 +33,6 @@ setInterval(async () => {
 }, 1000);
 
 
-
-
-
-
-
   setInterval(async () => {
     fetch("http://localhost:5030/api/sendTotalQuantity", {
       method: "POST",
