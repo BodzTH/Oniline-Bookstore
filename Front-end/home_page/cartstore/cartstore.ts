@@ -7,25 +7,47 @@ let fetchedData: any = [];
 
 export async function fetchBooks(): Promise<any> {
   try {
-    const response = await axios.get<any[]>('http://localhost:5030/api/getAllBooks'); // Replace '/api/quantity' with your API endpoint
+    const response = await axios.get<any[]>(
+      "http://localhost:5030/api/getAllBooks"
+    ); // Replace '/api/quantity' with your API endpoint
     fetchedData = response.data;
     return response.data;
   } catch (error) {
-    console.error('Error fetching quantity:', error);
+    console.error("Error fetching quantity:", error);
     throw error;
   }
 }
 
-
-
-
+export async function fetchDeletedBooks(): Promise<any> {
+  try {
+    const response = await axios.get<any[]>(
+      "http://localhost:5030/api/getDeletedBook"
+    ); // Replace '/api/quantity' with your API endpoint
+    
+    // Iterate through local storage items
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key === `addedToShelf-${response}`) {
+        localStorage.removeItem(key);
+        break; // Exit the loop after deleting the item
+      }
+    }
+    
+    // Rest of the code...
+  } catch (error) {
+    console.error("Error fetching quantity:", error);
+    throw error;
+  }
+}
 
 export async function fetchQuantity(): Promise<number> {
   try {
-    const response = await axios.get<number>('http://localhost:5030/api/getTotalQuantity'); // Replace '/api/quantity' with your API endpoint
+    const response = await axios.get<number>(
+      "http://localhost:5030/api/getTotalQuantity"
+    ); // Replace '/api/quantity' with your API endpoint
     return response.data;
   } catch (error) {
-    console.error('Error fetching quantity:', error);
+    console.error("Error fetching quantity:", error);
     throw error;
   }
 }
@@ -75,11 +97,15 @@ export const getBooksTOCart = () => {
   return Array.from(bookSet);
 };
 
-export function priceFormating(price: number){
-  let formatPrice=(price/100).toFixed(2);
+export function priceFormating(price: number) {
+  let formatPrice = (price / 100).toFixed(2);
   return formatPrice;
 }
 
 
+export function getInStockById(id: number) {
+  const book = fetchedData.find((book: { id: number; }) => book.id === id);
+  return book ? book.inStock : 0;
+}
 
 export default useStore;
