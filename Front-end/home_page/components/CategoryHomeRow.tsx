@@ -10,17 +10,18 @@ function CategoryHomeRow({ title, stylcat, width, height, stylall, stylcard }: {
 
   return (
     <>
-      <div className={"flex-shrink-0"} >
+      <div className="mb-20 ml-5" >
         {/* {ml-20 flex-col items-center justify-center w-full h-full pb-28} */}
-        <section className={stylcat}>
+        <section >
           {/* category title */}
-          <h1 className="text-3xl font-bold ">{title}</h1>
+          <h1 className="text-3xl font-bold lobester mb-3 ">{title}</h1>
+          <div className={stylcat}></div>
           {/* book card -- put here the iteration func */}
           { /* <BookCard title={''} book_name={''} image={''} price={} cart={''} books={[]} /> */}
 
         </section>
 
-        <div className=' flex gap-10 '>
+        <div className=' flex gap-10 w-fit '>
           {
             categoryBooks.map((lol: { BookName: string; altImage: string; image: string; priceCents: number; id: number; }, index: Key | null | undefined) => (
               <BookCard key={index} book_name={lol.BookName} alt_image={lol.altImage} image={lol.image} price={lol.priceCents} id={lol.id} title={''} books={''} width={width} height={height} stylcat={""} stylcard={stylcard} />

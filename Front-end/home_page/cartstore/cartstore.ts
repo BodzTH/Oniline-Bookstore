@@ -72,6 +72,11 @@ export const getBooksTOCart = () => {
   return Array.from(bookSet);
 };
 
+export function priceFormating(price: number){
+  let formatPrice=(price/100).toFixed(2);
+  return formatPrice;
+}
+
 
 
 export default useStore;

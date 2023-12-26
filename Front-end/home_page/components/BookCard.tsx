@@ -1,3 +1,4 @@
+import { priceFormating } from "@/cartstore/cartstore";
 import { BookProbs } from "@/common.types";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,16 +15,16 @@ function BookCard({ book_name, image, price, alt_image, id, stylcat, stylcard, w
                             <Image className="imageHome mb-5"
                                 src={image}
                                 alt={alt_image}
-                                width={width}
-                                height={height} />
+                                width={width }
+                                height={height } />
                         </div>
                     </div>
 
                 </Link>
                 {/* Book content */}
-                <div className="py-3">
+                <div className="m-8">
                     <h1 className="">{book_name}</h1>
-                    <h1 className="">{price}</h1>
+                    <h1 className="">{priceFormating(price)}</h1>
                 </div>
             </div>
         </>

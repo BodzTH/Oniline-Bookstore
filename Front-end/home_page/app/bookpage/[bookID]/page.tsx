@@ -9,8 +9,22 @@ function BookPage() {
 
   const { bookID } = useParams();
   const bookDetails = getBookByID(+bookID);
+  const [isAdded, setIsAdded] = useState(() => {
+    // Get the initial state from local storage
+    const savedState = localStorage.getItem(`addedToShelf-${+bookID}`);
+    return savedState ? JSON.parse(savedState) : false;
+  });
 
-   const no = 1;
+  useEffect(() => {
+    // Save the state to local storage whenever it changes
+    localStorage.setItem(`addedToShelf-${+bookID}`, JSON.stringify(isAdded));
+  }, [isAdded, bookID]);
+
+  const handleClick = () => {
+    setIsAdded(true);
+  };
+
+  const no = 1;
   function sendDataToServer(idd: number, quantity: number) {
     axios.post('http://localhost:5030/api/sendCartItems', { id: idd, quantity: quantity })
       .then(response => console.log('Response:', response))
@@ -28,20 +42,29 @@ function BookPage() {
         {/* Book content */}
         <div>
           <div>
+
+            {/* image:
+        "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
+      altImage:"alt",  
+      id,
+      categori: "Study",
+      BookName: "Mathmatics",
+      desc: "description",
+      author:"name of the ather",
+      publisher:"puplisher",
+      priceCents: 1000,
+      inStock: 10,
+      sold: 2, */}
             <h1>{bookDetails?.BookName}</h1>
             <h1>{bookDetails?.priceCents}</h1>
-            {/* <h1>{bookDetails.}</h1>
-            <h1>{publisher}</h1>
-            <h1>{book_description}</h1> */}
+
           </div>
           <div>
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button onClick={() => { sendDataToServer(+bookID, no); }}>Send Message to Iframe</button>
+                <button className="addtocart" onClick={() => {handleClick(); sendDataToServer(+bookID, no); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
                 <br />
-
-                <Link href={"/cart"}> press</Link>
               </div>
 
             </div>

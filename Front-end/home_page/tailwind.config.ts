@@ -30,7 +30,7 @@ module.exports = {
         "127": "127px",
       },
       colors: {
-        "background-color": "#61A2B6A6",
+        "background-color": "#ffffff",
         "text-cart-color": "#ffffff",
         "border-color": "#000000",
         "globe-background-color": "#ffffff",

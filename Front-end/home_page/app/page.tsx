@@ -44,11 +44,14 @@ function Home() {
 
   return (
     <main >
+      <div className="welcome-image">
+      </div>
       <div >
         <div>
+          
           {
             uniqueCategories.map((category: string, index: number) => (
-              <CategoryHomeRow key={index} title={category} stylcat={" border-y-0 border-b line h-12 border-border-color mb-10"} width={300} height={200} stylall={"ml-6"} stylcard={""} />
+              <CategoryHomeRow key={index} title={category} stylcat={" horizontalline h-5"} width={110} height={146} stylall={"ml-6"} stylcard={"backgroundClass "} />
             ))
 
 

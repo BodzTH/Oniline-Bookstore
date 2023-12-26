@@ -12,7 +12,7 @@
 }
 
 body {
-  font-family: "normal";
+  font-family: "Arial", sans-serif;
   background-color: #ffffff;
   color: #000000;
   font-size: larger;
@@ -33,34 +33,97 @@ body {
   border-radius: 50%; /* Make the element a circle */
 }
 
-.imageHome{
-  
-  border-radius: 24px;
-  width: 250px;
-  height: 250px;
+.imageCat {
+}
+.imageSearch {
+}
+.horizontalline {
+  background-image: linear-gradient(to right, #000000, #ffffff);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+.addtocart {
+  display: inline-flex;
+  padding: 8.1px 15px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background: #000;
+  color: #ffffff;
+  border: black;
+}
+
+.addtocart:hover,
+.addtocart:focus {
+  background: white;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Add transform property to transition */
+  box-sizing: border-box; /* Include border in the element's dimensions */
+  outline: 2px solid black; /* Add outline instead of border */
+}
+
+.addtocart {
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Add the same transition properties */
+}
+
+.addtocart:disabled {
+  background: #ccc;
+  color: #000;
+  outline: none; /* Remove the outline */
+}
+
+.imageHome {
+  border-radius: 10px;
+  width: 150px; /* Updated width */
+  height: 200px; /* Updated height */
   flex-shrink: 0;
-  
   @apply shadowbox flexBetween;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease;
 }
 
-.imageCat{
-  
-}
-.imageSearch{
-  
+.imageHome:hover {
+  transform: scale(1.05);
 }
 
-.bookCardHome {
-  border-radius: 24px;
-  @apply bg-background-color shadowbox;
-  width: 350px;
-  height: 300px;
-  flex-shrink: 0;
+.imageHome::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.line {
-  width: 1220px;
+.imageHome:hover::before {
+  opacity: 1;
 }
+
+.backgroundClass {
+  flex: 1; /* Make the element equal in size to its neighbors */
+  background-color: #ffffff;
+  padding: 20px; /* Adjust the padding as needed */
+  color: black;
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  font-family: "Arial", sans-serif; /* Change the font family */
+  font-size: 16px; /* Adjust the font size */
+  text-align: center; /* Center the text */
+  text-transform: uppercase; /* Convert the text to uppercase */
+  letter-spacing: 2px; /* Add letter spacing */
+  transition: background-color 0.6s ease; /* Add a smooth transition effect */
+  background-size: cover; /* Set the background image size to cover */
+}
+
+.backgroundClass:hover {
+  background-color: #000; /* Change the background color on hover */
+  color: white; /* Change the text color on hover */
+}
+
 .flexCenter {
   @apply flex justify-center items-center;
 }
@@ -85,9 +148,63 @@ body {
   @apply lg:px-20 py-8 px-5;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 4px;
+.welcome-image {
+  background-image: url("/cover3.jpg");
+  background-size: cover;
+  background-position: 100% 100%; /* Modify the values as needed */
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  position: relative; /* Set the position to relative */
+  @apply mt-24 mb-7;
+  bottom: 86px; /* Adjust the value as needed */
+}
+
+/* Add the following CSS for the child elements */
+.welcome-image .child-element {
+  position: absolute; /* Set the position to absolute */
+  bottom: 0; /* Position from the bottom margin */
+  /* Add any other styling for the child elements */
+}
+
+.welcome-image:hover {
+  transform: scale(1.05);
+}
+
+.welcome-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 20px;
+}
+
+.flexCenter {
+  @apply flex justify-center items-center;
+}
+
+.flexBetween {
+  @apply flex justify-between items-center;
+}
+
+.flexStart {
+  @apply flex items-center justify-start;
+}
+
+.flex-Start {
+  @apply flex justify-start;
+}
+
+.text-small {
+  @apply text-sm font-medium;
+}
+
+.paddings {
+  @apply lg:px-20 py-8 px-5;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -132,7 +249,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply relative bottom-0 py-4 shadowboxfooter  w-full gap-20 border-t  border-border-color bg-background-color;
+  @apply bottom-0 py-4 shadowboxfooter bg-white w-full gap-20 border-t border-border-color bg-background-color;
 }
 
 .footer_copyright {
@@ -145,7 +262,7 @@ body {
 
 /* Navbar */
 .navbar {
-  @apply border-b h-20 border-border-color shadowbox bg-background-color ;
+  @apply border-b h-20 border-border-color shadowbox bg-background-color;
 }
 
 /* Side Bar */

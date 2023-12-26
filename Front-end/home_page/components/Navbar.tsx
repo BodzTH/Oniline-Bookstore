@@ -22,7 +22,7 @@ function Navbar() {
     fetchAndUpdateQuantity();
 
     // Set up interval to continuously fetch quantity (optional)
-    const interval = setInterval(fetchAndUpdateQuantity, 100); // Fetch every 5 seconds, for example
+    const interval = setInterval(fetchAndUpdateQuantity, 1000); // Fetch every 5 seconds, for example
 
     // Clear interval on component unmount (optional)
     return () => clearInterval(interval);
@@ -66,7 +66,7 @@ function Navbar() {
 
           <div className='flexBetween flex-shrink-0'>
             <button className='flexBetween ' >
-              <Link href={"/"}>
+              <Link href={"http://127.0.0.1:5500/Front-end/cart_page/cart.html"}>
                 <Image className='max-w-none'
                   src="/bookshelf.svg" alt="bookshelficon"
                   width={40}
