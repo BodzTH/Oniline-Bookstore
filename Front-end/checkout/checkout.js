@@ -1,4 +1,4 @@
-import { bookscard } from "../../Back-end/books.js";
+import { bookscard,saveBooksToStorage } from "../../Back-end/books.js";
 import { orders,saveOrdersToStorage } from "../../Back-end/orders.js";
 import {cart} from "../../Back-end/cart.js"
 
@@ -97,6 +97,17 @@ function setOrder()
     const newOrder={};
     const button=document.querySelector('.js-Checkout-button')
     button.addEventListener('click', () => {
+        cart.forEach(item => {
+            let matching;
+            bookscard.forEach(book => {
+                if(item.id==book.id)
+                {
+                    matching=book;
+                }
+            })
+            matching.inStock-=item.quantity
+            matching.sold+=item.quantity
+        })
         newOrder.fullName=document.querySelector('.js-full-name-set-order').value
         newOrder.phoneNumber=document.querySelector('.js-phone-number-set-order').value
         newOrder.address=document.querySelector('.js-address-set-order').value
@@ -108,6 +119,7 @@ function setOrder()
         orders.push(newOrder)
         localStorage.removeItem('orders')        
         saveOrdersToStorage();
+        saveBooksToStorage();
         console.log(orders)
         console.log(newOrder.items)
         localStorage.removeItem('cart')
