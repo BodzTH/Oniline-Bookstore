@@ -2,21 +2,10 @@ import { bookscard } from "./books.js";
 export let cart = JSON.parse(localStorage.getItem("cart"));;
 if(!cart)
 {
-  cart=[
-    {
-      id: 1,
-      quantity: 9,
-      deliveryOptionId: "1",
-    },
-    {
-      id: 2,
-      quantity: 2,
-      deliveryOptionId: "2",
-    },
-  ];
+  cart=[];
 }
 
-function fetchDataAndUpdateLocalStorage() {
+
   setInterval(() => {
     fetch("http://localhost:5030/api/getCartItems")
       .then((response) => response.json())
@@ -30,6 +19,7 @@ function fetchDataAndUpdateLocalStorage() {
           matchingID = item.id;
         }
       });
+     
 if (matching == true) {
         cart.forEach((item) => {
           if (item.id === matchingID) {
@@ -110,11 +100,7 @@ if (matching == true) {
     })
     .catch((error) => console.error("Error:", error));
 }, 5000); // fetch every 6 seconds
-}
-export { fetchDataAndUpdateLocalStorage };
 
-
-fetchDataAndUpdateLocalStorage();
 
 
 export function saveToStorage() {
@@ -143,6 +129,28 @@ export function deleteItem() {
       cart = newCart;
       localStorage.setItem("cart", JSON.stringify(cart));
       //add here (bookid) is the name of the variable that you want to pass to the home page
+
+        setInterval(() => {
+          fetch("http://localhost:5030/api/sendDeletedBook", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(bookid),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok.");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("POST request successful:", data);
+            })
+            .catch((error) => {
+              console.error("There was a problem with the fetch operation:", error);
+            });
+        }, 6000); // execute every 6 seconds
     });
   });
 }
