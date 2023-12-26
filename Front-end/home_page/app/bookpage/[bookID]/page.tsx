@@ -25,33 +25,23 @@ function BookPage() {
   };
 
 
-  function sendDataToServer(idd: number, quantity: number) {
-    axios.post('http://localhost:5030/api/sendCartItems', { id: idd, quantity: quantity })
-      .then(response => console.log('Response:', response))
-      .catch(error => console.error('Error:', error));
-  } 
-  
+  async function sendDataToServer(idd: number, quantity: number) {
+    try {
+      const response = await axios.post('http://localhost:5030/api/sendCartItems', { id: idd, quantity: quantity });
+      console.log('Response:', response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const quantity = getInStockById(+bookID);
-
+  
   useEffect(() => {
-    async function fetchAndSetBooks() {
-      try {
-        const fetchedBooks = await fetchDeletedBooks();
-        setSelectedQuantity(fetchedBooks);
-      } catch (error) {
-        console.error('Error fetching books:', error);
-        // Handle error
-      }
-    }
+    setSelectedQuantity(quantity);
+  }, [quantity]);
 
-    fetchAndSetBooks();
-
-    const interval = setInterval(fetchAndSetBooks, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
 
 
@@ -89,12 +79,13 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-                <button className="addtocart" onClick={() => { handleClick(); sendDataToServer(+bookID, selectedQuantity); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
-                <select onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
+              <select onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
                   {[...Array(quantity)].map((_, i) =>
                     <option key={i} value={i + 1}>{i + 1}</option>
                   )}
                 </select>
+                <button className="addtocart" onClick={() => { handleClick(); sendDataToServer(+bookID, selectedQuantity); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
+                
                 <br />
               </div>
 

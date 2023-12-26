@@ -2,67 +2,101 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 
-// Enable CORS for all routes
 app.use(cors());
-
-// Middleware to parse JSON bodies
 app.use(express.json());
 
-let cartItmes = []; // Temporarily store data here
+let cartItems = {};
 let AllBooks = [];
 let totalQuantity = 0;
 let deletedBook = {};
 
-//Books From cart.js
-app.post("/api/sendAllBooks", (req, res) => {
-  AllBooks = req.body;
-  res.json({ message: "Books received" });
+app.post("/api/sendAllBooks", async (req, res) => {
+  try {
+    if (
+      !Array.isArray(req.body) ||
+      req.body.some((book) => typeof book !== "object")
+    ) {
+      res.status(400).json({ message: "Invalid data format" });
+      return;
+    }
+    AllBooks = req.body;
+    res.json({ message: "Books received" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//Books to Next
-
-app.get("/api/getAllBooks", (req, res) => {
-  res.json(AllBooks);
+app.post("/api/sendCartItems", async (req, res) => {
+  try {
+    if (
+      typeof req.body !== "object" ||
+      req.body === null ||
+      Array.isArray(req.body)
+    ) {
+      res.status(400).json({ message: "Invalid data format" });
+      return;
+    }
+    cartItems = req.body;
+    res.json({ message: "Cart Items received" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//AddToCart From Next
-app.post("/api/sendCartItems", (req, res) => {
-  cartItmes = req.body;
-  res.json({ message: "Cart Items received" });
+app.get("/api/getAllBooks", async (req, res) => {
+  try {
+    res.json(AllBooks);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//CartItems to cart.js
-app.get("/api/getCartItems", (req, res) => {
-  res.json(cartItmes);
+app.get("/api/getCartItems", async (req, res) => {
+  try {
+    res.json(cartItems);
+    cartItems = {};
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//TotalQuantity from admin.js
-app.post("/api/sendTotalQuantity", (req, res) => {
-  totalQuantity = parseInt(req.body.quantity);
-  res.json({ message: "Total Quantity received" });
-  console.log(totalQuantity);
+app.post("/api/sendTotalQuantity", async (req, res) => {
+  try {
+    totalQuantity = parseInt(req.body.quantity);
+    res.json({ message: "Total Quantity received" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//Total Quantity to Next
-
-app.get("/api/getTotalQuantity", (req, res) => {
-  res.json(totalQuantity);
+app.get("/api/getTotalQuantity", async (req, res) => {
+  try {
+    res.json(totalQuantity);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//Delete Book from cart.js
-app.post("/api/sendDeletedBook", (req, res) => {
-  deletedBook = req.body;
-  res.json({ message: "deleted Item received" });
+app.post("/api/sendDeletedBook", async (req, res) => {
+  try {
+    deletedBook = req.body;
+    res.json({ message: "deleted Item received" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-//Delete Book to Next
-
-app.get("/api/getDeletedBook", (req, res) => {
-  res.json(deletedBook);
-  deletedBook = {};
+app.get("/api/getDeletedBook", async (req, res) => {
+  try {
+    const response = { ...deletedBook };
+    deletedBook = {};
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
 });
 
-const PORT = 5030; // Port number
+const PORT = 5030;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
