@@ -142,6 +142,7 @@ export function deleteItem() {
       });
       cart = newCart;
       localStorage.setItem("cart", JSON.stringify(cart));
+      //add here (bookid) is the name of the variable that you want to pass to the home page
     });
   });
 }
