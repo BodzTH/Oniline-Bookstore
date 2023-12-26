@@ -15,8 +15,8 @@ function BookCard({ book_name, image, price, alt_image, id, stylcat, stylcard, w
                             <Image className="imageHome mb-5"
                                 src={image}
                                 alt={alt_image}
-                                width={width }
-                                height={height } />
+                                width={width}
+                                height={height} />
                         </div>
                     </div>
 

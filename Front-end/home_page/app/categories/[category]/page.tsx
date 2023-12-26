@@ -1,6 +1,6 @@
 'use client'
 import CategoryHomeRow from "@/components/CategoryHomeRow";
-import useStore, { fetchBooks, getCategories } from "@/cartstore/cartstore";
+import useStore, { fetchBooks, getBooksByCategory, getCategories } from "@/cartstore/cartstore";
 import { Key, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
@@ -20,9 +20,8 @@ interface Book {
 
 
 function Category() {
-  const { category } = useParams()
 
-
+  const { category }: { category: string } = useParams();
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
@@ -45,7 +44,12 @@ function Category() {
 
 
   const uniqueCategories = Array.from(new Set(books.map(book => book.categori)));
-
+  const getBooksByCategory = (category: string) => {
+    return uniqueCategories.filter(
+      (book: string) => book === category
+    );
+  };
+  const mysteryBooks = getBooksByCategory(category ?? '');
   return (
     <>
       <div className="flex">
@@ -58,7 +62,7 @@ function Category() {
         </div>
         <div className="ml-10  ">
           {
-            uniqueCategories.map((category: string, index: number) => (
+            mysteryBooks.map((category: string, index: number) => (
               <CategoryHomeRow key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
             ))
 
