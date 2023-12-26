@@ -17,6 +17,9 @@ export async function fetchBooks(): Promise<any> {
 }
 
 
+
+
+
 export async function fetchQuantity(): Promise<number> {
   try {
     const response = await axios.get<number>('http://localhost:5030/api/getTotalQuantity'); // Replace '/api/quantity' with your API endpoint

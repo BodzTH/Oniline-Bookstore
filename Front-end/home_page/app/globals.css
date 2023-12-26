@@ -160,7 +160,7 @@ body {
   transition: transform 0.3s ease;
   position: relative; /* Set the position to relative */
   @apply mt-24 mb-7;
-  bottom: 86px; /* Adjust the value as needed */
+  bottom: 87px; /* Adjust the value as needed */
 }
 
 /* Add the following CSS for the child elements */
@@ -249,7 +249,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply bottom-0 py-4 shadowboxfooter bg-white w-full gap-20 border-t border-border-color bg-background-color;
+  @apply bottom-0 py-4 mt-0 shadowboxfooter bg-white w-full gap-x-20 border-t border-border-color;
 }
 
 .footer_copyright {
@@ -289,10 +289,86 @@ body {
 
 /* Search Bar */
 .searchbar {
-  @apply flex items-center justify-between w-64 h-7 rounded-full bg-globe-background-color;
+  @apply flex items-center justify-between w-64 h-7 rounded-full bg-black outline-none transition-all duration-300;
+  border: 2px solid black;
+  padding: 0 10px;
+  color: white; /* Updated color to white */
 }
 
+.searchbar::placeholder {
+  color: white;
+}
+
+.searchbar:focus {
+  border-color: black;
+  background-color: white;
+  color: black;
+}
+
+.searchbar:focus::placeholder {
+  color: transparent; /* Updated to hide the placeholder text */
+}
 /* Category Bar */
 .catbar {
   @apply fixed top-32 left-0 h-screen w-48 ml-4 pb-5 border-l-0 border-x bg-globe-background-color;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+@keyframes counterChange {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+.counter {
+  transition: all 0.3s ease;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.counter.change {
+  animation: counterChange 0.3s ease;
+}
+
+
+.aboutus {
+  @apply flex flex-col items-center justify-center mb-20 m-auto;
+  transition: all 0.3s ease;
+  background-color: black;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  height: 200px; /* Add more height */
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutus:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease; /* Updated transition speed */
+}
+
+.contactus {
+  @apply flex flex-col items-center justify-center mb-0 m-auto;
+  transition: all 0.3s ease;
+  background-color: black;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  height: 150px; /* Add more height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -29,7 +29,7 @@ function Search() {
                 </Link>
             </button>
             <input
-                className="searchbar text-center placeholder:text-border-color"
+                className="searchbar text-center placeholder:white"
                 placeholder={"Search"}
                 onBlur={(e) => {
                     setSearchTerm(e.target.value); // Update the search term state
