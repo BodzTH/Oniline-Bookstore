@@ -32,10 +32,11 @@ setInterval(async () => {
 }, 1000);
 
 
-setInterval(async () => {
+
+(async () => {
   try {
     console.log("Sending POST request...");
-    totalCartQuantity();
+    
     const response = await fetch("http://localhost:5030/api/sendTotalQuantity", {
       method: "POST",
       headers: {
@@ -53,4 +54,4 @@ setInterval(async () => {
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
   }
-}, 500); // Add closing parenthesis here
+})();
