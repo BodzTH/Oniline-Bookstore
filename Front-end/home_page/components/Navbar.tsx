@@ -36,6 +36,7 @@ function Navbar() {
     // Clear interval on component unmount (optional)
     return () => clearInterval(interval);
   }, []);
+  
 
 
   

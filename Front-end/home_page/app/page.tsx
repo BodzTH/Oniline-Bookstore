@@ -25,6 +25,8 @@ function Home() {
       try {
         const fetchedBooks = await fetchBooks();
         setBooks(fetchedBooks);
+        
+
       } catch (error) {
         console.error('Error fetching books:', error);
         // Handle error
@@ -35,14 +37,14 @@ function Home() {
 
     const interval = setInterval(fetchAndSetBooks, 1000);
     return () => clearInterval(interval);
+
   }, []);
 
 
-
   const uniqueCategories = Array.from(new Set(books.map(book => book.categori)));
- 
+
   const router = useRouter();
-  
+
   return (
     <main >
       <div className="welcome-image">

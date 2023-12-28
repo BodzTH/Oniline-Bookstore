@@ -61,14 +61,14 @@ export function deleteItem() {
       cart = newCart;
       localStorage.setItem("cart", JSON.stringify(cart));
       //add here (bookid) is the name of the variable that you want to pass to the home page
-
-      setInterval(() => {
+      
         fetch("http://localhost:5030/api/sendDeletedBook", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(bookid),
+          body: JSON.stringify( {id : bookid} ),
+          
         })
           .then((response) => {
             if (!response.ok) {
@@ -85,7 +85,6 @@ export function deleteItem() {
               error
             );
           });
-      }, 6000); // execute every 6 seconds
     });
   });
 }

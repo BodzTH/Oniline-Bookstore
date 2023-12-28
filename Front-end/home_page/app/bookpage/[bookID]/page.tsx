@@ -1,23 +1,33 @@
 'use client'
 import { fetchDeletedBooks, getBookByID, getInStockById } from "@/cartstore/cartstore"
 import { useParams } from "next/navigation"
-import useStore from '@/cartstore/cartstore';
-import Link from "next/link";
 import React, { use, useEffect, useState } from 'react';
 import axios from "axios"
 function BookPage() {
 
   const { bookID } = useParams();
   const bookDetails = getBookByID(+bookID);
-  const [isAdded, setIsAdded] = useState(() => {
-    // Get the initial state from local storage
+  const [isAdded, setIsAdded] = useState(false);
+  useEffect(() => {
     const savedState = localStorage.getItem(`addedToShelf-${+bookID}`);
-    return savedState ? JSON.parse(savedState) : false;
-  });
+    setIsAdded(savedState ? JSON.parse(savedState) : false);
+  }, [bookID]);
+
 
   useEffect(() => {
-    // Save the state to local storage whenever it changes
-    localStorage.setItem(`addedToShelf-${+bookID}`, JSON.stringify(isAdded));
+    async function fetchAndSetCart() {
+      try {
+
+        localStorage.setItem(`addedToShelf-${+bookID}`, JSON.stringify(isAdded));
+        await fetchDeletedBooks();
+
+      } catch (error) {
+        console.error('Error fetching books:', error);
+        // Handle error
+      }
+    }
+
+    fetchAndSetCart();
   }, [isAdded, bookID]);
 
   const handleClick = () => {
@@ -37,7 +47,7 @@ function BookPage() {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const quantity = getInStockById(+bookID);
-  
+
   useEffect(() => {
     setSelectedQuantity(quantity);
   }, [quantity]);
@@ -45,7 +55,7 @@ function BookPage() {
 
 
 
-  
+
 
   return (
     <div>
@@ -79,13 +89,13 @@ function BookPage() {
             {/* <>{cart}</> */}
             <div>
               <div>
-              <select onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
+                <select onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
                   {[...Array(quantity)].map((_, i) =>
                     <option key={i} value={i + 1}>{i + 1}</option>
                   )}
                 </select>
                 <button className="addtocart" onClick={() => { handleClick(); sendDataToServer(+bookID, selectedQuantity); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
-                
+
                 <br />
               </div>
 

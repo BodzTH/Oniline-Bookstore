@@ -20,20 +20,26 @@ export async function fetchBooks(): Promise<any> {
 
 export async function fetchDeletedBooks(): Promise<any> {
   try {
-    const response = await axios.get<any[]>(
+    const response = await axios.get<any>(
       "http://localhost:5030/api/getDeletedBook"
     ); // Replace '/api/quantity' with your API endpoint
+    console.log(response.data);
 
-    // Iterate through local storage items
+    // Get the id from the response data
+    const id = response.data.id; // Adjust this line as needed to get the ID from the response
+
+    // Iterate over the local storage
     for (let i = 0; i < localStorage.length; i++) {
+      // Get the key at the current index
       const key = localStorage.key(i);
-      if (key === `addedToShelf-${response}`) {
-        localStorage.removeItem(key);
-        break; // Exit the loop after deleting the item
+
+      // If the key matches the 'addedToShelf-${id}' format, set the item to 'false'
+      if (key === `addedToShelf-${id}`) {
+        localStorage.setItem(key, JSON.stringify(false));
       }
     }
 
-    // Rest of the code...
+    return response.data; // Add this line to return the data
   } catch (error) {
     console.error("Error fetching quantity:", error);
     throw error;
