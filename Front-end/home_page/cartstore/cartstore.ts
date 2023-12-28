@@ -23,7 +23,7 @@ export async function fetchDeletedBooks(): Promise<any> {
     const response = await axios.get<any[]>(
       "http://localhost:5030/api/getDeletedBook"
     ); // Replace '/api/quantity' with your API endpoint
-    
+
     // Iterate through local storage items
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
@@ -32,7 +32,7 @@ export async function fetchDeletedBooks(): Promise<any> {
         break; // Exit the loop after deleting the item
       }
     }
-    
+
     // Rest of the code...
   } catch (error) {
     console.error("Error fetching quantity:", error);
@@ -81,11 +81,24 @@ export const getCategories = () => {
 };
 
 export const getBooksBySearchQuery = (searchQuery: string) => {
+  const lowerCaseSearchQuery = searchQuery.toLowerCase();
+  const searchQueryAsNumber = Number(searchQuery);
   return fetchedData.filter(
-    (book: { BookName: string | string[]; categori: string | string[] }) => {
+    (book: {
+      SKU: number;
+      BookName: string | string[];
+      categori: string | string[];
+    }) => {
+      const lowerCaseBookName = Array.isArray(book.BookName)
+        ? book.BookName.map((name) => name.toLowerCase())
+        : book.BookName.toLowerCase();
+      const lowerCaseCategori = Array.isArray(book.categori)
+        ? book.categori.map((categori) => categori.toLowerCase())
+        : book.categori.toLowerCase();
       return (
-        book.BookName.includes(searchQuery) ||
-        book.categori.includes(searchQuery)
+        lowerCaseBookName.includes(lowerCaseSearchQuery) ||
+        lowerCaseCategori.includes(lowerCaseSearchQuery) ||
+        book.SKU === searchQueryAsNumber
       );
     }
   );
@@ -102,9 +115,8 @@ export function priceFormating(price: number) {
   return formatPrice;
 }
 
-
 export function getInStockById(id: number) {
-  const book = fetchedData.find((book: { id: number; }) => book.id === id);
+  const book = fetchedData.find((book: { id: number }) => book.id === id);
   return book ? book.inStock : 0;
 }
 

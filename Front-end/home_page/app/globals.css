@@ -57,25 +57,31 @@ body {
 .addtocart:focus {
   background: white;
   color: black;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Add transform property to transition */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease; /* Add transform property to transition */
   box-sizing: border-box; /* Include border in the element's dimensions */
   outline: 2px solid black; /* Add outline instead of border */
 }
 
 .addtocart {
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Add the same transition properties */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease; /* Add the same transition properties */
 }
 
 .addtocart:disabled {
   background: #ccc;
-  color: #000;
+  color: black;
   outline: none; /* Remove the outline */
 }
 
 .imageHome {
   border-radius: 10px;
-  width: 150px; /* Updated width */
-  height: 200px; /* Updated height */
+  width: 200px;
+  height: 266.66666667px;
   flex-shrink: 0;
   @apply shadowbox flexBetween;
   position: relative;
@@ -104,25 +110,41 @@ body {
 }
 
 .backgroundClass {
-  flex: 1; /* Make the element equal in size to its neighbors */
+  flex: 1;
   background-color: #ffffff;
-  padding: 20px; /* Adjust the padding as needed */
+  padding: 20px;
   color: black;
-  border-radius: 10px; /* Add rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
-  font-family: "Arial", sans-serif; /* Change the font family */
-  font-size: 16px; /* Adjust the font size */
-  text-align: center; /* Center the text */
-  text-transform: uppercase; /* Convert the text to uppercase */
-  letter-spacing: 2px; /* Add letter spacing */
-  transition: background-color 0.6s ease; /* Add a smooth transition effect */
-  background-size: cover; /* Set the background image size to cover */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: background-color 0.6s ease;
+  background-size: cover;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 380px;
+  width: 240px;
 }
 
 .backgroundClass:hover {
   background-color: #000; /* Change the background color on hover */
   color: white; /* Change the text color on hover */
 }
+
+
+.cardText {
+  position: relative;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 .flexCenter {
   @apply flex justify-center items-center;
@@ -151,7 +173,7 @@ body {
 .welcome-image {
   background-image: url("/cover3.jpg");
   background-size: cover;
-  background-position: 100% 100%; /* Modify the values as needed */
+  background-position: 100% 100%;
   background-repeat: no-repeat;
   height: 400px;
   width: 100%;
@@ -320,9 +342,15 @@ body {
 }
 
 @keyframes counterChange {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.5); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .counter {
@@ -336,7 +364,6 @@ body {
 .counter.change {
   animation: counterChange 0.3s ease;
 }
-
 
 .aboutus {
   @apply flex flex-col items-center justify-center mb-20 m-auto;

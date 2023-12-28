@@ -28,11 +28,11 @@ function SearchFound({ book_description, image, price, book_type, alt_image }: S
   return (
     <div>
       <span className=" text-5xl"><h1>Search Found: {query.length}</h1></span>
-      
+
       {query.map((book: Book, index: number) => (
-        <BookItem key={index} book_description={""} image={book.image} price={book.priceCents} book_type={book.categori} alt_image={""} book_name={book.BookName}  author={""} publisher={""} sku={""} />
+        <BookItem key={index} book_description={""} image={book.image} price={book.priceCents} book_type={book.categori} alt_image={""} book_name={book.BookName} author={""} publisher={""} sku={""} />
       ))}
-      
+
     </div>
   );
 }

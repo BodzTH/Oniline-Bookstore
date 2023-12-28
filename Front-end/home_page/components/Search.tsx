@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 function Search() {
+
     const [searchTerm, setSearchTerm] = useState('');
     const router = useRouter();
 
@@ -32,11 +33,20 @@ function Search() {
                 className="searchbar text-center placeholder:white"
                 placeholder={"Search"}
                 onBlur={(e) => {
-                    setSearchTerm(e.target.value); // Update the search term state
+                    setSearchTerm(e.currentTarget.value); // Update the search term state
+                }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        const inputValue = e.currentTarget.value.trim();
+                        if (inputValue) { // Check if the input value is not empty
+                            setSearchTerm(inputValue); // Update the search term state
+                            router.push(`/search?q=${inputValue}`); // Navigate to the search page
+                        }
+                    }
                 }}
                 defaultValue={searchTerm}
             />
-
+            
         </>
     );
 }

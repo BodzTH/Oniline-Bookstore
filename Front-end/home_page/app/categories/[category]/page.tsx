@@ -3,6 +3,7 @@ import CategoryHomeRow from "@/components/CategoryHomeRow";
 import useStore, { fetchBooks, getBooksByCategory, getCategories } from "@/cartstore/cartstore";
 import { Key, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import AllBooks from "@/components/AllBooks";
 
 interface Book {
   id: number;
@@ -45,10 +46,13 @@ function Category() {
 
   const uniqueCategories = Array.from(new Set(books.map(book => book.categori)));
   const getBooksByCategory = (category: string) => {
-    return uniqueCategories.filter(
-      (book: string) => book === category
-    );
+    if (category === 'default') {
+      return uniqueCategories;
+    } else {
+      return uniqueCategories.filter((book: string) => book === category);
+    }
   };
+
   const mysteryBooks = getBooksByCategory(category ?? '');
   return (
     <>
@@ -62,11 +66,17 @@ function Category() {
         </div>
         <div className="ml-10  ">
           {
-            mysteryBooks.map((category: string, index: number) => (
-              <CategoryHomeRow key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
-            ))
-
-
+            category === 'default' ? (
+              // Render the default component here
+              mysteryBooks.map((category: string, index: number) => (
+                <AllBooks key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
+              ))
+            ) : (
+              // Render the CategoryHomeRow component for each category
+              mysteryBooks.map((category: string, index: number) => (
+                <CategoryHomeRow key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
+              ))
+            )
           }
 
         </div>
