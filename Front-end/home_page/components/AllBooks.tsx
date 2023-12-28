@@ -1,17 +1,13 @@
 'use client';
 import BookCard from '@/components/BookCard';
-import { Key, useState, useRef } from 'react'; // Import useRef
-import { useEffect } from 'react';
-import useStore, { getBooksByCategory } from '@/cartstore/cartstore';
-import Image from 'next/image';
+import { Key } from 'react'; 
+import  { getBooksByCategory } from '@/cartstore/cartstore';
 function AllBooks({ title,stylcat, width, height, stylall, stylcard }: { stylcard: string, stylall: string, width: number, height: number, stylcat: string, title: string }) {
-
-    const scrollContainerRef = useRef<HTMLDivElement>(null); // Declare scrollContainerRef
 
     const categoryBooks = getBooksByCategory(title);
     return (
         <>
-            <div ref={scrollContainerRef} className=" mb-32 scroll-container">
+            <div className=" mb-32">
 
 
                 <div className="mb-10 ml-5 " >

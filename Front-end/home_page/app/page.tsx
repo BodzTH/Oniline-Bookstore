@@ -1,7 +1,7 @@
 'use client';
 import CategoryHomeRow from "@/components/CategoryHomeRow";
-import useStore, { fetchBooks, getCategories } from "@/cartstore/cartstore";
-import { Key, useEffect, useState } from "react";
+import { fetchBooks } from "@/cartstore/cartstore";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 interface Book {
   id: number;

@@ -1,7 +1,7 @@
 'use client'
 import CategoryHomeRow from "@/components/CategoryHomeRow";
-import useStore, { fetchBooks, getBooksByCategory, getCategories } from "@/cartstore/cartstore";
-import { Key, useEffect, useState } from "react";
+import { fetchBooks } from "@/cartstore/cartstore";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import AllBooks from "@/components/AllBooks";
 
@@ -57,24 +57,25 @@ function Category() {
   return (
     <>
       <div className="flex">
-        <div className=" left-0 border-x-0 border-r h-screen w-40 border-border-color " >
+        <div className="verticalCategoryLine" >
 
           <div>
 
           </div>
 
         </div>
-        <div className="ml-10  ">
+        <div className="ml-10 ">
           {
             category === 'default' ? (
               // Render the default component here
               mysteryBooks.map((category: string, index: number) => (
-                <AllBooks key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
-              ))
+                <AllBooks key={index} title={category} stylcat={""} width={110} height={146} stylall={""} stylcard={""} />
+              
+                ))
             ) : (
               // Render the CategoryHomeRow component for each category
               mysteryBooks.map((category: string, index: number) => (
-                <CategoryHomeRow key={index} title={category} stylcat={""} width={0} height={0} stylall={""} stylcard={""} />
+                <CategoryHomeRow key={index} title={category} stylcat={""} width={110} height={146} stylall={""} stylcard={""} />
               ))
             )
           }

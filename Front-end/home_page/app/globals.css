@@ -16,6 +16,8 @@ body {
   background-color: #ffffff;
   color: #000000;
   font-size: larger;
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
 }
 
 .lobester {
@@ -26,22 +28,18 @@ body {
   font-family: "Merriweather";
 }
 
-.circle-block {
-  width: 20px; /* Adjust the width and height as needed */
-  height: 20px;
-  background-color: #ffffff; /* Set your desired background color */
-  border-radius: 50%; /* Make the element a circle */
-}
-
 .imageCat {
 }
 .imageSearch {
 }
+
+/* category title underline */
 .horizontalline {
   background-image: linear-gradient(to right, #000000, #ffffff);
   background-size: 100% 2px;
   background-repeat: no-repeat;
 }
+
 .addtocart {
   display: inline-flex;
   padding: 8.1px 15px;
@@ -51,6 +49,10 @@ body {
   background: #000;
   color: #ffffff;
   border: black;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .addtocart:hover,
@@ -60,16 +62,9 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease,
-    transform 0.3s ease; /* Add transform property to transition */
-  box-sizing: border-box; /* Include border in the element's dimensions */
-  outline: 2px solid black; /* Add outline instead of border */
-}
-
-.addtocart {
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease; /* Add the same transition properties */
+    transform 0.3s ease;
+  box-sizing: border-box;
+  outline: 2px solid black;
 }
 
 .addtocart:disabled {
@@ -78,6 +73,7 @@ body {
   outline: none; /* Remove the outline */
 }
 
+/* Bookcard image HomePage */
 .imageHome {
   border-radius: 10px;
   width: 200px;
@@ -109,6 +105,7 @@ body {
   opacity: 1;
 }
 
+/* BookCards background */
 .backgroundClass {
   flex: 1;
   background-color: #ffffff;
@@ -136,7 +133,7 @@ body {
   color: white; /* Change the text color on hover */
 }
 
-
+/* card text ellipsis */
 .cardText {
   position: relative;
   max-width: 200px;
@@ -145,31 +142,7 @@ body {
   white-space: nowrap;
 }
 
-
-.flexCenter {
-  @apply flex justify-center items-center;
-}
-
-.flexBetween {
-  @apply flex justify-between items-center;
-}
-
-.flexStart {
-  @apply flex items-center justify-start;
-}
-
-.flex-Start {
-  @apply flex justify-start;
-}
-
-.text-small {
-  @apply text-sm font-medium;
-}
-
-.paddings {
-  @apply lg:px-20 py-8 px-5;
-}
-
+/* Welcome Home page cover image */
 .welcome-image {
   background-image: url("/cover3.jpg");
   background-size: cover;
@@ -185,17 +158,11 @@ body {
   bottom: 87px; /* Adjust the value as needed */
 }
 
-/* Add the following CSS for the child elements */
-.welcome-image .child-element {
-  position: absolute; /* Set the position to absolute */
-  bottom: 0; /* Position from the bottom margin */
-  /* Add any other styling for the child elements */
-}
-
 .welcome-image:hover {
   transform: scale(1.05);
 }
 
+/* text styling in for cover image */
 .welcome-text {
   font-size: 24px;
   font-weight: bold;
@@ -205,6 +172,7 @@ body {
   padding: 20px;
 }
 
+/* templates */
 .flexCenter {
   @apply flex justify-center items-center;
 }
@@ -227,46 +195,6 @@ body {
 
 .paddings {
   @apply lg:px-20 py-8 px-5;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 12px;
-}
-
-.modal-head-text {
-  @apply md:text-5xl text-3xl font-extrabold text-left max-w-5xl w-full;
-}
-
-.no-result-text {
-  @apply w-full text-center my-10 px-2;
-}
-
-/* Project Details */
-.user-actions_section {
-  @apply fixed max-md:hidden flex gap-4 flex-col right-10 top-20;
-}
-
-.user-info {
-  @apply flex flex-wrap whitespace-nowrap text-sm font-normal gap-2 w-full;
-}
-
-/* Home */
-.projects-grid {
-  @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10 mt-10 w-full;
-}
-
-/* Related Project Card */
-.related_project-card {
-  @apply flex-col rounded-2xl min-w-[210px] min-h-[197px];
-}
-
-.related_project-card_title {
-  @apply justify-end items-end w-full h-1/3 bg-gradient-to-b from-transparent to-black/50 rounded-b-2xl gap-2 absolute bottom-0 right-0 font-semibold text-lg text-white p-4;
-}
-
-.related_projects-grid {
-  @apply grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-5;
 }
 
 /* Footer */
@@ -301,7 +229,7 @@ body {
   @apply [box-shadow:0px_-6px_10px_0px_rgba(0,_0,_0,_0.15)];
 }
 
-/* Shadowing cat */
+/* Shadowing category */
 .shadowboxcat {
   @apply [box-shadow:0px_0px_5px_0px_rgba(0,_0,_0,_0)];
 }
@@ -335,10 +263,21 @@ body {
   @apply fixed top-32 left-0 h-screen w-48 ml-4 pb-5 border-l-0 border-x bg-globe-background-color;
 }
 
+/* scroll books bar */
 .scroll-container {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
+}
+
+/* counter  */
+
+.counter {
+  transition: all 0.3s ease;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
 }
 
 @keyframes counterChange {
@@ -353,16 +292,8 @@ body {
   }
 }
 
-.counter {
-  transition: all 0.3s ease;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-}
-
 .counter.change {
-  animation: counterChange 0.3s ease;
+  animation: counterChange 0.2s ease;
 }
 
 .aboutus {
@@ -398,4 +329,84 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.verticalCategoryLine {
+  @apply left-0 border-x-0 border-r  border-border-color ml-40 mr-0;
+  height: 500px;
+  border: 2px solid #000000;
+}
+
+/* Book item Page */
+.pageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+.container {
+  display: flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  height: 500px;
+  width: 1200px;
+}
+
+.image-container {
+  flex: 1;
+  padding: 20px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px;
+}
+
+.content-container {
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.book-title,
+.book-ISBN,
+.price,
+.quantity {
+  margin: 0;
+  flex: 1;
+}
+
+.author-publisher-container {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.book-author {
+  margin-right: 10px;
+}
+
+.book-publisher {
+  margin-left: 10px;
+}
+
+.book-description {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  overflow: auto; /* Enable scrollbar for long content */
 }

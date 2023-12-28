@@ -1,9 +1,7 @@
 'use client';
 import BookCard from '@/components/BookCard';
 import { getBooksByCategory } from '@/cartstore/cartstore';
-import { Key, useState, useRef } from 'react'; // Import useRef
-import { useEffect } from 'react';
-import useStore from '@/cartstore/cartstore';
+import { Key, useRef } from 'react'; // Import useRef
 import Image from 'next/image';
 function CategoryHomeRow({ title, stylcat, width, height, stylall, stylcard }: { stylcard: string, stylall: string, width: number, height: number, stylcat: string, title: string }) {
 
@@ -48,7 +46,7 @@ function CategoryHomeRow({ title, stylcat, width, height, stylall, stylcard }: {
 
           <div className=' flex gap-10 w-fit '>
             {
-              categoryBooks.map((lol: { BookName: string; altImage: string; image: string; priceCents: number; id: number; }, index: Key | null | undefined) => (
+              categoryBooks.slice(0,10).map((lol: { BookName: string; altImage: string; image: string; priceCents: number; id: number; }, index: Key | null | undefined) => (
                 <BookCard key={index} book_name={lol.BookName} alt_image={lol.altImage} image={lol.image} price={lol.priceCents} id={lol.id} title={''} books={''} width={width} height={height} stylcat={""} stylcard={stylcard} />
               )
               )}

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { NavLinks } from '@/constants/test';
 import Search from '@/components/Search';
 import { fetchQuantity } from '@/cartstore/cartstore';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 function Navbar() {
@@ -36,11 +36,11 @@ function Navbar() {
     // Clear interval on component unmount (optional)
     return () => clearInterval(interval);
   }, []);
-  
 
 
-  
-const router = useRouter();
+
+
+  const router = useRouter();
 
 
   const smoothScrollTo = (href: string) => (event: { preventDefault: () => void; }) => {
@@ -50,7 +50,7 @@ const router = useRouter();
 
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    
+
   };
 
   return (
@@ -73,7 +73,7 @@ const router = useRouter();
           {
             NavLinks.map((link) => (
               <Link href={link.href} key={link.key} passHref legacyBehavior>
-                <Link  onClick={smoothScrollTo(link.href)} href={'  '}>{link.text}</Link>
+                <Link onClick={smoothScrollTo(link.href)} href={'  '}>{link.text}</Link>
               </Link>
             ))}
         </ul>

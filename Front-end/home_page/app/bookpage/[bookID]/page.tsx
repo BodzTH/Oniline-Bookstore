@@ -1,8 +1,9 @@
 'use client'
 import { fetchDeletedBooks, getBookByID, getInStockById } from "@/cartstore/cartstore"
 import { useParams } from "next/navigation"
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios"
+import Image from "next/image"
 function BookPage() {
 
   const { bookID } = useParams();
@@ -54,22 +55,7 @@ function BookPage() {
 
 
 
-
-
-
-  return (
-    <div>
-      {/* Book item section */}
-      <div>
-        {/* Book image */}
-        <div>
-          {/* <Image src={} alt={alt_image} width={50} height={50} /> */}
-        </div>
-        {/* Book content */}
-        <div>
-          <div>
-
-            {/* image:
+  {/* image:
         "https://diwanegypt.com/wp-content/uploads/2022/06/9781783350827.jpg",
       altImage:"alt",  
       id,
@@ -81,24 +67,59 @@ function BookPage() {
       priceCents: 1000,
       inStock: 10,
       sold: 2, */}
+
+
+  return (
+    <div className="pageContainer">
+      {/* Book item section */}
+      <div className="container">
+        {/* Book image */}
+        <div className="image-container" >
+
+          <Image className="" src={bookDetails?.image} alt={bookDetails?.altImage} width={200} height={200} />
+
+        </div>
+        {/* Book content */}
+        <div className="content-container">
+          {/* bookname */}
+          <div>
             <h1>{bookDetails?.BookName}</h1>
-            <h1>{bookDetails?.priceCents}</h1>
+          </div>
+          {/* author publisher */}
+          <div>
 
           </div>
+          {/* SKU */}
+          <div>
+
+          </div>
+
+          {/* description */}
+          <div>
+
+          </div>
+
+          {/* Price Dropdown */}
+          <div>
+
+            <div>
+              Price
+            </div>
+
+            <div>
+              <select className="quantity" onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
+                {[...Array(quantity)].map((_, i) =>
+                  <option key={i} value={i + 1}>{i + 1}</option>
+                )}
+              </select>
+            </div>
+
+          </div>
+
           <div>
             {/* <>{cart}</> */}
             <div>
-              <div>
-                <select onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
-                  {[...Array(quantity)].map((_, i) =>
-                    <option key={i} value={i + 1}>{i + 1}</option>
-                  )}
-                </select>
                 <button className="addtocart" onClick={() => { handleClick(); sendDataToServer(+bookID, selectedQuantity); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
-
-                <br />
-              </div>
-
             </div>
 
           </div>

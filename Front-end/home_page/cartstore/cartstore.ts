@@ -1,6 +1,4 @@
-import { create } from "zustand";
 import axios from "axios";
-import { useEffect } from "react";
 
 // Function to fetch data from the API using async/await
 let fetchedData: any = [];
@@ -58,18 +56,6 @@ export async function fetchQuantity(): Promise<number> {
   }
 }
 
-type Store = {
-  bookscard: any;
-  count: number;
-  incart: number;
-};
-
-const useStore = create<Store>()((set) => ({
-  count: 0,
-  bookscard: fetchedData,
-  incart: 0,
-}));
-
 export const getBookByID = (id: number) => {
   return fetchedData.find((book: { id: any }) => book.id === id);
 };
@@ -125,5 +111,3 @@ export function getInStockById(id: number) {
   const book = fetchedData.find((book: { id: number }) => book.id === id);
   return book ? book.inStock : 0;
 }
-
-export default useStore;
