@@ -1,5 +1,5 @@
 'use client'
-import { fetchDeletedBooks, getBookByID, getInStockById } from "@/cartstore/cartstore"
+import { fetchBooks, fetchDeletedBooks, getBookByID, getInStockById, priceFormating } from "@/cartstore/cartstore"
 import { useParams } from "next/navigation"
 import React, { useEffect, useState } from 'react';
 import axios from "axios"
@@ -8,32 +8,61 @@ function BookPage() {
 
   const { bookID } = useParams();
   const bookDetails = getBookByID(+bookID);
-  const [isAdded, setIsAdded] = useState(false);
-  useEffect(() => {
+  const [isAdded, setIsAdded] = useState(() => {
+    // Get the initial state from local storage
     const savedState = localStorage.getItem(`addedToShelf-${+bookID}`);
-    setIsAdded(savedState ? JSON.parse(savedState) : false);
-  }, [bookID]);
-
+    return savedState ? JSON.parse(savedState) : false;
+  });
 
   useEffect(() => {
-    async function fetchAndSetCart() {
+    // Save the state to local storage whenever it changes
+    localStorage.setItem(`addedToShelf-${+bookID}`, JSON.stringify(isAdded));
+  }, [isAdded, bookID]);
+
+
+  async function fetchDeletedBooks(): Promise<number> {
+    try {
+      const response = await axios.get<any>(
+        "http://localhost:5030/api/getDeletedBook"
+      );
+      console.log(response.data);
+
+      // Get the id from the response data and convert it to a number
+      const id = Number(response.data.id);
+
+      return id;
+    } catch (error) {
+      console.error("Error fetching quantity:", error);
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    async function fetchAndSetId() {
       try {
-
-        localStorage.setItem(`addedToShelf-${+bookID}`, JSON.stringify(isAdded));
-        await fetchDeletedBooks();
-
+        const fetchedId = await fetchDeletedBooks();
+        console.log('fetchedId:', fetchedId);
+        console.log('bookID:', bookID);
+        if (fetchedId === +bookID) {
+          console.log('Setting isAdded to false');
+          setIsAdded(false);
+        }
       } catch (error) {
-        console.error('Error fetching books:', error);
+        console.error('Error fetching deleted book id:', error);
         // Handle error
       }
     }
 
-    fetchAndSetCart();
-  }, [isAdded, bookID]);
+    fetchAndSetId();
+
+    const interval = setInterval(fetchAndSetId, 5000);
+    return () => clearInterval(interval);
+  }, [bookID]);
 
   const handleClick = () => {
     setIsAdded(true);
   };
+
 
 
   async function sendDataToServer(idd: number, quantity: number) {
@@ -69,6 +98,8 @@ function BookPage() {
       sold: 2, */}
 
 
+
+
   return (
     <div className="pageContainer">
       {/* Book item section */}
@@ -86,8 +117,14 @@ function BookPage() {
             <h1>{bookDetails?.BookName}</h1>
           </div>
           {/* author publisher */}
-          <div>
+          <div className="author-publisher-container">
+            <div className="book-author">
+              <span>By</span> {bookDetails?.author}
+            </div>
+            <div>
+              {bookDetails?.publisher}
 
+            </div>
           </div>
           {/* SKU */}
           <div>
@@ -95,23 +132,24 @@ function BookPage() {
           </div>
 
           {/* description */}
-          <div>
-
+          <div className="book-description">
+            {bookDetails?.desc}
           </div>
 
           {/* Price Dropdown */}
-          <div>
+          <div className="quantity-container">
 
             <div>
-              Price
+              {priceFormating(bookDetails?.priceCents)}EGP
             </div>
 
-            <div>
+            <div className="price-dropdown ">
               <select className="quantity" onChange={(e) => setSelectedQuantity(Number(e.target.value))}>
                 {[...Array(quantity)].map((_, i) =>
                   <option key={i} value={i + 1}>{i + 1}</option>
                 )}
               </select>
+
             </div>
 
           </div>
@@ -119,7 +157,7 @@ function BookPage() {
           <div>
             {/* <>{cart}</> */}
             <div>
-                <button className="addtocart" onClick={() => { handleClick(); sendDataToServer(+bookID, selectedQuantity); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
+              <button className="addtocart" onClick={() => { handleClick(); sendDataToServer(+bookID, selectedQuantity); }} disabled={isAdded}>{isAdded ? 'Added to Shelf' : 'Add to BookShelf'}</button>
             </div>
 
           </div>

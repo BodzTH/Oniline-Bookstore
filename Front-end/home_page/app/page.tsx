@@ -25,7 +25,7 @@ function Home() {
       try {
         const fetchedBooks = await fetchBooks();
         setBooks(fetchedBooks);
-        
+
 
       } catch (error) {
         console.error('Error fetching books:', error);
@@ -35,15 +35,13 @@ function Home() {
 
     fetchAndSetBooks();
 
-    const interval = setInterval(fetchAndSetBooks, 1000);
+    const interval = setInterval(fetchAndSetBooks, 900);
     return () => clearInterval(interval);
 
   }, []);
 
 
   const uniqueCategories = Array.from(new Set(books.map(book => book.categori)));
-
-  const router = useRouter();
 
   return (
     <main >

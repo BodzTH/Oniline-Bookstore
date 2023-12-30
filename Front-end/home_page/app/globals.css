@@ -382,6 +382,7 @@ body {
   display: flex;
   align-items: baseline;
   margin-bottom: 10px;
+  @apply gap-60;
 }
 
 .book-author {
@@ -400,13 +401,35 @@ body {
 .quantity-container {
   display: flex;
   align-items: center;
+  @apply gap-80;
 }
 
-.quantity {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
+
+.quantity  {
   width: 50px;
   text-align: center;
-  overflow: auto; /* Enable scrollbar for long content */
+  overflow: auto; 
+  background-color: #000;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition:  0.4s  ease;
+  @apply ml-20;
 }
+
+.quantity:hover {
+  background-color: white;
+  color: black;
+  outline: #000 2px solid;
+}
+
+.quantity:focus {
+  background-color: white;
+  color: black;
+  outline: #000 2px solid;
+} 
+
+
+
