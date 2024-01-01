@@ -106,6 +106,24 @@ header .totalQuantity{
     margin: 0;
 }
 
+/* Add or modify the styles for the checkout button */
+.js-Checkout-button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #49D8B9;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer; /* Add this to indicate it's clickable */
+    transition: background-color 0.3s ease; /* Add smooth background color transition */
+}
+
+.js-Checkout-button:hover {
+    background-color: #45c7a5; /* Change background color on hover */
+}
+
 
 .cart .listCart .item{
     display: grid;

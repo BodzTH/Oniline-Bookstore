@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.js-items-orders {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.js-status {
+    font-weight: bold;
+    color: #007bff; /* Change color as needed */
+    margin-bottom: 10px;
+}
+
+.js-book-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.js-book-name {
+    font-weight: bold;
+    margin-right: 10px;
+    flex-grow: 1; /* Expands to fill available space */
+}
+
+.js-book-quantity {
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+.js-book-image {
+    max-width: 80px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}

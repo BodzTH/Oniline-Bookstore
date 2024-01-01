@@ -199,3 +199,32 @@ button {
 button:hover {
     background-color: #c82333;
 }
+
+/* Add or modify the styles for the "BACK" and "Cheakout" buttons */
+.bar a.back,
+.bar a.Cheakout_button {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.bar a.back {
+    background-color: #343a40; /* Dark background color */
+    color: #fff;
+}
+
+.bar a.Cheakout_button {
+    background-color: #49D8B9; /* Green background color */
+    color: #fff;
+}
+
+/* Adjust the hover effect for buttons */
+.bar a.back:hover,
+.bar a.Cheakout_button:hover {
+    background-color: #2b2f33; /* Darker background color on hover */
+}
