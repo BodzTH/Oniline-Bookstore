@@ -180,11 +180,11 @@ h3 {
 }
 
 .js-delete-item{
-    margin-left: 3rem;
+    margin-left: 4rem;
 }
 
-.m{
-    margin-left: 11rem;
+.p{
+    margin-left: 7rem;
 }
 
 button {
@@ -227,4 +227,28 @@ button:hover {
 .bar a.back:hover,
 .bar a.Cheakout_button:hover {
     background-color: #2b2f33; /* Darker background color on hover */
+}
+
+.item-show {
+    text-align: center;
+    font-size: 24px; /* Adjust the font size as needed */
+    margin-top: 50px; /* Adjust the margin-top to center vertically */
+    margin-bottom: 50px;
+}
+
+.cart-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #50bdb8;
+    font-family: 'serif';
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.cart-title1{
+    margin-right: 80%;
 }

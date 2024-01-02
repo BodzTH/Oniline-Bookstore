@@ -37,9 +37,9 @@ let shop = document.getElementById('cart-container');
                <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
             </div>
             <div class="prices">
-            <h2 class="m">$</h2>
-            <h2 id=${matching.id+'-price'} > ${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
+            <h2 id=${matching.id+'-price'} class="p"> ${((matching.priceCents*x.quantity)/100).toFixed(2)}</h2>
             </div>
+            <h2 class="m">EGP</h2>
             <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
         </div>
         </div>
@@ -49,7 +49,7 @@ let shop = document.getElementById('cart-container');
 };
 
 if(cart.length===0){
-shop.innerHTML=`<div>no items to be shown</div>`
+shop.innerHTML=`<div class="item-show">no items to be shown</div>`
 }
 else{
     console.log(generatshop());
