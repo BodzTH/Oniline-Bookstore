@@ -1,65 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Inventory Management</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-            background-color: #f0f0f0;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .tabs {
-            display: flex;
-        }
-
-        .tab {
-            padding: 10px;
-            margin-right: 10px;
-            cursor: pointer;
-            background-color: #ddd;
-        }
-
-        .tab:hover {
-            background-color: #ccc;
-        }
-
-        .tab-content {
-            margin-top: 20px;
-        }
-
-        label, input, button {
-            display: block;
-            margin-top: 10px;
-        }
-
-        input, button {
-            margin-bottom: 10px;
-            padding: 5px;
-        }
-
-        button {
-            padding: 8px 12px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book Inventory Management</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background: url('https://media.istockphoto.com/id/1218656325/photo/laptop-with-online-library-realistic-3d-rendering.jpg?s=1024x1024&w=is&k=20&c=pvfq-vzbwb6UCcA9Gn9Hmr5s9p_u7_bqhn04VuWa-cg=') center center fixed;
+                background-size: cover;
+                display: flex;
+                flex-direction: column;
+                height: 150vh;
+                overflow-y: auto;
+            }
+    
+            header {
+                background-color: #4e2f00;
+                color: #fff;
+                font-style:italic;
+                padding: 5px;
+                text-align: center;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+    
+            h1 {
+                color: #ede7e7;
+                margin: 10px;
+            }
+    
+            .wrapper {
+                display: flex;
+                flex: 1 ;
+                overflow: hidden;
+            }
+    
+            .sidebar {
+                background-color: #251705; /* Dark background color for the sidebar */
+                color: #fff;
+                width: 150px; /* Initial width of the sidebar */
+                transition: width 0.3s ease;
+                overflow: hidden;
+            }
+    
+            .tabs-container {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+    
+            .tabs {
+                display: flex;
+                flex-direction: column;
+                width: 150px; /* Initial width of the tabs container */
+                transition: width 0.3s ease;
+            }
+    
+            .tab {
+                padding: 10px;
+                cursor: pointer;
+                text-align: auto;
+            }
+    
+            .tab:hover {
+                background-color: #ccc;
+            }
+    
+            .tab-content {
+                flex: 1;
+                margin-top: 20px;
+                padding: 20px;
+                
+            }
+    
+            button {
+                padding: 8px 12px;
+                background-color: #9a911a;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+            }
+    
+            button:hover {
+                background-color: #45a049;
+            }
+    
+            .toggle-btn {
+                background-color: #2c3e50; /* Dark background color for the toggle button */
+                color: #fff;
+                border: none;
+                padding: 5px;
+                cursor: pointer;
+            }
+    
+            @media (max-width: 768px) {
+                .tabs {
+                    width: 10px; /* Initially hide the tabs on smaller screens */
+                }
+    
+                .sidebar {
+                    width: 0; /* Initially hide the sidebar on smaller screens */
+                }
+            }
+    
+            footer {
+                background-color: #4e2f00;
+                color: #fff;
+                padding: 5px;
+                text-align: left;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+    
+            .toggle-btn {
+                background-color: #976e07; /* Green background color */
+                color: white; /* White text color */
+                border: none; /* Remove borders */
+                padding: 10px 20px; /* Set padding */
+                text-align: center; /* Center text */
+                text-decoration: none; /* Remove underline */
+                display: inline-block; /* Make it an inline block */
+                font-size: 16px; /* Set font size */
+                cursor: pointer; /* Add a cursor on hover */
+                border-radius: 8px; /* Optional: Add rounded corners */
+            }
+    
+            /* Customize the button to look like a book */
+            .toggle-btn::before {
+                content: '\1F4D6'; /* Unicode character for an open book */
+                font-size: 24px; /* Set font size for the book icon */
+                margin-right: 10px; /* Add some spacing between the icon and text */
+            }
+            label {
+                color: rgb(255, 255, 255);
+            }
+            h2 {
+                color: white; 
+    
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+    
+            th, td {
+                border: 1px solid #e1e1e1;
+                padding: 8px;
+                text-align: left;
+            }
+    
+            th {
+                background-color: #000000;
+            }
+            /* Style the orders' ID and status cells */
+            td:nth-child(odd), th:nth-child(odd) {
+            color: rgb(255, 255, 255);  /* Change to your desired color */
+            }
+    
+            td:nth-child(even), th:nth-child(even) {
+            color: rgb(255, 255, 255);  /* Change to your desired color */
+            }
+            /* Define styles for each status class */
+            .ordered {
+            background-color: #2ecd9d;  /* Light red for "Ordered" */
+            }
+    
+            .confirmed {
+            background-color: #b5f100;  /* Light green for "Confirmed" */
+            }
+    
+            .shipped {
+            background-color: #19ff05;  /* Light blue for "Shipped" */
+            }
+    
+            .delivered {
+            background-color: #ffb300;  /* Very light green for "Delivered" */
+            }
+    
+            .cancelled {
+            background-color: #ff0000;  /* Light gray for "Cancelled" */
+            }
+            .js-orders-container{
+                color: white;
+                
+            }
+        </style>
+    </head>
 <body>
 
-<h1>Admin Panel</h1>
+    <header>
+        <h1> Welcome Mr.Devloper</h1>
+        <!-- Sidebar Toggle Button -->
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    </header>
+<div class="wrapper">
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="tabs">
+        <div class="tab" onclick="showTab('addNumberTab')">Add Number of Books to Stock</div>
+        <div class="tab" onclick="showTab('addNewTab')">Add New Book to Stock</div>
+        <div class="tab" onclick="showTab('deleteTab')">Delete Book from Database</div>
+        <div class="tab" onclick="showTab('reduceTab')">Reduce Number of Books from Stock</div>
+        <div class="tab" onclick="showTab('orderStatusTab')">Update Order Status</div>
+        <div class="tab" onclick="showTab('ordersTab')">Orders</div>
+    </div>
+</div>
 
 <!-- Tabs -->
 <div class="tabs">

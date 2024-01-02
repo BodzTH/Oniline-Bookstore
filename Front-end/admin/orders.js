@@ -22,10 +22,12 @@ function generateOrders(items){
     items.forEach(item => {
         let matching;
         bookscard.forEach(book => {
+            console.log(book.id)
+            console.log(item.id)  
+            console.log(book.id==item.id)  
             if(item.id==book.id)
             {
                 matching=book;
-
             }
         })
         console.log(matching)
