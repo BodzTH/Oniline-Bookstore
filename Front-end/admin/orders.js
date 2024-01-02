@@ -5,14 +5,15 @@ let ordersHTML=``
 orders.forEach(order => {
     ordersHTML+=`
     <div class="js-order">
-    <div class="js-name-order">${order.id}</div>    
-    <div class="js-name-order">${order.fullName}</div>
-    <div class="js-phone-number-orders">${order.phoneNumber}</div>
-    <div class="js-address-orders">${order.address}</div>
-    <div class="js-countery-orders">${order.countery}</div>
-    <div class="js-city-orders">${order.city}</div>
+    <div class="js-name-order">order ID: ${order.id}</div>
+    <div class="js-order--status">order status: ${order.status}</div>    
+    <div class="js-name-order">name: ${order.fullName}</div>
+    <div class="js-phone-number-orders">phone number: ${order.phoneNumber}</div>
+    <div class="js-address-orders">adress: ${order.address}</div>
+    <div class="js-countery-orders">countery: ${order.countery}</div>
+    <div class="js-city-orders">city: ${order.city}</div>
     <div class="js-items-orders">${generateOrders(order.items)}</div>
-</div>`
+</div><hr>`
 console.log(ordersHTML)
 })
 document.querySelector('.js-orders-container').innerHTML=ordersHTML
@@ -32,9 +33,9 @@ function generateOrders(items){
         })
         console.log(matching)
         itemHTML+= `
-        <div class="js-book-id">${matching.id}</div>
-        <div class="js-book-name">${matching.BookName}</div>
-        <div class="js-book-quantity">${item.quantity}</div>
+        <div class="js-book-id">Book ID: ${matching.id}</div>
+        <div class="js-book-name">Book Name: ${matching.BookName}</div>
+        <div class="js-book-quantity">quantity: ${item.quantity}</div>
         <image src='${matching.image}' class="js-book-image"></image>`
     })
     return itemHTML
