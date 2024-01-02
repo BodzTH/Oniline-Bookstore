@@ -11,7 +11,7 @@ function BookCard({ book_name, image, price, alt_image, id, stylcat, stylcard, w
         
             <div className={stylcard}>
 
-                <Link href={'/bookpage/' + id} className="">
+                <Link href={'/bookpage/' + id} key={id}>
                     <div>
                         {/* Book image */}
                         <div>
