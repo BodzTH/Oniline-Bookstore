@@ -107,7 +107,7 @@ function BookPage() {
         {/* Book image */}
         <div className="image-container" >
 
-          <Image className="" src={bookDetails?.image} alt={bookDetails?.altImage} width={200} height={200} />
+          <Image  src={bookDetails?.image} alt={bookDetails?.altImage} width={200} height={200} />
 
         </div>
         {/* Book content */}
