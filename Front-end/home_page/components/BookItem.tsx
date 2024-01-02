@@ -1,9 +1,21 @@
 import Image from "next/image"
-import { BookItemProbs } from "@/common.types"
 import { priceFormating } from "@/cartstore/cartstore"
+import Link from "next/link"
+import { useState } from "react";
 
 {/* Book found box */ }
-function BookItem({ book_name, book_description, image, price, book_type, alt_image, sku }: BookItemProbs) {
+type BookItemProbs = {
+  book_name: string;
+  book_description: string;
+  image: string;
+  price: number;
+  book_type: string;
+  alt_image: string;
+  sku: string;
+  idd: number; // Add the 'id' property
+};
+
+function BookItem({ book_name, book_description, image, price, book_type, alt_image , idd }: BookItemProbs) {
 
   return (
     <div  >
@@ -11,8 +23,16 @@ function BookItem({ book_name, book_description, image, price, book_type, alt_im
       <div className="searchContainer">
         {/* Book image */}
         <div className="searchImage-container" >
+          <Link href={'/bookpage/' + idd} key={idd}>
+            <div>
+              {/* Book image */}
+              <div>
+                <Image src={image} alt={alt_image} width={200} height={200} />
+    
+              </div>
+            </div>
 
-          <Image src={image} alt={alt_image} width={200} height={200} />
+          </Link>
 
         </div>
         {/* Book content */}

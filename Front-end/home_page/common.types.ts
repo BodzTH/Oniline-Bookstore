@@ -25,6 +25,7 @@ export type SearchProbs = {
   alt_image: string;
   price: number;
   book_type: string;
+  id: number;
 };
 
 export type FooterProbs = {
