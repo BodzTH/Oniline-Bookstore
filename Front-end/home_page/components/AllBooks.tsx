@@ -14,7 +14,7 @@ function AllBooks({ title,stylcat, width, height, stylall, stylcard }: { stylcar
                     {/* {ml-20 flex-col items-center justify-center w-full h-full pb-28} */}
                    
 
-                    <div className=' flex gap-10 w-fit '>
+                    <div className={stylall}>
                         {
                             categoryBooks.map((lol: { BookName: string; altImage: string; image: string; priceCents: number; id: number; }, index: Key | null | undefined) => (
                                 <BookCard key={index} book_name={lol.BookName} alt_image={lol.altImage} image={lol.image} price={lol.priceCents} id={lol.id} title={''} books={''} width={width} height={height} stylcat={""} stylcard={stylcard} />

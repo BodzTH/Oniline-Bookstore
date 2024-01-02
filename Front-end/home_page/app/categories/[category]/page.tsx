@@ -69,13 +69,13 @@ function Category() {
             category === 'default' ? (
               // Render the default component here
               mysteryBooks.map((category: string, index: number) => (
-                <AllBooks key={index} title={category} stylcat={""} width={110} height={146} stylall={""} stylcard={""} />
+                <AllBooks key={index} title={category} stylcat={""} width={110} height={146} stylall={"products"} stylcard={""} />
               
                 ))
             ) : (
               // Render the CategoryHomeRow component for each category
               mysteryBooks.map((category: string, index: number) => (
-                <CategoryHomeRow key={index} title={category} stylcat={""} width={110} height={146} stylall={""} stylcard={""} />
+                <CategoryHomeRow key={index} title={category} stylcat={""} width={110} height={146} stylall={"products"} stylcard={""} />
               ))
             )
           }

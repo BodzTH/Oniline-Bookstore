@@ -52,7 +52,7 @@ function Home() {
 
           {
             uniqueCategories.map((category: string, index: number) => (
-              <CategoryHomeRow key={index} title={category} stylcat={" horizontalline h-5 "} width={110} height={146} stylall={"ml-6"} stylcard={"backgroundClass"} />
+              <CategoryHomeRow key={index} title={category} stylcat={" horizontalline h-5 "} width={110} height={146} stylall={"flex gap-10 w-fit"} stylcard={"backgroundClass"} />
             ))
 
 
