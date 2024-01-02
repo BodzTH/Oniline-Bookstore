@@ -1,12 +1,7 @@
 
 export let cart = JSON.parse(localStorage.getItem("cart"));
 if (!cart) {
-  cart = [
-  {
-    id:3,
-    quantity:4
-  }
-  ];
+  cart = [];
 }
 
 (async () => {

@@ -67,7 +67,7 @@ decrement_buttons.forEach(button => {
         item.quantity-=1
         document.getElementById(item.id+'-quantity').innerHTML=item.quantity
         console.log(item.quantity)
-        let newTotalPrice=updatePrice(item,bookid)/100
+        let newTotalPrice=updatePrice(item,bookid)
         document.getElementById(item.id+'-price').innerHTML=newTotalPrice    
         console.log(newTotalPrice)
         saveToStorage();
@@ -96,7 +96,7 @@ increment_buttons.forEach(button => {
             item.quantity+=1
             document.getElementById(item.id+'-quantity').innerHTML=item.quantity
             console.log(item.quantity)
-            let newTotalPrice=updatePrice(item,bookid)/100
+            let newTotalPrice=updatePrice(item,bookid)
             document.getElementById(item.id+'-price').innerHTML=newTotalPrice      
             console.log(newTotalPrice)
             saveToStorage();
@@ -116,7 +116,7 @@ function updatePrice(item,id)
 let newTotalPrice;
 bookscard.map(book => {
 if(book.id==id){
-newTotalPrice=item.quantity*book.priceCents
+newTotalPrice=((item.quantity*book.priceCents)/100).toFixed(2)
 }
 })
 return newTotalPrice

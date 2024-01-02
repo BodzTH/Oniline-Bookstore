@@ -23,9 +23,11 @@ function generateOrders(items){
         })
         console.log(matching)
         itemHTML+= `
+        <div class"contant">
         <div class="js-book-name">${matching.BookName}</div>
         <div class="js-book-quantity">${item.quantity}</div>
-        <image src='${matching.image}' class="js-book-image"></image>`
+        <image src='${matching.image}' class="js-book-image"></image>
+        </div>`
     })
     return itemHTML
 }
