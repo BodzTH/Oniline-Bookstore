@@ -1447,6 +1447,7 @@ export function deleteBookFromDatabase() {
     });
     bookscard = newBooksCard;
     console.log(bookscard);
+    saveBooksToStorage();
   });
 }
 
