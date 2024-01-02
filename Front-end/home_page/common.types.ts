@@ -41,5 +41,5 @@ export type BookItemProbs = {
   book_type: string;
   author: string;
   publisher: string;
-  sku: string;
+  sku: number;
 };

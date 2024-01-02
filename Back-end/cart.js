@@ -1,26 +1,14 @@
-import { bookscard } from "./books.js";
-export let cart = JSON.parse(localStorage.getItem("cart"));;
-if(!cart)
-{
-  cart=[
-    {
-      id: 1,
-      quantity: 9,
-      deliveryOptionId: "1",
-    },
-    {
-      id: 2,
-      quantity: 2,
-      deliveryOptionId: "2",
-    },
-  ];
+
+export let cart = JSON.parse(localStorage.getItem("cart"));
+if (!cart) {
+  cart = [];
 }
 
-function fetchDataAndUpdateLocalStorage() {
-  setInterval(() => {
-    fetch("http://localhost:5030/api/getCartItems")
-      .then((response) => response.json())
-      .then((data) => {
+(async () => {
+  try {
+    const response = await fetch("http://localhost:5030/api/getCartItems");
+    const data = await response.json();
+
     if (Object.keys(data).length !== 0) {
       let matching = false;
       let matchingID;
@@ -30,7 +18,8 @@ function fetchDataAndUpdateLocalStorage() {
           matchingID = item.id;
         }
       });
-if (matching == true) {
+
+      if (matching) {
         cart.forEach((item) => {
           if (item.id === matchingID) {
             item.quantity = data.quantity;
@@ -41,87 +30,17 @@ if (matching == true) {
       } else {
         cart.push(data);
         console.log(cart);
-        let matching;
-        bookscard.forEach(book => {
-          if(data.id==book.id)
-          {
-            matching=book;
-          }
-        })
-        if(cart.length>0)
-        {
-        document.getElementById('cart-container').innerHTML+=`
-        <div id=product-id-${matching.id} class="item">
-            <div class="details">
-            <img src=${matching.image} alt="Product Image" class="cart-row-img" >
-            <div class="name_desc">
-            <h2>${matching.BookName}</h2>
-            <h3>${matching.categori}</h3>
-            <p>${matching.desc}</p>
-            </div>
-            <div class="price-quantity">
-                <div class="buttons">
-                   <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
-                   <div id=${matching.id+'-quantity'} class="quantity">
-                   ${data.quantity}
-                   </div>
-                   <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
-                </div>
-                <div class="prices">
-                <h2 class="m">$</h2>
-                <h2 id=${matching.id+'-price'} > ${((matching.priceCents*data.quantity)/100).toFixed(2)}</h2>
-                </div>
-                <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
-            </div>
-            </div>
-        </div>
-        `}else{
-          document.getElementById('cart-container').innerHTML=`
-          <div id=product-id-${matching.id} class="item">
-              <div class="details">
-              <img src=${matching.image} alt="Product Image" class="cart-row-img" >
-              <div class="name_desc">
-              <h2>${matching.BookName}</h2>
-              <h3>${matching.categori}</h3>
-              <p>${matching.desc}</p>
-              </div>
-              <div class="price-quantity">
-                  <div class="buttons">
-                     <i  class="bi bi-dash-lg js-decrement" data-book-id=${matching.id}></i>
-                     <div id=${matching.id+'-quantity'} class="quantity">
-                     ${data.quantity}
-                     </div>
-                     <i class="bi bi-plus-lg js-increment" data-book-id=${matching.id}></i>
-                  </div>
-                  <div class="prices">
-                  <h2 class="m">$</h2>
-                  <h2 id=${matching.id+'-price'} > ${((matching.priceCents*data.quantity)/100).toFixed(2)}</h2>
-                  </div>
-                  <button class="js-delete-item"    data-book-id=${matching.id}>delete</button>
-              </div>
-              </div>
-          </div>
-          `
-        }
-
-             }
-        saveToStorage();
       }
-    })
-    .catch((error) => console.error("Error:", error));
-}, 5000); // fetch every 6 seconds
-}
-export { fetchDataAndUpdateLocalStorage };
-
-
-fetchDataAndUpdateLocalStorage();
-
+      saveToStorage();
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+})();
 
 export function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
-
-
 
 export function deleteItem() {
   let delete_buttons = document.querySelectorAll(".js-delete-item");
@@ -134,14 +53,38 @@ export function deleteItem() {
         if (bookid != item.id) {
           newCart.push(item);
           console.log(item);
-        }
-        else {
-        const container=document.getElementById( 'product-id-'+item.id)
-        container.remove();
+        } else {
+          const container = document.getElementById("product-id-" + item.id);
+          container.remove();
         }
       });
       cart = newCart;
       localStorage.setItem("cart", JSON.stringify(cart));
+      //add here (bookid) is the name of the variable that you want to pass to the home page
+      
+        fetch("http://localhost:5030/api/sendDeletedBook", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify( {id : bookid} ),
+          
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok.");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("POST request successful:", data);
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
     });
   });
 }

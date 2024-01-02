@@ -1,7 +1,7 @@
 import { BookProbs } from "@/common.types";
 import Image from "next/image";
 {/* Book item section */ }
-function BookSection({ title, book_name, image, price, cart, books }: BookProbs) {
+function BookSection({ title, book_name, image, price, books }: BookProbs) {
     return (
         <>
             <div>
@@ -16,9 +16,6 @@ function BookSection({ title, book_name, image, price, cart, books }: BookProbs)
                 </div>
                 <div>
                     <h1>{price}</h1>
-                </div>
-                <div>
-                    <>{cart}</>
                 </div>
                 <div>
                     <h1>{books}</h1>
