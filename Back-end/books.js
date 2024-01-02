@@ -1,34 +1,32 @@
 //import { bookid } from "../Front-end/admin/admin.js"
-export let bookscard=JSON.parse(localStorage.getItem("books"));
-if(!bookscard)
-{
+export let bookscard = JSON.parse(localStorage.getItem("books"));
+if (!bookscard) {
   bookscard = [
     {
       id: 1,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781421597133-768x1152.jpg",
-      altImage:"The Promised Neverland 2",  
-      categori: "E-Manga",
+      altImage: "The Promised Neverland 2",
+      categori: "Manga",
       BookName: "The Promised Neverland 2",
       desc: "The children of the Grace Field House orphanage have their happy lives upended when they find out they’re being raised to be fed to demons. Can they escape their fate before it’s too late?",
-      author:"Kaiu Shirai",
-      publisher:"Simon & Schuster UK",
+      author: "Kaiu Shirai",
+      publisher: "Simon & Schuster UK",
       SKU: 9781421597133,
       priceCents: 48000,
       inStock: 10,
       sold: 0,
-      
     },
     {
       id: 2,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9781974710027.jpg",
-      altImage:"Jujutsu Kaisen, Vol. 1",
-      categori: "E-Manga",
+      altImage: "Jujutsu Kaisen, Vol. 1",
+      categori: "Manga",
       BookName: "Jujutsu Kaisen, Vol. 1",
       desc: "Although Yuji Itadori looks like your average teenager, his immense physical strength is something to behold! Every sports club wants him to join, but Itadori would rather hang out with the school outcasts in the Occult Research Club. One day, the club manages to get their hands on a sealed cursed object. Little do they know the terror they’ll unleash when they break the seal",
-      author:"Gege Akutami",
-      publisher:"VIZ Media",
+      author: "Gege Akutami",
+      publisher: "VIZ Media",
       SKU: 9781974710027,
       priceCents: 48000,
       inStock: 5,
@@ -38,12 +36,12 @@ if(!bookscard)
       id: 3,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/06/9781974713325.jpg",
-      altImage:"Naruto: Sasuke’s Story – Star",
-      categori: "E-Manga",
+      altImage: "Naruto: Sasuke’s Story – Star",
+      categori: "Manga",
       BookName: "Naruto: Sasuke’s Story – Star",
       desc: "A new series of prose novels, straight from the worldwide Naruto franchise. Naruto’s allies and enemies take center stage in these fast-paced adventures, with each volume focusing on a particular clan mate, ally, team…or villain.",
-      author:"Jun Esaka",
-      publisher:"Simon & Schuster UK",
+      author: "Jun Esaka",
+      publisher: "Simon & Schuster UK",
       SKU: 9781974713325,
       priceCents: 48000,
       inStock: 5,
@@ -53,12 +51,12 @@ if(!bookscard)
       id: 4,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/10/9781974714698.jpg",
-      altImage:"Persona 5, Vol. 3",  
-      categori: "E-Manga",
+      altImage: "Persona 5, Vol. 3",
+      categori: "Manga",
       BookName: "Persona 5, Vol. 3",
       desc: "After successfully changing Kamoshida’s heart, Akira and his friends decide to continue operating as the Phantom Thieves. Not long after, they meet famous Japanese artist Ichiryusai Madarame and his student Yusuke Kitagawa. The Phantom Thieves hear rumors that Madarame might be up to some shady stuff. Ann accepts Yusuke’s request to model for him in the hopes that she can get some information out of him, but Yusuke refuses to hear it! Will the Phantom Thieves be able to expose Madarame’s crimes? And what is the startling truth about Yusuke’s past?",
-      author:"Hisato Murasaki",
-      publisher:"VIZ LLC",
+      author: "Hisato Murasaki",
+      publisher: "VIZ LLC",
       SKU: 9781974714698,
       priceCents: 48000,
       inStock: 5,
@@ -68,277 +66,296 @@ if(!bookscard)
       id: 5,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/01/9780099523994.jpg",
-      altImage:"Persepolis I and II",  
-      categori: "E-Manga",
+      altImage: "Persepolis I and II",
+      categori: "Manga",
       BookName: "Persepolis I and II",
       desc: "Marjane Satrapi’s Persepolis is an exemplary autobiographical graphic novel, in the tradition of Art Spiegelman’s classic Maus. Set in Iran during the Islamic Revolution, it follows the young Satrapi, six-year-old daughter of two committed and well-to-do Marxists. As she grows up, she witnesses first-hand the effects that the revolution and the war with Iraq have on her home, family and school.",
-      author:"Marjane Satrapi",
-      publisher:"Random House UK",
+      author: "Marjane Satrapi",
+      publisher: "Random House UK",
       SKU: 9780099523994,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 6,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9780593356098-scaled.jpg",
-      altImage:"Lore Olympus",  
-      categori: "E-Graphic Novels &Comics",
+      altImage: "Lore Olympus",
+      categori: "Graphic-Novels-Comics",
       BookName: "Lore Olympus",
       desc: "All of Olympus—and the Underworld—are talking about the God of the Dead and the sprightly daughter of Demeter. But despite the rumors of their romance, Hades and Persephone have plenty to navigate on their own.",
-      author:"Rachel Smythe",
-      publisher:"Penguin Random House USA",
+      author: "Rachel Smythe",
+      publisher: "Penguin Random House USA",
       SKU: 9780593356098,
       priceCents: 105000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 7,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781481438261.jpg",
-      altImage:"Long Way Down",  
-      categori: "E-Graphic Novels &Comics",
+      altImage: "Long Way Down",
+      categori: "Graphic-Novels-Comics",
       BookName: "Long Way Down",
       desc: "Or, you can call it a gun. That’s what fifteen-year-old Will has shoved in the back waistband of his jeans. See, his brother Shawn was just murdered. And Will knows the rules. No crying. No snitching. Revenge. That’s where Will’s now heading, with that gun shoved in the back waistband of his jeans, the gun that was his brother’s gun. He gets on the elevator, seventh floor, stoked. He knows who he’s after. Or does he?",
-      author:"Jason Reynolds",
-      publisher:"Simon & Schuster Usa",
+      author: "Jason Reynolds",
+      publisher: "Simon & Schuster Usa",
       SKU: 9781481438261,
       priceCents: 65000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 8,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/03/9781779507242.jpg",
-      altImage:"Justice League Unlimited 1",  
-      categori: "E-Graphic Novels &Comics",
+      altImage: "Justice League Unlimited 1",
+      categori: "Graphic-Novels-Comics",
       BookName: "Justice League Unlimited 1",
       desc: "The Justice League has the best-of-the-best heroes trained for the top of their game–together they can tackle an evil that comes into their world. In this thrilling collection, our heroes jet off into the future where they team up with the Legion of Super-Heroes to try to defeat Kilgore! But the future problems have seeds that were planted in the past. Will the Flash be fast enough to return to his own era and stop his Justice League teammates from dooming the world?",
-      author:"Various",
-      publisher:"Random House US",
+      author: "Various",
+      publisher: "Random House US",
       SKU: 9781779507242,
       priceCents: 55000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 9,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/03/9781779502421.jpg",
-      altImage:"Year of the Villain 1",  
-      categori: "E-Graphic Novels &Comics",
+      altImage: "Year of the Villain 1",
+      categori: "Graphic-Novels-Comics",
       BookName: "Year of the Villain 1",
       desc: "DC’s “Year of the Villain” leaps into its final phase as the ultimate battle between Lex Luthor and the Batman Who Laughs rages! On one side are the super-powered “Apex” Lex’s forces of injustice-Captain Cold, Oracle, Solomon Grundy, Black Manta, and Lobo-and on the other are the Batman Who Laughs’ Infected, corrupted versions of heroes Supergirl, Shazam, Blue Beetle, Donna Troy, Hawkman, and Commissioner Gordon! But where does The Joker fit in? It’s a final showdown between two of DC’s most iconic villains, all to curry the favor of Perpetua. Whoever wins will take over the Multiverse alongside her! Collects Year of the Villain: Hell Arisen #1-4, plus DC’s Year of the Villain #1 and more!",
-      author:"James Tynion IV",
-      publisher:"Random House US",
+      author: "James Tynion IV",
+      publisher: "Random House US",
       SKU: 9781779502421,
       priceCents: 85000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 10,
       image:
         "https://diwanegypt.com/wp-content/uploads/2020/09/9781529105100-1-scaled.jpg",
-      altImage:"Boy, The Mole, The Fox and The Hourse",  
-      categori: "E-Graphic Novels &Comics",
+      altImage: "Boy, The Mole, The Fox and The Hourse",
+      categori: "Graphic-Novels-Comics",
       BookName: "Boy, The Mole, The Fox and The Hourse",
       desc: "(2019) The Sunday Times Bestseller and New York Times Bestseller. A book of hope for uncertain times. ‘Feeling a little blue? Meet the new Winnie the Pooh.’ The Daily Mail ‘A wonderful work of art and a wonderful window into the human heart’ Richard Curtis Enter the world of Charlie’s four unlikely friends, discover their story and their most important life lessons. The conversations of the boy, the mole, the fox and the horse have been shared thousands of times online, recreated in school art classes, hung on hospital walls and turned into tattoos. In Charlie’s first book, you will find his most-loved illustrations and some new ones too.",
-      author:"Charlie Mackesy",
-      publisher:"Random House UK",
+      author: "Charlie Mackesy",
+      publisher: "Random House UK",
       SKU: 9781529105100,
       priceCents: 102000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 11,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781649031631.jpg",
-      altImage:"The Nubian Pharoas of Egypt: Their Lives and Afterlives",  
-      categori: "E-Egypt Essentials",
+      altImage: "The Nubian Pharoas of Egypt: Their Lives and Afterlives",
+      categori: "Egypt-Essentials",
       BookName: "The Nubian Pharoas of Egypt: Their Lives and Afterlives",
       desc: "description",
-      author:"Aidan Dodson",
-      publisher:"Auc",
+      author: "Aidan Dodson",
+      publisher: "Auc",
       SKU: 9781649031631,
       priceCents: 75000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 12,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/10/9783836584234.jpg",
-      altImage:"King Tut: The Journey through the Underworld",  
-      categori: "E-Egypt Essentials",
+      altImage: "King Tut: The Journey through the Underworld",
+      categori: "Egypt-Essentials",
       BookName: "King Tut: The Journey through the Underworld",
       desc: "description",
-      author:"Sandro Vannini",
-      publisher:"Taschen",
+      author: "Sandro Vannini",
+      publisher: "Taschen",
       SKU: 9783836584234,
       priceCents: 150000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 13,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/10/9783836520546.jpg",
-      altImage:"Egypt: People, Gods, Pharaohs",  
-      categori: "E-Egypt Essentials",
+      altImage: "Egypt: People, Gods, Pharaohs",
+      categori: "Egypt-Essentials",
       BookName: "Egypt: People, Gods, Pharaohs",
       desc: "description",
-      author:"Rose Marie Hagen",
-      publisher:"Taschen",
+      author: "Rose Marie Hagen",
+      publisher: "Taschen",
       SKU: 9783836520546,
       priceCents: 180000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 14,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/10/9781649031754.jpg",
-      altImage:"Descendants of a Lesser God: Regional Power in Old and Middle",  
-      categori: "E-Egypt Essentials",
+      altImage: "Descendants of a Lesser God: Regional Power in Old and Middle",
+      categori: "Egypt-Essentials",
       BookName: "Descendants of a Lesser God: Regional Power in Old and Middle",
       desc: "description",
-      author:"Alejandro jimenez serrano",
-      publisher:"Auc",
+      author: "Alejandro jimenez serrano",
+      publisher: "Auc",
       SKU: 9781649031754,
       priceCents: 100000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 15,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/08/9781649032188.jpg",
-      altImage:"A Gift of Geology",  
-      categori: "E-Egypt Essentials",
+      altImage: "A Gift of Geology",
+      categori: "Egypt-Essentials",
       BookName: "A Gift of Geology",
       desc: "description",
-      author:"Colin D.Reader",
-      publisher:"Auc",
+      author: "Colin D.Reader",
+      publisher: "Auc",
       SKU: 9781649032188,
       priceCents: 50000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 16,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/08/9781649031853.jpg",
-      altImage:"Ramesses",  
-      categori: "E-Egypt Essentials",
+      altImage: "Ramesses",
+      categori: "Egypt-Essentials",
       BookName: "Ramesses",
       desc: "description",
-      author:"Susanna Thomas",
-      publisher:"Auc",
+      author: "Susanna Thomas",
+      publisher: "Auc",
       SKU: 9781649031853,
       priceCents: 50000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 17,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/08/9781649031617.jpg",
-      altImage:"Tutankhamun",  
-      categori: "E-Egypt Essentials",
+      altImage: "Tutankhamun",
+      categori: "Egypt-Essentials",
       BookName: "Tutankhamun",
       desc: "description",
-      author:"Aidan Dodson",
+      author: "Aidan Dodson",
       SKU: 9781649031617,
       priceCents: 75000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 18,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9782724707663.jpg",
-      altImage:"Cairo in Chicago",  
-      categori: "E-Egypt Essentials",
+      altImage: "Cairo in Chicago",
+      categori: "Egypt-Essentials",
       BookName: "Cairo in Chicago",
       desc: "description",
-      author:"Istvan Ormos",
-      publisher:"Institut Francais D'Archeologi",
+      author: "Istvan Ormos",
+      publisher: "Institut Francais D'Archeologi",
       SKU: 9782724707663,
       priceCents: 241900,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 19,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9789774161216.jpg",
-      altImage:"Secrets From The Sand",  
-      categori: "E-Egypt Essentials",
+      altImage: "Secrets From The Sand",
+      categori: "Egypt-Essentials",
       BookName: "Secrets From The Sand",
       desc: "description",
-      author:"Zahi A.Hawass",
-      publisher:"American University Press",
+      author: "Zahi A.Hawass",
+      publisher: "American University Press",
       SKU: 9789774161216,
       priceCents: 50000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 20,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9789774249006.jpg",
-      altImage:"Re-Envisioning Egypt, 1919-195",  
-      categori: "E-Egypt Essentials",
+      altImage: "Re-Envisioning Egypt, 1919-195",
+      categori: "Egypt-Essentials",
       BookName: "Re-Envisioning Egypt, 1919-195",
       desc: "description",
-      author:"Arthur Goldschmidt Jr",
-      publisher:"American University Press",
+      author: "Arthur Goldschmidt Jr",
+      publisher: "American University Press",
       SKU: 9789774249006,
       priceCents: 40000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 21,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9781474619301.jpg",
-      altImage:"The Diet Myth",  
-      categori: "E-Diets & Nutrition",
+      altImage: "The Diet Myth",
+      categori: "Diets-Nutrition",
       BookName: "The Diet Myth",
       desc: "Drawing on the latest science and his own pioneering research, Professor Tim Spector demystifies the common misconceptions about fat, calories, vitamins and nutrients. Only by understanding what makes our own personal microbes tick can we overcome the confusion of modern nutrition, and achieve a healthy gut and a healthy body.",
-      author:"Tim spector",
-      publisher:"Hachette Uk Distribution",
+      author: "Tim spector",
+      publisher: "Hachette Uk Distribution",
       SKU: 9781474619301,
       priceCents: 54000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 22,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9781780725239.jpg",
-      altImage:"Glucose Revolution",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Glucose Revolution",
+      categori: "Diets-Nutrition",
       BookName: "Glucose Revolution",
       desc: "Dietary science is on the move. For decades, people were wrongly focused on reducing fat and calories, whereas we now know that the real trouble-makers are the foods that deregulate our blood sugar levels. By the end of this book, you’ll be aware of how food impacts your biology. You’ll know which breakfast choices may be causing your cravings, in which order you should eat the food on your plate, what not to do on an empty stomach, which foods lead to mood swings, and how to avoid being sleepy at 3pm. You’ll evolve the way you eat, take control of your health, and your life will flourish.",
-      author:"Jessie Inchauspe",
-      publisher:"Short Books",
+      author: "Jessie Inchauspe",
+      publisher: "Short Books",
       SKU: 9781780725239,
       priceCents: 102000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 23,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9781982182380.jpg",
-      altImage:"Foodwise: A Fresh Approach to",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Foodwise: A Fresh Approach to",
+      categori: "Diets-Nutrition",
       BookName: "Foodwise: A Fresh Approach to",
       desc: "Foodwise is a reset for the mind, body, and soul. Created by board-certified nutritionist and trained chef Mia Rigden, this book will help you discover the best foods and routines for your body, establish healthy new habits you love, and restore your ability to eat intuitively for radiant health—all it takes is twenty-one days. Foodwise also shares sought-after recipes and nutrition tips for anyone looking to improve their health or well-being—whether that’s to lose weight, reduce stress, improve mood or focus, boost energy, or simply feel better.",
-      author:"Mia Rigden",
-      publisher:"Simon & Schuster Usa",
+      author: "Mia Rigden",
+      publisher: "Simon & Schuster Usa",
       SKU: 9781982182380,
       priceCents: 150000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 24,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9781401952556.jpg",
-      altImage:"Bright Line Eating",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Bright Line Eating",
+      categori: "Diets-Nutrition",
       BookName: "Bright Line Eating",
       desc: "Bright Line Eating (BLE) is a simple approach designed to reverse that process. By working with four “”Bright Lines””—clear, unambiguous, boundaries—Susan Peirce Thompson shows us how to heal our brain and shift it into a mode where it is ready to shed pounds, release cravings, and stop sabotaging our weight loss goals.Best of all, it is a program that understands that willpower cannot be relied on, and sets us up to be successful anyway.",
-      author:"Susan Peirce Thompson",
-      publisher:"Penguin Random House USA",
+      author: "Susan Peirce Thompson",
+      publisher: "Penguin Random House USA",
       SKU: 9781401952556,
       priceCents: 90000,
       inStock: 10,
@@ -348,236 +365,252 @@ if(!bookscard)
       id: 25,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781473681309.jpg",
-      altImage:"Food: WTF Should I Eat?",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Food: WTF Should I Eat?",
+      categori: "Diets-Nutrition",
       BookName: "Food: WTF Should I Eat?",
       desc: "Did you know that porridge isn’t actually a healthy way to start the day? That perhaps you should be eating a Mediterranean diet? And that milk doesn’t build bones, and eggs aren’t the devil? In WTF Should I eat? – Dr Hyman looks at every food group and explains what we’ve gotten wrong, revealing which foods nurture our health and which pose a threat. He also explains the crucial role food plays in functional medicine and how food systems and policies affect our environmental and personal health.",
-      author:"Mark Hyman",
-      publisher:"Hodder and Stoughton",
+      author: "Mark Hyman",
+      publisher: "Hodder and Stoughton",
       SKU: 9781473681309,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 26,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/06/9781526602800.jpg",
-      altImage:"Eat Better Forever",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Eat Better Forever",
+      categori: "Diets-Nutrition",
       BookName: "Eat Better Forever",
       desc: "In this ground-breaking book, instead of promising a gimmicky single-fix solution to the challenge of healthy eating, Hugh extracts the knowledge, advice and healthy habits, from cutting edge research into the obesity crisis, to produce 7 simple strategies that will transform your diet and your health. Starting with the blissfully simple message that we all need to Go Whole, he leads us away from the industrial junk and processed foods that are doing so many of us so much harm and returns us to the real foods that nurture us and keep us well.",
-      author:"Hugh Fearnley-Whittingstall",
-      publisher:"Bloomsbury Publishing PLC",
+      author: "Hugh Fearnley-Whittingstall",
+      publisher: "Bloomsbury Publishing PLC",
       SKU: 9781526602800,
       priceCents: 156000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 27,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/03/9786009967154.jpg",
-      altImage:"Choose Health this Ramadan",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Choose Health this Ramadan",
+      categori: "Diets-Nutrition",
       BookName: "Choose Health this Ramadan",
       desc: "description",
-      author:"Nouran Gamal",
-      publisher:"Self-Publishing",
+      author: "Nouran Gamal",
+      publisher: "Self-Publishing",
       SKU: 9786009967154,
       priceCents: 15000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 28,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9780241254707.jpg",
-      altImage:"Neal’s Yard Remedies Eat Beaut",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Neal’s Yard Remedies Eat Beaut",
+      categori: "Diets-Nutrition",
       BookName: "Neal’s Yard Remedies Eat Beaut",
       desc: "Discover how to enhance your outer beauty from the inside by eating the most beneficial natural foods. Target the face, body, hair, and teeth with over 100 recipes selected by the experts to help you look and feel beautiful. Build your own clean beauty plan based on the results you want to see, and discover the wonderful effects that beauty foods can have on everything from fragile hair and oily skin, to cellulite and bruises.",
-      author:"Susan Curtis & Tipper Lewis",
-      publisher:"DK",
+      author: "Susan Curtis & Tipper Lewis",
+      publisher: "DK",
       SKU: 9780241254707,
       priceCents: 104500,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 29,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9780241313626.jpg",
-      altImage:"Eat Better Live Longer",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Eat Better Live Longer",
+      categori: "Diets-Nutrition",
       BookName: "Eat Better Live Longer",
       desc: "A four-week eating plan, with over 110 nutrient-packed recipes, helps you learn to make smarter choices about foods that can reduce your risk of certain diseases and lessen the effects of others. Use this new-found knowledge in tandem with details on how each part of your body changes as you age and which nutrients you need to support all-round health, helping you live a longer, happier life.",
-      author:"Sarah Brewer",
-      publisher:"DK",
+      author: "Sarah Brewer",
+      publisher: "DK",
       SKU: 9780241313626,
       priceCents: 102000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 30,
       image:
         "https://diwanegypt.com/wp-content/uploads/2020/12/9781473631168.jpg",
-      altImage:"Eat Fat Get Thin",  
-      categori: "E-Diets & Nutrition",
+      altImage: "Eat Fat Get Thin",
+      categori: "Diets-Nutrition",
       BookName: "Eat Fat Get Thin",
       desc: "As ‘Pegan Plan’ creator and author Dr Mark Hyman explains in Eat Fat Get Thin, a growing body of research is revealing the immense health and weight-loss benefits of a high-fat diet rich in eggs, nuts, oils, avocados, coconut oil, and other delicious superfoods. That’s right – as it turns out, the key to losing weight, increasing overall energy, and achieving optimum wellness is eating more fat, not less. Dr Hyman debunks some of our most persistent fat-phobic myths and clearly explains the science behind fat’s health benefits. In addition to learning why fat is good and which fats are best, you’ll learn how to apply that knowledge to your day-to-day life. With easy-to-follow advice, simple and flavourful recipes, shopping lists, and more, Eat Fat Get Thin will help you lose weight and stay healthy for life.",
-      author:"Mark Hyman",
-      publisher:"Hodder & Stoughton",
+      author: "Mark Hyman",
+      publisher: "Hodder & Stoughton",
       SKU: 9781473631168,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 31,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/11/9780241989678.jpg",
-      altImage:"How the World Really Works",  
-      categori: "E-Science & Technology",
+      altImage: "How the World Really Works",
+      categori: "Science-Technology",
       BookName: "How the World Really Works",
       desc: "We have never had so much information at our fingertips and yet most of us don’t know how the world really works. This book explains seven of the most fundamental realities governing our survival and prosperity. From energy and food production, through our material world and its globalization, to risks, our environment and its future, How the World Really Works offers a much-needed reality check – because before we can tackle problems effectively, we must understand the facts.",
-      author:"Vaclav Smil",
-      publisher:"Penguin UK`",
+      author: "Vaclav Smil",
+      publisher: "Penguin UK`",
       SKU: 9780241989678,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 32,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/06/9781784708276.jpg",
-      altImage:"Entangled Life",  
-      categori: "E-Science & Technology",
+      altImage: "Entangled Life",
+      categori: "Science-Technology",
       BookName: "Entangled Life",
       desc: "When we think of fungi, we likely think of mushrooms. But mushrooms are only fruiting bodies, analogous to apples on a tree. Most fungi live out of sight, yet make up a massively diverse kingdom of organisms that supports and sustains nearly all living systems. Fungi provide a key to understanding the planet on which we live, and the ways we think, feel, and behave.  In Entangled Life, the brilliant young biologist Merlin Sheldrake shows us the world from a fungal point of view, providing an exhilarating change of perspective. Sheldrake’s vivid exploration takes us from yeast to psychedelics, to the fungi that range for miles underground and are the largest organisms on the planet, to those that link plants together in complex networks known as the “Wood Wide Web,” to those that infiltrate and manipulate insect bodies with devastating precision.",
-      author:"Merlin Sheldrake",
-      publisher:"Penguin UK",
+      author: "Merlin Sheldrake",
+      publisher: "Penguin UK",
       SKU: 9781784708276,
       priceCents: 78000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 33,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/02/9781787333765.jpg",
-      altImage:"Sapiens A Graphic History Vol",  
-      categori: "E-Science & Technology",
+      altImage: "Sapiens A Graphic History Vol",
+      categori: "Science-Technology",
       BookName: "Sapiens A Graphic History Vol",
       desc: "In The Pillars of Civilization, Yuval Noah Harari and his companions including Prof. Saraswati and Dr. Fiction travel the length and breadth of human history to investigate how the Agricultural Revolution changed society forever. Discover how wheat took over the world, how war, famine, disease and inequality became a part of the human condition, and why we might only have ourselves to blame. A radical, witty and colourful retelling of the story of humankind, adapted from Yuval Noah Harari’s Sapiens: A Brief History of Humankind, Volume 2 can be read as a standalone or as a follow-up to Volume 1, The Birth of Humankind.",
-      author:"Yuval Noah Harari",
-      publisher:"Random House UK",
+      author: "Yuval Noah Harari",
+      publisher: "Random House UK",
       SKU: 9781787333765,
       priceCents: 114000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 34,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/02/9781787332812.jpg",
-      altImage:"Sapiens A Graphic History Vol",  
-      categori: "E-Science & Technology",
+      altImage: "Sapiens A Graphic History Vol",
+      categori: "Science-Technology",
       BookName: "Sapiens A Graphic History Vol",
       desc: "In this first volume of the adaptation of his ground-breaking book, renowned historian Yuval Harari tells the story of humankind’s creation and evolution, exploring the ways in which biology and history have defined us and enhanced our understanding of what it means to be “”human””. From examining the role evolving humans have played in the global ecosystem to charting the rise of empires, Sapiens challenges us to reconsider accepted beliefs, connect past developments with contemporary concerns, and view specific events within the context of larger ideas.",
-      author:"Yuval Noah Harari",
-      publisher:"Random House UK",
+      author: "Yuval Noah Harari",
+      publisher: "Random House UK",
       SKU: 9781787332812,
       priceCents: 120000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 35,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9781409350156.jpg",
-      altImage:"Science Book",  
-      categori: "E-Science & Technology",
+      altImage: "Science Book",
+      categori: "Science-Technology",
       BookName: "Science Book",
       desc: "(2014) Part of the popular Big Ideas series, The Science Book explores the history of science, how scientists have sought to explain our incredible universe and how amazing scientific discoveries have been made. Discover how Galileo worked out his scientific theories of motion and inertia, why Copernicus’s ideas were contentious and what the discovery of DNA meant. All the big scientific ideas and discoveries are brought to life with quirky graphics, pithy quotes and step-by-step ‘mind maps’, plus every area of science is covered, including astronomy, biology, chemistry, geology, maths and physics. You’ll be brought up-to-date on scientific ideas from black holes to genetic engineering with eye-catching artworks showing how the ideas of key scientists have impacted our understanding of the world.",
-      author:"N/A",
-      publisher:"Penguin UK",
+      author: "N/A",
+      publisher: "Penguin UK",
       SKU: 9781409350156,
       priceCents: 120000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 36,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9781784296148.jpg",
-      altImage:"50 Science Ideas You Really Ne",  
-      categori: "E-Science & Technology",
+      altImage: "50 Science Ideas You Really Ne",
+      categori: "Science-Technology",
       BookName: "50 Science Ideas You Really Ne",
       desc: "(2016) 50 Science Ideas You Really Need to Know is your guide to the biggest questions and deepest concepts from across the whole of science. What was the Big Bang? How did life on Earth arise? What does quantum mechanics tell us about the universe? Is true artificial intelligence possible? And does life exist on other planets? Moving from the basics of atoms and molecules, Newton’s laws of physics and the building blocks of life to the cutting edge of nanotechnology, Einstein’s theories of relativity and cloning, this book makes the many worlds of science accessible and illuminating. Featuring fifty concise, insightful and illustrated essays covering physics and astronomy, Earth and life sciences, chemistry and materials, psychology and computing, and exploring the ways they connect with each other and impact on our lives, 50 Science Ideas You Really Need to Know is the ideal introduction to the questions which fascinate us all",
-      author:"Gail Dixon & Paul Parsons",
-      publisher:"Quercus Publishing",
+      author: "Gail Dixon & Paul Parsons",
+      publisher: "Quercus Publishing",
       SKU: 9781784296148,
       priceCents: 78000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 37,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9781786344205.jpg",
-      altImage:"Scientist and the Forger",  
-      categori: "E-Science & Technology",
+      altImage: "Scientist and the Forger",
+      categori: "Science-Technology",
       BookName: "Scientist and the Forger",
       desc: "(2018) There is a richness in details from a selection of cases, and the author is a good story?teller. The book has an important educational role in the professional authentication of art the book includes a discussion of the most pressing problems today and indicates a possible future development. ? Prof Bengt Norden, Royal Swedish Academy of Sciences. This is a book that explores both chemistry and chicanery, the pleasures and pitfalls of collecting, and perhaps most interestingly, the psychology of lying, self-deception, and discovery… Whatever the reader’s involvement or perspective on recent events and controversies, the stories recounted here so artfully, along with the scientific techniques explained with such clarity and care, together make for a terrific read. – Professor Robert Switzer, The American University in Cairo",
-      author:"Jehane Ragai",
-      publisher:"World Scientific Europe",
+      author: "Jehane Ragai",
+      publisher: "World Scientific Europe",
       SKU: 9781786344205,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 38,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/11/9780143127536.jpg",
-      altImage:"How Not to Be Wrong",  
-      categori: "E-Science & Technology",
+      altImage: "How Not to Be Wrong",
+      categori: "Science-Technology",
       BookName: "How Not to Be Wrong",
       desc: "(2015) The maths we learn in school can seem like an abstract set of rules, laid down by the ancients and not to be questioned. In fact, Jordan Ellenberg shows us, maths touches on everything we do, and a little mathematical knowledge reveals the hidden structures that lie beneath the world’s messy and chaotic surface. In How Not to be Wrong, Ellenberg explores the mathematician’s method of analyzing life, from the everyday to the cosmic, showing us which numbers to defend, which ones to ignore, and when to change the equation entirely. Along the way, he explains calculus in a single page, describes Gِdel’s theorem using only one-syllable words, and reveals how early you actually need to get to the airport.",
-      author:"Jordan Ellenberg",
-      publisher:"Penguin USA",
+      author: "Jordan Ellenberg",
+      publisher: "Penguin USA",
       SKU: 9780143127536,
       priceCents: 72500,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 39,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/10/9781848549562.jpg",
-      altImage:"What If",  
-      categori: "E-Science & Technology",
+      altImage: "What If",
+      categori: "Science-Technology",
       BookName: "What If",
       desc: "(2018) From the creator of the wildly popular xkcd.com, hilarious and informative answers to important questions you probably never thought to ask. Millions visit xkcd.com each week to read Randall Munroe’s iconic webcomic. Fans ask him a lot of strange questions: How fast can you hit a speed bump, driving, and live? When (if ever) did the sun go down on the British Empire? When will Facebook contain more profiles of dead people than living? How many humans would a T Rex rampaging through New York need to eat a day?",
-      author:"Randall Munroe",
-      publisher:"John Murray",
+      author: "Randall Munroe",
+      publisher: "John Murray",
       SKU: 9781848549562,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 40,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/03/9789779071091.jpg",
-      altImage:"Virtual Smart Codes",  
-      categori: "E-Science & Technology",
+      altImage: "Virtual Smart Codes",
+      categori: "Science-Technology",
       BookName: "Virtual Smart Codes",
       desc: "Virtual Smart codes is a simplified and user-friendly overview of a complex relationship between modern technology and how we interact with it. Inspired by social observations and legal principles, it questions the sustainability of its ethical and regulatory foundations.",
-      author:"Ziad El Hefnawy",
-      publisher:"Self-Publishing",
+      author: "Ziad El Hefnawy",
+      publisher: "Self-Publishing",
       SKU: 9789779071091,
       priceCents: 10000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 41,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9782724709216.jpg",
-      altImage:"Costumes of Egypt: The Lost Legacies, I",  
-      categori: "E-Fashion",
+      altImage: "Costumes of Egypt: The Lost Legacies, I",
+      categori: "Fashion",
       BookName: "Costumes of Egypt: The Lost Legacies, I",
       desc: "Costumes of Egypt: The Lost legacies sums up decades of Shahira Mehrez’s research: it is a four-volume work recording and tracing the origin of hitherto undocumented ways of dressing and jewelry of Egyptian women, most of which have today become obsolete. The costumes surveyed in this first volume establish the fact that irrespective of distant geographic locations, beyond religious and ethnic diversity, and throughout thousands of years of history and successive civilizations, Nubians, Nile Valley peasants, Bedouins and oasis dwellers, both Christian and Muslim, were heirs to the same legacy. Old and new emblems were melted into one tradition, defining a multifaceted but harmonious Egyptian identity.This tradition provides undeniable and tangible proof of the unity of the country and bears witness to the fact that throughout history these various communities were the different parts of a multicultural and pluralistic nation.",
-      author:"Shahira Mehrez",
-      publisher:"Institut Francais D'Archeologi",
+      author: "Shahira Mehrez",
+      publisher: "Institut Francais D'Archeologi",
       SKU: 9782724709216,
       priceCents: 241900,
       inStock: 10,
@@ -587,124 +620,132 @@ if(!bookscard)
       id: 42,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9798888140338.jpg",
-      altImage:"Fashion Upcycling: The DIY Guide to Sewing, Mending, and Sus",  
-      categori: "E-Fashion",
+      altImage: "Fashion Upcycling: The DIY Guide to Sewing, Mending, and Sus",
+      categori: "Fashion",
       BookName: "Fashion Upcycling: The DIY Guide to Sewing, Mending, and Sus",
       desc: "description",
-      author:"Ysabel Hilado",
-      publisher:"Rocky Nook",
+      author: "Ysabel Hilado",
+      publisher: "Rocky Nook",
       SKU: 9798888140338,
       priceCents: 135000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 43,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781510713499.jpg",
-      altImage:"The Capsule Wardrobe: 1,000 Outfits from 30 Pieces",  
-      categori: "E-Fashion",
+      altImage: "The Capsule Wardrobe: 1,000 Outfits from 30 Pieces",
+      categori: "Fashion",
       BookName: "The Capsule Wardrobe: 1,000 Outfits from 30 Pieces",
       desc: "N/A",
-      author:"Wendy Mak",
-      publisher:"Skyhorse Publishing",
+      author: "Wendy Mak",
+      publisher: "Skyhorse Publishing",
       SKU: 9781510713499,
       priceCents: 100000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 44,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847868544.jpg",
-      altImage:"Jewels That Made History: 101 Stones, Myths, and Legends",  
-      categori: "E-Fashion",
+      altImage: "Jewels That Made History: 101 Stones, Myths, and Legends",
+      categori: "Fashion",
       BookName: "Jewels That Made History: 101 Stones, Myths, and Legends",
       desc: "N/A",
-      author:"Stellene Volandes",
-      publisher:"Rizzoli",
+      author: "Stellene Volandes",
+      publisher: "Rizzoli",
       SKU: 9780847868544,
       priceCents: 225000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 45,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847864089.jpg",
-      altImage:"The Style of Movement: Fashion & Dance",  
-      categori: "E-Fashion",
+      altImage: "The Style of Movement: Fashion & Dance",
+      categori: "Fashion",
       BookName: "The Style of Movement: Fashion & Dance",
       desc: "N/A",
-      author:"Ken Browar",
-      publisher:"Rizzoli",
+      author: "Ken Browar",
+      publisher: "Rizzoli",
       SKU: 9780847864089,
       priceCents: 425000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 46,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847846078.jpg",
-      altImage:"Versace",  
-      categori: "E-Fashion",
+      altImage: "Versace",
+      categori: "Fashion",
       BookName: "Versace",
       desc: "description",
-      author:"Donatella Versace",
-      publisher:"Rizzoli",
+      author: "Donatella Versace",
+      publisher: "Rizzoli",
       SKU: 9780847846078,
       priceCents: 500000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 47,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847843497.jpg",
-      altImage:"Halston: Inventing American Fashion",  
-      categori: "E-Fashion",
+      altImage: "Halston: Inventing American Fashion",
+      categori: "Fashion",
       BookName: "Halston: Inventing American Fashion",
       desc: "N/A",
-      author:"Lesley Frowick",
-      publisher:"Rizzoli",
+      author: "Lesley Frowick",
+      publisher: "Rizzoli",
       SKU: 9780847843497,
       priceCents: 375000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 48,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847841851.jpg",
-      altImage:"Dior Glamour (1952-1962)",  
-      categori: "E-Fashion",
+      altImage: "Dior Glamour (1952-1962)",
+      categori: "Fashion",
       BookName: "Dior Glamour (1952-1962)",
       desc: "N/A",
-      author:"Natasha Fraser-Cavassoni",
-      publisher:"Rizzoli",
+      author: "Natasha Fraser-Cavassoni",
+      publisher: "Rizzoli",
       SKU: 9780847841851,
       priceCents: 625000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 49,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847838028.jpg",
-      altImage:"Dior: Couture",  
-      categori: "E-Fashion",
+      altImage: "Dior: Couture",
+      categori: "Fashion",
       BookName: "Dior: Couture",
       desc: "N/A",
-      author:"Patrick Demarchelier",
-      publisher:"Rizzoli",
+      author: "Patrick Demarchelier",
+      publisher: "Rizzoli",
       SKU: 9780847838028,
       priceCents: 625000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 50,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847831722.jpg",
-      altImage:"Valentino: Themes and Variations",  
-      categori: "E-Fashion",
+      altImage: "Valentino: Themes and Variations",
+      categori: "Fashion",
       BookName: "Valentino: Themes and Variations",
       desc: "N/A",
-      author:"Pamela Golbin",
-      publisher:"Rizzoli",
+      author: "Pamela Golbin",
+      publisher: "Rizzoli",
       SKU: 9780847831722,
       priceCents: 400000,
       inStock: 10,
@@ -714,698 +755,747 @@ if(!bookscard)
       id: 50,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9780847831722.jpg",
-      altImage:"Valentino: Themes and Variations",  
-      categori: "E-Fashion",
+      altImage: "Valentino: Themes and Variations",
+      categori: "Fashion",
       BookName: "Valentino: Themes and Variations",
       desc: "N/A",
-      author:"Pamela Golbin",
-      publisher:"Rizzoli",
+      author: "Pamela Golbin",
+      publisher: "Rizzoli",
       SKU: 9780847831722,
       priceCents: 400000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 51,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781982179670.jpg",
-      altImage:"CEO Excellence: The Six Mindsets That Distinguish the Best L",  
+      altImage: "CEO Excellence: The Six Mindsets That Distinguish the Best L",
       categori: "Business",
       BookName: "CEO Excellence: The Six Mindsets That Distinguish the Best L",
       desc: "N/A",
-      author:" Carolyn Dewar",
-      publisher:"Scribner",
+      author: " Carolyn Dewar",
+      publisher: "Scribner",
       SKU: 9781982179670,
       priceCents: 150000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 52,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781647826017.jpg",
-      altImage:"The Year in Tech, 2024: The Insights You Need from Harvard B",  
+      altImage: "The Year in Tech, 2024: The Insights You Need from Harvard B",
       categori: "Business",
       BookName: "The Year in Tech, 2024: The Insights You Need from Harvard B",
       desc: "N/A",
-      author:"Harvard Business Review Press",
-      publisher:"Harvard Business Review Press",
+      author: "Harvard Business Review Press",
+      publisher: "Harvard Business Review Press",
       SKU: 9781647826017,
       priceCents: 115000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 53,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781647825966.jpg",
-      altImage:"Supply Chain: The Insights You Need from Harvard Business Re",  
+      altImage: "Supply Chain: The Insights You Need from Harvard Business Re",
       categori: "Business",
       BookName: "Supply Chain: The Insights You Need from Harvard Business Re",
       desc: "N/A",
-      author:"Harvard Business Review Press",
-      publisher:"Harvard Business Review Press",
+      author: "Harvard Business Review Press",
+      publisher: "Harvard Business Review Press",
       SKU: 9781647825966,
       priceCents: 115000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 54,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781647825843.jpg",
-      altImage:"HBR’s 10 Must Reads: on AI (with bonus article “How to Win w",  
+      altImage: "HBR’s 10 Must Reads: on AI (with bonus article “How to Win w",
       categori: "Business",
       BookName: "HBR’s 10 Must Reads: on AI (with bonus article “How to Win w",
       desc: "N/A",
-      author:"Harvard Business Review Press",
-      publisher:"Harvard Business Review Press",
+      author: "Harvard Business Review Press",
+      publisher: "Harvard Business Review Press",
       SKU: 9781647825843,
       priceCents: 125000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 55,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781647825782.jpg",
-      altImage:"HBR’s 10 Must Reads 2024: The Definitive Management Ideas of",  
+      altImage: "HBR’s 10 Must Reads 2024: The Definitive Management Ideas of",
       categori: "Business",
       BookName: "HBR’s 10 Must Reads 2024: The Definitive Management Ideas of",
       desc: "N/A",
-      author:"Harvard Business Review Press",
-      publisher:"Harvard Business Review Press",
+      author: "Harvard Business Review Press",
+      publisher: "Harvard Business Review Press",
       SKU: 9781647825782,
       priceCents: 125000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 56,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781642011586.jpg",
-      altImage:"Entrepreneur: Write Your Business Plan: A Step-By-Step Guide",  
+      altImage: "Entrepreneur: Write Your Business Plan: A Step-By-Step Guide",
       categori: "Business",
       BookName: "Entrepreneur: Write Your Business Plan: A Step-By-Step Guide",
       desc: "N/A",
-      author:"Entrepreneur Press",
-      publisher:"Entrepreneur Press",
+      author: "Entrepreneur Press",
+      publisher: "Entrepreneur Press",
       SKU: 9781642011586,
       priceCents: 125000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 57,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781523002887.jpg",
-      altImage:"The Human Side of Innovation: The Power of People in Love wi",  
+      altImage: "The Human Side of Innovation: The Power of People in Love wi",
       categori: "Business",
       BookName: "The Human Side of Innovation: The Power of People in Love wi",
       desc: "N/A",
-      author:"Mauro Porcini",
-      publisher:"Berrett-Koehler Publishers",
+      author: "Mauro Porcini",
+      publisher: "Berrett-Koehler Publishers",
       SKU: 9781523002887,
       priceCents: 165000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 58,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781292441115.jpg",
-      altImage:"The Rules Series: The Rules of Wealth: A Personal Code for P",  
+      altImage: "The Rules Series: The Rules of Wealth: A Personal Code for P",
       categori: "Business",
       BookName: "The Rules Series: The Rules of Wealth: A Personal Code for P",
       desc: "N/A",
-      author:"Richard Templar",
-      publisher:"Pearson",
+      author: "Richard Templar",
+      publisher: "Pearson",
       SKU: 9781292441115,
       priceCents: 86500,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 59,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9781292435763.jpg",
-      altImage:"The Rules of Management: A definitive code for managerial su",  
+      altImage: "The Rules of Management: A definitive code for managerial su",
       categori: "Business",
       BookName: "The Rules of Management: A definitive code for managerial su",
       desc: "N/A",
-      author:"Richard Templar",
-      publisher:"Pearson",
+      author: "Richard Templar",
+      publisher: "Pearson",
       SKU: 9781292435763,
       priceCents: 90000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 60,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9781529146516.jpg",
-      altImage:"The Diary of a CEO: The 33 Laws of Business and Life",  
+      altImage: "The Diary of a CEO: The 33 Laws of Business and Life",
       categori: "Business",
       BookName: "The Diary of a CEO: The 33 Laws of Business and Life",
       desc: "N/A",
-      author:"N/A",
-      publisher:"Penguin UK",
+      author: "N/A",
+      publisher: "Penguin UK",
       SKU: 9781529146516,
       priceCents: 87000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 61,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9781409376415.jpg",
-      altImage:"The Economics Book: Big Ideas Simply Explained",  
+      altImage: "The Economics Book: Big Ideas Simply Explained",
       categori: "Economics",
       BookName: "The Economics Book: Big Ideas Simply Explained",
       desc: "N/A",
-      author:"N/A",
-      publisher:"DK",
+      author: "N/A",
+      publisher: "DK",
       SKU: 9781409376415,
       priceCents: 116000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 62,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9781398525627.jpg",
-      altImage:"Permacrisis: A Plan to Fix a Fractured World",  
+      altImage: "Permacrisis: A Plan to Fix a Fractured World",
       categori: "Economics",
       BookName: "Permacrisis: A Plan to Fix a Fractured World",
       desc: "N/A",
-      author:"N/A",
-      publisher:"Simon & Schuster UK",
+      author: "N/A",
+      publisher: "Simon & Schuster UK",
       SKU: 9781398525627,
       priceCents: 87000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 63,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9780593238714.jpg",
-      altImage:"It’s OK to Be Angry About Capi",  
+      altImage: "It’s OK to Be Angry About Capi",
       categori: "Economics",
       BookName: "It’s OK to Be Angry About Capi",
       desc: "NEW YORK TIMES BESTSELLER • A progressive takedown of the uber-capitalist status quo that has enriched millionaires and billionaires at the expense of the working class, and a blueprint for what transformational change would actually look like. Sanders argues that unfettered capitalism is to blame for an unprecedented level of income and wealth inequality, is undermining our democracy, and is destroying our planet. How can we accept an economic order that allows three billionaires to control more wealth than the bottom half of our society? How can we accept a political system that allows the super rich to buy elections and politicians? How can we accept an energy system that rewards the fossil fuel corporations causing the climate crisis? Sanders believes that, in the face of these overwhelming challenges, the American people must ask tough questions about the systems that have failed us and demand fundamental economic and political change. This is where the path forward begins.",
-      author:"Bernie Sanders",
-      publisher:"Penguin Random House USA",
+      author: "Bernie Sanders",
+      publisher: "Penguin Random House USA",
       SKU: 9780593238714,
       priceCents: 100000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 64,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781529352566.jpg",
-      altImage:"The Deficit Myth",  
+      altImage: "The Deficit Myth",
       categori: "Economics",
       BookName: "The Deficit Myth",
       desc: "Supporting the economy, paying for healthcare, creating new jobs, preventing a climate apocalypse: how can we pay for it all? Leading economic thinker Stephanie Kelton, shows how misguided that question is, and how a radical new approach can maximise our potential as a society. Everything that we’ve been led to believe about deficits and the role of money and government spending is wrong. Rather than asking the self-defeating question of how to pay for the crucial improvements our society needs, Kelton guides us to ask: which deficits actually matter?",
-      author:"Stephanie Kelton",
-      publisher:"John Murray Press",
+      author: "Stephanie Kelton",
+      publisher: "John Murray Press",
       SKU: 9781529352566,
       priceCents: 78000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 65,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/06/9780008308384.jpg",
-      altImage:"Kleptopia",  
+      altImage: "Kleptopia",
       categori: "Economics",
       BookName: "Kleptopia",
       desc: "When you pick this book up, you won’t be able to put it down’ MISHA GLENNY, author of MCMAFIA Kleptopia follows the dirty money that is flooding the global economy, emboldening dictators, enriching oligarchs and poisoning democracies. From the Kremlin to Beijing, Harare to Riyadh, London to the Trump White House, it shows how the thieves are uniting – and the terrible human cost.",
-      author:"Tom Burgis",
-      publisher:"Harper Collins UK",
+      author: "Tom Burgis",
+      publisher: "Harper Collins UK",
       SKU: 9780008308384,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 66,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/02/9781982160272.jpg",
-      altImage:"Principles for Dealing with",  
+      altImage: "Principles for Dealing with",
       categori: "Economics",
       BookName: "Principles for Dealing with",
       desc: "A few years ago, Ray Dalio noticed a confluence of political and economic conditions he hadn’t encountered before. They included huge debts and zero or near-zero interest rates that led to massive printing of money in the world’s three major reserve currencies; big political and social conflicts within countries, especially the US, due to the largest wealth, political, and values disparities in more than 100 years; and the rising of a world power (China) to challenge the existing world power (US) and the existing world order. The last time that this confluence occurred was between 1930 and 1945. This realization sent Dalio on a search for the repeating patterns and cause/effect relationships underlying all major changes in wealth and power over the last 500 years.",
-      author:"Ray Dalio",
-      publisher:"Simon & Schuster UK",
+      author: "Ray Dalio",
+      publisher: "Simon & Schuster UK",
       SKU: 9781982160272,
       priceCents: 175000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 67,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/12/9781847941749.jpg",
-      altImage:"Gigged",  
+      altImage: "Gigged",
       categori: "Economics",
       BookName: "Gigged",
       desc: "GIGGED goes inside the Silicon Valley companies leading the way to this emerging ‘gig economy’. It tells the stories of the workers – from computer programmers to online comment moderators – who are getting by in a new wave of precarious, short-term employment. And it sketches out what tomorrow’s economy might look like: one where the fortunate get to work when they want, how they want, while the rest live lives of extraordinary hardship.",
-      author:"Sarah Kessler",
-      publisher:"Random House UK",
+      author: "Sarah Kessler",
+      publisher: "Random House UK",
       SKU: 9781847941749,
       priceCents: 60000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 68,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/10/9781847941398-1.jpg",
-      altImage:"Doughnut Economics",  
+      altImage: "Doughnut Economics",
       categori: "Economics",
       BookName: "Doughnut Economics",
       desc: "In Doughnut Economics, Oxford academic Kate Raworth identifies the seven critical ways in which mainstream economics has led us astray – from selling us the myth of ‘rational economic man’ to obsessing over growth at all costs – and offers instead an alternative roadmap for bringing humanity into a sweet spot that meets the needs of all within the means of the planet. Ambitious, radical and thoughtful, she offers a new, cutting-edge economic model fit for the challenges of the 21st century.",
-      author:"Kate Raworth",
-      publisher:"Random House UK",
+      author: "Kate Raworth",
+      publisher: "Random House UK",
       SKU: 9781847941398,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 69,
       image:
         "https://diwanegypt.com/wp-content/uploads/2020/08/9780061956270.jpg",
-      altImage:"Freakonomics",  
+      altImage: "Freakonomics",
       categori: "Economics",
       BookName: "Freakonomics",
       desc: "Cult bestseller, new buzz word… Freakonomics is at the heart of everything we see and do and the subjects that bedevil us daily: from parenting to crime, sport to politics, fat to cheating, fear to traffic jams. Asking provocative and profound questions about human motivation and contemporary living and reaching some astonishing conclusions, Freakonomics will make you see the familiar world through a completely original lens.",
-      author:"Steven D. Levitt & Stephen J.",
-      publisher:"Harper Collins USA",
+      author: "Steven D. Levitt & Stephen J.",
+      publisher: "Harper Collins USA",
       SKU: 9780061956270,
       priceCents: 45000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 70,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9780141995151-scaled.jpg",
-      altImage:"The Warmth of Other Suns",  
-      categori: "History & Politics",
+      altImage: "The Warmth of Other Suns",
+      categori: "History-Politics",
       BookName: "The Warmth of Other Suns",
       desc: "Based on interviews with more than a thousand people, and access to new data and official records, The Warmth of Other Suns tells the story of America’s Great Migration through the lives of three unique individuals: Ida Mae Gladney, who in 1937 left sharecropping and prejudice in Mississippi for Chicago, where she achieved quiet blue-collar success and, in old age, voted for Barack Obama when he ran for an Illinois Senate seat; sharp and quick-tempered George Starling, who in 1945 fled Florida for Harlem, where he endangered his job fighting for civil rights, saw his family fall, and finally found peace in God; and Robert Foster, who left Louisiana in 1953 to pursue a medical career, the personal physician to Ray Charles as part of a glitteringly successful medical career.",
-      author:"Isabel Wilkerson",
-      publisher:"Penguin UK",
+      author: "Isabel Wilkerson",
+      publisher: "Penguin UK",
       SKU: 9780141995151,
       priceCents: 90000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 71,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/06/9780593236314.jpg",
-      altImage:"Renegades",  
-      categori: "History & Politics",
+      altImage: "Renegades",
+      categori: "History-Politics",
       BookName: "Renegades",
       desc: "Renegades: Born in the USA is a candid, revealing, and entertaining dialogue between President Barack Obama and legendary musician Bruce Springsteen that explores everything from their origin stories and career-defining moments to our country’s polarized politics and the growing distance between the American Dream and the American reality. Filled with full-color photographs and rare archival material, it is a compelling and beautifully illustrated portrait of two outsiders—one Black and one white—looking for a way to connect their unconventional searches for meaning, identity, and community with the American story itself.",
-      author:"Barack Obama",
-      publisher:"Random House Usa",
+      author: "Barack Obama",
+      publisher: "Random House Usa",
       SKU: 9780593236314,
       priceCents: 240000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 72,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9781471837685.jpg",
-      altImage:"History for Edexcel A Level",  
-      categori: "History & Politics",
+      altImage: "History for Edexcel A Level",
+      categori: "History-Politics",
       BookName: "History for Edexcel A Level",
       desc: "Enable your students to develop high-level skills in their Edexcel A level History breadth and depth studies through expert narrative and extended reading, including bespoke essays from leading academics ",
-      author:"Nick Shepley & Vivienne Sander",
-      publisher:"Hodder & Stoughton",
+      author: "Nick Shepley & Vivienne Sander",
+      publisher: "Hodder & Stoughton",
       SKU: 9781471837685,
       priceCents: 130500,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 73,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/10/9780679763888.jpg",
-      altImage:"Warmth of Other Suns",  
-      categori: "History & Politics",
+      altImage: "Warmth of Other Suns",
+      categori: "History-Politics",
       BookName: "Warmth of Other Suns",
       desc: "(2011) NEW YORK TIMES BESTSELLER – In this beautifully written masterwork, the Pulitzer Prize-winning author chronicles one of the great untold stories of American history: the decades-long migration of black citizens who fled the South for northern and western cities, in search of a better life. NATIONAL BOOK CRITICS CIRCLE AWARD WINNER",
-      author:"Isabel Wilkerson",
-      publisher:"Random House US",
+      author: "Isabel Wilkerson",
+      publisher: "Random House US",
       SKU: 9780679763888,
       priceCents: 90000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 74,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/10/9780063060395.jpg",
-      altImage:"FBI Way",  
-      categori: "History & Politics",
+      altImage: "FBI Way",
+      categori: "History-Politics",
       BookName: "FBI Way",
       desc: "N/A",
-      author:"Frank Figliuzzi",
-      publisher:"Harper Collins USA",
+      author: "Frank Figliuzzi",
+      publisher: "Harper Collins USA",
       SKU: 9780063060395,
       priceCents: 95000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 75,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/07/9780306824852.jpg",
-      altImage:"Roots The Saga of an American",  
-      categori: "History & Politics",
+      altImage: "Roots The Saga of an American",
+      categori: "History-Politics",
       BookName: "Roots The Saga of an American",
       desc: "(2016) A new eight-hour event series based on Roots will be simulcast on the History Channel, Lifetime, and A&E over four consecutive nights beginning Memorial Day, May 30, 2016″Early in the spring of 1750, in the village of Juffure, four days upriver from the coast of The Gambia, West Africa, a man-child was born to Omoro and Binta Kinte.”So begins Roots , one of the most extraordinary and influential books of our time. Through the story of one family, his family,Alex Haley unforgettably brings to life the monumental two-century drama of Kunta Kinte and the six generations who came after him: slaves and freedmen, farmers and blacksmiths, lumber mill workmen and Pullman porters, lawyers and architects…and one author.A national and international phenomenon at the time of its original publication, Roots continues to enthrall readers with its masterful narrative drive and exceptional emotional power, speaking to us all with an undiminished resonance and relevance.”In all of us there is a hunger, marrow deep, to know our heritage…. Without this enriching knowledge, there is a hollow yearning no matter what our attainments in life.",
-      author:"Alex Haley",
-      publisher:"Hachette Book Group",
+      author: "Alex Haley",
+      publisher: "Hachette Book Group",
       SKU: 9780306824852,
       priceCents: 95000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 76,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/01/9781408711392.jpg",
-      altImage:"Fire and Fury",  
-      categori: "History & Politics",
+      altImage: "Fire and Fury",
+      categori: "History-Politics",
       BookName: "Fire and Fury",
       desc: "(2018) The first nine months of Donald Trump’s term were stormy, outrageous – and absolutely mesmerising. Now, thanks to his deep access to the West Wing, bestselling author Michael Wolff tells the riveting story of how Trump launched a tenure as volatile and fiery as the man himself.",
-      author:"Michael Wolff",
-      publisher:"Little, Brown & Company",
+      author: "Michael Wolff",
+      publisher: "Little, Brown & Company",
       SKU: 9781408711392,
       priceCents: 71500,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 77,
       image:
         "https://diwanegypt.com/wp-content/uploads/2020/09/9781982148034.jpg",
-      altImage:"Room Where It Happened",  
-      categori: "History & Politics",
+      altImage: "Room Where It Happened",
+      categori: "History-Politics",
       BookName: "Room Where It Happened",
       desc: "2020) As President Trump’s National Security Advisor, John Bolton spent many of his 453 days in the room where it happened, and the facts speak for themselves. The result is a White House memoir that is the most comprehensive and substantial account of the Trump Administration, and one of the few to date by a top-level official. With almost daily access to the President, John Bolton has produced a precise rendering of his days in and around the Oval Office. What Bolton saw astonished him: a President for whom getting reelected was the only thing that mattered, even if it meant endangering or weakening the nation.",
-      author:"John Bolton",
-      publisher:"Simon & Schuster UK",
+      author: "John Bolton",
+      publisher: "Simon & Schuster UK",
       SKU: 9781982148034,
       priceCents: 150000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 78,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9780241641484.jpg",
-      altImage:"Battles that Changed History",  
-      categori: "World History",
+      altImage: "Battles that Changed History",
+      categori: "World-History",
       BookName: "Battles that Changed History",
       desc: "N/A",
-      author:"N/A",
-      publisher:"DK",
+      author: "N/A",
+      publisher: "DK",
       SKU: 9780241641484,
       priceCents: 145000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 79,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9781474615792.jpg",
-      altImage:"Making History",  
-      categori: "World History",
+      altImage: "Making History",
+      categori: "World-History",
       BookName: "Making History",
       desc: "Epic, authoritative and entertaining, Making History delves into the lives of those who have charted human history – professional historians, witnesses, novelists, journalists and propagandists – to discover the agendas that informed their world views, and which in so many ways have informed ours. From the origins of history-writing through to television and the digital age, Making History abounds in captivating figures brought to vivid life, from Thucydides and Tacitus to Voltaire and Gibbon, from Winston Churchill to Mary Beard. Rich in character, complex truths and surprising anecdotes, the result is a unique exploration of both the aims and craft of history-making that will lead us to think anew about our past and ourselves.",
-      author:"Richard Cohen",
-      publisher:"Hachette Uk Distribution",
+      author: "Richard Cohen",
+      publisher: "Hachette Uk Distribution",
       SKU: 9781474615792,
       priceCents: 99000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 80,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9781472297242.jpg",
-      altImage:"50 Codes that Changed the Worl",  
-      categori: "World History",
+      altImage: "50 Codes that Changed the Worl",
+      categori: "World-History",
       BookName: "50 Codes that Changed the Worl",
       desc: "In 50 Codes that Changed the World, Sinclair McKay explores these uncrackable codes, secret cyphers and hidden messages from across time to tell a new history of a secret world. From the temples of Ancient Greece to the court of Elizabeth I; from antique manuscripts whose codes might hold prophecies of doom to the modern realm of quantum mechanics, you will see how a few concealed words could help to win wars, spark revolutions and even change the faces of great nations.",
-      author:"Sinclair McKay",
-      publisher:"Hachette Uk Distribution",
+      author: "Sinclair McKay",
+      publisher: "Hachette Uk Distribution",
       SKU: 9781472297242,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 81,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9780753558263.jpg",
-      altImage:"Femina",  
-      categori: "World History",
+      altImage: "Femina",
+      categori: "World-History",
       BookName: "Femina",
       desc: "An instant bestseller and one of the most celebrated history books of the year, Femina reveals the power and influence of medieval women who have been written out of our history. From royalty and religion to fame and fury, see the medieval world – and the women erased from it – with fresh eyes.",
-      author:"Janina Ramirez",
-      publisher:"Random House UK",
+      author: "Janina Ramirez",
+      publisher: "Random House UK",
       SKU: 9780753558263,
       priceCents: 72000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 82,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9780141998374.jpg",
-      altImage:"The Bomber Mafia",  
-      categori: "World History",
+      altImage: "The Bomber Mafia",
+      categori: "World-History",
       BookName: "The Bomber Mafia",
       desc: "This book tells the story of what happened when that dream was put to the test. The Bomber Mafia follows the stories of a reclusive Dutch genius and his homemade computer, Winston Churchill’s forbidding best friend, a team of pyromaniacal chemists at Harvard, a brilliant pilot who sang vaudeville tunes to his crew, and the bomber commander, Curtis Emerson LeMay, who would order the bloodiest attack of the Second World War.",
-      author:"Malcolm Gladwell",
-      publisher:"Penguin UK",
+      author: "Malcolm Gladwell",
+      publisher: "Penguin UK",
       SKU: 9780141998374,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 83,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/06/9780143035183.jpg",
-      altImage:"The First World War",  
-      categori: "World History",
+      altImage: "The First World War",
+      categori: "World-History",
       BookName: "The First World War",
       desc: "Strachan has done a masterful job of reexamining the causes, the major campaigns, and the consequences of the First World War, compressing a lifetime of knowledge into a single definitive volume tailored for the general reader. Written in crisp, compelling prose and enlivened with extraordinarily vivid photographs and detailed maps, The First World War re-creates this world-altering conflict both on and off the battlefield—the clash of ideologies between the colonial powers at the center of the war, the social and economic unrest that swept Europe both before and after, the military strategies employed with stunning success and tragic failure in the various theaters of war, the terms of peace and why it didn’t last.",
-      author:"Hew Strachan",
-      publisher:"Random House Usa",
+      author: "Hew Strachan",
+      publisher: "Random House Usa",
       SKU: 9780143035183,
       priceCents: 105000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 84,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9780802715296.jpg",
-      altImage:"Longitude",  
-      categori: "World History",
+      altImage: "Longitude",
+      categori: "World-History",
       BookName: "Longitude",
       desc: "Anyone alive in the eighteenth century would have known that “the longitude problem” was the thorniest scientific dilemma of the day-and had been for centuries. Lacking the ability to measure their longitude, sailors throughout the great ages of exploration had been literally lost at sea as soon as they lost sight of land. Thousands of lives and the increasing fortunes of nations hung on a resolution. One man, John Harrison, in complete opposition to the scientific community, dared to imagine a mechanical solution-a clock that would keep precise time at sea, something no clock had ever been able to do on land.",
-      author:"Dava Sobel",
-      publisher:"Macmillan USA",
+      author: "Dava Sobel",
+      publisher: "Macmillan USA",
       SKU: 9780802715296,
       priceCents: 85000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 85,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781474622462-scaled.jpg",
-      altImage:"What Is History, Now?",  
-      categori: "World History",
+      altImage: "What Is History, Now?",
+      categori: "World-History",
       BookName: "What Is History, Now?",
       desc: "Inspired by the influential text WHAT IS HISTORY? authored by Helen Carr’s great-grandfather, E.H. Carr, and published on the 60th anniversary of that book, this is a groundbreaking new collection addressing the burning issue of how we interpret history today. What stories are told, and by whom, who should be celebrated, and what rewritten, are questions that have been asked recently not just within the history world, but by all of us. Featuring a diverse mix of writers, both bestselling names and emerging voices, this is the history book we need NOW.",
-      author:"Suzannah Lipscomb and Helen Ca",
-      publisher:"Orion Publ. Grp",
+      author: "Suzannah Lipscomb and Helen Ca",
+      publisher: "Orion Publ. Grp",
       SKU: 9781474622462,
       priceCents: 90000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 86,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781473658226.jpg",
-      altImage:"The Craft",  
-      categori: "World History",
+      altImage: "The Craft",
+      categori: "World-History",
       BookName: "The Craft",
       desc: "Professor Dickie’s The Craft is a surprising and enthralling exploration of a movement that not only helped to forge modern society, but still has substantial contemporary influence. With 400,000 members in Britain, over a million in the USA, and around six million across the world, understanding the role of Freemasonry is as important now as it has ever been.",
-      author:"John Dickie",
-      publisher:"Hodder and Stoughton",
+      author: "John Dickie",
+      publisher: "Hodder and Stoughton",
       SKU: 9781473658226,
       priceCents: 66000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 87,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781541675643.jpg",
-      altImage:"The Gates Of Europe",  
-      categori: "World History",
+      altImage: "The Gates Of Europe",
+      categori: "World-History",
       BookName: "The Gates Of Europe",
       desc: "As Ukraine is embroiled in an ongoing struggle with Russia to preserve its territorial integrity and political independence, celebrated historian Serhii Plokhy explains that today’s crisis is a case of history repeating itself: the Ukrainian conflict is only the latest in a long history of turmoil over Ukraine’s sovereignty. Situated between Central Europe, Russia, and the Middle East, Ukraine has been shaped by empires that exploited the nation as a strategic gateway between East and West—from the Romans and Ottomans to the Third Reich and the Soviet Union. In The Gates of Europe, Plokhy examines Ukraine’s search for its identity through the lives of major Ukrainian historical figures, from its heroes to its conquerors.",
-      author:"Robin Roberts",
-      publisher:"Hachette Book Group",
+      author: "Robin Roberts",
+      publisher: "Hachette Book Group",
       SKU: 9781541675643,
       priceCents: 100000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 88,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/07/9781439170915.jpg",
-      altImage:"Emperor Of All Maladies",  
-      categori: "World History",
+      altImage: "Emperor Of All Maladies",
+      categori: "World-History",
       BookName: "Emperor Of All Maladies",
       desc: "The story of cancer is a story of human ingenuity, resilience, and perseverance, but also of hubris, paternalism, and misperception. Mukherjee recounts centuries of discoveries, setbacks, victories, and deaths, told through the eyes of his predecessors and peers, training their wits against an infinitely resourceful adversary that, just three decades ago, was thought to be easily vanquished in an all-out “war against cancer.” The book reads like a literary thriller with cancer as the protagonist.",
-      author:"Siddhartha Mukherjee",
-      publisher:"Simon & Schuster Usa",
+      author: "Siddhartha Mukherjee",
+      publisher: "Simon & Schuster Usa",
       SKU: 9781439170915,
       priceCents: 100000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 89,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/03/9781408839997.jpg",
-      altImage:"Silk Roads",  
-      categori: "World History",
+      altImage: "Silk Roads",
+      categori: "World-History",
       BookName: "Silk Roads",
       desc: "(2016) The sun is setting on the Western world. Slowly but surely, the direction in which the world spins has reversed: where for the last five centuries the globe turned westwards on its axis, it now turns to the east…For centuries, fame and fortune was to be found in the west – in the New World of the Americas. Today, it is the east which calls out to those in search of adventure and riches. The region stretching from eastern Europe and sweeping right across Central Asia deep into China and India, is taking centre stage in international politics, commerce and culture – and is shaping the modern world. This region, the true centre of the earth, is obscure to many in the English-speaking world. Yet this is where civilization itself began, where the world’s great religions were born and took root. The Silk Roads were no exotic series of connections, but networks that linked continents and oceans together. Along them flowed ideas, goods, disease and death. This was where empires were won – and where they were lost. As a new era emerges, the patterns of exchange are mirroring those that have criss-crossed Asia for millennia. The Silk Roads are rising again. A major reassessment of world history, The Silk Roads is an important account of the forces that have shaped the global economy and the political renaissance in the re-emerging east.",
-      author:"Peter Frankopan",
-      publisher:"Bloomsbury Publishing PLC",
+      author: "Peter Frankopan",
+      publisher: "Bloomsbury Publishing PLC",
       SKU: 9781408839997,
       priceCents: 102000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 90,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/01/9781780225647.jpg",
-      altImage:"Second World War",  
-      categori: "World History",
+      altImage: "Second World War",
+      categori: "World-History",
       BookName: "Second World War",
       desc: "The Second World War began in August 1939 on the edge of Manchuria and ended there exactly six years later with the Soviet invasion of northern China. The war in Europe appeared completely divorced from the war in the Pacific and China, and yet events on opposite sides of the world had profound effects. Using the most up-to-date scholarship and research, Beevor assembles the whole picture in a gripping narrative that extends from the North Atlantic to the South Pacific and from the snowbound steppe to the North African Desert.",
-      author:"Antony Beevor",
-      publisher:"Orion",
+      author: "Antony Beevor",
+      publisher: "Orion",
       SKU: 9781780225647,
       priceCents: 90000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 91,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781566560757.jpg",
-      altImage:"Night in Gaza",  
-      categori: "Middle East History & Current Affairs",
+      altImage: "Night in Gaza",
+      categori: "Middle-East-History-Current-Affairs",
       BookName: "Night in Gaza",
       desc: "N/A",
-      author:"Mads Gilbert",
-      publisher:"Olive Branch Press",
+      author: "Mads Gilbert",
+      publisher: "Olive Branch Press",
       SKU: 9781566560757,
       priceCents: 125000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 92,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781250787651.jpg",
-      altImage:"The Hundred Years’ War on Palestine: A History of Settler Co",  
-      categori: "Middle East History & Current Affairs",
+      altImage: "The Hundred Years’ War on Palestine: A History of Settler Co",
+      categori: "Middle-East-History-Current-Affairs",
       BookName: "The Hundred Years’ War on Palestine: A History of Settler Co",
       desc: "N/A",
-      author:"Rashid Khalidi",
-      publisher:"Picador",
+      author: "Rashid Khalidi",
+      publisher: "Picador",
       SKU: 9781250787651,
       priceCents: 100000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 93,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9789774167478.jpg",
-      altImage:"Women in Revolutionary Egypt",  
-      categori: "Middle East History & Current Affairs",
+      altImage: "Women in Revolutionary Egypt",
+      categori: "Middle-East-History-Current-Affairs",
       BookName: "Women in Revolutionary Egypt",
       desc: "N/A",
-      author:"Shereen Abouelnaga",
-      publisher:"American University Press",
+      author: "Shereen Abouelnaga",
+      publisher: "American University Press",
       SKU: 9789774167478,
       priceCents: 40000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 94,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9789774166952.jpg",
-      altImage:"Occupied Lives:Maintaining Integrity in a Palestinian Refuge",  
-      categori: "Middle East History & Current Affairs",
+      altImage: "Occupied Lives:Maintaining Integrity in a Palestinian Refuge",
+      categori: "Middle-East-History-Current-Affairs",
       BookName: "Occupied Lives:Maintaining Integrity in a Palestinian Refuge",
       desc: "N/A",
-      author:"Nina Gren",
-      publisher:"Auc",
+      author: "Nina Gren",
+      publisher: "Auc",
       SKU: 9789774166952,
       priceCents: 40000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 95,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/05/9789774168260.jpg",
-      altImage:"Farewell Shiraz",  
-      categori: "Middle East History & Current Affairs",
+      altImage: "Farewell Shiraz",
+      categori: "Middle-East-History-Current-Affairs",
       BookName: "Farewell Shiraz",
       desc: "In October 1999 during a trip to Cairo, Cyrus Kadivar, an exiled Iranian living in London, visited the tomb of the last shah and opened a Pandora’s box. Haunted by nostalgia for a bygone era, he recalled a protected and idyllic childhood in the fabled city of Shiraz and his coming of age during the 1979 Iranian revolution. Back in London, he reflected on what had happened to him and his family after their uprooting and decided to conduct his own investigation into why he lost his country. He spent the next ten years seeking out witnesses who would shed light on the last days of Pahlavi rule. Among those he met were a former empress, ex-courtiers, disaffected revolutionaries, and the bereaved relatives of those who perished in the cataclysm. ",
-      author:"Cyrus Kadivar",
-      publisher:"American University Press",
+      author: "Cyrus Kadivar",
+      publisher: "American University Press",
       SKU: 9789774168260,
       priceCents: 60000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 96,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781623717469.jpg",
-      altImage:"Seeking Palestine: New Palestinian Writing on Exile and Home",  
-      categori: "Literary Essays",
+      altImage: "Seeking Palestine: New Palestinian Writing on Exile and Home",
+      categori: "Literary-Essays",
       BookName: "Seeking Palestine: New Palestinian Writing on Exile and Home",
       desc: "N/A",
-      author:"Penny Johnson",
-      publisher:"Olive Branch Press",
+      author: "Penny Johnson",
+      publisher: "Olive Branch Press",
       SKU: 9781623717469,
       priceCents: 90000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 97,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9780349119526.jpg",
-      altImage:"Consider The Lobster: And Other Essays",  
-      categori: "Literary Essays",
+      altImage: "Consider The Lobster: And Other Essays",
+      categori: "Literary-Essays",
       BookName: "Consider The Lobster: And Other Essays",
       desc: "N/A",
-      author:"N/A",
-      publisher:"Hachette Uk",
+      author: "N/A",
+      publisher: "Hachette Uk",
       SKU: 9780349119526,
       priceCents: 55000,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 98,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/11/9780141046754.jpg",
-      altImage:"Both Flesh and Not",  
-      categori: "Literary Essays",
+      altImage: "Both Flesh and Not",
+      categori: "Literary-Essays",
       BookName: "Both Flesh and Not",
       desc: "N/A",
-      author:"N/A",
-      publisher:"Penguin UK",
+      author: "N/A",
+      publisher: "Penguin UK",
       SKU: 9780141046754,
       priceCents: 59500,
       inStock: 10,
       sold: 0,
-    },{
+    },
+    {
       id: 99,
       image:
         "https://diwanegypt.com/wp-content/uploads/2022/11/9780451494641.jpg",
-      altImage:"Novelist as a Vocation",  
-      categori: "Literary Essays",
+      altImage: "Novelist as a Vocation",
+      categori: "Literary-Essays",
       BookName: "Novelist as a Vocation",
       desc: "Aspiring writers and readers who have long wondered where the mysterious novelist gets his ideas and what inspires his strangely surreal worlds will be fascinated by this engaging book from the internationally best-selling author. Haruki Murakami now shares with readers his thoughts on the role of the novel in our society; his own origins as a writer; and his musings on the sparks of creativity that inspire other writers, artists, and musicians.",
-      author:"Haruki Murakami",
-      publisher:"Random House US",
+      author: "Haruki Murakami",
+      publisher: "Random House US",
       SKU: 9780451494641,
       priceCents: 107500,
       inStock: 10,
@@ -1415,12 +1505,12 @@ if(!bookscard)
       id: 100,
       image:
         "https://diwanegypt.com/wp-content/uploads/2021/08/9781984856029.jpg",
-      altImage:"Swim in a Pond in the Rain",  
-      categori: "Literary Essays",
+      altImage: "Swim in a Pond in the Rain",
+      categori: "Literary-Essays",
       BookName: "Swim in a Pond in the Rain",
       desc: "For the last twenty years, George Saunders has been teaching a class on the Russian short story to his MFA students at Syracuse University. In A Swim in a Pond in the Rain, he shares a version of that class with us, offering some of what he and his students have discovered together over the years. Paired with iconic short stories by Chekhov, Turgenev, Tolstoy, and Gogol, the seven essays in this book are intended for anyone interested in how fiction works and why it’s more relevant than ever in these turbulent times.",
-      author:"George Saunders",
-      publisher:"Penguin Random House USA",
+      author: "George Saunders",
+      publisher: "Penguin Random House USA",
       SKU: 9781984856029,
       priceCents: 110000,
       inStock: 10,
@@ -1428,7 +1518,6 @@ if(!bookscard)
     },
   ];
 }
-
 
 export function saveBooksToStorage() {
   localStorage.setItem("books", JSON.stringify(bookscard));
@@ -1451,70 +1540,77 @@ export function deleteBookFromDatabase() {
   });
 }
 
-
-
 export function addInStockQuantity() {
   const button = document.querySelector(".js-add-quantity-button");
   button.addEventListener("click", () => {
     const bookid = document.querySelector(".js-book-id-add-to-stock").value;
     console.log(bookid);
-    const quantity=Number(document.querySelector(".js-add-quantity").value);
+    const quantity = Number(document.querySelector(".js-add-quantity").value);
     bookscard.forEach((book) => {
       if (bookid == book.id) {
-        book.inStock += quantity
+        book.inStock += quantity;
         saveBooksToStorage();
-        console.log(bookscard)
+        console.log(bookscard);
       }
     });
   });
 }
-
 
 export function reduceInStockQuantity() {
   const button = document.querySelector(".js-take-from-stock-button");
   button.addEventListener("click", () => {
     const bookid = document.querySelector(".js-book-id-take-from-stock").value;
     console.log(bookid);
-    const quantity=Number(document.querySelector(".js-reduce-quantity").value);
+    const quantity = Number(
+      document.querySelector(".js-reduce-quantity").value
+    );
     bookscard.forEach((book) => {
       if (bookid == book.id) {
-        book.inStock -= quantity
+        book.inStock -= quantity;
         saveBooksToStorage();
-        console.log(bookscard)
+        console.log(bookscard);
       }
     });
-  }); 
+  });
 }
 
-
-export function addBook()
-{
-  const newBook={};
-  const button=document.querySelector('.js-add-book-button')
-  button.addEventListener('click',()=> {
-    const bookid=Number(document.querySelector('.js-book-id-add-book').value)
-    const bookImage=document.querySelector('.js-image-path-add-book').value
-    const altImage=document.querySelector('.js-alt-image-add-book').value
-    const bookCategory=document.querySelector('.js-book-category-add-book').value
-    const bookName=document.querySelector('.js-book-name-add-book').value
-    const bookDescribtion=document.querySelector('.js-book-describtion-add-book').value
-    const bookAthor=document.querySelector('.js-athor-add-book').value
-    const bookPublischer=document.querySelector('.js-publisher-add-book').value
-    const bookPrice=Number(document.querySelector('.js-price-add-book').value)
-    const inStock=Number(document.querySelector('.js-in-stock-add-book').value)
-    newBook.id=bookid
-    newBook.image=bookImage
-    newBook.altImage=altImage
-    newBook.categori=bookCategory
-    newBook.BookName=bookName
-    newBook.desc=bookDescribtion
-    newBook.author=bookAthor
-    newBook.publisher=bookPublischer
-    newBook.priceCents=bookPrice
-    newBook.inStock=inStock
-    newBook.sold=0
-    bookscard.push(newBook)
+export function addBook() {
+  const newBook = {};
+  const button = document.querySelector(".js-add-book-button");
+  button.addEventListener("click", () => {
+    const bookid = Number(document.querySelector(".js-book-id-add-book").value);
+    const bookImage = document.querySelector(".js-image-path-add-book").value;
+    const altImage = document.querySelector(".js-alt-image-add-book").value;
+    const bookCategory = document.querySelector(
+      ".js-book-category-add-book"
+    ).value;
+    const bookName = document.querySelector(".js-book-name-add-book").value;
+    const bookDescribtion = document.querySelector(
+      ".js-book-describtion-add-book"
+    ).value;
+    const bookAthor = document.querySelector(".js-athor-add-book").value;
+    const bookPublischer = document.querySelector(
+      ".js-publisher-add-book"
+    ).value;
+    const bookPrice = Number(
+      document.querySelector(".js-price-add-book").value
+    );
+    const inStock = Number(
+      document.querySelector(".js-in-stock-add-book").value
+    );
+    newBook.id = bookid;
+    newBook.image = bookImage;
+    newBook.altImage = altImage;
+    newBook.categori = bookCategory;
+    newBook.BookName = bookName;
+    newBook.desc = bookDescribtion;
+    newBook.author = bookAthor;
+    newBook.publisher = bookPublischer;
+    newBook.priceCents = bookPrice;
+    newBook.inStock = inStock;
+    newBook.sold = 0;
+    bookscard.push(newBook);
     saveBooksToStorage();
-    console.log(bookscard)
-  })
+    console.log(bookscard);
+  });
 }

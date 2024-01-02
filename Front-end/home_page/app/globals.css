@@ -167,7 +167,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply bottom-0 py-4 mt-0 shadowboxfooter bg-white w-full gap-x-20 border-t border-border-color;
+  @apply bottom-0 py-4 mt-0 shadowboxfooter bg-white w-full gap-x-20 border-t border-border-color text-center;
 }
 
 .footer_copyright {
@@ -284,6 +284,13 @@ body {
   transform: scale(1.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease; /* Updated transition speed */
+}
+
+.about-us-text {
+  @apply text-center;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
 }
 
 .contactus {
@@ -466,3 +473,47 @@ body {
 .product-info {
   margin-top: auto;
 }
+
+
+/* Search Page */
+.searchContainer {
+  display: flex;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  height: 500px;
+  width: 1200px;
+}
+
+.searchImage-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.searchImage-container img {
+  max-width: 100%;
+  height: 250px; /* Maintain aspect ratio */
+  display: block;
+  border-radius: 15px;
+}
+
+.searchContent-container {
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+
+.searchBook-description {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.searchQuantity-container {
+  display: flex;
+  align-items: center;
+  @apply gap-80;
+}
+
+

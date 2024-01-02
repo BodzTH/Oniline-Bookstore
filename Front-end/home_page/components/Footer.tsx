@@ -2,9 +2,8 @@
 
 function Footer() {
   return (
-    <footer className="flexStart footer mt-20 "> footer
-
-
+    <footer className="footer mt-20">
+      Thank you for visiting our online bookstore
     </footer>
   )
 }

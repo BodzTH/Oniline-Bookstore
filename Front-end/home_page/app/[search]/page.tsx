@@ -28,10 +28,12 @@ function SearchFound() {
   return (
     <div>
       <span className=" text-5xl"><h1>Search Found: {query.length}</h1></span>
-
-      {query.map((book: Book, index: number) => (
+      <div >
+        {query.map((book: Book, index: number) => (
         <BookItem key={index} book_description={book.desc} image={book.image} price={book.priceCents} book_type={book.categori} alt_image={book.altImage} book_name={book.BookName} author={book.author} publisher={book.publisher} sku={book.SKU} />
       ))}
+      </div>
+      
 
     </div>
   );

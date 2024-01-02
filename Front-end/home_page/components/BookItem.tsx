@@ -3,23 +3,41 @@ import { BookItemProbs } from "@/common.types"
 import { priceFormating } from "@/cartstore/cartstore"
 
 {/* Book found box */ }
-function BookItem({ book_name,book_description, image, price, book_type, alt_image,sku }: BookItemProbs) {
+function BookItem({ book_name, book_description, image, price, book_type, alt_image, sku }: BookItemProbs) {
 
   return (
-    <div>
-      {/* Book found box */}
-      <div>
-        {/* Book found content */}
-        <section className="">
-          <h1>{book_name}</h1>
-          <h2>{book_type}</h2>
-          <h2>{priceFormating(price)}EGP</h2>
-          <h4>{book_description}</h4>
-          <h3>{sku}</h3>
+    <div  >
+      {/* Book item section */}
+      <div className="searchContainer">
+        {/* Book image */}
+        <div className="searchImage-container" >
+
+          <Image src={image} alt={alt_image} width={200} height={200} />
+
+        </div>
+        {/* Book content */}
+        <div className="searchContent-container">
+          {/* bookname */}
           <div>
-            <Image src={image} alt={alt_image} width={333} height={33} />
+            <h1>{book_name}</h1>
           </div>
-        </section>
+
+          {/* description */}
+          <div className="searchBook-description">
+            {book_description}
+          </div>
+          <div className="quantity-container">
+
+            <div>
+              {priceFormating(price)}EGP
+            </div>
+            <div>
+              {book_type}
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </div>
   )
