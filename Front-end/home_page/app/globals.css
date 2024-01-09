@@ -307,7 +307,7 @@ body {
 }
 
 .verticalCategoryLine {
-  @apply left-0 border-x-0 border-r  border-border-color ml-40 mr-0;
+  @apply left-0 border-x-0 border-r  border-border-color ml-10 mr-0;
   height: 500px;
   border: 2px solid #000000;
 }
@@ -526,3 +526,7 @@ body {
 }
 
 
+.catlinks{
+  display: block !important;
+  min-width: 200px;
+}

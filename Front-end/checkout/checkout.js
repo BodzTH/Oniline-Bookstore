@@ -139,8 +139,7 @@ function setOrder()
         newOrder.items=cart;
         newOrder.status='orderd'
         newOrder.id=getId(10,orders)
-        orders.push(newOrder)
-        localStorage.removeItem('orders')        
+        orders.push(newOrder)        
         saveOrdersToStorage();
         saveBooksToStorage();
         console.log(orders)

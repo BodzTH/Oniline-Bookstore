@@ -4,6 +4,8 @@ import { fetchBooks } from "@/cartstore/cartstore";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import AllBooks from "@/components/AllBooks";
+import { CatLinks } from "@/constants/test";
+import Link from "next/link";
 
 interface Book {
   id: number;
@@ -57,6 +59,17 @@ function Category() {
   return (
     <>
       <div className="flex">
+        <div className="flex-col  lobester">
+          {
+            CatLinks.map((link) => (
+                <Link  className=" catlinks" href={link.href} key={link.key} >
+                  {link.text} 
+                  
+                </Link>
+            ))}
+        </div>
+
+
         <div className="verticalCategoryLine" >
 
           <div>
@@ -70,8 +83,8 @@ function Category() {
               // Render the default component here
               mysteryBooks.map((category: string, index: number) => (
                 <AllBooks key={index} title={category} stylcat={""} width={110} height={146} stylall={"products"} stylcard={""} />
-              
-                ))
+
+              ))
             ) : (
               // Render the CategoryHomeRow component for each category
               mysteryBooks.map((category: string, index: number) => (
