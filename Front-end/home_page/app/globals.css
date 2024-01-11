@@ -307,7 +307,7 @@ body {
 }
 
 .verticalCategoryLine {
-  @apply left-0 border-x-0 border-r  border-border-color ml-40 mr-0;
+  @apply left-0 border-x-0 border-r  border-border-color ml-10 mr-0;
   height: 500px;
   border: 2px solid #000000;
 }
@@ -338,14 +338,13 @@ body {
   max-height: 400px;
   display: block;
   border-radius: 15px;
-  @apply mx-5
+  @apply mx-5;
 }
 
 .image-container img {
   border-radius: 10px;
   width: 300px;
   height: 400px;
-  
   @apply shadowbox flexBetween;
   position: relative;
   overflow: hidden;
@@ -477,23 +476,33 @@ body {
 
 /* Search Page */
 .searchContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  height: 500px;
+  height: 440px;
   width: 1200px;
+  border-bottom: 1px solid black; 
 }
 
 .searchImage-container {
   flex: 1;
   padding: 20px;
+  max-width: 300px;
+  min-width: 300px;
+  min-height: 400px;
+  max-height: 400px;
+  display: block;
+  border-radius: 15px;
+  @apply mx-5;
 }
 
 .searchImage-container img {
-  max-width: 100%;
-  height: 250px; /* Maintain aspect ratio */
-  display: block;
-  border-radius: 15px;
+  border-radius: 10px;
+  width: 300px;
+  height: 400px;
+  @apply shadowbox flexBetween;
+  position: relative;
+  overflow: hidden;
 }
 
 .searchContent-container {
@@ -517,3 +526,7 @@ body {
 }
 
 
+.catlinks{
+  display: block !important;
+  min-width: 200px;
+}

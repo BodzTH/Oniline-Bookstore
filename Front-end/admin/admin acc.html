@@ -48,6 +48,7 @@
                 transition: width 0.3s ease;
                 overflow: hidden;
                 height: auto;
+
             }
     
             .tabs-container {
@@ -156,10 +157,21 @@
                 width: 200px;
                 height: 200px;
             }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid rgb(255, 255, 255);
+                padding: 10px;
+                text-align: center;
+                background-color: #4e2f00;
+            }
+        </style>
 
 
     
-        </style>
+        
     </head>
 <body>
 
@@ -248,9 +260,16 @@
 
 <!-- Orders Tab -->
 <div id="ordersTab" class="tab-content" style="display:none;">
-    <h2>Orders</h2>
-    <!-- Placeholder content for orders tab -->
-    <p class="js-orders-container">This section is for displaying orders.</p>
+    <h2 style="text-align:center;">Orders</h2>
+
+    <table>
+        <tr>
+            <td class="js-orders-container">Content from .js-orders-container</td>
+        </tr>
+        <tr>
+            <td class="js-book-image">Content from .js-book-image</td>
+        </tr>
+    </table>
 </div>
 
 <script>
@@ -262,6 +281,10 @@
 
         // Show the selected tab
         document.getElementById(tabId).style.display = 'block';
+    }
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.style.width = (sidebar.style.width === '150px') ? '0' : '150px';
     }
 
 </script>
