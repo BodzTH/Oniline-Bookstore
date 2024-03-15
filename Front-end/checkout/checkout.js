@@ -107,6 +107,29 @@ function setOrder()
             })
             matching.inStock-=item.quantity
             matching.sold+=item.quantity
+            fetch("http://localhost:5030/api/sendDeletedBook", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify( {id : matching.id} ),
+                
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok.");
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  console.log("POST request successful:", data);
+                })
+                .catch((error) => {
+                  console.error(
+                    "There was a problem with the fetch operation:",
+                    error
+                  );
+                });            
         })
         newOrder.fullName=document.querySelector('.js-full-name-set-order').value
         newOrder.phoneNumber=document.querySelector('.js-phone-number-set-order').value
@@ -116,13 +139,13 @@ function setOrder()
         newOrder.items=cart;
         newOrder.status='orderd'
         newOrder.id=getId(10,orders)
-        orders.push(newOrder)
-        localStorage.removeItem('orders')        
+        orders.push(newOrder)        
         saveOrdersToStorage();
         saveBooksToStorage();
         console.log(orders)
         console.log(newOrder.items)
         localStorage.removeItem('cart')
     })
+
 }
 setOrder();

@@ -63,16 +63,21 @@ function Home() {
 
       <div id="about-us" className="aboutus">
         <h1>About Us</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, aliquam? Eaque deserunt quia sit quod. Nisi assumenda molestias consectetur atque.
+        <p className="about-us-text">
+            Welcome to our online bookstore! This project is the brainchild of a group of dedicated Computer Engineering students who share a common passion for books and technology. Our mission is to create a user-friendly platform that makes discovering and purchasing books an enjoyable and seamless experience. We understand the importance of a good book and the role it plays in shaping minds. That&apos;s why we&apos;ve designed our bookstore to cater to all kinds of readers, offering a wide range of genres.
         </p>
       </div>
 
       <div id="contact-us" className="contactus">
-        <h1>Contact Us</h1>
-        <p>Please reach out to us at contact@example.com.</p>
+
+        Contact us:
+        <a href="mailto:BookStore@example.com">Abdelrahman.Khalil@gu.edu.eg</a>
+        <a href="mailto:BookStore@example.com">Omar.Esam@gu.edu.eg</a>
+        <a href="mailto:BookStore@example.com">Abdelrahman.Ayman@gu.edu.eg</a>
+        <a href="mailto:BookStore@example.com">mohamed.tawfeek@gu.edu.eg</a>
       </div>
 
-    </main>
+    </main> 
   )
 
 }

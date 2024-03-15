@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Book Inventory Management</title>
         <style>
+            
             body {
                 font-family: 'Arial', sans-serif;
                 margin: 0;
@@ -13,7 +14,7 @@
                 background-size: cover;
                 display: flex;
                 flex-direction: column;
-                height: 150vh;
+                height: auto;
                 overflow-y: auto;
             }
     
@@ -37,6 +38,7 @@
                 display: flex;
                 flex: 1 ;
                 overflow: hidden;
+                
             }
     
             .sidebar {
@@ -45,6 +47,8 @@
                 width: 150px; /* Initial width of the sidebar */
                 transition: width 0.3s ease;
                 overflow: hidden;
+                height: auto;
+
             }
     
             .tabs-container {
@@ -104,7 +108,9 @@
     
                 .sidebar {
                     width: 0; /* Initially hide the sidebar on smaller screens */
+                
                 }
+                
             }
     
             footer {
@@ -143,54 +149,29 @@
                 color: white; 
     
             }
-            table {
-                border-collapse: collapse;
-                width: 100%;
-                margin-top: 20px;
-            }
-    
-            th, td {
-                border: 1px solid #e1e1e1;
-                padding: 8px;
-                text-align: left;
-            }
-    
-            th {
-                background-color: #000000;
-            }
-            /* Style the orders' ID and status cells */
-            td:nth-child(odd), th:nth-child(odd) {
-            color: rgb(255, 255, 255);  /* Change to your desired color */
-            }
-    
-            td:nth-child(even), th:nth-child(even) {
-            color: rgb(255, 255, 255);  /* Change to your desired color */
-            }
-            /* Define styles for each status class */
-            .ordered {
-            background-color: #2ecd9d;  /* Light red for "Ordered" */
-            }
-    
-            .confirmed {
-            background-color: #b5f100;  /* Light green for "Confirmed" */
-            }
-    
-            .shipped {
-            background-color: #19ff05;  /* Light blue for "Shipped" */
-            }
-    
-            .delivered {
-            background-color: #ffb300;  /* Very light green for "Delivered" */
-            }
-    
-            .cancelled {
-            background-color: #ff0000;  /* Light gray for "Cancelled" */
-            }
             .js-orders-container{
                 color: white;
                 
             }
+            .js-book-image{
+                width: 200px;
+                height: 200px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid rgb(255, 255, 255);
+                padding: 10px;
+                text-align: center;
+                background-color: #4e2f00;
+            }
         </style>
+
+
+    
+        
     </head>
 <body>
 
@@ -212,49 +193,43 @@
     </div>
 </div>
 
-<!-- Tabs -->
-<div class="tabs">
-    <div class="tab" onclick="showTab('addNumberTab')">Add Number</div>
-    <div class="tab" onclick="showTab('addNewTab')">Add New Book</div>
-    <div class="tab" onclick="showTab('deleteTab')">Delete Book</div>
-    <div class="tab" onclick="showTab('reduceTab')">Reduce Number</div>
-    <div class="tab" onclick="showTab('ordersTab')">Orders</div>
-    <div class="tab" onclick="showTab('orderStatusTab')">Order Status</div>
-</div>
+
+
+
 
 <!-- Add Number of Books to Stock -->
 <div id="addNumberTab" class="tab-content">
     <h2>Add Number of Books to Stock</h2>
-    <label for="bookId" >Book ID:</label>
-    <input type="text" id="bookId" class="js-book-id-add-to-stock">
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" class="js-add-quantity">
+    <label for="bookId" >Book ID:</label><br>
+    <input type="text" id="bookId" class="js-book-id-add-to-stock"><br><br>
+    <label for="quantity">Quantity:</label><br>
+    <input type="number" id="quantity" class="js-add-quantity"><br><br>
     <button class="js-add-quantity-button">Add to Stock</button>
 </div>
 
 <!-- Add New Book to Stock -->
 <div id="addNewTab" class="tab-content" style="display:none;">
     <h2>Add New Book to Stock</h2>
-    <label for="bookId">Book ID:</label>
-    <input class="js-book-id-add-book" type="text" id="bookId">
-    <label for="bookName">Book Name:</label>
-    <input class="js-book-name-add-book" type="text" id="bookName">
-    <label for="bookCategory">Book Category:</label>
-    <input class="js-book-category-add-book" type="text" id="bookCategory">
-    <label for="numBooksStore">Number of Books in Store:</label>
-    <input class="js-in-stock-add-book" type="number" id="numBooksStore">
-    <label for="bookImage">Book Image URL:</label>
-    <input class="js-image-path-add-book" type="text" id="bookImage">
-    <label for="altImage">alt image:</label>
-    <input class="js-alt-image-add-book" type="text" id="altImage">
-    <label for="bookPrice">Book Price in cents:</label>
-    <input class="js-price-add-book" type="number" id="bookPrice">
-    <label for="bookAthor">athor:</label>
-    <input class="js-athor-add-book" type="text" id="bookAthor" step="0.1">
-    <label for="publisher">publisher:</label>
-    <input class="js-publisher-add-book" type="text" id="publisher">
-    <label for="bookDescribtion">book describtion:</label>
-    <input class="js-book-describtion-add-book" type="text" id="bookDescribtion">
+    <label for="bookId">Book ID:</label><br>
+    <input class="js-book-id-add-book" type="text" id="bookId"><br><br>
+    <label for="bookName">Book Name:</label><br>
+    <input class="js-book-name-add-book" type="text" id="bookName"><br><br>
+    <label for="bookCategory">Book Category:</label><br>
+    <input class="js-book-category-add-book" type="text" id="bookCategory"><br><br>
+    <label for="numBooksStore">Number of Books in Store:</label><br>
+    <input class="js-in-stock-add-book" type="number" id="numBooksStore"><br><br>
+    <label for="bookImage">Book Image URL:</label><br>
+    <input class="js-image-path-add-book" type="text" id="bookImage"><br><br>
+    <label for="altImage">alt image:</label><br>
+    <input class="js-alt-image-add-book" type="text" id="altImage"><br><br>
+    <label for="bookPrice">Book Price in cents:</label><br>
+    <input class="js-price-add-book" type="number" id="bookPrice"><br><br>
+    <label for="bookAthor">athor:</label><br>
+    <input class="js-athor-add-book" type="text" id="bookAthor" step="0.1"><br><br>
+    <label for="publisher">publisher:</label><br>
+    <input class="js-publisher-add-book" type="text" id="publisher"><br><br>
+    <label for="bookDescribtion">book describtion:</label><br>
+    <input class="js-book-describtion-add-book" type="text" id="bookDescribtion"><br><br>   
 
     <button class="js-add-book-button" >Add New Book to Stock</button>
 </div>
@@ -277,14 +252,24 @@
     <button class="js-take-from-stock-button">Reduce from Stock</button>
 </div>
 
+
+
+
 <div id="orderStatusTab" class="tab-content js-edit-id-container" style="display:none;">
 </div>
 
 <!-- Orders Tab -->
 <div id="ordersTab" class="tab-content" style="display:none;">
-    <h2>Orders</h2>
-    <!-- Placeholder content for orders tab -->
-    <p class="js-orders-container">This section is for displaying orders.</p>
+    <h2 style="text-align:center;">Orders</h2>
+
+    <table>
+        <tr>
+            <td class="js-orders-container">Content from .js-orders-container</td>
+        </tr>
+        <tr>
+            <td class="js-book-image">Content from .js-book-image</td>
+        </tr>
+    </table>
 </div>
 
 <script>
@@ -296,6 +281,10 @@
 
         // Show the selected tab
         document.getElementById(tabId).style.display = 'block';
+    }
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.style.width = (sidebar.style.width === '150px') ? '0' : '150px';
     }
 
 </script>

@@ -2,7 +2,6 @@
   "name": "home_page",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3004/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,7 +10,9 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
-    "next": "^14.0.5-canary.17",
+    "mysql": "^2.18.1",
+    "next": "^14.1.0",
+    "open": "^10.0.4",
     "react": "^18",
     "react-dom": "^18",
     "zustand": "^4.4.7"

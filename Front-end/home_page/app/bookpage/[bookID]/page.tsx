@@ -78,10 +78,6 @@ function BookPage() {
 
   const quantity = getInStockById(+bookID);
 
-  useEffect(() => {
-    setSelectedQuantity(quantity);
-  }, [quantity]);
-
 
 
   {/* image:
@@ -128,7 +124,7 @@ function BookPage() {
           </div>
           {/* SKU */}
           <div>
-
+            SKU: {bookDetails?.SKU}
           </div>
 
           {/* description */}

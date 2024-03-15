@@ -167,7 +167,7 @@ body {
 
 /* Footer */
 .footer {
-  @apply bottom-0 py-4 mt-0 shadowboxfooter bg-white w-full gap-x-20 border-t border-border-color;
+  @apply bottom-0 py-4 mt-0 shadowboxfooter bg-white w-full gap-x-20 border-t border-border-color text-center;
 }
 
 .footer_copyright {
@@ -286,6 +286,13 @@ body {
   transition: all 0.3s ease; /* Updated transition speed */
 }
 
+.about-us-text {
+  @apply text-center;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
 .contactus {
   @apply flex flex-col items-center justify-center mb-0 m-auto;
   transition: all 0.3s ease;
@@ -300,7 +307,7 @@ body {
 }
 
 .verticalCategoryLine {
-  @apply left-0 border-x-0 border-r  border-border-color ml-40 mr-0;
+  @apply left-0 border-x-0 border-r  border-border-color ml-10 mr-0;
   height: 500px;
   border: 2px solid #000000;
 }
@@ -331,14 +338,13 @@ body {
   max-height: 400px;
   display: block;
   border-radius: 15px;
-  @apply mx-5
+  @apply mx-5;
 }
 
 .image-container img {
   border-radius: 10px;
   width: 300px;
   height: 400px;
-  
   @apply shadowbox flexBetween;
   position: relative;
   overflow: hidden;
@@ -465,4 +471,62 @@ body {
 }
 .product-info {
   margin-top: auto;
+}
+
+
+/* Search Page */
+.searchContainer {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  height: 440px;
+  width: 1200px;
+  border-bottom: 1px solid black; 
+}
+
+.searchImage-container {
+  flex: 1;
+  padding: 20px;
+  max-width: 300px;
+  min-width: 300px;
+  min-height: 400px;
+  max-height: 400px;
+  display: block;
+  border-radius: 15px;
+  @apply mx-5;
+}
+
+.searchImage-container img {
+  border-radius: 10px;
+  width: 300px;
+  height: 400px;
+  @apply shadowbox flexBetween;
+  position: relative;
+  overflow: hidden;
+}
+
+.searchContent-container {
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+
+.searchBook-description {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.searchQuantity-container {
+  display: flex;
+  align-items: center;
+  @apply gap-80;
+}
+
+
+.catlinks{
+  display: block !important;
+  min-width: 200px;
 }

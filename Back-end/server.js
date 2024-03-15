@@ -1,102 +1,210 @@
-const cors = require("cors");
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+
 const app = express();
+const port = 3000;
 
-app.use(cors());
-app.use(express.json());
+// Create connection to MySQL database
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'Om@rEssam2003',
+    database: 'bookstore'
+});
 
-let cartItems = {};
-let AllBooks = [];
-let totalQuantity = 0;
-let deletedBook = {};
+// Middleware
+app.use(bodyParser.json());
+app.use(cors()); // Enable CORS for all requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true,
+}));
 
-app.post("/api/sendAllBooks", async (req, res) => {
-  try {
-    if (
-      !Array.isArray(req.body) ||
-      req.body.some((book) => typeof book !== "object")
-    ) {
-      res.status(400).json({ message: "Invalid data format" });
-      return;
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
+// Route for sign-up page
+app.get('/signup', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'signup.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/signin', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'signin.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+// Route for profile page
+app.get('/profile', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+// Route for sign-up form submission
+app.post('/signup', (req, res) => {
+    const { email, username, dob, country, city, area, street, buildingNumber, floor, apartmentNumber, password } = req.body;
+
+    // Validate input
+    if (!email || !username || !dob || !password) {
+        return res.status(400).send('Email, username, date of birth, and password are required');
     }
-    AllBooks = req.body;
-    res.json({ message: "Books received" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
+
+    // Encrypt password
+    bcrypt.hash(password, 10, (error, hashedPassword) => {
+        if (error) {
+            console.error('Error hashing password:', error);
+            return res.status(500).send('Error signing up');
+        }
+
+        // Check if email already exists in the database
+        const checkEmailQuery = 'SELECT * FROM users WHERE email = ?';
+        connection.query(checkEmailQuery, [email], (error, existingUsers) => {
+            if (error) {
+                console.error('Error querying database:', error);
+                return res.status(500).send('Error signing up');
+            }
+
+            // If email already exists, send error response
+            if (existingUsers.length > 0) {
+                return res.status(409).send('Email already exists');
+            }
+
+            // Insert new user into the database with hashed password
+            const address = `${country},${city},${area},${street},${buildingNumber},${floor},${apartmentNumber}`;
+            const insertUserQuery = 'INSERT INTO users (email, username, dob, address, password) VALUES (?, ?, ?, ?, ?)';
+            connection.query(insertUserQuery, [email, username, dob, address, hashedPassword], (error) => {
+                if (error) {
+                    console.error('Error inserting user data:', error);
+                    return res.status(500).send('Error signing up');
+                }
+                console.log('User signed up successfully');
+
+                // Redirect user to sign-in page after successful sign-up
+                res.sendFile('signin.html', { root: __dirname });
+            });
+        });
+    });
 });
 
-app.post("/api/sendCartItems", async (req, res) => {
-  try {
-    if (
-      typeof req.body !== "object" ||
-      req.body === null ||
-      Array.isArray(req.body)
-    ) {
-      res.status(400).json({ message: "Invalid data format" });
-      return;
+
+// Route for sign-in form submission
+app.post('/signin', (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        return res.status(400).send('Email and password are required');
     }
-    cartItems = req.body;
-    res.json({ message: "Cart Items received" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
+
+    // Check if user exists in the database
+    const checkUserQuery = 'SELECT * FROM users WHERE email = ?';
+    connection.query(checkUserQuery, [email], (error, results) => {
+        if (error) {
+            console.error('Error querying database:', error);
+            return res.status(500).send('Error signing in');
+        }
+
+        // Check if user was found
+        if (results.length === 0) {
+            // User not found, redirect to sign-in page with error message
+            return res.redirect('/signin?error=Invalid email or password');
+        }
+
+        // Compare hashed password with input password
+        bcrypt.compare(password, results[0].password, (error, isMatch) => {
+            if (error) {
+                console.error('Error comparing passwords:', error);
+                return res.status(500).send('Error signing in');
+            }
+
+            if (!isMatch) {
+                // Password doesn't match, redirect to sign-in page with error message
+                return res.redirect('/signin?error=Invalid email or password');
+            }
+
+            // User was found and password matches, create session
+            req.session.user = email;
+            res.cookie('user', email); // Set user cookie
+
+            // Redirect user to home page after successful sign-in
+            // Construct the file path relative to the current directory (__dirname)
+            const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+            // Send the file as the response
+            res.sendFile(filePath);
+        });
+    });
 });
 
-app.get("/api/getAllBooks", async (req, res) => {
-  try {
-    res.json(AllBooks);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
+// Route for home page
+app.get('/profile-data', (req, res) => {
+    // Check if user session exists
+    if (!req.session.user) {
+        return res.status(401).send('Unauthorized');
+    }
+
+    // User is signed in, fetch user's profile data from the database
+    const userEmail = req.session.user;
+
+    // Query the database to fetch user's profile data
+    const getUserQuery = 'SELECT * FROM users WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error querying database:', error);
+            return res.status(500).send('Error fetching user data');
+        }
+
+        // If user data found, send user's profile data as JSON response
+        if (results.length > 0) {
+            const user = results[0]; // Assuming user data is in the first row
+            res.json(user);
+            // Construct the file path relative to the current directory (__dirname)
+            const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+            // Send the file as the response
+            res.sendFile(filePath);            
+        } else {
+            // User data not found
+            res.status(404).send('User data not found');
+        }
+    });
 });
 
-app.get("/api/getCartItems", async (req, res) => {
-  try {
-    res.json(cartItems);
-    cartItems = {};
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
+
+
+// Route for logout
+app.post('/logout', (req, res) => {
+    // Destroy session
+    req.session.destroy((error) => {
+        if (error) {
+            console.error('Error destroying session:', error);
+        }
+        // Clear user cookie
+        res.clearCookie('user');
+        // Redirect user to sign-in page after logout
+        res.redirect('/signin');
+    });
 });
 
-app.post("/api/sendTotalQuantity", async (req, res) => {
-  try {
-    totalQuantity = parseInt(req.body.quantity);
-    res.json({ message: "Total Quantity received" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
-
-app.get("/api/getTotalQuantity", async (req, res) => {
-  try {
-    res.json(totalQuantity);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
-
-app.post("/api/sendDeletedBook", async (req, res) => {
-  try {
-    deletedBook = req.body;
-    res.json({ message: "deleted Item received" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
-
-app.get("/api/getDeletedBook", async (req, res) => {
-  try {
-    const response = { ...deletedBook };
-    deletedBook = {};
-    res.json(response);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
-
-const PORT = 5030;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Start server
+app.listen(port, () => {
+    console.log(`Server is listening at http://localhost:${port}`);
 });

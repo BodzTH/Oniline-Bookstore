@@ -1,25 +1,63 @@
 import Image from "next/image"
-import { BookItemProbs } from "@/common.types"
 import { priceFormating } from "@/cartstore/cartstore"
+import Link from "next/link"
+import { useState } from "react";
 
 {/* Book found box */ }
-function BookItem({ book_name,book_description, image, price, book_type, alt_image,sku }: BookItemProbs) {
+type BookItemProbs = {
+  book_name: string;
+  book_description: string;
+  image: string;
+  price: number;
+  book_type: string;
+  alt_image: string;
+  sku: string;
+  idd: number; // Add the 'id' property
+};
+
+function BookItem({ book_name, book_description, image, price, book_type, alt_image , idd }: BookItemProbs) {
 
   return (
-    <div>
-      {/* Book found box */}
-      <div>
-        {/* Book found content */}
-        <section className="">
-          <h1>{book_name}</h1>
-          <h2>{book_type}</h2>
-          <h2>{priceFormating(price)}EGP</h2>
-          <h4>{book_description}</h4>
-          <h3>{sku}</h3>
+    <div  >
+      {/* Book item section */}
+      <div className="searchContainer">
+        {/* Book image */}
+        <div className="searchImage-container" >
+          <Link href={'/bookpage/' + idd} key={idd}>
+            <div>
+              {/* Book image */}
+              <div>
+                <Image src={image} alt={alt_image} width={200} height={200} />
+    
+              </div>
+            </div>
+
+          </Link>
+
+        </div>
+        {/* Book content */}
+        <div className="searchContent-container">
+          {/* bookname */}
           <div>
-            <Image src={image} alt={alt_image} width={333} height={33} />
+            <h1>{book_name}</h1>
           </div>
-        </section>
+
+          {/* description */}
+          <div className="searchBook-description">
+            {book_description}
+          </div>
+          <div className="quantity-container">
+
+            <div>
+              {priceFormating(price)}EGP
+            </div>
+            <div>
+              {book_type}
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </div>
   )
