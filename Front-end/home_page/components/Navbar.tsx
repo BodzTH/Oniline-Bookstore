@@ -93,7 +93,7 @@ function Navbar() {
 
           <div className='flexBetween flex-shrink-0'>
             <button className='flexBetween ' >
-              <Link href={"http://127.0.0.1:5500/Front-end/cart_page/cart.html"}>
+              <Link href={"http://127.0.0.1:5501/Front-end/cart_page/cart.html"}>
                 <div className='relative'>
                   <Image className='max-w-none'
                     src="/bookshelf.svg" alt="bookshelficon"
