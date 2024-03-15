@@ -49,6 +49,15 @@ app.get('/signin', (req, res) => {
     res.sendFile(filePath);
 });
 
+// Route for profile page
+app.get('/profile', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
     const { email, username, dob, country, city, area, street, buildingNumber, floor, apartmentNumber, password } = req.body;
@@ -146,7 +155,7 @@ app.post('/signin', (req, res) => {
 });
 
 // Route for home page
-app.get('/profile', (req, res) => {
+app.get('/profile-data', (req, res) => {
     // Check if user session exists
     if (!req.session.user) {
         return res.status(401).send('Unauthorized');
@@ -167,6 +176,11 @@ app.get('/profile', (req, res) => {
         if (results.length > 0) {
             const user = results[0]; // Assuming user data is in the first row
             res.json(user);
+            // Construct the file path relative to the current directory (__dirname)
+            const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+            // Send the file as the response
+            res.sendFile(filePath);            
         } else {
             // User data not found
             res.status(404).send('User data not found');
