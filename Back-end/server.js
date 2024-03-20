@@ -14,7 +14,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Abdo2003',
+    password: 'Om@rEssam2003',
     database: 'bookstore'
 });
 
@@ -31,7 +31,7 @@ app.use(session({
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
-
+app.use(express.static(path.join(__dirname, 'Front-end')));
 // Route for sign-up page
 app.get('/signup', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
@@ -49,10 +49,36 @@ app.get('/signin', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/back-end/books.js', (req, res) => {
+    // Send the file as the response
+    res.sendFile("books.js", { root: __dirname });
+});
+
+app.get('/cart.css', (req, res) => {
+    const filePath = path.join(__dirname, '..', 'Front-end', 'cart_page', 'cart.css');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/cart.js', (req, res) => {
+    // Send the file as the response
+    res.sendFile("cart.js", { root: __dirname });
+});
+
 // Route for profile page
 app.get('/profile', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+// Route for cart page
+app.get('/cart', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'cart_page', 'cart.html');
     
     // Send the file as the response
     res.sendFile(filePath);
