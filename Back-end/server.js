@@ -149,7 +149,7 @@ app.post('/signin', (req, res) => {
             const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
     
             // Send the file as the response
-            res.sendFile(filePath);
+            res.redirect("/profile");
         });
     });
 });
