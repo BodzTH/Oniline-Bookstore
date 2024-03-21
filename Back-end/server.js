@@ -31,7 +31,7 @@ app.use(session({
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'Front-end')));
+app.use(express.static(path.join(__dirname,'..', 'Front-end')));
 // Route for sign-up page
 app.get('/signup', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
