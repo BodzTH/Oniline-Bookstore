@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname,'..', 'Front-end')));
 // Route for sign-up page
 app.get('/signup', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
-    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'signup.html');
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'sign_up.html');
     
     // Send the file as the response
     res.sendFile(filePath);
@@ -43,11 +43,45 @@ app.get('/signup', (req, res) => {
 
 app.get('/signin', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
-    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'signin.html');
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'sign_in.html');
     
     // Send the file as the response
     res.sendFile(filePath);
 });
+
+app.get('/checkout', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'checkout', 'checkout.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/Back-end/orders.js', (req, res) => {
+    // Send the file as the response
+    res.sendFile("orders.js", { root: __dirname });
+});
+
+
+
+
+app.get('/sign_up.css', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'sign_up.css');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/Front-end/cart_page/src/books1.jpg', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'cart_page', './src/books1.jpg');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+
 
 app.get('/back-end/books.js', (req, res) => {
     // Send the file as the response
@@ -66,10 +100,39 @@ app.get('/cart.js', (req, res) => {
     res.sendFile("cart.js", { root: __dirname });
 });
 
+app.get('/Back-end/cart.js', (req, res) => {
+    // Send the file as the response
+    res.sendFile("cart.js", { root: __dirname });
+});
+
 // Route for profile page
 app.get('/profile', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/orders', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'user_orders', 'orders.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/orders.js', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'user_orders', 'orders.js');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/orders.css', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'user_orders', 'orders.css');
     
     // Send the file as the response
     res.sendFile(filePath);
@@ -124,7 +187,7 @@ app.post('/signup', (req, res) => {
                 console.log('User signed up successfully');
 
                 // Redirect user to sign-in page after successful sign-up
-                res.sendFile('signin.html', { root: __dirname });
+                res.redirect('/signin');
             });
         });
     });
