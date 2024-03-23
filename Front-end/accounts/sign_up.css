@@ -47,7 +47,6 @@ body {
     font-size: 16px;
     color: #fff;
     padding: 20px 45px 20px 20px;
-
 }
 
 .input-box input::placeholder {
@@ -111,4 +110,9 @@ body {
 
 .register-link p a:hover {
     text-decoration: underline;
+}
+.name {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
 }
