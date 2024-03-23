@@ -9,16 +9,53 @@
 </head>
 <body>
     <div class="wrapper">
-        <form action="">
-            <h1>Login</h1>
+        <form action="http://localhost:3000/signup" method="POST">
+            <h1>Sign Up</h1>
             <div class="input-box">
-                <input type="text" placeholder="Username" required>
-                <i class='bx bxs-user'></i>
+                <input type="email" id="email" name="email" placeholder="email" required><br>
+                <i class='bx bxs-envelope'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" required>
-                <i class='bx bxs-lock-alt' ></i>
+                <input type="text" id="username" name="username" placeholder="User name" required><br>
+                <i class='bx bxs-user'></i>                
             </div>
+            <div class="input-box">
+                <input type="date" id="dob" name="dob" required><br>
+                <i class='bx bxs-calendar-alt' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="country" name="country" placeholder="Country" required><br>
+                <i class='bx bxs-buildings' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="city" name="city" placeholder="City" required><br>
+                <i class='bx bxs-city' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="area" name="area" placeholder="Area" required><br>
+                <i class='bx bx-buildings' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="street" name="street" placeholder="Street" required><br>
+                <i class='bx bx-street-view' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="buildingNumber" name="buildingNumber" placeholder="building number" required><br>
+                <i class='bx bxs-home' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="floor" name="floor" placeholder="floor" required><br>
+                <i class='bx bxs-home' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" id="apartmentNumber" name="apartmentNumber" placeholder="Apartment number"><br>
+                <i class='bx bxs-lock' ></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" name="password" placeholder="password" required><br><br>
+                <i class='bx bxs-lock' ></i>
+            </div>
+            <input type="submit" value="Sign Up">
         </form>
     </div>
 </body>
