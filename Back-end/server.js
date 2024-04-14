@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Om@rEssam2003',
-    database: 'bookstore'
+    database: 'bookstore-final'
 });
 
 // Middleware
@@ -52,6 +52,14 @@ app.get('/signin', (req, res) => {
 app.get('/checkout', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'checkout', 'checkout.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/home', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'home.html');
     
     // Send the file as the response
     res.sendFile(filePath);
@@ -149,11 +157,11 @@ app.get('/cart', (req, res) => {
 
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
-    const { email, username, dob, country, city, area, street, buildingNumber, floor, apartmentNumber, password } = req.body;
+    const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, phoneNumber, gender, password } = req.body;
 
     // Validate input
-    if (!email || !username || !dob || !password) {
-        return res.status(400).send('Email, username, date of birth, and password are required');
+    if (!email || !first_name || !last_name || !dob || !password) {
+        return res.status(400).send('Email, first name, last name, date of birth, and password are required');
     }
 
     // Encrypt password
@@ -164,7 +172,7 @@ app.post('/signup', (req, res) => {
         }
 
         // Check if email already exists in the database
-        const checkEmailQuery = 'SELECT * FROM users WHERE email = ?';
+        const checkEmailQuery = 'SELECT * FROM user WHERE email = ?';
         connection.query(checkEmailQuery, [email], (error, existingUsers) => {
             if (error) {
                 console.error('Error querying database:', error);
@@ -177,9 +185,9 @@ app.post('/signup', (req, res) => {
             }
 
             // Insert new user into the database with hashed password
-            const address = `${country},${city},${area},${street},${buildingNumber},${floor},${apartmentNumber}`;
-            const insertUserQuery = 'INSERT INTO users (email, username, dob, address, password) VALUES (?, ?, ?, ?, ?)';
-            connection.query(insertUserQuery, [email, username, dob, address, hashedPassword], (error) => {
+            const address = `${country},${city},${area},${street},${buildingNumber},${flatNumber}`;
+            const insertUserQuery = 'INSERT INTO user (email, first_name, last_name, dob, country, city, area, street, bulding_no, flat_no, phone_number, Gender, hashed_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            connection.query(insertUserQuery, [email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, phoneNumber, gender, hashedPassword], (error) => {
                 if (error) {
                     console.error('Error inserting user data:', error);
                     return res.status(500).send('Error signing up');
@@ -194,6 +202,7 @@ app.post('/signup', (req, res) => {
 });
 
 
+
 // Route for sign-in form submission
 app.post('/signin', (req, res) => {
     const { email, password } = req.body;
@@ -204,7 +213,7 @@ app.post('/signin', (req, res) => {
     }
 
     // Check if user exists in the database
-    const checkUserQuery = 'SELECT * FROM users WHERE email = ?';
+    const checkUserQuery = 'SELECT * FROM user WHERE email = ?';
     connection.query(checkUserQuery, [email], (error, results) => {
         if (error) {
             console.error('Error querying database:', error);
@@ -218,7 +227,7 @@ app.post('/signin', (req, res) => {
         }
 
         // Compare hashed password with input password
-        bcrypt.compare(password, results[0].password, (error, isMatch) => {
+        bcrypt.compare(password, results[0].hashed_password, (error, isMatch) => {
             if (error) {
                 console.error('Error comparing passwords:', error);
                 return res.status(500).send('Error signing in');
@@ -233,49 +242,42 @@ app.post('/signin', (req, res) => {
             req.session.user = email;
             res.cookie('user', email); // Set user cookie
 
-            // Redirect user to home page after successful sign-in
-            // Construct the file path relative to the current directory (__dirname)
-            const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
-    
-            // Send the file as the response
+            // Redirect user to profile page after successful sign-in
             res.redirect("/profile");
         });
     });
 });
 
+
 // Route for home page
 app.get('/profile-data', (req, res) => {
     // Check if user session exists
     if (!req.session.user) {
-        return res.status(401).send('Unauthorized');
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
     // User is signed in, fetch user's profile data from the database
     const userEmail = req.session.user;
 
     // Query the database to fetch user's profile data
-    const getUserQuery = 'SELECT * FROM users WHERE email = ?';
+    const getUserQuery = 'SELECT * FROM user WHERE email = ?';
     connection.query(getUserQuery, [userEmail], (error, results) => {
         if (error) {
             console.error('Error querying database:', error);
-            return res.status(500).send('Error fetching user data');
+            return res.status(500).json({ error: 'Error fetching user data' });
         }
 
         // If user data found, send user's profile data as JSON response
         if (results.length > 0) {
             const user = results[0]; // Assuming user data is in the first row
             res.json(user);
-            // Construct the file path relative to the current directory (__dirname)
-            const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
-    
-            // Send the file as the response
-            res.sendFile(filePath);            
         } else {
             // User data not found
-            res.status(404).send('User data not found');
+            res.status(404).json({ error: 'User data not found' });
         }
     });
 });
+
 
 
 
@@ -292,6 +294,92 @@ app.post('/logout', (req, res) => {
         res.redirect('/signin');
     });
 });
+
+// Route to fetch books data from the database
+/* app.get('/api/getAllBooks', (req, res) => {
+    // Query to select all books from the database
+    const query = 'SELECT * FROM books';
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error("Error fetching books from database:", error);
+            res.status(500).json({ error: "Internal server error" });
+            return;
+        }
+
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+}); */
+
+app.get('/api/getAllBooks', (req, res) => {
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
+                        b.books_sold, b.book_image, b.book_altImage, 
+                        p.name AS publisher_name, 
+                        a.first_name AS author_first_name, a.last_name AS author_last_name
+                   FROM books b
+                   INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
+                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID`;
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+
+/* app.get('/getAllBooks', (req, res) => {
+    // Get a connection from the pool
+    connection.getConnection((err, connection) => {
+      if (err) {
+        console.error("Error getting MySQL connection:", err);
+        res.status(500).json({ error: "Internal server error" });
+        return;
+      }
+  
+      // Query to select all books from the database
+      const query = 'SELECT * FROM books';
+  
+      // Execute the query
+      connection.query(query, (error, results) => {
+        connection.release(); // Release the connection back to the pool
+  
+        if (error) {
+          console.error("Error fetching books from database:", error);
+          res.status(500).json({ error: "Internal server error" });
+          return;
+        }
+  
+        // Send the fetched books data as JSON response
+        res.json(results);
+      });
+    });
+  });
+ */
+
+/*   app.post("/api/sendAllBooks", async (req, res) => {
+    try {
+      if (
+        !Array.isArray(req.body) ||
+        req.body.some((book) => typeof book !== "object")
+      ) {
+        res.status(400).json({ message: "Invalid data format" });
+        return;
+      }
+      AllBooks = req.body;
+      res.json({ message: "Books received" });
+    } catch (error) {
+      res.status(500).json({ message: "Server error", error: error.message });
+    }
+  }); */
 
 // Start server
 app.listen(port, () => {

@@ -752,21 +752,6 @@ if (!bookscard) {
       sold: 0,
     },
     {
-      id: 50,
-      image:
-        "https://diwanegypt.com/wp-content/uploads/2023/12/9780847831722.jpg",
-      altImage: "Valentino: Themes and Variations",
-      categori: "Fashion",
-      BookName: "Valentino: Themes and Variations",
-      desc: "N/A",
-      author: "Pamela Golbin",
-      publisher: "Rizzoli",
-      SKU: 9780847831722,
-      priceCents: 400000,
-      inStock: 10,
-      sold: 0,
-    },
-    {
       id: 51,
       image:
         "https://diwanegypt.com/wp-content/uploads/2023/12/9781982179670.jpg",
