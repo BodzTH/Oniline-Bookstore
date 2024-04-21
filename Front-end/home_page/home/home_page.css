@@ -1,0 +1,103 @@
+/* CSS for Navbar Component */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__links {
+    display: flex;
+    list-style-type: none;
+    margin-left: 20px;
+}
+
+.navbar__links li {
+    margin-right: 15px;
+}
+
+.navbar__title {
+    flex-grow: 1;
+}
+
+.navbar__right {
+    display: flex;
+    align-items: center;
+}
+
+.search {
+    margin-right: 20px;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.counter {
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    background-color: black;
+    color: white;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CSS for Footer Component */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* CSS for BookItem Component */
+.book-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.book-image {
+    margin-right: 20px;
+}
+
+.book-content {
+    flex-grow: 1;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* CSS for BookSection Component */
+.book-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.book-section>div {
+    flex-basis: 48%;
+    /* Adjust as needed */
+}
