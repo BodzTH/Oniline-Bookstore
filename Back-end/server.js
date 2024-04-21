@@ -49,6 +49,8 @@ app.get('/signin', (req, res) => {
     res.sendFile(filePath);
 });
 
+
+
 app.get('/checkout', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'checkout', 'checkout.html');
@@ -105,7 +107,8 @@ app.get('/cart.css', (req, res) => {
 
 app.get('/cart.js', (req, res) => {
     // Send the file as the response
-    res.sendFile("cart.js", { root: __dirname });
+    const filePath = path.join(__dirname, '..', 'Front-end', 'cart_page', 'cart.js');
+    res.sendFile(filePath);
 });
 
 app.get('/Back-end/cart.js', (req, res) => {
@@ -148,6 +151,11 @@ app.get('/orders.css', (req, res) => {
 
 // Route for cart page
 app.get('/cart', (req, res) => {
+    if (req.session.user==undefined) {
+        // User is not logged in, redirect to sign-in page
+        res.redirect('/signin');
+        
+    }
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'cart_page', 'cart.html');
     
@@ -335,6 +343,164 @@ app.get('/api/getAllBooks', (req, res) => {
         res.json(results);
     });
 });
+
+// Route for adding a book to the cart
+app.post('/addToCart', (req, res) => {
+    // Check if user is logged in
+    console.log(req.session.user);
+    if (req.session.user==undefined) {
+        // User is not logged in, redirect to sign-in page
+        return res.status(500).send('Error you have to sign in first');
+        
+    }
+
+    const userEmail = req.session.user;
+    const { bookId } = req.body;
+    const bookCount = 1; // Initial count for the book in the cart
+    console.log(bookId);
+    // Query to retrieve user ID based on email
+    const getUserQuery = 'SELECT user_id FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
+
+        const userId = results[0].user_id;
+
+        // Insert the book into the cart content table
+        const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
+        connection.query(query, [bookCount, bookId, userId], (error, results) => {
+            if (error) {
+                console.error('Error adding book to cart:', error);
+                return res.status(500).send('Error adding book to cart');
+            }
+            console.log('Book added to cart successfully');
+            // Send a success response
+            res.status(200).send('Book added to cart successfully');
+        });
+    });
+});
+
+app.get('/api/getcart', (req, res) => {
+
+    // Query to retrieve user ID based on email
+    const userEmail = req.session.user;
+    const getUserQuery = 'SELECT user_id FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
+
+        const userId = results[0].user_id;
+    // Query to fetch books data from the database including author's name
+    const query =`SELECT Book_counts, book_name, book_ID, book_desc, book_price, book_image,name AS publisher_name,books_instock 
+    FROM books,cart_content,publishers   
+    WHERE user_user_id = ? AND books_book_ID = book_ID AND publishers_publisher_ID = publisher_ID`;
+
+    // Execute the query
+    connection.query(query,[userId] ,(error, results) => {
+        if (error) {
+            console.error('Error fetching books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+});
+
+
+app.post('/updatebookcounts', (req, res) => {
+    // Check if user is logged in
+
+    const userEmail = req.session.user;
+    const { bookId,Book_counts } = req.body;
+    console.log(bookId,Book_counts);
+    // Initial count for the book in the cart
+    // Query to retrieve user ID based on email
+    const getUserQuery = 'SELECT user_id FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
+
+        const userId = results[0].user_id;
+
+        // Insert the book into the cart content table
+        const query = 'update cart_content set Book_counts = ? where books_book_ID = ? and user_user_id = ?';
+        connection.query(query, [Book_counts, bookId, userId], (error, results) => {
+            if (error) {
+                console.error('Error adding book to cart:', error);
+                return res.status(500).send('Error adding book to cart');
+            }
+            console.log('Book added to cart successfully');
+            // Send a success response
+            res.status(200).send('Book added to cart successfully');
+        });
+    });
+});
+
+// Route to fetch cart data for the signed-in user
+/* app.get('/api/getCartData', (req, res) => {
+    const userEmail = req.session.user;
+
+    // Check if user is logged in
+    if (!userEmail) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    // Query to retrieve user ID based on email
+    const getUserQuery = 'SELECT user_id FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, userResults) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).json({ error: 'Failed to fetch user data' });
+        }
+
+        if (userResults.length === 0) {
+            console.error('User not found');
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const userId = userResults[0].user_id;
+
+        // Query to fetch cart data for the user
+        const getCartDataQuery = `SELECT Book_counts, book_name, book_ID, book_desc, book_price, book_image 
+                                  FROM books,cart_content   
+                                  WHERE user_user_id = ? AND books_book_ID = book_ID`;
+
+        connection.query(getCartDataQuery, [userId], (error, cartResults) => {
+            if (error) {
+                console.error('Error fetching cart data:', error);
+                return res.status(500).json({ error: 'Failed to fetch cart data' });
+            }
+
+            res.json(cartResults);
+        });
+    });
+});
+ */
+
 
 /* app.get('/getAllBooks', (req, res) => {
     // Get a connection from the pool
