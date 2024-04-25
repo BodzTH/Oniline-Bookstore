@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front-end/home_page/home/home_page.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Navbar Component -->
+    <nav class="navbar">
+        <div class="navbar__left">
+            <a href="/" class="logo">
+                <img src="/logo.svg" alt="Bookz" width="70" height="10">
+            </a>
+            <ul class="navbar__links">
+                <li><a href="/categories/default">Categories</a></li>
+                <!-- Add dynamic links here -->
+            </ul>
+        </div>
+        <div class="navbar__title">
+            <h1 class="title">Welcome To Our Bookstore</h1>
+        </div>
+        <div class="navbar__right">
+            <div class="search">
+                <!-- Search component goes here -->
+            </div>
+            <div class="cart">
+                <a href="http://127.0.0.1:5501/Front-end/cart_page/cart.html">
+                    <div class="cart-icon">
+                        <img src="/bookshelf.svg" alt="bookshelficon" width="40" height="10">
+                        <span class="counter">0</span> <!-- Initialize with 0 -->
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- Search Component -->
+        <div class="search">
+            <button onclick="handleSearch()">
+                <img src="/search.svg" alt="Bookz" width="32" height="10">
+            </button>
+            <input id="searchInput" class="searchbar text-center" placeholder="Search" onkeydown="handleKeyDown(event)"
+                value="">
+        </div>
+    </nav>
+    
+    <!-- BookItem Component -->
+    <div class="book-item">
+        <!-- Book image -->
+        <div class="book-image">
+            <a href={`/bookpage/${idd}`}>
+                <img src={image} alt={alt_image} width="200" height="200">
+            </a>
+        </div>
+        <!-- Book content -->
+        <div class="book-content">
+            <h1>{book_name}</h1>
+            <p class="description">{book_description}</p>
+            <div class="details">
+                <div>{priceFormating(price)}EGP</div>
+                <div>{book_type}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BookSection Component -->
+    <div class="book-section">
+        <div>
+            <h1>{title}</h1>
+        </div>
+        <div>
+            <h1>{book_name}</h1>
+        </div>
+        <div>
+            <img src={image} alt="" width="200" height="200">
+        </div>
+        <div>
+            <h1>{price}</h1>
+        </div>
+        <div>
+            <h1>{books}</h1>
+        </div>
+    </div>
+
+    <!-- Footer Component -->
+    <footer class="footer">
+        Thank you for visiting our online bookstore
+    </footer>
+
+
+    <script type="module" src="sign_in_admin.js"></script>
+</body>
+
+</html>
