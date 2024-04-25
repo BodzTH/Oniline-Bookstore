@@ -1,4 +1,4 @@
-import { bookscard,saveBooksToStorage } from "../../Back-end/books.js";
+/* import { bookscard,saveBooksToStorage } from "../../Back-end/books.js";
 import { orders,saveOrdersToStorage } from "../../Back-end/orders.js";
 import {cart} from "../../Back-end/cart.js"
 
@@ -148,4 +148,86 @@ function setOrder()
     })
 
 }
-setOrder();
+setOrder(); */
+// Function to fetch cart data from the server
+async function fetchCartData() {
+  let cartItems;
+  try {
+      const response = await fetch('http://localhost:3000/api/getcart' );
+      cartItems = await response.json();
+      // Fetch additional book data for each cart item
+  }
+  catch (error) {
+      console.error('Error fetching cart data:', error);
+}
+return cartItems;
+};
+
+let items = document.querySelector('.list');
+
+
+let generatCheckout = async () => {
+  try {
+      const cart = await fetchCartData(); // Await the result of fetchCartData
+
+      // Generate shop content
+      items.innerHTML = cart.map(cartItem => {
+          return  `
+          <div class="item">
+          <img src="${cartItem.book_image}">
+          <div class="info">
+              <div class="name">${cartItem.book_name}</div>
+              <div class="price">${(cartItem.book_price).toFixed(2)}EGP/1 product</div>
+          </div>
+          <div class="quantity">${cartItem.Book_counts}</div>
+          <div class="returnPrice">${(cartItem.book_price*cartItem.Book_counts).toFixed(2)}EGP</div>
+          </div>
+      `;
+      }).join('');
+
+      function getTotalPrice()
+      {
+          let totaPrice=0;
+          cart.map(item => {
+              totaPrice+=(item.book_price*item.Book_counts)
+          })
+          return totaPrice
+      }
+      
+      function getTotalQuantity()
+      {
+          let totalQuantity=0;
+          cart.map(item => {
+              totalQuantity+=item.Book_counts
+          })
+          return totalQuantity
+      }
+
+
+      const totalQuantity=document.querySelector('.totalQuantity')
+      totalQuantity.innerHTML= getTotalQuantity();
+
+
+
+      const totalPrice=document.querySelector('.totalPrice')
+      totalPrice.innerHTML= getTotalPrice()+'EGP'
+
+
+      const button=document.querySelector('.js-Checkout-button')
+      button.addEventListener('click',async () => {
+        try {
+          const response = await fetch('http://localhost:3000/checkout', {
+              method: 'POST',
+          });
+      } catch (error) {
+          console.error('Error updating the cart:', error);
+          alert('Error updating the cart. Please try again later.');
+      }
+      });
+      
+  } catch (error) {
+      console.error('Error fetching cart data:', error);
+  }
+};
+
+generatCheckout();

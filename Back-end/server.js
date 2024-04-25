@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+// Using moment.js
+const moment = require('moment');
+
 
 const app = express();
 const port = 3000;
@@ -165,7 +168,7 @@ app.get('/cart', (req, res) => {
 
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
-    const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, phoneNumber, gender, password } = req.body;
+    const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber,floor, phoneNumber, gender, password } = req.body;
 
     // Validate input
     if (!email || !first_name || !last_name || !dob || !password) {
@@ -193,9 +196,8 @@ app.post('/signup', (req, res) => {
             }
 
             // Insert new user into the database with hashed password
-            const address = `${country},${city},${area},${street},${buildingNumber},${flatNumber}`;
-            const insertUserQuery = 'INSERT INTO user (email, first_name, last_name, dob, country, city, area, street, bulding_no, flat_no, phone_number, Gender, hashed_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            connection.query(insertUserQuery, [email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, phoneNumber, gender, hashedPassword], (error) => {
+            const insertUserQuery = 'INSERT INTO user (email, first_name, last_name, dob, country, city, area, street, bulding_no, flat_no,floor, phone_number, Gender, hashed_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+            connection.query(insertUserQuery, [email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber,floor, phoneNumber, gender, hashedPassword], (error) => {
                 if (error) {
                     console.error('Error inserting user data:', error);
                     return res.status(500).send('Error signing up');
@@ -348,10 +350,9 @@ app.get('/api/getAllBooks', (req, res) => {
 app.post('/addToCart', (req, res) => {
     // Check if user is logged in
     console.log(req.session.user);
-    if (req.session.user==undefined) {
-        // User is not logged in, redirect to sign-in page
-        return res.status(500).send('Error you have to sign in first');
-        
+    if (req.session.user === undefined) {
+        // User is not logged in, send an error response
+        return res.status(500).send('Error: You have to sign in first');
     }
 
     const userEmail = req.session.user;
@@ -384,8 +385,10 @@ app.post('/addToCart', (req, res) => {
             // Send a success response
             res.status(200).send('Book added to cart successfully');
         });
+
     });
 });
+
 
 app.get('/api/getcart', (req, res) => {
 
@@ -424,6 +427,8 @@ app.get('/api/getcart', (req, res) => {
 });
 
 
+
+
 app.post('/updatebookcounts', (req, res) => {
     // Check if user is logged in
 
@@ -449,6 +454,119 @@ app.post('/updatebookcounts', (req, res) => {
         // Insert the book into the cart content table
         const query = 'update cart_content set Book_counts = ? where books_book_ID = ? and user_user_id = ?';
         connection.query(query, [Book_counts, bookId, userId], (error, results) => {
+            if (error) {
+                console.error('Error adding book to cart:', error);
+                return res.status(500).send('Error adding book to cart');
+            }
+            console.log('Book added to cart successfully');
+            // Send a success response
+            res.status(200).send('Book added to cart successfully');
+        });
+    });
+});
+
+
+app.post('/checkout', (req, res) => {
+    // Check if user is logged in
+    const userEmail = req.session.user;
+    // Initial count for the book in the cart
+    // Query to retrieve user ID based on email
+    const getUserQuery = 'SELECT * FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
+
+        const userId = results[0].user_id;
+        const phone_number = results[0].phone_number;
+        const countery = results[0].country;
+        const city = results[0].city;
+        const area = results[0].area;
+        const street = results[0].street;
+        const building_no = results[0].bulding_no;
+        const floor = results[0].floor;
+        const flat_no = results[0].flat_no;
+        const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+        // Insert the order into the orders table
+        const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        connection.query(orderQuery, [currentDateTime, 'ordered', phone_number, countery, city, area, street, building_no, floor, flat_no, userId], (error, results) => {
+            if (error) {
+                console.error('Error adding order:', error);
+                return res.status(500).send('Error adding order');
+            }
+            console.log('Order added successfully');
+
+            // Get the max order ID
+            const max_IDquery = 'SELECT MAX(order_id) as max_order_id FROM orders WHERE user_user_id = ?';
+            connection.query(max_IDquery, [userId], (error, maxID) => {
+                if (error) {
+                    console.error('Error getting max order ID:', error);
+                    return res.status(500).send('Error getting max order ID');
+                }
+                
+                const maxOrderId = maxID[0].max_order_id;
+
+                // Insert into order_details
+                const insertOrderDetailsQuery = 'INSERT INTO order_details (orders_order_id, books_book_ID, Book_count) SELECT ?, books_book_ID, Book_counts FROM cart_content WHERE user_user_id = ?';
+                connection.query(insertOrderDetailsQuery, [maxOrderId, userId], (error, results) => {
+                    if (error) {
+                        console.error('Error adding order details:', error);
+                        return res.status(500).send('Error adding order details');
+                    }
+                    console.log('Order details added successfully');
+                    
+                    // Delete cart items after adding the order
+                    const deleteQuery = 'DELETE FROM cart_content WHERE user_user_id = ?';
+                    connection.query(deleteQuery, [userId], (error, results) => {
+                        if (error) {
+                            console.error('Error deleting cart items:', error);
+                            return res.status(500).send('Error deleting cart items');
+                        }
+                        console.log('Cart items deleted successfully');
+                        // Send a success response
+                        res.status(200).send('Order placed successfully');
+                    });
+                });
+            });
+        });
+    });
+});
+
+
+
+
+app.post('/deleteitem', (req, res) => {
+    // Check if user is logged in
+
+    const userEmail = req.session.user;
+    const { bookId} = req.body;
+    console.log(bookId);
+    // Initial count for the book in the cart
+    // Query to retrieve user ID based on email
+    const getUserQuery = 'SELECT user_id FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
+
+        const userId = results[0].user_id;
+
+        // Insert the book into the cart content table
+        const query = 'DELETE FROM cart_content WHERE books_book_ID = ? AND user_user_id = ?';
+        
+        connection.query(query, [bookId, userId], (error, results) => {
             if (error) {
                 console.error('Error adding book to cart:', error);
                 return res.status(500).send('Error adding book to cart');

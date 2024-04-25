@@ -145,7 +145,7 @@ let generatshop = async () => {
         // Generate shop content
         shop.innerHTML = cart.map(cartItem => {
             return `
-            <div id=product-id-${cartItem.books_book_ID} class="item">
+            <div id=product-id-${cartItem.book_ID} class="item">
                 <div class="details">
                     <img src=${cartItem.book_image} alt="Product Image" class="cart-row-img" >
                     <div class="name_desc">
@@ -221,7 +221,28 @@ let generatshop = async () => {
             });
         });
 
-        // Function to execute when the user navigates away from the page
+        document.querySelectorAll('.js-delete-item').forEach(button => {
+            button.addEventListener('click', async () => {
+                console.log('Delete button clicked');
+                let bookid = button.dataset.bookId;
+                console.log(bookid);
+                cart.map(item => {
+                    if (bookid == item.book_ID) {
+                        item.Book_counts = 0;
+                        deleteItem(bookid);
+                        let elementToRemove = document.getElementById('product-id-' + bookid);
+                        if (elementToRemove) {
+                            elementToRemove.remove();
+                        } else {
+                            console.error("Element with ID 'product-id-" + bookid + "' not found.");
+                        }
+                    }
+                });
+            });
+        });
+        
+
+
         async function updatebookcounts(bookId,Book_counts) {
             try {
                 const response = await fetch('http://localhost:3000/updatebookcounts', {
@@ -232,8 +253,24 @@ let generatshop = async () => {
                     body: JSON.stringify({ bookId,Book_counts }) // Replace 'user_id_placeholder' with the actual user ID
                 });
             } catch (error) {
-                console.error('Error adding book to cart:', error);
-                alert('Error adding book to cart. Please try again later.');
+                console.error('Error updating the cart:', error);
+                alert('Error updating the cart. Please try again later.');
+            }
+        }
+
+        
+        async function deleteItem(bookId) {
+            try {
+                const response = await fetch('http://localhost:3000/deleteitem', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ bookId }) // Replace 'user_id_placeholder' with the actual user ID
+                });
+            } catch (error) {
+                console.error('Error deleting the item from the cart:', error);
+                alert('Error deleting the item from the cart. Please try again later.');
             }
         }
 
@@ -245,7 +282,9 @@ let generatshop = async () => {
 // Call generatshop function to generate the cart items
 generatshop();
 
-
+document.querySelector('.js-checkout-button').addEventListener('click', () => {
+    alert('Checkout button clicked');
+});
 
 /* let increment_buttons=document.querySelectorAll('.js-increment')
 console.log(increment_buttons.length)
