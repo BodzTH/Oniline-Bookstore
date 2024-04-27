@@ -167,6 +167,10 @@
                 text-align: center;
                 background-color: #4e2f00;
             }
+            .orderStatusTab .statusUpdateForm .orderId {
+                margin-left: 40px;
+            }
+
         </style>
 
 
@@ -256,8 +260,24 @@
 
 
 
-<div id="orderStatusTab" class="tab-content js-edit-id-container" style="display:none;">
+<div id="orderStatusTab" class="tab-content js-edit-id-container">
+    <form id="statusUpdateForm">
+        <label for="orderId">Order ID:</label>
+        <input type="text" id="orderId" name="orderId" class="orderId">
+
+        <label for="status">Update Status:</label>
+        <select id="status" name="status">
+            <option value="Ordered">Ordered</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Canceled">Canceled</option>
+        </select>
+
+        <button type="button" onclick="updateOrderStatus()">Update</button>
+    </form>
 </div>
+
 
 <!-- Orders Tab -->
 <div id="ordersTab" class="tab-content" style="display:none;">
