@@ -17,7 +17,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Abdo2003',
+    password: 'Om@rEssam2003',
     database: 'bookstore-final'
 });
 
@@ -65,6 +65,14 @@ app.get('/checkout', (req, res) => {
 app.get('/home', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'home.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/admin', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'admin', 'admin acc.html');
     
     // Send the file as the response
     res.sendFile(filePath);
@@ -571,12 +579,34 @@ app.post('/deleteitem', (req, res) => {
                 console.error('Error adding book to cart:', error);
                 return res.status(500).send('Error adding book to cart');
             }
+            
             console.log('Book added to cart successfully');
             // Send a success response
             res.status(200).send('Book added to cart successfully');
         });
     });
 });
+
+
+app.get('/api/getAllorders', (req, res) => {
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT order_id, order_status, first_name, last_name, orders.phone_number,orders.countery, orders.city, orders.area, orders.street, orders.building_no, orders.flat_no,orders.floor ,orders.date,book_ID,book_name,Book_count,book_image
+                   FROM orders, user,order_details,books
+                   WHERE user_user_id = user_id AND books_book_ID = book_ID AND orders_order_id = order_id`;
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error orders books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+        console.log(results);
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+
 
 // Route to fetch cart data for the signed-in user
 /* app.get('/api/getCartData', (req, res) => {
