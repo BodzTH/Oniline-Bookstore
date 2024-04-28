@@ -193,6 +193,9 @@
         <div class="tab" onclick="showTab('deleteTab')">Delete Book from Database</div>
         <div class="tab" onclick="showTab('reduceTab')">Reduce Number of Books from Stock</div>
         <div class="tab" onclick="showTab('orderStatusTab')">Update Order Status</div>
+        <div class="tab" onclick="showTab('addAuthor')">Add Author</div>
+        <div class="tab" onclick="showTab('addPublisher')">Add Publisher</div>
+        <div class="tab" onclick="showTab('addCategory')">Add Category</div>
         <div class="tab" onclick="showTab('ordersTab')">Orders</div>
     </div>
 </div>
@@ -291,6 +294,33 @@
         </tr>
     </table>
 </div>
+
+<!-- Add Author -->
+<div id="addAuthor" class="tab-content">
+    <h2>Add Author</h2>
+    <label for="Author" >Author First Name:</label>
+    <input type="text" id="Author_First_Name" class="js-author-name-add-to-stock">
+    <label for="Author" >Author Last Name:</label>
+    <input type="text" id="Author_Last_Name" class="js-author-name-add-to-stock">
+    <button class="js-add-quantity-button">Add to Stock</button>
+</div>
+
+<!-- Add Publisher -->
+<div id="addPublisher" class="tab-content">
+    <h2>Add Publisher</h2>
+    <label for="Publisher" >Publisher Name:</label><br>
+    <input type="text" id="Publisher_Name" class="js-publisher-name-add-to-stock"><br><br>
+    <button class="js-add-quantity-button">Add to Stock</button>
+</div>
+
+<!-- Add  -->
+<div id="addCategory" class="tab-content">
+    <h2>Add Category</h2>
+    <label for="Publisher" >Category:</label><br>
+    <input type="text" id="Category" class="js-category-name-add-to-stock"><br><br>
+    <button class="js-add-quantity-button">Add to Stock</button>
+</div>
+
 
 <script>
     function showTab(tabId) {
