@@ -206,17 +206,15 @@
 <div id="addNumberTab" class="tab-content">
     <h2>Add Number of Books to Stock</h2>
     <label for="bookId" >Book ID:</label><br>
-    <input type="text" id="bookId" class="js-book-id-add-to-stock"><br><br>
+    <input type="text" id="js-book-id-add-book" class="js-book-id-add-book"><br><br>
     <label for="quantity">Quantity:</label><br>
-    <input type="number" id="quantity" class="js-add-quantity"><br><br>
-    <button class="js-add-quantity-button">Add to Stock</button>
+    <input type="number" id="js-book-quantity-add-book" class="js-book-quantity-add-book"><br><br>
+    <button class="js-add-book-button">Add to Stock</button>
 </div>
 
 <!-- Add New Book to Stock -->
 <div id="addNewTab" class="tab-content" style="display:none;">
     <h2>Add New Book to Stock</h2>
-    <label for="bookId">Book ID:</label><br>
-    <input class="js-book-id-add-book" type="text" id="bookId"><br><br>
     <label for="bookName">Book Name:</label><br>
     <input class="js-book-name-add-book" type="text" id="bookName"><br><br>
     <label for="bookCategory">Book Category:</label><br>
@@ -225,26 +223,25 @@
     <input class="js-in-stock-add-book" type="number" id="numBooksStore"><br><br>
     <label for="bookImage">Book Image URL:</label><br>
     <input class="js-image-path-add-book" type="text" id="bookImage"><br><br>
-    <label for="altImage">alt image:</label><br>
-    <input class="js-alt-image-add-book" type="text" id="altImage"><br><br>
-    <label for="bookPrice">Book Price in cents:</label><br>
+    <label for="bookPrice">Book Price:</label><br>
     <input class="js-price-add-book" type="number" id="bookPrice"><br><br>
-    <label for="bookAthor">athor:</label><br>
-    <input class="js-athor-add-book" type="text" id="bookAthor" step="0.1"><br><br>
+    <label for="bookAthor">athor first name:</label><br>
+    <input class="js-athor-first-add-book" type="text" id="bookAthor" step="0.1"><br><br>
+    <label for="bookAthor">athor last name:</label><br>
+    <input class="js-athor-last-add-book" type="text" id="bookAthor" step="0.1"><br><br>
     <label for="publisher">publisher:</label><br>
     <input class="js-publisher-add-book" type="text" id="publisher"><br><br>
     <label for="bookDescribtion">book describtion:</label><br>
-    <input class="js-book-describtion-add-book" type="text" id="bookDescribtion"><br><br>   
-
-    <button class="js-add-book-button" >Add New Book to Stock</button>
+    <input class="js-description-add-book" type="text" id="bookDescribtion"><br><br>   
+    <button class="add-book-button" >Add Book</button>
 </div>
 
 <!-- Delete Book from Database -->
 <div id="deleteTab" class="tab-content" style="display:none;">
     <h2>Delete Book from Database</h2>
     <label for="deleteBookId">Book ID:</label>
-    <input type="text" class="js-delete-from-database" id="deleteBookId">
-    <button class="js-delete-from-database-button">Delete Book</button>
+    <input type="text" class="js-book-id-delete-book" id="deleteBookId">
+    <button class="js-delete-book-button">Delete Book</button>
 </div>
 
 <!-- Reduce Number of Books from Stock -->
@@ -263,10 +260,10 @@
 <div id="orderStatusTab" class="tab-content js-edit-id-container">
     <form id="statusUpdateForm">
         <label for="orderId">Order ID:</label>
-        <input type="text" id="orderId" name="orderId" class="orderId">
+        <input type="text" id="js-order-id-edit-order-status" name="js-order-id-edit-order-status" class="js-order-id-edit-order-status">
 
         <label for="status">Update Status:</label>
-        <select id="status" name="status">
+        <select id="js-order-status-edit-order-status" class="js-order-status-edit-order-status" name="status">
             <option value="Ordered">Ordered</option>
             <option value="Confirmed">Confirmed</option>
             <option value="Shipped">Shipped</option>
@@ -274,7 +271,7 @@
             <option value="Canceled">Canceled</option>
         </select>
 
-        <button type="button" onclick="updateOrderStatus()">Update</button>
+        <button type="button" class="js-edit-order-status-button" >Update</button>
     </form>
 </div>
 

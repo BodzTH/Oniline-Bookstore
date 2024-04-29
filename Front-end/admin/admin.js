@@ -56,7 +56,6 @@ setInterval(async () => {
   }
 })(); */
 document.addEventListener('DOMContentLoaded', async () => {
-
   try {
       const response = await fetch('http://localhost:3000/api/getAllorders');
       const orders = await response.json();
@@ -90,8 +89,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 document.querySelector('.js-orders-container').innerHTML=ordersHTML;
   }
-
-  
        catch (error) {
       console.error('Error fetching books data:', error);
       alert('Error fetching books data. Please try again later.');
@@ -99,3 +96,129 @@ document.querySelector('.js-orders-container').innerHTML=ordersHTML;
 });
 
 
+function updateOrderStatus(){
+  document.querySelector('.js-edit-order-status-button').addEventListener('click', async () => {
+      const orderID = document.querySelector('.js-order-id-edit-order-status').value;
+      const status = document.querySelector('.js-order-status-edit-order-status').value;
+      try {
+          const response = await fetch('http://localhost:3000/updateOrderStatus', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ orderID, status }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Order status updated successfully.');
+      } catch (error) {
+          console.error('Error updating order status:', error);
+          alert('Error updating order status. Please try again later.');
+      }
+  });
+}
+
+function addNumberofBooks(){
+  document.querySelector('.js-add-book-button').addEventListener('click', async () => {
+      const bookID = document.querySelector('.js-book-id-add-book').value;
+      const quantity = document.querySelector('.js-book-quantity-add-book').value;
+      try {
+          const response = await fetch('http://localhost:3000/addNumberofBooks', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ bookID, quantity }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Book added successfully.');
+      } catch (error) {
+          console.error('Error adding book:', error);
+          alert('Error adding book. Please try again later.');
+      }
+  });
+}
+
+function reduceNumberofBooks(){
+  document.querySelector('.js-take-from-stock-button').addEventListener('click', async () => {
+      const bookID = document.querySelector('.js-book-id-take-from-stock').value;
+      const quantity = document.querySelector('.js-reduce-quantity').value;
+      try {
+          const response = await fetch('http://localhost:3000/reduceNumberofBooks', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ bookID, quantity }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Book added successfully.');
+      } catch (error) {
+          console.error('Error adding book:', error);
+          alert('Error adding book. Please try again later.');
+      }
+  });
+}
+
+function addBook(){
+  const button=document.querySelector('.add-book-button');
+  button.addEventListener('click', async () => {
+    console.log('clicked');
+      const bookName = document.querySelector('.js-book-name-add-book').value;
+      const bookCategory = document.querySelector('.js-book-category-add-book').value;
+      const inStock = document.querySelector('.js-in-stock-add-book').value;
+      const bookPrice = document.querySelector('.js-price-add-book').value;
+      const bookImage = document.querySelector('.js-image-path-add-book').value;
+      const book_author_first_name = document.querySelector('.js-athor-first-add-book').value;
+      const book_author_last_name = document.querySelector('.js-athor-last-add-book').value;
+      const book_description = document.querySelector('.js-description-add-book').value;
+      const book_publisher = document.querySelector('.js-publisher-add-book').value;
+      try {
+          const response = await fetch('http://localhost:3000/addBook', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({bookName, bookCategory,inStock, bookPrice, bookImage, book_author_first_name, book_author_last_name, book_description, book_publisher}),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Book added successfully.');
+      } catch (error) {
+          console.error('Error adding book:', error);
+          alert('Error adding book. Please try again later.');
+      }
+  }); 
+}
+
+function deleteBook(){
+  const button=document.querySelector('.js-delete-book-button');
+  button.addEventListener('click', async () => {
+      const bookID = document.querySelector('.js-book-id-delete-book').value;
+      try {
+          const response = await fetch('http://localhost:3000/deleteBook', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ bookID }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Book deleted successfully.');
+      } catch (error) {
+          console.error('Error deleting book:', error);
+          alert('Error deleting book. Please try again later.');
+      }
+  });
+}
+
+addBook();
+reduceNumberofBooks();
+addNumberofBooks();
+updateOrderStatus();
+deleteBook();
+//const button=document.querySelector('.add-book-button');
+//button.addEventListener('click',() => { console.log('clicked')})
