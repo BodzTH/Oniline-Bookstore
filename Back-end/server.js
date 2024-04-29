@@ -82,10 +82,6 @@ app.get('/Back-end/orders.js', (req, res) => {
     // Send the file as the response
     res.sendFile("orders.js", { root: __dirname });
 });
-
-
-
-
 app.get('/sign_up.css', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'sign_up.css');
