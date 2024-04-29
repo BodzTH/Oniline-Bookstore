@@ -601,12 +601,127 @@ app.get('/api/getAllorders', (req, res) => {
             res.status(500).send('Error fetching books');
             return;
         }
-        console.log(results);
         // Send the fetched books data as JSON response
         res.json(results);
     });
 });
 
+app.post('/updateOrderStatus', (req, res) => {
+    const { orderID, status } = req.body;
+
+    // Update the order status in the database
+    const query = 'UPDATE orders SET order_status = ? WHERE order_id = ?';
+    connection.query(query, [status, orderID], (error, results) => {
+        if (error) {
+            console.error('Error updating order status:', error);
+            return res.status(500).json({ error: 'Failed to update order status' });
+        }
+
+        res.json({ message: 'Order status updated successfully' });
+    });
+
+});
+
+app.post('/addNumberofBooks', (req, res) => {
+    const { bookID, quantity } = req.body;
+    // Update the order status in the database
+    const query = 'UPDATE books SET books_instock = books_instock+? WHERE book_ID = ?';
+    connection.query(query, [quantity, bookID], (error, results) => {
+        if (error) {
+            console.error('Error updating number of books:', error);
+            return res.status(500).json({ error: 'Failed to update number of books' });
+        }
+
+        res.json({ message: 'Number of books updated successfully' });
+    });
+});
+
+app.post('/reduceNumberofBooks', (req, res) => {
+    const { bookID, quantity } = req.body;
+    // Update the order status in the database
+    const query = 'UPDATE books SET books_instock = books_instock-? WHERE book_ID = ?';
+    connection.query(query, [quantity, bookID], (error, results) => {
+        if (error) {
+            console.error('Error updating number of books:', error);
+            return res.status(500).json({ error: 'Failed to update number of books' });
+        }
+
+        res.json({ message: 'Number of books updated successfully' });
+    });
+});
+
+app.post('/addBook', (req, res) => {
+    let book_author_id, book_publisher_id, book_category_id;
+    const { bookName, bookCategory, inStock,  bookPrice, bookImage, book_author_first_name, book_author_last_name, book_description, book_publisher } = req.body;
+
+    const get_author_ID = `SELECT author_ID FROM authors WHERE first_name = ? AND last_name = ?`;
+    connection.query(get_author_ID, [book_author_first_name, book_author_last_name], (error, authorResults) => {
+        if (error) {
+            console.error('Error adding book:', error);
+            return res.status(500).json({ error: 'Failed to add book' });
+        }
+        if (authorResults.length === 0) {
+            console.error('Author not found');
+            return res.status(404).json({ error: 'Author not found' });
+        }
+        book_author_id = authorResults[0].author_ID;
+        console.log(book_author_id);
+
+        const get_publisher_ID = `SELECT publisher_ID FROM publishers WHERE name = ?`;
+        connection.query(get_publisher_ID, [book_publisher], (error, publisherResults) => {
+            if (error) {
+                console.error('Error adding book:', error);
+                return res.status(500).json({ error: 'Failed to add book' });
+            }
+            if (publisherResults.length === 0) {
+                console.error('Publisher not found');
+                return res.status(404).json({ error: 'Publisher not found' });
+            }
+            book_publisher_id = publisherResults[0].publisher_ID;
+            console.log(book_publisher_id);
+
+            const get_category_ID = `SELECT category_ID FROM categories WHERE category_name = ?`;
+            connection.query(get_category_ID, [bookCategory], (error, categoryResults) => {
+                if (error) {
+                    console.error('Error adding book:', error);
+                    return res.status(500).json({ error: 'Failed to add book' });
+                }
+                if (categoryResults.length === 0) {
+                    console.error('Category not found');
+                    return res.status(404).json({ error: 'Category not found' });
+                }
+                book_category_id = categoryResults[0].category_ID;
+                console.log(book_category_id);
+
+                // Insert the book into the database
+                const query = 'INSERT INTO books (book_name, book_desc, book_price, books_instock, books_sold, book_image, book_altImage, categories_category_ID ,publishers_publisher_ID, authors_author_ID) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?)';
+                connection.query(query, [bookName, book_description, bookPrice, inStock,0 ,bookImage,bookName , book_category_id,book_publisher_id ,book_author_id], (error, insertResults) => {
+                    if (error) {
+                        console.error('Error adding book:', error);
+                        return res.status(500).json({ error: 'Failed to add book' });
+                    }
+
+                    res.json({ message: 'Book added successfully' });
+                });
+            });
+        });
+    });
+});
+
+app.post('/deleteBook', (req, res) => {
+    const { bookID } = req.body;
+
+    // Delete the book from the database
+    const query = 'DELETE FROM books WHERE book_ID = ?';
+    connection.query(query, [bookID], (error, results) => {
+        if (error) {
+            console.error('Error deleting book:', error);
+            return res.status(500).json({ error: 'Failed to delete book' });
+        }
+
+        res.json({ message: 'Book deleted successfully' });
+    });
+});
 
 // Route to fetch cart data for the signed-in user
 /* app.get('/api/getCartData', (req, res) => {
