@@ -95,7 +95,11 @@ users.forEach(user => {
             <div class="user-container">
                 <div class="user" onclick="toggleDetails(${user.user_id})">${user.email}</div>
                 <div class="details" id="${user.user_id}">
-                    <p>User 1 details go here.</p>
+                    <div>user ID: ${user.user_id}</div>
+                    <div>full Name: ${user.first_name} ${user.last_name}</div>
+                    <div>Phone Number: ${user.phone_number}</div>
+                    <div>Address: ${user.country}-${user.city}-${user.area}-${user.street}-${user.bulding_no}-${user.flat_no}-${user.floor}</div>
+                    <div>gender: ${user.Gender}</div>
                 </div>
             </div>`
 })
