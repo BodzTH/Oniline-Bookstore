@@ -57,11 +57,14 @@ setInterval(async () => {
 })(); */
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-      const response = await fetch('http://localhost:3000/api/getAllorders');
-      const orders = await response.json();
+      const orders_response = await fetch('http://localhost:3000/api/getAllorders');
+      const orders = await orders_response.json();
+      const users_response = await fetch('http://localhost:3000/api/getAllUsers');
+      const users=await users_response.json();
       console.log(orders)
       let last_order_id=0;
       let ordersHTML=``
+      let usersHTML=``
       orders.forEach(order => {
         if(order.order_id!=last_order_id){
           ordersHTML+=`
@@ -86,7 +89,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="js-book-quantity">quantity: ${order.Book_count}</div>
             <image src='${order.book_image}' class="js-book-image"></image>`
           }
+});
+users.forEach(user => {
+  usersHTML+=`
+            <div class="user-container">
+                <div class="user" onclick="toggleDetails(${user.user_id})">${user.email}</div>
+                <div class="details" id="${user.user_id}">
+                    <p>User 1 details go here.</p>
+                </div>
+            </div>`
 })
+document.querySelector('.js-users-container').innerHTML=usersHTML;
 document.querySelector('.js-orders-container').innerHTML=ordersHTML;
   }
        catch (error) {
@@ -215,6 +228,76 @@ function deleteBook(){
   });
 }
 
+function addAuthor(){
+  const button=document.querySelector('.js-add-author-button');
+  button.addEventListener('click', async () => {
+      const authorFirstName = document.querySelector('.js-author-first-name-add-author').value;
+      const authorLastName = document.querySelector('.js-author-last-name-add-author').value;
+      try {
+          const response = await fetch('http://localhost:3000/addAuthor', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ authorFirstName, authorLastName }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Author added successfully.');
+      } catch (error) {
+          console.error('Error adding author:', error);
+          alert('Error adding author. Please try again later.');
+      }
+  });
+}
+
+function addpubisher(){
+  const button=document.querySelector('.js-add-publisher-button');
+  button.addEventListener('click', async () => {
+      const publisherName = document.querySelector('.js-publisher-name-add-publisher').value;
+      try {
+          const response = await fetch('http://localhost:3000/addPublisher', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ publisherName }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Publisher added successfully.');
+      } catch (error) {
+          console.error('Error adding publisher:', error);
+          alert('Error adding publisher. Please try again later.');
+      }
+  });
+}
+
+function addCategory(){
+  const button=document.querySelector('.js-add-category-button');
+  button.addEventListener('click', async () => {
+      const categoryName = document.querySelector('.js-category-name-add-category').value;
+      try {
+          const response = await fetch('http://localhost:3000/addCategory', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ categoryName }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Category added successfully.');
+      } catch (error) {
+          console.error('Error adding category:', error);
+          alert('Error adding category. Please try again later.');
+      }
+  });
+}
+
+addCategory();
+addpubisher();
+addAuthor();
 addBook();
 reduceNumberofBooks();
 addNumberofBooks();

@@ -351,42 +351,29 @@
         <div id="addAuthor" class="tab-content">
             <h2>Add Author</h2>
             <label for="Author">Author First Name:</label>
-            <input type="text" id="Author_First_Name" class="js-author-name-add-to-stock">
+            <input type="text" id="Author_First_Name" class="js-author-first-name-add-author">
             <label for="Author">Author Last Name:</label>
-            <input type="text" id="Author_Last_Name" class="js-author-name-add-to-stock">
-            <button class="js-add-quantity-button">Add to Stock</button>
+            <input type="text" id="Author_Last_Name" class="js-author-last-name-add-author">
+            <button class="js-add-author-button">Add author</button>
         </div>
 
         <!-- Add Publisher -->
         <div id="addPublisher" class="tab-content">
             <h2>Add Publisher</h2>
             <label for="Publisher">Publisher Name:</label><br>
-            <input type="text" id="Publisher_Name" class="js-publisher-name-add-to-stock"><br><br>
-            <button class="js-add-quantity-button">Add to Stock</button>
+            <input type="text" id="Publisher_Name" class="js-publisher-name-add-publisher"><br><br>
+            <button class="js-add-publisher-button">Add publisher</button>
         </div>
 
         <!-- Add  -->
         <div id="addCategory" class="tab-content">
             <h2>Add Category</h2>
             <label for="Publisher">Category:</label><br>
-            <input type="text" id="Category" class="js-category-name-add-to-stock"><br><br>
-            <button class="js-add-quantity-button">Add to Stock</button>
+            <input type="text" id="Category" class="js-category-name-add-category"><br><br>
+            <button class="js-add-category-button">Add Category</button>
         </div>
 
-        <div id="user_accounts" class="tab-content">
-            <div class="user-container">
-                <div class="user" onclick="toggleDetails('user1')">User 1</div>
-                <div class="details" id="user1">
-                    <p>User 1 details go here.</p>
-                </div>
-            </div>
-
-            <div class="user-container">
-                <div class="user" onclick="toggleDetails('user2')">User 2</div>
-                <div class="details" id="user2">
-                    <p>User 2 details go here.</p>
-                </div>
-            </div>
+        <div id="user_accounts" class="tab-content js-users-container">
         </div>
 
         <script>

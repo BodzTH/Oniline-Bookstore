@@ -64,6 +64,30 @@ app.get('/checkout', (req, res) => {
 
 app.get('/home', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'Home_page_final','home.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/home.css', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'Home_page_final','home.css');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/home.js', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'Home_page_final','home.js');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/home2', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'home.html');
     
     // Send the file as the response
@@ -716,6 +740,66 @@ app.post('/deleteBook', (req, res) => {
         }
 
         res.json({ message: 'Book deleted successfully' });
+    });
+});
+
+app.post('/addAuthor', (req, res) => {
+    const { authorFirstName, authorLastName } = req.body;
+
+    // Insert the author into the database
+    const query = 'INSERT INTO authors (first_name, last_name) VALUES (?, ?)';
+    connection.query(query, [authorFirstName, authorLastName], (error, results) => {
+        if (error) {
+            console.error('Error adding author:', error);
+            return res.status(500).json({ error: 'Failed to add author' });
+        }
+
+        res.json({ message: 'Author added successfully' });
+    });
+});
+
+app.post('/addPublisher', (req, res) => {
+    const { publisherName } = req.body;
+    // Insert the publisher into the database
+    const query = 'INSERT INTO publishers (name) VALUES (?)';
+    connection.query(query, [publisherName], (error, results) => {
+        if (error) {
+            console.error('Error adding publisher:', error);
+            return res.status(500).json({ error: 'Failed to add publisher' });
+        }
+
+        res.json({ message: 'Publisher added successfully' });
+    });
+});
+
+app.post('/addCategory', (req, res) => {
+    const { categoryName } = req.body;
+    // Insert the category into the database
+    const query = 'INSERT INTO categories (category_name) VALUES (?)';
+    connection.query(query, [categoryName], (error, results) => {
+        if (error) {
+            console.error('Error adding category:', error);
+            return res.status(500).json({ error: 'Failed to add category' });
+        }
+
+        res.json({ message: 'Category added successfully' });
+    });
+});
+
+app.get('/api/getAllUsers', (req, res) => {
+    // Query to fetch all users from the database
+    const query = 'SELECT * FROM user';
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching users from database:', error);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Send the fetched users data as JSON response
+        res.json(results);
     });
 });
 

@@ -132,3 +132,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Error fetching books data. Please try again later.');
     }
   });
+
+/*   document.querySelector('.shop').addEventListener('click', async (e) => {
+    try{
+        fetch('http://localhost:3000/addToCart', {
+            method: 'GET',
+        });
+    }
+    catch (error) {
+        console.error('Error adding book to cart:', error);
+        alert('Error adding book to cart. Please try again later.');
+    }
+  }); */
