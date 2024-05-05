@@ -227,6 +227,34 @@
         .details.active {
             display: block;
         }
+
+        .author-list {
+            margin-top: 20px;
+        }
+
+        .author {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: none;
+            color:#ccc
+            /* Initially hide each author */
+        }
+        .publisher{
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: none;
+            color:#ccc
+        }
+        .category{
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: none;
+            color:#ccc
+        }
+        .show {
+            display: block;
+            /* Show author when .show class is applied */
+        }
     </style>
 
 
@@ -262,47 +290,47 @@
 
 
 
-<!-- Add Number of Books to Stock -->
-<div id="addNumberTab" class="tab-content">
-    <h2>Add Number of Books to Stock</h2>
-    <label for="bookId" >Book ID:</label><br>
-    <input type="text" id="js-book-id-add-book" class="js-book-id-add-book"><br><br>
-    <label for="quantity">Quantity:</label><br>
-    <input type="number" id="js-book-quantity-add-book" class="js-book-quantity-add-book"><br><br>
-    <button class="js-add-book-button">Add to Stock</button>
-</div>
+        <!-- Add Number of Books to Stock -->
+        <div id="addNumberTab" class="tab-content">
+            <h2>Add Number of Books to Stock</h2>
+            <label for="bookId">Book ID:</label><br>
+            <input type="text" id="js-book-id-add-book" class="js-book-id-add-book"><br><br>
+            <label for="quantity">Quantity:</label><br>
+            <input type="number" id="js-book-quantity-add-book" class="js-book-quantity-add-book"><br><br>
+            <button class="js-add-book-button">Add to Stock</button>
+        </div>
 
-<!-- Add New Book to Stock -->
-<div id="addNewTab" class="tab-content" style="display:none;">
-    <h2>Add New Book to Stock</h2>
-    <label for="bookName">Book Name:</label><br>
-    <input class="js-book-name-add-book" type="text" id="bookName"><br><br>
-    <label for="bookCategory">Book Category:</label><br>
-    <input class="js-book-category-add-book" type="text" id="bookCategory"><br><br>
-    <label for="numBooksStore">Number of Books in Store:</label><br>
-    <input class="js-in-stock-add-book" type="number" id="numBooksStore"><br><br>
-    <label for="bookImage">Book Image URL:</label><br>
-    <input class="js-image-path-add-book" type="text" id="bookImage"><br><br>
-    <label for="bookPrice">Book Price:</label><br>
-    <input class="js-price-add-book" type="number" id="bookPrice"><br><br>
-    <label for="bookAthor">athor first name:</label><br>
-    <input class="js-athor-first-add-book" type="text" id="bookAthor" step="0.1"><br><br>
-    <label for="bookAthor">athor last name:</label><br>
-    <input class="js-athor-last-add-book" type="text" id="bookAthor" step="0.1"><br><br>
-    <label for="publisher">publisher:</label><br>
-    <input class="js-publisher-add-book" type="text" id="publisher"><br><br>
-    <label for="bookDescribtion">book describtion:</label><br>
-    <input class="js-description-add-book" type="text" id="bookDescribtion"><br><br>   
-    <button class="add-book-button" >Add Book</button>
-</div>
+        <!-- Add New Book to Stock -->
+        <div id="addNewTab" class="tab-content" style="display:none;">
+            <h2>Add New Book to Stock</h2>
+            <label for="bookName">Book Name:</label><br>
+            <input class="js-book-name-add-book" type="text" id="bookName"><br><br>
+            <label for="bookCategory">Book Category:</label><br>
+            <input class="js-book-category-add-book" type="text" id="bookCategory"><br><br>
+            <label for="numBooksStore">Number of Books in Store:</label><br>
+            <input class="js-in-stock-add-book" type="number" id="numBooksStore"><br><br>
+            <label for="bookImage">Book Image URL:</label><br>
+            <input class="js-image-path-add-book" type="text" id="bookImage"><br><br>
+            <label for="bookPrice">Book Price:</label><br>
+            <input class="js-price-add-book" type="number" id="bookPrice"><br><br>
+            <label for="bookAthor">athor first name:</label><br>
+            <input class="js-athor-first-add-book" type="text" id="bookAthor" step="0.1"><br><br>
+            <label for="bookAthor">athor last name:</label><br>
+            <input class="js-athor-last-add-book" type="text" id="bookAthor" step="0.1"><br><br>
+            <label for="publisher">publisher:</label><br>
+            <input class="js-publisher-add-book" type="text" id="publisher"><br><br>
+            <label for="bookDescribtion">book describtion:</label><br>
+            <input class="js-description-add-book" type="text" id="bookDescribtion"><br><br>
+            <button class="add-book-button">Add Book</button>
+        </div>
 
-<!-- Delete Book from Database -->
-<div id="deleteTab" class="tab-content" style="display:none;">
-    <h2>Delete Book from Database</h2>
-    <label for="deleteBookId">Book ID:</label>
-    <input type="text" class="js-book-id-delete-book" id="deleteBookId">
-    <button class="js-delete-book-button">Delete Book</button>
-</div>
+        <!-- Delete Book from Database -->
+        <div id="deleteTab" class="tab-content" style="display:none;">
+            <h2>Delete Book from Database</h2>
+            <label for="deleteBookId">Book ID:</label>
+            <input type="text" class="js-book-id-delete-book" id="deleteBookId">
+            <button class="js-delete-book-button">Delete Book</button>
+        </div>
 
         <!-- Reduce Number of Books from Stock -->
         <div id="reduceTab" class="tab-content" style="display:none;">
@@ -317,29 +345,29 @@
 
 
 
-<div id="orderStatusTab" class="tab-content js-edit-id-container">
-    <form id="statusUpdateForm">
-        <label for="orderId">Order ID:</label>
-        <input type="text" id="js-order-id-edit-order-status" name="js-order-id-edit-order-status" class="js-order-id-edit-order-status">
+        <div id="orderStatusTab" class="tab-content js-edit-id-container">
+            <form id="statusUpdateForm">
+                <label for="orderId">Order ID:</label>
+                <input type="text" id="js-order-id-edit-order-status" name="js-order-id-edit-order-status"
+                    class="js-order-id-edit-order-status">
 
-        <label for="status">Update Status:</label>
-        <select id="js-order-status-edit-order-status" class="js-order-status-edit-order-status" name="status">
-            <option value="Ordered">Ordered</option>
-            <option value="Confirmed">Confirmed</option>
-            <option value="Shipped">Shipped</option>
-            <option value="Delivered">Delivered</option>
-            <option value="Canceled">Canceled</option>
-        </select>
+                <label for="status">Update Status:</label>
+                <select id="js-order-status-edit-order-status" class="js-order-status-edit-order-status" name="status">
+                    <option value="Ordered">Ordered</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Canceled">Canceled</option>
+                </select>
 
-        <button type="button" class="js-edit-order-status-button" >Update</button>
-    </form>
-</div>
+                <button type="button" class="js-edit-order-status-button">Update</button>
+            </form>
+        </div>
 
 
         <!-- Orders Tab -->
         <div id="ordersTab" class="tab-content" style="display:none;">
             <h2 style="text-align:center;">Orders</h2>
-
             <table>
                 <tr>
                     <td class="js-orders-container">Content from .js-orders-container</td>
@@ -355,6 +383,14 @@
             <label for="Author">Author Last Name:</label>
             <input type="text" id="Author_Last_Name" class="js-author-last-name-add-author">
             <button class="js-add-author-button">Add author</button>
+            <h2>Show Author</h2>
+            <button class="js-get-author-button">GET Author</button>
+            <div class="author-list" id="authorList">
+                <div class="author">Author 1</div>
+                <div class="author">Author 2</div>
+                <div class="author">Author 3</div>
+                <!-- Add more authors as needed -->
+            </div>
         </div>
 
         <!-- Add Publisher -->
@@ -362,15 +398,31 @@
             <h2>Add Publisher</h2>
             <label for="Publisher">Publisher Name:</label><br>
             <input type="text" id="Publisher_Name" class="js-publisher-name-add-publisher"><br><br>
-            <button class="js-add-publisher-button">Add publisher</button>
+            <button class="js-add-publisher-button">Add Publisher</button>
+            <h2>Show Publisher</h2>
+            <button class="js-get-publisher-button">GET Publisher</button>
+            <div class="publisher-list" id="publisherList">
+                <div class="publisher">publisher 1</div>
+                <div class="publisher">publisher 2</div>
+                <div class="publisher">publisher 3</div>
+                <!-- Add more publishers as needed -->
+            </div>
         </div>
 
         <!-- Add  -->
         <div id="addCategory" class="tab-content">
             <h2>Add Category</h2>
-            <label for="Publisher">Category:</label><br>
-            <input type="text" id="Category" class="js-category-name-add-category"><br><br>
+            <label for="category">Category:</label><br>
+            <input type="text" id="category" class="js-category-name-add-category"><br><br>
             <button class="js-add-category-button">Add Category</button>
+            <h2>Show Category</h2>
+            <button class="js-get-category-button">GET Category</button>
+            <div class="category-list" id="categoryList">
+                <div class="category">Category 1</div>
+                <div class="category">Category 2</div>
+                <div class="category">Category 3</div>
+                <!-- Add more Categorys as needed -->
+            </div>
         </div>
 
         <div id="user_accounts" class="tab-content js-users-container">
@@ -394,6 +446,24 @@
                 const sidebar = document.querySelector('.sidebar');
                 sidebar.style.width = (sidebar.style.width === '150px') ? '0' : '150px';
             }
+            document.querySelector('.js-get-author-button').addEventListener('click', function () {
+                var authors = document.querySelectorAll('.author');
+                authors.forEach(function (author) {
+                    author.classList.toggle('show');
+                });
+            });
+            document.querySelector('.js-get-publisher-button').addEventListener('click', function () {
+                var publishers = document.querySelectorAll('.publisher');
+                publishers.forEach(function (publisher) {
+                    publisher.classList.toggle('show');
+                });
+            });
+            document.querySelector('.js-get-category-button').addEventListener('click', function () {
+                var categorys = document.querySelectorAll('.category');
+                categorys.forEach(function (category) {
+                    category.classList.toggle('show');
+                });
+            });
 
         </script>
         <script src="admin.js" type="module"></script>
