@@ -114,15 +114,22 @@ users.forEach(user => {
 })
 
 authors.forEach(author => {
-  authorsHTML+=`<div class="author"><pre>ID: ${author.author_ID}      first name: ${author.first_name}    last name: ${author.last_name}  </pre></div>`
+  authorsHTML+=`
+  <td class="author"><pre>ID ${author.author_ID}</pre></td>
+  <td class="author"><pre>first name ${author.first_name}</pre></td>
+  <td class="author"><pre>last name ${author.last_name}</pre></td>`
 })
 
 publishers.forEach(publisher => {
-  publishersHTML+=`<div class="publisher"><pre>ID: ${publisher.publisher_ID}      name: ${publisher.name}  </pre></div>`
+  publishersHTML+=`
+  <td class="publisher"><pre>${publisher.publisher_ID}</pre></td>
+  <td class="publisher"><pre>${publisher.name}</pre></td>`
 })
 
 categories.forEach(category => {
-  categoriesHTML+=`<div class="category"><pre>ID: ${category.category_ID}      name: ${category.category_name}  </pre></div>`
+  categoriesHTML+=`
+  <td class="category"><pre>${category.category_ID}</pre></td>
+  <td class="category"><pre>${category.category_name}</pre></td>`
 })
 
 document.querySelector('.category-list').innerHTML=categoriesHTML;

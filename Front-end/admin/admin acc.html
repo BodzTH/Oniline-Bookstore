@@ -283,6 +283,7 @@
                 <div class="tab" onclick="showTab('addCategory')">Add Category</div>
                 <div class="tab" onclick="showTab('ordersTab')">Orders</div>
                 <div class="tab" onclick="showTab('user_accounts')">user accounts</div>
+                <div class="tab" onclick="showTab('add_admin_account')">add admin account</div>
             </div>
         </div>
 
@@ -385,12 +386,16 @@
             <button class="js-add-author-button">Add author</button>
             <h2>Show Author</h2>
             <button class="js-get-author-button">GET Author</button>
-            <div class="author-list" id="authorList">
-                <div class="author">Author 1</div>
-                <div class="author">Author 2</div>
-                <div class="author">Author 3</div>
+            <table class="author-list" id="authorList">
+                <tr>
+                    <td>ID</td>
+                    <td>First name</td>
+                    <td>last name</td>
+                </tr>
+                <tr class="author">
+                </tr>
                 <!-- Add more authors as needed -->
-            </div>
+            </table>
         </div>
 
         <!-- Add Publisher -->
@@ -401,12 +406,15 @@
             <button class="js-add-publisher-button">Add Publisher</button>
             <h2>Show Publisher</h2>
             <button class="js-get-publisher-button">GET Publisher</button>
-            <div class="publisher-list" id="publisherList">
-                <div class="publisher">publisher 1</div>
-                <div class="publisher">publisher 2</div>
-                <div class="publisher">publisher 3</div>
+            <table class="publisher-list" id="publisherList">
+                <tr>
+                    <td>ID</td>
+                    <td>name</td>
+                </tr>
+                <tr class="publisher">
+                </tr>
                 <!-- Add more publishers as needed -->
-            </div>
+            </table>
         </div>
 
         <!-- Add  -->
@@ -417,15 +425,29 @@
             <button class="js-add-category-button">Add Category</button>
             <h2>Show Category</h2>
             <button class="js-get-category-button">GET Category</button>
-            <div class="category-list" id="categoryList">
-                <div class="category">Category 1</div>
-                <div class="category">Category 2</div>
-                <div class="category">Category 3</div>
-                <!-- Add more Categorys as needed -->
-            </div>
+            <table class="category-list" id="categoryList">
+                <tr>
+                    <td>ID</td>
+                    <td>name</td>
+                </tr>
+                <tr class="category">
+                </tr>
+                <!-- Add more publishers as needed -->
+            </table>
         </div>
 
         <div id="user_accounts" class="tab-content js-users-container">
+        </div>
+        
+        <div id="add_admin_account" class="tab-content">
+            <h2>Add Admin Account</h2>
+            <label for="Admin">Email:</label>
+            <input type="text" id="admin_email" class="js-admin-email-add-admin-account">
+            <label for="Admin">Password:</label>
+            <input type="text" id="admin_passwrod" class="js-admin-password-add-admin-account">
+            <label for="Admin">Confirm Password:</label>
+            <input type="text" id="admin_passwrod_Confirmtion" class="js-admin-password-confirmtion-add-admin-account">
+            <button class="js-add-admin-button">Add admin</button>
         </div>
 
         <script>
