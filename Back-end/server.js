@@ -180,6 +180,14 @@ app.get('/orders.css', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/signinadmin', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'admin', 'accounts','signin.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});  
+
 // Route for cart page
 app.get('/cart', (req, res) => {
     if (req.session.user==undefined) {
@@ -803,6 +811,99 @@ app.get('/api/getAllUsers', (req, res) => {
     });
 });
 
+app.get('/api/getAuthors', (req, res) => {
+    // Query to fetch all authors from the database
+    const query = 'SELECT * FROM authors';
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching authors from database:', error);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Send the fetched authors data as JSON response
+        res.json(results);
+    });
+})
+
+app.get('/api/getPublishers', (req, res) => {
+    // Query to fetch all publishers from the database
+    const query = 'SELECT * FROM publishers';
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching publishers from database:', error);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Send the fetched publishers data as JSON response
+        res.json(results);
+    });    
+})
+
+app.get('/api/getCategories', (req, res) => {
+    // Query to fetch all categories from the database
+    const query = 'SELECT * FROM categories';
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching categories from database:', error);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+
+        // Send the fetched categories data as JSON response
+        res.json(results);
+    });
+})
+
+app.post('/signinadmin', (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        return res.status(400).send('Email and password are required');
+    }
+
+    // Check if user exists in the database
+    const checkUserQuery = 'SELECT * FROM user WHERE email = ?';
+    connection.query(checkUserQuery, [email], (error, results) => {
+        if (error) {
+            console.error('Error querying database:', error);
+            return res.status(500).send('Error signing in');
+        }
+
+        // Check if user was found
+        if (results.length === 0) {
+            // User not found, redirect to sign-in page with error message
+            return res.redirect('/signinadmin?error=Invalid email or password');
+        }
+
+        // Compare hashed password with input password
+            if (results[0].email == email && results[0].hashed_password == password) {
+                req.session.user = email;
+                res.cookie('admin', email); // Set user cookie
+                res.redirect("/admin");
+            }
+
+            else {
+                // Password doesn't match, redirect to sign-in page with error message
+                return res.redirect('/signin?error=Invalid email or password');
+            }
+
+            // User was found and password matches, create session
+
+
+            // Redirect user to profile page after successful sign-in
+
+        
+    });
+});
 // Route to fetch cart data for the signed-in user
 /* app.get('/api/getCartData', (req, res) => {
     const userEmail = req.session.user;

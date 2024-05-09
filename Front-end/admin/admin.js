@@ -61,10 +61,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       const orders = await orders_response.json();
       const users_response = await fetch('http://localhost:3000/api/getAllUsers');
       const users=await users_response.json();
+      const authors_respons = await fetch('http://localhost:3000/api/getAuthors');
+      const authors=await authors_respons.json();
+      const publishers_respons = await fetch('http://localhost:3000/api/getPublishers');
+      const publishers=await publishers_respons.json();
+      const categories_respons = await fetch('http://localhost:3000/api/getCategories');
+      const categories=await categories_respons.json();
       console.log(orders)
       let last_order_id=0;
       let ordersHTML=``
       let usersHTML=``
+      let authorsHTML=``
+      let publishersHTML=``
+      let categoriesHTML=``
       orders.forEach(order => {
         if(order.order_id!=last_order_id){
           ordersHTML+=`
@@ -103,6 +112,22 @@ users.forEach(user => {
                 </div>
             </div>`
 })
+
+authors.forEach(author => {
+  authorsHTML+=`<div class="author"><pre>ID: ${author.author_ID}      first name: ${author.first_name}    last name: ${author.last_name}  </pre></div>`
+})
+
+publishers.forEach(publisher => {
+  publishersHTML+=`<div class="publisher"><pre>ID: ${publisher.publisher_ID}      name: ${publisher.name}  </pre></div>`
+})
+
+categories.forEach(category => {
+  categoriesHTML+=`<div class="category"><pre>ID: ${category.category_ID}      name: ${category.category_name}  </pre></div>`
+})
+
+document.querySelector('.category-list').innerHTML=categoriesHTML;
+document.querySelector('.publisher-list').innerHTML=publishersHTML;
+document.querySelector('.author-list').innerHTML=authorsHTML;
 document.querySelector('.js-users-container').innerHTML=usersHTML;
 document.querySelector('.js-orders-container').innerHTML=ordersHTML;
   }
