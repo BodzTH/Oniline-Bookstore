@@ -114,30 +114,31 @@ users.forEach(user => {
 })
 
 authors.forEach(author => {
-  authorsHTML+=`
-  <td class="author"><pre>ID ${author.author_ID}</pre></td>
-  <td class="author"><pre>first name ${author.first_name}</pre></td>
-  <td class="author"><pre>last name ${author.last_name}</pre></td>`
+  authorsHTML+=`<tr>
+  <td class="author"> ${author.author_ID}</td>
+  <td class="author"> ${author.first_name}</td>
+  <td class="author"> ${author.last_name}</td>
+  </tr>`
 })
 
 publishers.forEach(publisher => {
   publishersHTML+=`
-  <td class="publisher"><pre>${publisher.publisher_ID}</pre></td>
-  <td class="publisher"><pre>${publisher.name}</pre></td>`
+  <td class="publisher">${publisher.publisher_ID}</td>
+  <td class="publisher">${publisher.name}</td>`
 })
 
 categories.forEach(category => {
   categoriesHTML+=`
-  <td class="category"><pre>${category.category_ID}</pre></td>
-  <td class="category"><pre>${category.category_name}</pre></td>`
+  <td class="category">${category.category_ID}</td>
+  <td class="category">${category.category_name}</td>`
 })
 
-document.querySelector('.category-list').innerHTML=categoriesHTML;
-document.querySelector('.publisher-list').innerHTML=publishersHTML;
-document.querySelector('.author-list').innerHTML=authorsHTML;
+document.querySelector('.category-list').innerHTML+=categoriesHTML;
+document.querySelector('.publisher-list').innerHTML+=publishersHTML;
+document.querySelector('.authers-list').innerHTML+=authorsHTML;
 document.querySelector('.js-users-container').innerHTML=usersHTML;
 document.querySelector('.js-orders-container').innerHTML=ordersHTML;
-  }
+console.log(document.querySelector('.authers-list').innerHTML)}
        catch (error) {
       console.error('Error fetching books data:', error);
       alert('Error fetching books data. Please try again later.');
@@ -331,6 +332,32 @@ function addCategory(){
   });
 }
 
+function addadmin() {
+  const button=document.querySelector('.js-add-admin-button');
+  button.addEventListener('click', async () => {
+      const email = document.querySelector('.js-admin-email-add-admin-account').value;
+      const password = document.querySelector('.js-admin-password-add-admin-account').value;
+      const confirmPassword = document.querySelector('.js-admin-password-confirmtion-add-admin-account').value;
+      if (password !== confirmPassword) {
+          alert('Passwords do not match. Please try again.');
+          return;
+      }
+      try {
+          const response = await fetch('http://localhost:3000/addAdmin', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email, password }),
+          });
+          alert('Admin added successfully.');
+      } catch (error) {
+          console.error('Error adding admin:', error);
+          alert('Error adding admin. Please try again later.');
+      }
+  });
+}
+addadmin();
 addCategory();
 addpubisher();
 addAuthor();

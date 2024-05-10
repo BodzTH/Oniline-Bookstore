@@ -95,11 +95,17 @@ app.get('/home2', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
+    if (req.session.admin === undefined) {
+        // Admin is not logged in, redirect to sign-in page
+        res.redirect('/signinadmin?');
+    }
+    else {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'admin', 'admin acc.html');
     
     // Send the file as the response
     res.sendFile(filePath);
+}
 });
 
 app.get('/Back-end/orders.js', (req, res) => {
@@ -338,6 +344,20 @@ app.post('/logout', (req, res) => {
         res.clearCookie('user');
         // Redirect user to sign-in page after logout
         res.redirect('/signin');
+    });
+});
+
+// Route for logout
+app.get('/logoutadmin', (req, res) => {
+    // Destroy session
+    req.session.destroy((error) => {
+        if (error) {
+            console.error('Error destroying session:', error);
+        }
+        // Clear user cookie
+        res.clearCookie('admin');
+        // Redirect user to sign-in page after logout
+        res.redirect('/signinadmin');
     });
 });
 
@@ -871,7 +891,7 @@ app.post('/signinadmin', (req, res) => {
     }
 
     // Check if user exists in the database
-    const checkUserQuery = 'SELECT * FROM user WHERE email = ?';
+    const checkUserQuery = 'SELECT * FROM admin WHERE email = ?';
     connection.query(checkUserQuery, [email], (error, results) => {
         if (error) {
             console.error('Error querying database:', error);
@@ -884,26 +904,54 @@ app.post('/signinadmin', (req, res) => {
             return res.redirect('/signinadmin?error=Invalid email or password');
         }
 
-        // Compare hashed password with input password
-            if (results[0].email == email && results[0].hashed_password == password) {
-                req.session.user = email;
-                res.cookie('admin', email); // Set user cookie
-                res.redirect("/admin");
-            }
-
-            else {
-                // Password doesn't match, redirect to sign-in page with error message
-                return res.redirect('/signin?error=Invalid email or password');
-            }
-
-            // User was found and password matches, create session
-
-
-            // Redirect user to profile page after successful sign-in
-
-        
+        // Compare input password with database password
+        if (results[0].hashed_password === password) {
+            // Password matches, create session and set cookie
+            req.session.admin = email;
+            res.cookie('admin', email);
+            return res.redirect('/admin');
+        } else {
+            // Password doesn't match, redirect to sign-in page with error message
+            return res.redirect('/signinadmin?error=Invalid email or password');
+        }
     });
 });
+app.post('/addAdmin', (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        return res.status(400).send('Email and password are required');
+    }
+
+    // Check if user exists in the database
+    const checkUserQuery = 'SELECT * FROM admin WHERE email = ?';
+    connection.query(checkUserQuery, [email], (error, results) => {
+        if (error) {
+            console.error('Error querying database:', error);
+            return res.status(500).send('Error signing in');
+        }
+
+        // Check if user was found
+        if (results.length > 0) {
+            // User not found, redirect to sign-in page with error message
+            return res.status(409).send('Email already exists');
+        }
+
+        // Insert new user into the database
+        const insertUserQuery = 'INSERT INTO admin (email, hashed_password, admin_of_admins) VALUES (?, ?,?)';
+        connection.query(insertUserQuery, [email, password,0], (error) => {
+            if (error) {
+                console.error('Error inserting user data:', error);
+                return res.status(500).send('Error signing up');
+            }
+            console.log('Admin signed up successfully');
+
+            // Redirect user to sign-in page after successful sign-up
+            res.status(200).send('Admin signed up successfully');
+        });
+    });
+})
 // Route to fetch cart data for the signed-in user
 /* app.get('/api/getCartData', (req, res) => {
     const userEmail = req.session.user;
