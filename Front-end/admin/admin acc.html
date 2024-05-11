@@ -386,15 +386,14 @@
             <button class="js-add-author-button">Add author</button>
             <h2>Show Author</h2>
             <button class="js-get-author-button">GET Author</button>
-            <table class="author-list" id="authorList">
+            <table>
+                <tbody class="authers-list" id="authors-list">              
                 <tr>
-                    <th>ID</th>
-                    <th>First name</th>
-                    <th>last name</th>
+                    <th>ID</td>
+                    <th>First name</td>
+                    <th>last name</td>
                 </tr>
-                <tr class="author">
-                </tr>
-                <!-- Add more authors as needed -->
+                </tbody> 
             </table>
         </div>
 
@@ -451,6 +450,7 @@
         </div>
 
         <script>
+            showTab('addNumberTab')
             function toggleDetails(userId) {
                 var details = document.getElementById(userId);
                 details.classList.toggle("active");
