@@ -1,4 +1,4 @@
-import {saveOrdersToStorage, orders} from '../../Back-end/orders.js'
+/* import {saveOrdersToStorage, orders} from '../../Back-end/orders.js'
 import { bookscard } from "../../Back-end/books.js";
 console.log(orders)
 let ordersHTML=``
@@ -11,6 +11,7 @@ console.log(ordersHTML)
 document.querySelector('.container').innerHTML=ordersHTML
 
 function generateOrders(items){
+    
     let itemHTML=``
     items.forEach(item => {
         let matching;
@@ -30,4 +31,39 @@ function generateOrders(items){
         </div>`
     })
     return itemHTML
-}
+} */
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const orders_response = await fetch('http://localhost:3000/api/getUserorders');
+        const orders = await orders_response.json();
+        console.log(orders)
+        let last_order_id=0;
+        let ordersHTML=``
+        orders.forEach(order => {
+          if(order.order_id!=last_order_id){
+            ordersHTML+=
+            
+            `<hr>
+            <div class="js-order--status">order status: ${order.order_status}</div>
+            <div class="js-order">
+            <div class="js-book-name">Book Name: ${order.book_name}</div>
+            <div class="js-book-quantity">quantity: ${order.Book_count}</div>
+            <image src='${order.book_image}' class="js-book-image"></image>`
+
+            console.log(ordersHTML)
+            last_order_id+=1}
+            else{
+              ordersHTML+=`
+              <div class="js-book-name">Book Name: ${order.book_name}</div>
+              <div class="js-book-quantity">quantity: ${order.Book_count}</div>
+              <image src='${order.book_image}' class="js-book-image"></image>`
+            }
+            document.querySelector('.container').innerHTML=ordersHTML
+  });}
+         catch (error) {
+        console.error('Error fetching books data:', error);
+        alert('Error fetching books data. Please try again later.');
+    }
+  });

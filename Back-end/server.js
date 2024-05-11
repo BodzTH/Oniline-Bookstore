@@ -162,12 +162,28 @@ app.get('/profile', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/profile.css',(req,res) => {
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.css');
+    res.sendFile(filePath);
+})
+
+app.get('/profile.js',(req,res) => {
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.js');
+    res.sendFile(filePath);
+})
+
 app.get('/orders', (req, res) => {
-    // Construct the file path relative to the current directory (__dirname)
+    // Construct the file path relative to the current directory (__dirname)(
+    if (req.session.user==undefined){
+        // User is not logged in, redirect to sign-in page
+        res.redirect('/signin');;
+    }
+    else{
     const filePath = path.join(__dirname, '..', 'Front-end', 'user_orders', 'orders.html');
     
     // Send the file as the response
     res.sendFile(filePath);
+    }
 });
 
 app.get('/orders.js', (req, res) => {
@@ -198,7 +214,7 @@ app.get('/signinadmin', (req, res) => {
 app.get('/cart', (req, res) => {
     if (req.session.user==undefined) {
         // User is not logged in, redirect to sign-in page
-        res.redirect('/signin');
+        res.redirect('/signin');;
         
     }
     // Construct the file path relative to the current directory (__dirname)
@@ -302,7 +318,7 @@ app.post('/signin', (req, res) => {
 
 
 // Route for home page
-app.get('/profile-data', (req, res) => {
+app.get('/api/profile-data', (req, res) => {
     // Check if user session exists
     if (!req.session.user) {
         return res.status(401).json({ error: 'Unauthorized' });
@@ -952,6 +968,26 @@ app.post('/addAdmin', (req, res) => {
         });
     });
 })
+
+app.get('/api/getUserorders', (req, res) => {
+    // Query to fetch books data from the database including author's name
+    const userEmail = req.session.user;
+    const query = `SELECT order_id, order_status ,orders.date,book_ID,book_name,Book_count,book_image
+                   FROM orders, order_details,books,user
+                   WHERE email=? AND books_book_ID = book_ID AND orders_order_id = order_id`;
+    console.log(userEmail)
+
+    // Execute the query
+    connection.query(query,[userEmail] ,(error, results) => {
+        if (error) {
+            console.error('Error orders books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
 // Route to fetch cart data for the signed-in user
 /* app.get('/api/getCartData', (req, res) => {
     const userEmail = req.session.user;
