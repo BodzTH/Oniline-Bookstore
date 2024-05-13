@@ -10,6 +10,7 @@ const path = require('path');
 const moment = require('moment');
 
 
+  
 const app = express();
 const port = 3000;
 
@@ -35,6 +36,7 @@ app.use(session({
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname,'..', 'Front-end')));
+  
 // Route for sign-up page
 app.get('/signup', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
@@ -986,6 +988,21 @@ app.get('/api/getUserorders', (req, res) => {
         }
         // Send the fetched books data as JSON response
         res.json(results);
+    });
+});
+
+app.post('/updateImage', (req, res) => {
+    const { bookID, bookImage } = req.body;
+    console.log(bookID, bookImage);
+    // Update the book image in the database
+    const query = 'UPDATE books SET book_image = ? WHERE book_ID = ?';
+    connection.query(query, [bookImage, bookID], (error, results) => {
+        if (error) {
+            console.error('Error updating book image:', error);
+            return res.status(500).json({ error: 'Failed to update book image' });
+        }
+
+        res.json({ message: 'Book image updated successfully' });
     });
 });
 // Route to fetch cart data for the signed-in user

@@ -357,6 +357,32 @@ function addadmin() {
       }
   });
 }
+
+function updateImage()
+{
+  const button=document.querySelector('.js-update-image-button');
+  button.addEventListener('click', async () => {
+      const bookID = document.querySelector('.js-update-image-id').value;
+      const bookImage = document.querySelector('.js-update-image-link').value;
+      try {
+          const response = await fetch('http://localhost:3000/updateImage', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ bookID, bookImage }),
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Image updated successfully.');
+      } catch (error) {
+          console.error('Error updating image:', error);
+          alert('Error updating image. Please try again later.');
+      }
+  });
+
+}
+updateImage();
 addadmin();
 addCategory();
 addpubisher();
