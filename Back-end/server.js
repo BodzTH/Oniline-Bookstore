@@ -226,6 +226,40 @@ app.get('/cart', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/search', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'search_page', 'search.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+
+})
+
+app.get('/search.js', (req, res) => {
+        // Construct the file path relative to the current directory (__dirname)
+        const filePath = path.join(__dirname, '..', 'Front-end', 'search_page', 'search.js');
+    
+        // Send the file as the response
+        res.sendFile(filePath);
+});
+
+app.get('/category', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'category_page', 'category.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+
+})
+
+app.get('/category.js', (req, res) => {
+        // Construct the file path relative to the current directory (__dirname)
+        const filePath = path.join(__dirname, '..', 'Front-end', 'category_page', 'category.js');
+    
+        // Send the file as the response
+        res.sendFile(filePath);
+});
+
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
     const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber,floor, phoneNumber, gender, password } = req.body;
@@ -402,10 +436,12 @@ app.get('/api/getAllBooks', (req, res) => {
     const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
                         b.books_sold, b.book_image, b.book_altImage, 
                         p.name AS publisher_name, 
-                        a.first_name AS author_first_name, a.last_name AS author_last_name
+                        a.first_name AS author_first_name, a.last_name AS author_last_name,
+                        c.category_name
                    FROM books b
                    INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
-                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID`;
+                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID
+                   INNER JOIN categories c ON b.categories_category_ID = c.category_ID`;
 
     // Execute the query
     connection.query(query, (error, results) => {
@@ -1005,6 +1041,64 @@ app.post('/updateImage', (req, res) => {
         res.json({ message: 'Book image updated successfully' });
     });
 });
+
+
+app.get('/api/getSearchedBooks', (req, res) => {
+    const search = req.query.search;
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
+    b.books_sold, b.book_image, b.book_altImage, 
+    p.name AS publisher_name, 
+    a.first_name AS author_first_name, a.last_name AS author_last_name
+    FROM books b
+    INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
+    INNER JOIN authors a ON b.authors_author_ID = a.author_ID
+    WHERE b.book_name LIKE '%${search}%';
+`;
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+
+app.get('/api/getBooksByCategory', (req, res) => {
+    const category = req.query.category;
+    console.log(category);
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
+                        b.books_sold, b.book_image, b.book_altImage, 
+                        p.name AS publisher_name, 
+                        a.first_name AS author_first_name, a.last_name AS author_last_name,
+                        c.category_name
+                   FROM books b
+                   INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
+                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID
+                   INNER JOIN categories c ON b.categories_category_ID = c.category_ID
+                   Where c.category_name = '${category}'; 
+`;
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+
+
 // Route to fetch cart data for the signed-in user
 /* app.get('/api/getCartData', (req, res) => {
     const userEmail = req.session.user;
