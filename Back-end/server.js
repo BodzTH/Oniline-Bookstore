@@ -624,8 +624,8 @@ app.post('/checkout', (req, res) => {
                     console.error('Error updating balance:', error);
                     return res.status(500).send('Error updating balance');
             }
-            const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            connection.query(orderQuery, [currentDateTime, 'ordered', phone_number, countery, city, area, street, building_no, floor, flat_no, userId], (error, results) => {
+            const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id,paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+            connection.query(orderQuery, [currentDateTime, 'ordered', phone_number, countery, city, area, street, building_no, floor, flat_no, userId,1], (error, results) => {
                 if (error) {
                     console.error('Error adding order:', error);
                     return res.status(500).send('Error adding order');
@@ -1142,7 +1142,65 @@ app.post('/addbalance', (req, res) => {
 });
 
 app.post('/grouporder', (req, res) => {
+        // Check if user is logged in
+        const userEmail = req.session.user;
+        // Initial count for the book in the cart
+        // Query to retrieve user ID based on email
+        const getUserQuery = 'SELECT * FROM user WHERE email = ?';
+        connection.query(getUserQuery, [userEmail], (error, results) => {
+            if (error) {
+                console.error('Error fetching user ID:', error);
+                return res.status(500).send('Error adding book to cart');
+            }
+            
+            if (results.length === 0) {
+                console.error('User not found');
+                return res.status(404).send('User not found');
+            }
     
+            const userId = results[0].user_id;
+            const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+                const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id,paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+                connection.query(orderQuery, [currentDateTime, 'ordered',1,'NULL','NULL','NULL','NULL',0,'NULL',0, userId, 0], (error, results) => {
+                    if (error) {
+                        console.error('Error adding order:', error);
+                        return res.status(500).send('Error adding order');
+                    }
+                    console.log('Order added successfully');
+    
+                    // Get the max order ID
+                    const max_IDquery = 'SELECT MAX(order_id) as max_order_id FROM orders WHERE user_user_id = ?';
+                    connection.query(max_IDquery, [userId], (error, maxID) => {
+                        if (error) {
+                            console.error('Error getting max order ID:', error);
+                            return res.status(500).send('Error getting max order ID');
+                        }
+                        
+                        const maxOrderId = maxID[0].max_order_id;
+    
+                        // Insert into order_details
+                        const insertOrderDetailsQuery = 'INSERT INTO order_details (orders_order_id, books_book_ID, Book_count) SELECT ?, books_book_ID, Book_counts FROM cart_content WHERE user_user_id = ?';
+                        connection.query(insertOrderDetailsQuery, [maxOrderId, userId], (error, results) => {
+                            if (error) {
+                                console.error('Error adding order details:', error);
+                                return res.status(500).send('Error adding order details');
+                            }
+                            console.log('Order details added successfully');                       
+                                // Delete cart items after adding the order
+                                const deleteQuery = 'DELETE FROM cart_content WHERE user_user_id = ?';
+                                connection.query(deleteQuery, [userId], (errojyr, results) => {
+                                    if (error) {
+                                        console.error('Error deleting cart items:', error);
+                                        return res.status(500).send('Error deleting cart items');
+                                    }
+                                    console.log('Cart items deleted successfully');
+                                    // Send a success response
+                                    res.status(200).send('Order placed successfully');
+                    });
+                });                      
+            });
+        });
+    });
 });
 
 

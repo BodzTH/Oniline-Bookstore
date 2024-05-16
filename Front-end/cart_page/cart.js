@@ -286,6 +286,20 @@ document.querySelector('.js-checkout-button').addEventListener('click', () => {
     alert('Checkout button clicked');
 });
 
+function grouporder() {
+    document.querySelector('.js-group-button').addEventListener('click',async () => {
+    try {
+        const response = await fetch('http://localhost:3000/grouporder', {
+            method: 'POST',
+        });
+    } catch (error) {
+        console.error('Error updating the cart:', error);
+        alert('Error updating the cart. Please try again later.');
+    }}
+)};
+  
+grouporder();
+
 /* let increment_buttons=document.querySelectorAll('.js-increment')
 console.log(increment_buttons.length)
 increment_buttons.forEach(button => {
