@@ -284,6 +284,7 @@
                 <div class="tab" onclick="showTab('ordersTab')">Orders</div>
                 <div class="tab" onclick="showTab('user_accounts')">user accounts</div>
                 <div class="tab" onclick="showTab('add_admin_account')">add admin account</div>
+                <div class="tab" onclick="showTab('update_image')">update image</div>
             </div>
         </div>
 
@@ -448,7 +449,25 @@
             <input type="text" id="admin_passwrod_Confirmtion" class="js-admin-password-confirmtion-add-admin-account">
             <button class="js-add-admin-button">Add admin</button>
         </div>
-
+        <div id="update_image" class="tab-content">
+            <h2>Add Publisher</h2>
+            <label for="Publisher">image ID:</label><br>
+            <input type="text" id="Publisher_Name" class="js-update-image-id"><br><br>
+            <label for="Publisher">image link:</label><br>
+            <input type="text" id="Publisher_Name" class="js-update-image-link"><br><br>
+            <button class="js-update-image-button">update image</button>
+            <h2>Show Publisher</h2>
+            <button class="js-get-publisher-button">GET Publisher</button>
+            <table class="publisher-list" id="publisherList">
+                <tr>
+                    <td>ID</td>
+                    <td>name</td>
+                </tr>
+                <tr class="publisher">
+                </tr>
+                <!-- Add more publishers as needed -->
+            </table>
+        </div>
         <script>
             showTab('addNumberTab')
             function toggleDetails(userId) {

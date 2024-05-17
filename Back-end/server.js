@@ -10,6 +10,7 @@ const path = require('path');
 const moment = require('moment');
 
 
+  
 const app = express();
 const port = 3000;
 
@@ -35,6 +36,7 @@ app.use(session({
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname,'..', 'Front-end')));
+  
 // Route for sign-up page
 app.get('/signup', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
@@ -224,6 +226,40 @@ app.get('/cart', (req, res) => {
     res.sendFile(filePath);
 });
 
+app.get('/search', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'search_page', 'search.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+
+})
+
+app.get('/search.js', (req, res) => {
+        // Construct the file path relative to the current directory (__dirname)
+        const filePath = path.join(__dirname, '..', 'Front-end', 'search_page', 'search.js');
+    
+        // Send the file as the response
+        res.sendFile(filePath);
+});
+
+app.get('/category', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'category_page', 'category.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+
+})
+
+app.get('/category.js', (req, res) => {
+        // Construct the file path relative to the current directory (__dirname)
+        const filePath = path.join(__dirname, '..', 'Front-end', 'category_page', 'category.js');
+    
+        // Send the file as the response
+        res.sendFile(filePath);
+});
+
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
     const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber,floor, phoneNumber, gender, password } = req.body;
@@ -400,10 +436,12 @@ app.get('/api/getAllBooks', (req, res) => {
     const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
                         b.books_sold, b.book_image, b.book_altImage, 
                         p.name AS publisher_name, 
-                        a.first_name AS author_first_name, a.last_name AS author_last_name
+                        a.first_name AS author_first_name, a.last_name AS author_last_name,
+                        c.category_name
                    FROM books b
                    INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
-                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID`;
+                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID
+                   INNER JOIN categories c ON b.categories_category_ID = c.category_ID`;
 
     // Execute the query
     connection.query(query, (error, results) => {
@@ -443,23 +481,45 @@ app.post('/addToCart', (req, res) => {
             console.error('User not found');
             return res.status(404).send('User not found');
         }
-
+        let indecator=false;
         const userId = results[0].user_id;
-
-        // Insert the book into the cart content table
-        const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
-        connection.query(query, [bookCount, bookId, userId], (error, results) => {
+        const getinCartQuery = 'select * from cart_content where user_user_id = ?';
+        connection.query(getinCartQuery, [userId], (error, results) => {
             if (error) {
-                console.error('Error adding book to cart:', error);
+                console.error('Error fetching user ID:', error);
                 return res.status(500).send('Error adding book to cart');
             }
-            console.log('Book added to cart successfully');
-            // Send a success response
-            res.status(200).send('Book added to cart successfully');
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].books_book_ID == bookId) {
+                    indecator = true;
+                    const query = 'update cart_content set Book_counts = Book_counts + 1 where books_book_ID = ? and user_user_id = ?';
+                    connection.query(query, [bookId, userId], (error, results) => {
+                        if (error) {
+                            console.error('Error adding book to cart:', error);
+                            return res.status(500).send('Error adding book to cart');
+                        }
+                        return res.status(200).send('Book added to cart successfully');
+                    });
+                }
+            }
+            if (indecator == false) {
+                    // Insert the book into the cart content table
+                    const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
+                    connection.query(query, [bookCount, bookId, userId], (error, results) => {
+                    if (error) {
+                        console.error('Error adding book to cart:', error);
+                        return res.status(500).send('Error adding book to cart');
+                    }
+                    console.log('Book added to cart successfully');
+                    // Send a success response
+                    res.status(200).send('Book added to cart successfully');              
+        });}
+
+     });
         });
 
     });
-});
+
 
 
 app.get('/api/getcart', (req, res) => {
@@ -564,51 +624,80 @@ app.post('/checkout', (req, res) => {
         const building_no = results[0].bulding_no;
         const floor = results[0].floor;
         const flat_no = results[0].flat_no;
+        const balance = results[0].balance;
         const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-        // Insert the order into the orders table
-        const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        connection.query(orderQuery, [currentDateTime, 'ordered', phone_number, countery, city, area, street, building_no, floor, flat_no, userId], (error, results) => {
+        const totalQuery = 'SELECT SUM(Book_counts * book_price) as total FROM cart_content,books WHERE user_user_id = ? AND books_book_ID = book_ID';
+        connection.query(totalQuery, [userId], (error, total) => {
             if (error) {
-                console.error('Error adding order:', error);
-                return res.status(500).send('Error adding order');
+                console.error('Error fetching total:', error);
+                return res.status(500).send('Error fetching total');
             }
-            console.log('Order added successfully');
-
-            // Get the max order ID
-            const max_IDquery = 'SELECT MAX(order_id) as max_order_id FROM orders WHERE user_user_id = ?';
-            connection.query(max_IDquery, [userId], (error, maxID) => {
-                if (error) {
-                    console.error('Error getting max order ID:', error);
-                    return res.status(500).send('Error getting max order ID');
+            const totalCost = total[0].total;
+            console.log(totalCost);
+            if (totalCost > balance) 
+                {
+                    return res.status(500).send('Error: You dont have enough balance');
                 }
-                
-                const maxOrderId = maxID[0].max_order_id;
+        
+            // Insert the order into the orders table
+            const updateBalance = 'UPDATE user SET balance = balance - ? WHERE user_id = ?';
+            connection.query(updateBalance, [totalCost, userId], (error, results) => {
+                if (error) {
+                    console.error('Error updating balance:', error);
+                    return res.status(500).send('Error updating balance');
+            }
+            const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id,paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+            connection.query(orderQuery, [currentDateTime, 'ordered', phone_number, countery, city, area, street, building_no, floor, flat_no, userId,1], (error, results) => {
+                if (error) {
+                    console.error('Error adding order:', error);
+                    return res.status(500).send('Error adding order');
+                }
+                console.log('Order added successfully');
 
-                // Insert into order_details
-                const insertOrderDetailsQuery = 'INSERT INTO order_details (orders_order_id, books_book_ID, Book_count) SELECT ?, books_book_ID, Book_counts FROM cart_content WHERE user_user_id = ?';
-                connection.query(insertOrderDetailsQuery, [maxOrderId, userId], (error, results) => {
+                // Get the max order ID
+                const max_IDquery = 'SELECT MAX(order_id) as max_order_id FROM orders WHERE user_user_id = ?';
+                connection.query(max_IDquery, [userId], (error, maxID) => {
                     if (error) {
-                        console.error('Error adding order details:', error);
-                        return res.status(500).send('Error adding order details');
+                        console.error('Error getting max order ID:', error);
+                        return res.status(500).send('Error getting max order ID');
                     }
-                    console.log('Order details added successfully');
                     
-                    // Delete cart items after adding the order
-                    const deleteQuery = 'DELETE FROM cart_content WHERE user_user_id = ?';
-                    connection.query(deleteQuery, [userId], (error, results) => {
+                    const maxOrderId = maxID[0].max_order_id;
+
+                    // Insert into order_details
+                    const insertOrderDetailsQuery = 'INSERT INTO order_details (orders_order_id, books_book_ID, Book_count) SELECT ?, books_book_ID, Book_counts FROM cart_content WHERE user_user_id = ?';
+                    connection.query(insertOrderDetailsQuery, [maxOrderId, userId], (error, results) => {
                         if (error) {
-                            console.error('Error deleting cart items:', error);
-                            return res.status(500).send('Error deleting cart items');
+                            console.error('Error adding order details:', error);
+                            return res.status(500).send('Error adding order details');
                         }
-                        console.log('Cart items deleted successfully');
-                        // Send a success response
-                        res.status(200).send('Order placed successfully');
+                        console.log('Order details added successfully');
+                        const removebook=`                    UPDATE books AS b JOIN cart_content AS cc ON b.book_ID = cc.books_book_ID SET b.books_instock = b.books_instock - cc.Book_counts, b.books_sold = b.books_sold + cc.Book_counts WHERE cc.user_user_id = ?`;
+                        connection.query(removebook,[userId], (error, results) => {
+                            if(error){
+                                console.error('Error adding removing books:', error);
+                                return res.status(500).send('Error adding removing books');                        
+                            }                          
+                            // Delete cart items after adding the order
+                            const deleteQuery = 'DELETE FROM cart_content WHERE user_user_id = ?';
+                            connection.query(deleteQuery, [userId], (errojyr, results) => {
+                                if (error) {
+                                    console.error('Error deleting cart items:', error);
+                                    return res.status(500).send('Error deleting cart items');
+                                }
+                                console.log('Cart items deleted successfully');
+                                // Send a success response
+                                res.status(200).send('Order placed successfully');
+                        });
+                    });                      
                     });
                 });
             });
         });
     });
 });
+});
+
 
 
 
@@ -988,92 +1077,154 @@ app.get('/api/getUserorders', (req, res) => {
         res.json(results);
     });
 });
-// Route to fetch cart data for the signed-in user
-/* app.get('/api/getCartData', (req, res) => {
-    const userEmail = req.session.user;
 
-    // Check if user is logged in
-    if (!userEmail) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    // Query to retrieve user ID based on email
-    const getUserQuery = 'SELECT user_id FROM user WHERE email = ?';
-    connection.query(getUserQuery, [userEmail], (error, userResults) => {
+app.post('/updateImage', (req, res) => {
+    const { bookID, bookImage } = req.body;
+    console.log(bookID, bookImage);
+    // Update the book image in the database
+    const query = 'UPDATE books SET book_image = ? WHERE book_ID = ?';
+    connection.query(query, [bookImage, bookID], (error, results) => {
         if (error) {
-            console.error('Error fetching user ID:', error);
-            return res.status(500).json({ error: 'Failed to fetch user data' });
+            console.error('Error updating book image:', error);
+            return res.status(500).json({ error: 'Failed to update book image' });
         }
 
-        if (userResults.length === 0) {
-            console.error('User not found');
-            return res.status(404).json({ error: 'User not found' });
+        res.json({ message: 'Book image updated successfully' });
+    });
+});
+
+
+app.get('/api/getSearchedBooks', (req, res) => {
+    const search = req.query.search;
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
+    b.books_sold, b.book_image, b.book_altImage, 
+    p.name AS publisher_name, 
+    a.first_name AS author_first_name, a.last_name AS author_last_name
+    FROM books b
+    INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
+    INNER JOIN authors a ON b.authors_author_ID = a.author_ID
+    WHERE b.book_name LIKE '%${search}%';
+`;
+
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
         }
 
-        const userId = userResults[0].user_id;
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
 
-        // Query to fetch cart data for the user
-        const getCartDataQuery = `SELECT Book_counts, book_name, book_ID, book_desc, book_price, book_image 
-                                  FROM books,cart_content   
-                                  WHERE user_user_id = ? AND books_book_ID = book_ID`;
+app.get('/api/getBooksByCategory', (req, res) => {
+    const category = req.query.category;
+    console.log(category);
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT b.book_ID, b.book_name, b.book_desc, b.book_price, b.books_instock, 
+                        b.books_sold, b.book_image, b.book_altImage, 
+                        p.name AS publisher_name, 
+                        a.first_name AS author_first_name, a.last_name AS author_last_name,
+                        c.category_name
+                   FROM books b
+                   INNER JOIN publishers p ON b.publishers_publisher_ID = p.publisher_ID
+                   INNER JOIN authors a ON b.authors_author_ID = a.author_ID
+                   INNER JOIN categories c ON b.categories_category_ID = c.category_ID
+                   Where c.category_name = '${category}'; 
+`;
 
-        connection.query(getCartDataQuery, [userId], (error, cartResults) => {
+    // Execute the query
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+
+app.post('/addbalance', (req, res) => {
+    const userEmail = req.session.user;
+    const { balance } = req.body;
+    const query = 'UPDATE user SET balance = balance+? WHERE email = ?';
+    connection.query(query, [balance, userEmail], (error, results) => {
+        if (error) {
+            console.error('Error adding balance:', error);
+            return res.status(500).json({ error: 'Failed to add balance' });
+        }
+
+        res.json({ message: 'Balance added successfully' });
+    });
+});
+
+app.post('/grouporder', (req, res) => {
+        // Check if user is logged in
+        const userEmail = req.session.user;
+        // Initial count for the book in the cart
+        // Query to retrieve user ID based on email
+        const getUserQuery = 'SELECT * FROM user WHERE email = ?';
+        connection.query(getUserQuery, [userEmail], (error, results) => {
             if (error) {
-                console.error('Error fetching cart data:', error);
-                return res.status(500).json({ error: 'Failed to fetch cart data' });
+                console.error('Error fetching user ID:', error);
+                return res.status(500).send('Error adding book to cart');
             }
-
-            res.json(cartResults);
+            
+            if (results.length === 0) {
+                console.error('User not found');
+                return res.status(404).send('User not found');
+            }
+    
+            const userId = results[0].user_id;
+            const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+                const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id,paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+                connection.query(orderQuery, [currentDateTime, 'ordered',1,'NULL','NULL','NULL','NULL',0,'NULL',0, userId, 0], (error, results) => {
+                    if (error) {
+                        console.error('Error adding order:', error);
+                        return res.status(500).send('Error adding order');
+                    }
+                    console.log('Order added successfully');
+    
+                    // Get the max order ID
+                    const max_IDquery = 'SELECT MAX(order_id) as max_order_id FROM orders WHERE user_user_id = ?';
+                    connection.query(max_IDquery, [userId], (error, maxID) => {
+                        if (error) {
+                            console.error('Error getting max order ID:', error);
+                            return res.status(500).send('Error getting max order ID');
+                        }
+                        
+                        const maxOrderId = maxID[0].max_order_id;
+    
+                        // Insert into order_details
+                        const insertOrderDetailsQuery = 'INSERT INTO order_details (orders_order_id, books_book_ID, Book_count) SELECT ?, books_book_ID, Book_counts FROM cart_content WHERE user_user_id = ?';
+                        connection.query(insertOrderDetailsQuery, [maxOrderId, userId], (error, results) => {
+                            if (error) {
+                                console.error('Error adding order details:', error);
+                                return res.status(500).send('Error adding order details');
+                            }
+                            console.log('Order details added successfully');                       
+                                // Delete cart items after adding the order
+                                const deleteQuery = 'DELETE FROM cart_content WHERE user_user_id = ?';
+                                connection.query(deleteQuery, [userId], (errojyr, results) => {
+                                    if (error) {
+                                        console.error('Error deleting cart items:', error);
+                                        return res.status(500).send('Error deleting cart items');
+                                    }
+                                    console.log('Cart items deleted successfully');
+                                    // Send a success response
+                                    res.status(200).send('Order placed successfully');
+                    });
+                });                      
+            });
         });
     });
 });
- */
 
-
-/* app.get('/getAllBooks', (req, res) => {
-    // Get a connection from the pool
-    connection.getConnection((err, connection) => {
-      if (err) {
-        console.error("Error getting MySQL connection:", err);
-        res.status(500).json({ error: "Internal server error" });
-        return;
-      }
-  
-      // Query to select all books from the database
-      const query = 'SELECT * FROM books';
-  
-      // Execute the query
-      connection.query(query, (error, results) => {
-        connection.release(); // Release the connection back to the pool
-  
-        if (error) {
-          console.error("Error fetching books from database:", error);
-          res.status(500).json({ error: "Internal server error" });
-          return;
-        }
-  
-        // Send the fetched books data as JSON response
-        res.json(results);
-      });
-    });
-  });
- */
-
-/*   app.post("/api/sendAllBooks", async (req, res) => {
-    try {
-      if (
-        !Array.isArray(req.body) ||
-        req.body.some((book) => typeof book !== "object")
-      ) {
-        res.status(400).json({ message: "Invalid data format" });
-        return;
-      }
-      AllBooks = req.body;
-      res.json({ message: "Books received" });
-    } catch (error) {
-      res.status(500).json({ message: "Server error", error: error.message });
-    }
-  }); */
 
 // Start server
 app.listen(port, () => {

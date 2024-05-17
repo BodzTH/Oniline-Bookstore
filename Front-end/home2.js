@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await fetch('http://localhost:3000/api/getAllBooks');
         const booksData = await response.json();
+        
 
         booksData.forEach(book => {
             const bookElement = document.createElement('div');
@@ -66,3 +67,64 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Error fetching books data. Please try again later.');
     }
 });
+
+document.addEventListener('DOMContentLoaded', async () => {
+        const search = 'juj';
+
+    fetch(`/api/getSearchedBooks?search=${search}`, {
+    method: 'GET',
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+    })
+    .then(data => {
+    // Handle the fetched data here
+    console.log(data);
+    })
+    .catch(error => {
+    console.error('There was a problem with your fetch operation:', error);
+    });
+
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const category = 'Manga';
+
+fetch(`/api/getBooksByCategory?category=${category}`, {
+method: 'GET',
+})
+.then(response => {
+if (!response.ok) {
+    throw new Error('Network response was not ok');
+}
+return response.json();
+})
+.then(data => {
+// Handle the fetched data here
+console.log(data);
+})
+.catch(error => {
+console.error('There was a problem with your fetch operation:', error);
+});
+
+});
+
+/* try {
+    const response = await fetch('http://localhost:3000/addPublisher', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ publisherName }),
+    });
+    const data = await response.json();
+    console.log(data);
+    alert('Publisher added successfully.');
+} catch (error) {
+    console.error('Error adding publisher:', error);
+    alert('Error adding publisher. Please try again later.');
+}
+}); */

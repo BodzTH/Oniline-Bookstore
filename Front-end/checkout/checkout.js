@@ -223,11 +223,15 @@ let generatCheckout = async () => {
           console.error('Error updating the cart:', error);
           alert('Error updating the cart. Please try again later.');
       }
+
+
+    
       });
       
   } catch (error) {
       console.error('Error fetching cart data:', error);
   }
 };
+
 
 generatCheckout();

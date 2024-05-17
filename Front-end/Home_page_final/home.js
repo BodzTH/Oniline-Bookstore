@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         booksData.forEach(book => {
             booksHTML+=`
             <div id=product-id-${book.book_ID} class="item">
-                <img width="220" src=${book.book_image} height="331">
+                <img width="220" src="${book.book_image}" height="331">
                 <div class="details">
                     <h3>${book.book_name}</h3>
                     <div class="price-quantity">
