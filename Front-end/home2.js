@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const addToCartButton = document.createElement('button');
             addToCartButton.textContent = 'Add to Cart';
             addToCartButton.setAttribute('data-book-id', book.book_ID);
+            addToCartButton.setAttribute('data-book-stock', book.books_instock);
             addToCartButton.classList.add('js-add-to-cart');
 
             bookElement.appendChild(titleElement);
@@ -40,6 +41,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelectorAll('.js-add-to-cart').forEach(button => {
             button.addEventListener('click', async () => {
                 const bookId = button.getAttribute('data-book-id');
+                const bookStock = button.getAttribute('data-book-stock');
+                console.log(bookStock);
 
                 try {
                     const response = await fetch('http://localhost:3000/addToCart', {
@@ -47,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ bookId }) // Replace 'user_id_placeholder' with the actual user ID
+                        body: JSON.stringify({ bookId,bookStock}) // Replace 'user_id_placeholder' with the actual user ID
                     });
 
                     if (response.ok) {

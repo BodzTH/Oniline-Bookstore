@@ -466,7 +466,8 @@ app.post('/addToCart', (req, res) => {
     }
 
     const userEmail = req.session.user;
-    const { bookId } = req.body;
+    const { bookId,bookStock} = req.body;
+    console.log(bookStock)
     const bookCount = 1; // Initial count for the book in the cart
     console.log(bookId);
     // Query to retrieve user ID based on email
@@ -482,6 +483,7 @@ app.post('/addToCart', (req, res) => {
             return res.status(404).send('User not found');
         }
         let indecator=false;
+        let existIndecator=false;
         const userId = results[0].user_id;
         const getinCartQuery = 'select * from cart_content where user_user_id = ?';
         connection.query(getinCartQuery, [userId], (error, results) => {
@@ -489,8 +491,12 @@ app.post('/addToCart', (req, res) => {
                 console.error('Error fetching user ID:', error);
                 return res.status(500).send('Error adding book to cart');
             }
+            if(bookStock>0)
+            {
             for (let i = 0; i < results.length; i++) {
-                if (results[i].books_book_ID == bookId) {
+                if(results[i].Book_counts<bookStock){
+                existIndecator=true;    
+                if (results[i].books_book_ID == bookId && existIndecator==true) {
                     indecator = true;
                     const query = 'update cart_content set Book_counts = Book_counts + 1 where books_book_ID = ? and user_user_id = ?';
                     connection.query(query, [bookId, userId], (error, results) => {
@@ -502,7 +508,11 @@ app.post('/addToCart', (req, res) => {
                     });
                 }
             }
-            if (indecator == false) {
+            else{
+                res.status(500).send('there is no stock avabile for this book')                    
+            }
+            }
+            if (indecator == false && existIndecator==true ) {
                     // Insert the book into the cart content table
                     const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
                     connection.query(query, [bookCount, bookId, userId], (error, results) => {
@@ -514,6 +524,10 @@ app.post('/addToCart', (req, res) => {
                     // Send a success response
                     res.status(200).send('Book added to cart successfully');              
         });}
+    }
+    else{
+        res.status(500).send('there is no stock avabile for this book')
+    }
 
      });
         });
