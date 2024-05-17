@@ -32,11 +32,11 @@ li {
 li a h2 {
     margin-top: 0.3cm;
 }
+
 li .search-container {
     margin-top: 0.4cm;
-    margin-left: 25cm;
+    margin-left: 18.8cm;
 }
-
 
 li a {
     display: block;
@@ -45,7 +45,7 @@ li a {
     text-decoration: none;
   }
 
-.cart,.person{
+.cart,.person,.order{
     position: relative;
     background-color: #fff;
     color: #f4a261;
