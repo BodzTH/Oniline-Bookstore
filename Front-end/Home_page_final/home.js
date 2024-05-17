@@ -114,11 +114,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <h3>${book.book_name}</h3>
                     <div class="price-quantity">
                         <h2>$ ${book.book_price}</h2>
-                        <div class="buttons">
-                           <i onclick="decrement(${book.book_ID})" class="bi bi-dash-lg"></i>
-                           <i onclick="increment(${book.book_ID})" class="bi bi-plus-lg"></i>
-                        </div>
                     </div>
+                    <button type="submit" class="btn">AddTOCart</button>
                 </div>
             </div>
             `
