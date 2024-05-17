@@ -481,23 +481,45 @@ app.post('/addToCart', (req, res) => {
             console.error('User not found');
             return res.status(404).send('User not found');
         }
-
+        let indecator=false;
         const userId = results[0].user_id;
-
-        // Insert the book into the cart content table
-        const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
-        connection.query(query, [bookCount, bookId, userId], (error, results) => {
+        const getinCartQuery = 'select * from cart_content where user_user_id = ?';
+        connection.query(getinCartQuery, [userId], (error, results) => {
             if (error) {
-                console.error('Error adding book to cart:', error);
+                console.error('Error fetching user ID:', error);
                 return res.status(500).send('Error adding book to cart');
             }
-            console.log('Book added to cart successfully');
-            // Send a success response
-            res.status(200).send('Book added to cart successfully');
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].books_book_ID == bookId) {
+                    indecator = true;
+                    const query = 'update cart_content set Book_counts = Book_counts + 1 where books_book_ID = ? and user_user_id = ?';
+                    connection.query(query, [bookId, userId], (error, results) => {
+                        if (error) {
+                            console.error('Error adding book to cart:', error);
+                            return res.status(500).send('Error adding book to cart');
+                        }
+                        return res.status(200).send('Book added to cart successfully');
+                    });
+                }
+            }
+            if (indecator == false) {
+                    // Insert the book into the cart content table
+                    const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
+                    connection.query(query, [bookCount, bookId, userId], (error, results) => {
+                    if (error) {
+                        console.error('Error adding book to cart:', error);
+                        return res.status(500).send('Error adding book to cart');
+                    }
+                    console.log('Book added to cart successfully');
+                    // Send a success response
+                    res.status(200).send('Book added to cart successfully');              
+        });}
+
+     });
         });
 
     });
-});
+
 
 
 app.get('/api/getcart', (req, res) => {
