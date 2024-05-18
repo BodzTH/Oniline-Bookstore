@@ -130,6 +130,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  function toggleNavbar() {
+    var navbar = document.querySelector(".navbar2");
+    navbar.classList.toggle("collapsed");
+}
+
 /*   document.querySelector('.shop').addEventListener('click', async (e) => {
     try{
         fetch('http://localhost:3000/addToCart', {
