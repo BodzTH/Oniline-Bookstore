@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="price-quantity">
                         <h2>$ ${book.book_price}</h2>
                     </div>
-                    <button type="submit" class="btn">AddTOCart</button>
+                    <button data-book-id=${book.book_ID} data-book-stock=${book.books_instock}  type="submit" class="btn js-add-to-cart">AddTOCart</button>
                 </div>
             </div>
             `
@@ -123,6 +123,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   })
   console.log(booksHTML);
   document.querySelector('.shop').innerHTML=booksHTML;
+          // Add event listener for Add to Cart buttons
+          document.querySelectorAll('.js-add-to-cart').forEach(button => {
+            button.addEventListener('click', async () => {
+                const bookId = button.getAttribute('data-book-id');
+                const bookStock = button.getAttribute('data-book-stock');
+                console.log(bookStock);
+
+                try {
+                    const response = await fetch('http://localhost:3000/addToCart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ bookId,bookStock}) // Replace 'user_id_placeholder' with the actual user ID
+                    });
+
+                    if (response.ok) {
+                        alert('Book added to cart successfully!');
+                    } else {
+                        const errorMessage = await response.text();
+                        alert(`Error adding book to cart: ${errorMessage}`);
+                    }
+                } catch (error) {
+                    console.error('Error adding book to cart:', error);
+                    alert('Error adding book to cart. Please try again later.');
+                }
+            });
+        });
     }
          catch (error) {
         console.error('Error fetching books data:', error);

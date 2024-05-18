@@ -101,18 +101,13 @@ app.get('/home2', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-    if (req.session.admin === undefined) {
-        // Admin is not logged in, redirect to sign-in page
-        res.redirect('/signinadmin?');
-    }
-    else {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'admin', 'admin acc.html');
     
     // Send the file as the response
     res.sendFile(filePath);
 }
-});
+);
 
 app.get('/Back-end/orders.js', (req, res) => {
     // Send the file as the response
@@ -263,98 +258,6 @@ app.get('/category.js', (req, res) => {
         res.sendFile(filePath);
 });
 
-// Route for sign-up form submission
-/* app.post('/signup', (req, res) => {
-    const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber,floor, phoneNumber, gender, password } = req.body;
-
-    // Validate input
-    if (!email || !first_name || !last_name || !dob || !password) {
-        return res.status(400).send('Email, first name, last name, date of birth, and password are required');
-    }
-
-    // Encrypt password
-    bcrypt.hash(password, 10, (error, hashedPassword) => {
-        if (error) {
-            console.error('Error hashing password:', error);
-            return res.status(500).send('Error signing up');
-        }
-
-        // Check if email already exists in the database
-        const checkEmailQuery = 'SELECT * FROM user WHERE email = ?';
-        connection.query(checkEmailQuery, [email], (error, existingUsers) => {
-            if (error) {
-                console.error('Error querying database:', error);
-                return res.status(500).send('Error signing up');
-            }
-
-            // If email already exists, send error response
-            if (existingUsers.length > 0) {
-                return res.status(409).send('Email already exists');
-            }
-
-            // Insert new user into the database with hashed password
-            const insertUserQuery = 'INSERT INTO user (email, first_name, last_name, dob, country, city, area, street, bulding_no, flat_no,floor, phone_number, Gender, hashed_password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
-            connection.query(insertUserQuery, [email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber,floor, phoneNumber, gender, hashedPassword], (error) => {
-                if (error) {
-                    console.error('Error inserting user data:', error);
-                    return res.status(500).send('Error signing up');
-                }
-                console.log('User signed up successfully');
-
-                // Redirect user to sign-in page after successful sign-up
-                res.redirect('/signin');
-            });
-        });
-    });
-}); */
-
-
-
-// Route for sign-in form submission
-/* app.post('/signin', (req, res) => {
-    const { email, password } = req.body;
-
-    // Validate input
-    if (!email || !password) {
-        return res.status(400).send('Email and password are required');
-    }
-
-    // Check if user exists in the database
-    const checkUserQuery = 'SELECT * FROM user WHERE email = ?';
-    connection.query(checkUserQuery, [email], (error, results) => {
-        if (error) {
-            console.error('Error querying database:', error);
-            return res.status(500).send('Error signing in');
-        }
-
-        // Check if user was found
-        if (results.length === 0) {
-            // User not found, redirect to sign-in page with error message
-            return res.redirect('/signin?error=Invalid email or password');
-        }
-
-        // Compare hashed password with input password
-        bcrypt.compare(password, results[0].hashed_password, (error, isMatch) => {
-            if (error) {
-                console.error('Error comparing passwords:', error);
-                return res.status(500).send('Error signing in');
-            }
-
-            if (!isMatch) {
-                // Password doesn't match, redirect to sign-in page with error message
-                return res.redirect('/signin?error=Invalid email or password');
-            }
-
-            // User was found and password matches, create session
-            req.session.user = email;
-            res.cookie('user', email); // Set user cookie
-
-            // Redirect user to profile page after successful sign-in
-            res.redirect("/profile");
-        });
-    });
-});
- */
 
 // Route for home page
 app.get('/api/profile-data', (req, res) => {
@@ -1010,77 +913,6 @@ app.get('/api/getCategories', (req, res) => {
     });
 })
 
-app.post('/signinadmin', (req, res) => {
-    const { email, password } = req.body;
-
-    // Validate input
-    if (!email || !password) {
-        return res.status(400).send('Email and password are required');
-    }
-
-    // Check if user exists in the database
-    const checkUserQuery = 'SELECT * FROM admin WHERE email = ?';
-    connection.query(checkUserQuery, [email], (error, results) => {
-        if (error) {
-            console.error('Error querying database:', error);
-            return res.status(500).send('Error signing in');
-        }
-
-        // Check if user was found
-        if (results.length === 0) {
-            // User not found, redirect to sign-in page with error message
-            return res.redirect('/signinadmin?error=Invalid email or password');
-        }
-
-        // Compare input password with database password
-        if (results[0].hashed_password === password) {
-            // Password matches, create session and set cookie
-            req.session.admin = email;
-            res.cookie('admin', email);
-            return res.redirect('/admin');
-        } else {
-            // Password doesn't match, redirect to sign-in page with error message
-            return res.redirect('/signinadmin?error=Invalid email or password');
-        }
-    });
-});
-app.post('/addAdmin', (req, res) => {
-    const { email, password } = req.body;
-
-    // Validate input
-    if (!email || !password) {
-        return res.status(400).send('Email and password are required');
-    }
-
-    // Check if user exists in the database
-    const checkUserQuery = 'SELECT * FROM admin WHERE email = ?';
-    connection.query(checkUserQuery, [email], (error, results) => {
-        if (error) {
-            console.error('Error querying database:', error);
-            return res.status(500).send('Error signing in');
-        }
-
-        // Check if user was found
-        if (results.length > 0) {
-            // User not found, redirect to sign-in page with error message
-            return res.status(409).send('Email already exists');
-        }
-
-        // Insert new user into the database
-        const insertUserQuery = 'INSERT INTO admin (email, hashed_password, admin_of_admins) VALUES (?, ?,?)';
-        connection.query(insertUserQuery, [email, password,0], (error) => {
-            if (error) {
-                console.error('Error inserting user data:', error);
-                return res.status(500).send('Error signing up');
-            }
-            console.log('Admin signed up successfully');
-
-            // Redirect user to sign-in page after successful sign-up
-            res.status(200).send('Admin signed up successfully');
-        });
-    });
-})
-
 app.get('/api/getUserorders', (req, res) => {
     // Query to fetch books data from the database including author's name
     
@@ -1345,7 +1177,7 @@ app.post('/signin', (req, res) => {
 
         const user = users[0];
 
-        // Decrypt password using AES
+        // encrypt password using AES
         try {
             // Generate encryption key from environment variable
             const encryptionKey = process.env.MASTER_KEY;
@@ -1386,9 +1218,136 @@ app.post('/signin', (req, res) => {
         }
     });
 });
+
+
+// Route for sign-in form submission
+app.post('/signinadmin', (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        return res.status(400).send('Email and password are required');
+    }
+
+    // Retrieve user from database based on email
+    const getUserQuery = 'SELECT * FROM admin WHERE email = ?';
+    connection.query(getUserQuery, [email], (error, users) => {
+        if (error) {
+            console.error('Error querying database:', error);
+            return res.status(500).send('Error signing in');
+        }
+
+        // Check if user exists
+        if (users.length === 0) {
+            return res.status(404).send('User not found');
+        }
+
+        const admin = users[0];
+
+        // encrypt password using AES
+        try {
+            // Generate encryption key from environment variable
+            const encryptionKey = process.env.MASTER_KEY;
+            if (!encryptionKey) {
+                console.error('Encryption key is not set in environment variables');
+                return res.status(500).send('Error signing up');
+            }
+
+            // Encrypt password with AES
+            const iv = admin.iv // Generate initialization vector
+            console.log(iv)
+            console.log(Buffer.from(encryptionKey, 'base64'))
+            const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey, 'base64'), iv);
+            console.log(cipher)
+            let encryptedPassword = cipher.update(password, 'utf8', 'base64');
+            encryptedPassword += cipher.final('base64');
+            console.log(encryptedPassword)
+            // Compare decrypted password with input password using bcrypt
+            bcrypt.compare(encryptedPassword,admin.hashed_password,(error, result) => {
+                if (error) {
+                    console.error('Error comparing passwords:', error);
+                    return res.status(500).send('Error signing in');
+                }
+
+                if (!result) {
+                    return res.status(401).send('Incorrect password');
+                }
+
+                console.log('admin signed in successfully');
+                // User was found and password matches, create session
+                req.session.admin = email;
+                res.cookie('admin', email);
+                return res.redirect('/admin');
+            });
+        } catch (err) {
+            console.error('Error decrypting password:', err);
+            return res.status(500).send('Error signing in');
+        }
+    });
+});
+
+// Route for sign-up form submission
+app.post('/addAdmin', (req, res) => {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+        return res.status(400).send('Email, first name, last name, date of birth, and password are required');
+    }
+
+    // Generate encryption key from environment variable
+    const encryptionKey = process.env.MASTER_KEY;
+    if (!encryptionKey) {
+        console.error('Encryption key is not set in environment variables');
+        return res.status(500).send('Error signing up');
+    }
+
+    // Encrypt password with AES
+    const iv = crypto.randomBytes(16); // Generate initialization vector
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey, 'base64'), iv);
+    let encryptedPassword = cipher.update(password, 'utf8', 'base64');
+    encryptedPassword += cipher.final('base64');
+    console.log(encryptedPassword)
+
+    // Hash the encrypted password with bcrypt
+    bcrypt.hash(encryptedPassword, 10, (error, hashedPassword) => {
+        if (error) {
+            console.error('Error hashing password with bcrypt:', error);
+            return res.status(500).send('Error signing up');
+        }
+
+        // Check if email already exists in the database
+        const checkEmailQuery = 'SELECT * FROM admin WHERE email = ?';
+        connection.query(checkEmailQuery, [email], (error, existingUsers) => {
+            if (error) {
+                console.error('Error querying database:', error);
+                return res.status(500).send('Error signing up');
+            }
+
+            // If email already exists, send error response
+            if (existingUsers.length > 0) {
+                return res.status(409).send('Email already exists');
+            }
+            console.log(iv)
+            // Insert new user into the database with hashed password and initialization vector (iv)
+            // Insert new user into the database
+            const insertUserQuery = 'INSERT INTO admin (email, hashed_password, admin_of_admins,iv) VALUES (?, ?,?,?)';
+            connection.query(insertUserQuery, [email, hashedPassword,0,iv], (error) => {
+                if (error) {
+                    console.error('Error inserting user data:', error);
+                    return res.status(500).send('Error signing up');
+                }
+                console.log('Admin signed up successfully');
+
+                // Redirect user to sign-in page after successful sign-up
+                res.status(200).send('Admin signed up successfully');
+            });
+        });
+    });
+});
+
+
 // Start server
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
-
-//
