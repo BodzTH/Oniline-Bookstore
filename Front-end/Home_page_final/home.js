@@ -246,7 +246,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 }
 
 
-
+function toggleNavbar() {
+    var navbar = document.querySelector(".navbar2");
+    navbar.classList.toggle("collapsed");
+}
 
   document.querySelector('.js-search').addEventListener('click', search);
 
