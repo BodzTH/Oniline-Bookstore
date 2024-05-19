@@ -119,6 +119,7 @@ body {
 .register-link p a:hover {
     text-decoration: underline;
 }
+
 .name {
     display: flex;
     gap: 10px;
