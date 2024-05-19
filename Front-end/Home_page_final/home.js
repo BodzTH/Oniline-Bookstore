@@ -99,11 +99,11 @@ let calculation = () => {
 
 calculation();
 */
-
+let booksData;
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const response = await fetch('http://localhost:3000/api/getAllBooks');
-        const booksData = await response.json();
+        booksData = await response.json();
         console.log(booksData)
         let booksHTML=``
         booksData.forEach(book => {
@@ -157,6 +157,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Error fetching books data. Please try again later.');
     }
   });
+
+
+  function search() {
+    console.log('searching')
+    const query=document.querySelector('.search').value
+    filter_data= booksData.filter(item =>
+        item.book_name.toLowerCase().includes(query.toLowerCase()) ||   item.category_name.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log(filter_data)
+    let booksHTML=``
+    filter_data.forEach(book => {
+        booksHTML+=`
+        <div id=product-id-${book.book_ID} class="item">
+            <img width="220" src="${book.book_image}" height="331">
+            <div class="details">
+                <h3>${book.book_name}</h3>
+                <div class="price-quantity">
+                    <h2>$ ${book.book_price}</h2>
+                </div>
+                <button data-book-id=${book.book_ID} data-book-stock=${book.books_instock}  type="submit" class="btn js-add-to-cart">AddTOCart</button>
+            </div>
+        </div>
+        `})
+        document.querySelector('.shop').innerHTML=booksHTML;
+}
+
+
+
+
+  document.querySelector('.js-search').addEventListener('click', search);
 
 /*   document.querySelector('.shop').addEventListener('click', async (e) => {
     try{

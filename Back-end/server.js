@@ -1094,6 +1094,11 @@ app.post('/grouporder', (req, res) => {
         });
     });
 });
+
+
+app.post('checkoutgrouped', (req, res) => {
+
+});
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
     const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, floor, phoneNumber, gender, password } = req.body;

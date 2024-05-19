@@ -387,14 +387,17 @@
             <button class="js-add-author-button">Add author</button>
             <h2>Show Author</h2>
             <button class="js-get-author-button">GET Author</button>
-            <table>
-                <tbody class="authers-list" id="authors-list">              
-                <tr>
-                    <th>ID</td>
-                    <th>First name</td>
-                    <th>last name</td>
-                </tr>
-                </tbody> 
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>first_name</th>
+                        <th>last_name</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body" class="authors-data">
+                    <!-- Data will be populated here by JavaScript -->
+                </tbody>
             </table>
         </div>
 
@@ -406,14 +409,16 @@
             <button class="js-add-publisher-button">Add Publisher</button>
             <h2>Show Publisher</h2>
             <button class="js-get-publisher-button">GET Publisher</button>
-            <table class="publisher-list" id="publisherList">
-                <tr>
-                    <th>ID</th>
-                    <th>name</th>
-                </tr>
-                <tr class="publisher">
-                </tr>
-                <!-- Add more publishers as needed -->
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>name</th>
+                    </tr>
+                </thead>
+                <tbody id="publisher-list" class="publisher-list">
+                    <!-- Data will be populated here by JavaScript -->
+                </tbody>
             </table>
         </div>
 
@@ -425,14 +430,16 @@
             <button class="js-add-category-button">Add Category</button>
             <h2>Show Category</h2>
             <button class="js-get-category-button">GET Category</button>
-            <table class="category-list" id="categoryList">
-                <tr>
-                    <th>ID</th>
-                    <th>name</th>
-                </tr>
-                <tr class="category">
-                </tr>
-                <!-- Add more publishers as needed -->
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>category</th>
+                    </tr>
+                </thead>
+                <tbody id="category-data" class="category-data">
+                    <!-- Data will be populated here by JavaScript -->
+                </tbody>
             </table>
         </div>
 
@@ -459,13 +466,15 @@
             <h2>Show Publisher</h2>
             <button class="js-get-publisher-button">GET Publisher</button>
             <table class="publisher-list" id="publisherList">
+            <thead>
                 <tr>
                     <td>ID</td>
                     <td>name</td>
                 </tr>
-                <tr class="publisher">
-                </tr>
+            </thead>    
+            <tbody class="authors-data">
                 <!-- Add more publishers as needed -->
+            </tbody>
             </table>
         </div>
         <script>
@@ -487,7 +496,7 @@
                 const sidebar = document.querySelector('.sidebar');
                 sidebar.style.width = (sidebar.style.width === '150px') ? '0' : '150px';
             }
-            document.querySelector('.js-get-author-button').addEventListener('click', function () {
+ /*            document.querySelector('.js-get-author-button').addEventListener('click', function () {
                 var authors = document.querySelectorAll('.author');
                 authors.forEach(function (author) {
                     author.classList.toggle('show');
@@ -505,7 +514,7 @@
                     category.classList.toggle('show');
                 });
             });
-
+ */
         </script>
         <script src="admin.js" type="module"></script>
         <script src="orders.js" type="module"></script>

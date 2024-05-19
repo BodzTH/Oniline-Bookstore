@@ -112,33 +112,58 @@ users.forEach(user => {
                 </div>
             </div>`
 })
-
+const tableBody=document.querySelector('.authors-data');
+const publishertableBody=document.querySelector('.publisher-list');
+const categorytableBody=document.querySelector('.category-data');
 authors.forEach(author => {
-  authorsHTML+=`<tr>
-  <td class="author"> ${author.author_ID}</td>
-  <td class="author"> ${author.first_name}</td>
-  <td class="author"> ${author.last_name}</td>
-  </tr>`
+
+  const row = document.createElement('tr');
+  const firstnameCell = document.createElement('td');
+  const lastnameCell = document.createElement('td');
+  const idCell = document.createElement('td');
+  idCell.textContent = author.author_ID;
+  firstnameCell.textContent = author.first_name;
+  lastnameCell.textContent = author.last_name;
+  row.appendChild(idCell);
+  row.appendChild(firstnameCell);
+  row.appendChild(lastnameCell);
+  tableBody.appendChild(row);
+
+
 })
 
 publishers.forEach(publisher => {
-  publishersHTML+=`
-  <td class="publisher">${publisher.publisher_ID}</td>
-  <td class="publisher">${publisher.name}</td>`
+
+  const row = document.createElement('tr');
+  const nameCell = document.createElement('td');
+  const idCell = document.createElement('td');
+  idCell.textContent = publisher.publisher_ID;
+  nameCell.textContent = publisher.name;
+  row.appendChild(idCell);
+  row.appendChild(nameCell);
+  publishertableBody.appendChild(row);
 })
 
 categories.forEach(category => {
-  categoriesHTML+=`
+  console.log(category)
+  categoriesHTML+=`<tr>
   <td class="category">${category.category_ID}</td>
-  <td class="category">${category.category_name}</td>`
-})
+  <td class="category">${category.category_name}</td></tr>`
 
-document.querySelector('.category-list').innerHTML+=categoriesHTML;
-document.querySelector('.publisher-list').innerHTML+=publishersHTML;
-document.querySelector('.authers-list').innerHTML+=authorsHTML;
+  const row = document.createElement('tr');
+  const nameCell = document.createElement('td');
+  const idCell = document.createElement('td');
+  idCell.textContent = category.category_ID;
+  nameCell.textContent = category.category_name;
+  row.appendChild(idCell);
+  row.appendChild(nameCell);
+  categorytableBody.appendChild(row);
+})
+console.log(categoriesHTML)
+console.log(publishersHTML)
 document.querySelector('.js-users-container').innerHTML=usersHTML;
 document.querySelector('.js-orders-container').innerHTML=ordersHTML;
-console.log(document.querySelector('.authers-list').innerHTML)}
+}
        catch (error) {
       console.error('Error fetching books data:', error);
       alert('Error fetching books data. Please try again later.');

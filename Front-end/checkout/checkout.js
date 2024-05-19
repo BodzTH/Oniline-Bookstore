@@ -219,17 +219,21 @@ let generatCheckout = async () => {
           const response = await fetch('http://localhost:3000/checkout', {
               method: 'POST',
           });
+          if (response.ok) {
+            alert('ordere placed success!');
+        } else {
+            const errorMessage = await response.text();
+            alert(`Error adding book to cart: ${errorMessage}`);
+        }
       } catch (error) {
+        alert('Error updating the cart. Please try again later.');
           console.error('Error updating the cart:', error);
-          alert('Error updating the cart. Please try again later.');
       }
-
-
-    
       });
       
   } catch (error) {
       console.error('Error fetching cart data:', error);
+      alert('Error fetching cart data. Please try again later.');
   }
 };
 
