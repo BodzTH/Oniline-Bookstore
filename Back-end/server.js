@@ -1353,6 +1353,7 @@ app.post('/addAdmin', (req, res) => {
 
 app.get('/api/gettotaquatity', (req, res) => {
     userEmail = req.session.user;
+    console.log(userEmail);
     const getUserQuery = 'SELECT * FROM user WHERE email = ?';
     connection.query(getUserQuery, [userEmail], (error, results) => {
         if (error) {
@@ -1372,7 +1373,6 @@ app.get('/api/gettotaquatity', (req, res) => {
             return res.status(500).send('Error fetching total');
         }
         console.log(results);
-        console.log(json(results))
         res.json(results);
     });
 });

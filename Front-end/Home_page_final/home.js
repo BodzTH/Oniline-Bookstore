@@ -102,17 +102,20 @@ calculation();
 let booksData;
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const totalQuantityResponse=await fetch('http://localhost:3000/api/gettotaquatity');
-        const totalQuantityData = await totalQuantityResponse.json();
+        try{
+            const totalQuantityResponse=await fetch('http://localhost:3000/api/gettotaquatity');
+            const totalQuantityData = await totalQuantityResponse.json();
+            if(totalQuantityData[0].total != null){
+                console.log(totalQuantityData[0].total)
+                document.getElementById('cartAmount').innerHTML=totalQuantityData[0].total;
+            }
+            else{
+                document.getElementById('cartAmount').innerHTML=0;
+            }
+        }
+        catch (error) {
+        }
         const response = await fetch('http://localhost:3000/api/getAllBooks');
-        if(totalQuantityData[0].total != null){
-            console.log(totalQuantityData[0].total)
-            document.getElementById('cartAmount').innerHTML=totalQuantityData[0].total;
-        }
-        else{
-            document.getElementById('cartAmount').innerHTML=0;
-        }
-
         booksData = await response.json();
         console.log(booksData)
         let booksHTML=``
@@ -162,8 +165,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                             }
                         }
                         catch (error) {
-                            console.error('Error adding book to cart:', error);
-                            alert('Error adding book to cart. Please try again later.');
                         }
                         alert('Book added to cart successfully!');
                     } else {
