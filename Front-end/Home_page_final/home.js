@@ -102,7 +102,17 @@ calculation();
 let booksData;
 document.addEventListener('DOMContentLoaded', async () => {
     try {
+        const totalQuantityResponse=await fetch('http://localhost:3000/api/gettotaquatity');
+        const totalQuantityData = await totalQuantityResponse.json();
         const response = await fetch('http://localhost:3000/api/getAllBooks');
+        if(totalQuantityData[0].total != null){
+            console.log(totalQuantityData[0].total)
+            document.getElementById('cartAmount').innerHTML=totalQuantityData[0].total;
+        }
+        else{
+            document.getElementById('cartAmount').innerHTML=0;
+        }
+
         booksData = await response.json();
         console.log(booksData)
         let booksHTML=``
@@ -121,7 +131,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             `
             
   })
-  console.log(booksHTML);
   document.querySelector('.shop').innerHTML=booksHTML;
           // Add event listener for Add to Cart buttons
           document.querySelectorAll('.js-add-to-cart').forEach(button => {
@@ -141,6 +150,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                     });
 
                     if (response.ok) {
+                        try{
+                            const totalQuantityResponse=await fetch('http://localhost:3000/api/gettotaquatity');
+                            const totalQuantityData = await totalQuantityResponse.json();
+                            if(totalQuantityData[0].total != null){
+                                console.log(totalQuantityData[0].total)
+                                document.getElementById('cartAmount').innerHTML=totalQuantityData[0].total;
+                            }
+                            else{
+                                document.getElementById('cartAmount').innerHTML=0;
+                            }
+                        }
+                        catch (error) {
+                            console.error('Error adding book to cart:', error);
+                            alert('Error adding book to cart. Please try again later.');
+                        }
                         alert('Book added to cart successfully!');
                     } else {
                         const errorMessage = await response.text();
