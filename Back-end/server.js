@@ -1094,6 +1094,11 @@ app.post('/grouporder', (req, res) => {
         });
     });
 });
+
+
+app.post('checkoutgrouped', (req, res) => {
+
+});
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
     const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, floor, phoneNumber, gender, password } = req.body;
@@ -1346,7 +1351,32 @@ app.post('/addAdmin', (req, res) => {
     });
 });
 
-
+app.get('/api/gettotaquatity', (req, res) => {
+    userEmail = req.session.user;
+    console.log(userEmail);
+    const getUserQuery = 'SELECT * FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
+        const userId = results[0].user_id;
+    const query = 'SELECT SUM(Book_counts) as total FROM cart_content WHERE user_user_id = ?';
+    connection.query(query, [userId], (error, results) => {
+        if (error) {
+            console.error('Error fetching total:', error);
+            return res.status(500).send('Error fetching total');
+        }
+        console.log(results);
+        res.json(results);
+    });
+});
+})
 // Start server
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);

@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <span>Phone Number:</span>
                 <span id="phone-number">${profile.phone_number}</span>
             </div>
+            <div class="profile-row">
+            <span>Balance:</span>
+            <span id="phone-number">${profile.balance}</span>
+            </div>
         </div>`
         document.querySelector('.profile-container').innerHTML=profileHTML;
     }
