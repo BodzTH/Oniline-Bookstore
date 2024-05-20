@@ -126,8 +126,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="details">
                     <h3>${book.book_name}</h3>
                     <div class="price-quantity">
-                        <h2>$ ${book.book_price}</h2>
-                        <div class="stock-indicator">In Stock: 10</div>
+                        <h2>ُEGB ${book.book_price}</h2>
+                        <div class="stock-indicator">In Stock: ${book.books_instock}</div>
                     </div>
                     <button data-book-id=${book.book_ID} data-book-stock=${book.books_instock}  type="submit" class="btn js-add-to-cart">AddTOCart</button>
                     </div>
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="details">
                 <h3>${book.book_name}</h3>
                 <div class="price-quantity">
-                    <h2>$ ${book.book_price}</h2>
+                    <h2>ُEGB ${book.book_price}</h2>
                 </div>
                 <button data-book-id=${book.book_ID} data-book-stock=${book.books_instock}  type="submit" class="btn js-add-to-cart">AddTOCart</button>
             </div>
