@@ -361,6 +361,7 @@ app.get('/api/getAllBooks', (req, res) => {
     });
 });
 
+
 // Route for adding a book to the cart
 app.post('/addToCart', (req, res) => {
     // Check if user is logged in
@@ -401,13 +402,16 @@ app.post('/addToCart', (req, res) => {
             console.log(results)
             if(bookStock>0)
             {
+            console.log("the quantity is more that 0")
             if(results.length>0){
+            console.log("the cart is not empty")
             for (let i = 0; i < results.length; i++) {
-                if(results[i].Book_counts<bookStock){
-                console.log("the quantity is more that 0")  
+                console.log("searching")
+                if(results[i].books_book_ID == bookId){
+                console.log("the book is already in the cart")  
                 existIndecator=true;    
-                if (results[i].books_book_ID == bookId && existIndecator==true) {
-                    console.log("the book is already in the cart")
+                if (results[i].Book_counts<bookStock && existIndecator==true) {
+                    console.log("the book is already in the cart and can be added ")
                     indecator = true;
                     const query = 'update cart_content set Book_counts = Book_counts + 1 where books_book_ID = ? and user_user_id = ?';
                     connection.query(query, [bookId, userId], (error, results) => {
@@ -418,25 +422,15 @@ app.post('/addToCart', (req, res) => {
                         return res.status(200).send('Book added to cart successfully');
                     });
                 }
+                else{
+                    console.log("the book is already in the cart but the quantity is more than the stock")
+                    return res.status(500).send('the quantity is more than the stock')
+                }
             }
-            else{
-                res.status(500).send('there is no stock avabile for this book')                    
-            }
-            }
-            if (indecator == false && existIndecator==true ) {
-                console.log("the book is not in the cart")
-                    // Insert the book into the cart content table
-                    const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
-                    connection.query(query, [bookCount, bookId, userId], (error, results) => {
-                    if (error) {
-                        console.error('Error adding book to cart:', error);
-                        return res.status(500).send('Error adding book to cart');
-                    }
-                    console.log('Book added to cart successfully');
-                    // Send a success response
-                    res.status(200).send('Book added to cart successfully');              
-        });}}
-        else{
+        
+        }
+
+        if(existIndecator==false){                
             console.log("the book is not in the cart")
             // Insert the book into the cart content table
             const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
@@ -447,19 +441,32 @@ app.post('/addToCart', (req, res) => {
             }
             console.log('Book added to cart successfully');
             // Send a success response
-            res.status(200).send('Book added to cart successfully');              
-        });
-        
-        }
+            res.status(200).send('Book added to cart successfully');                    
+    });}
     }
     else{
-        res.status(500).send('there is no stock avabile for this book')
+        console.log("the cart is empty")
+        const query = 'INSERT INTO cart_content (Book_counts, books_book_ID, user_user_id) VALUES (?, ?, ?)';
+        connection.query(query, [bookCount, bookId, userId], (error, results) => {
+            if (error) {
+                console.error('Error adding book to cart:', error);
+                return res.status(500).send('Error adding book to cart');
+            }
+            console.log('Book added to cart successfully');
+            // Send a success response
+            res.status(200).send('Book added to cart successfully');                    
+    });
     }
 
-     });
+     }
+     else{
+        res.status(500).send('there is no stock avabile for this book')
+    }
+     
         });
 
-    });
+    });});
+
 
 
 
@@ -613,7 +620,7 @@ app.post('/checkout', (req, res) => {
                             return res.status(500).send('Error adding order details');
                         }
                         console.log('Order details added successfully');
-                        const removebook=`                    UPDATE books AS b JOIN cart_content AS cc ON b.book_ID = cc.books_book_ID SET b.books_instock = b.books_instock - cc.Book_counts, b.books_sold = b.books_sold + cc.Book_counts WHERE cc.user_user_id = ?`;
+                        const removebook=`UPDATE books AS b JOIN cart_content AS cc ON b.book_ID = cc.books_book_ID SET b.books_instock = b.books_instock - cc.Book_counts, b.books_sold = b.books_sold + cc.Book_counts WHERE cc.user_user_id = ?`;
                         connection.query(removebook,[userId], (error, results) => {
                             if(error){
                                 console.error('Error adding removing books:', error);
@@ -1068,7 +1075,7 @@ app.post('/grouporder', (req, res) => {
             const userId = results[0].user_id;
             const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
                 const orderQuery = 'INSERT INTO orders (date, order_status, phone_number, countery, city, area, street, building_no, floor, flat_no, user_user_id,paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
-                connection.query(orderQuery, [currentDateTime, 'ordered',1,'NULL','NULL','NULL','NULL',0,'NULL',0, userId, 0], (error, results) => {
+                connection.query(orderQuery, [currentDateTime, 'not paid',1,'NULL','NULL','NULL','NULL',0,'NULL',0, userId, 0], (error, results) => {
                     if (error) {
                         console.error('Error adding order:', error);
                         return res.status(500).send('Error adding order');
@@ -1111,9 +1118,86 @@ app.post('/grouporder', (req, res) => {
 });
 
 
-app.post('checkoutgrouped', (req, res) => {
+app.post('/checkoutgrouped', (req, res) => {
+    const userEmail = req.session.user;
+    const { order_id} = req.body;
+    const getUserQuery = 'SELECT * FROM user WHERE email = ?';
+    connection.query(getUserQuery, [userEmail], (error, results) => {
+        if (error) {
+            console.error('Error fetching user ID:', error);
+            return res.status(500).send('Error adding book to cart');
+        }
+        
+        if (results.length === 0) {
+            console.error('User not found');
+            return res.status(404).send('User not found');
+        }
 
-});
+        const userId = results[0].user_id;
+        const phone_number = results[0].phone_number;
+        const countery = results[0].country;
+        const city = results[0].city;
+        const area = results[0].area;
+        const street = results[0].street;
+        const building_no = results[0].bulding_no;
+        const floor = results[0].floor;
+        const flat_no = results[0].flat_no;
+        const balance = results[0].balance;
+        const currentDateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+        const totalQuery = 'SELECT SUM(Book_count * book_price) as total FROM order_details,books WHERE orders_order_id = ? AND books_book_ID = book_ID';
+        connection.query(totalQuery, [order_id], (error, total) => {
+            if (error) {
+                console.error('Error fetching total:', error);
+                return res.status(500).send('Error fetching total');
+            }
+            const totalCost = total[0].total;
+            console.log(totalCost);
+            if (totalCost > balance) 
+                {
+                    return res.status(500).send('Error: You dont have enough balance');
+                }
+        
+            // Insert the order into the orders table
+            const updateBalance = 'UPDATE user SET balance = balance - ? WHERE user_id = ?';
+            connection.query(updateBalance, [totalCost, userId], (error, results) => {
+                if (error) {
+                    console.error('Error updating balance:', error);
+                    return res.status(500).send('Error updating balance');
+            }
+            const orderQuery = 'UPDATE orders SET order_status = ?, phone_number = ?, countery = ?, city = ?, area = ?, street = ?, building_no = ?, floor = ?, flat_no = ?, paid = ? WHERE order_id = ?';
+            connection.query(orderQuery, ['ordered', phone_number, countery, city, area, street, building_no, floor, flat_no, 1, order_id], (error, results) => {
+                if (error) {
+                    console.error('Error adding order:', error);
+                    return res.status(500).send('Error adding order');
+                }
+                console.log('Order added successfully');
+
+                // Get the max order ID
+                const max_IDquery = 'SELECT MAX(order_id) as max_order_id FROM orders WHERE user_user_id = ?';
+                connection.query(max_IDquery, [userId], (error, maxID) => {
+                    if (error) {
+                        console.error('Error getting max order ID:', error);
+                        return res.status(500).send('Error getting max order ID');
+                    }
+                    
+                    const updateStock = 'UPDATE books AS b JOIN cart_content AS cc ON b.book_ID = cc.books_book_ID SET b.books_instock = b.books_instock - cc.Book_counts, b.books_sold = b.books_sold + cc.Book_counts WHERE cc.user_user_id = ?';
+                    connection.query(updateStock,[userId], (error, results) => {
+                        if(error){
+                            console.error('Error adding removing books:', error);
+                            return res.status(500).send('Error adding removing books');                        
+                        }                          
+                            res.status(200).send('Order placed successfully');
+                    });
+
+
+                });
+            });
+
+
+            });
+        });
+    });
+}); 
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
     const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, floor, phoneNumber, gender, password } = req.body;
@@ -1372,11 +1456,13 @@ app.get('/api/gettotaquatity', (req, res) => {
     const getUserQuery = 'SELECT * FROM user WHERE email = ?';
     connection.query(getUserQuery, [userEmail], (error, results) => {
         if (error) {
+            conaole.log('Error fetching user ID:', error);
             console.error('Error fetching user ID:', error);
             return res.status(500).send('Error adding book to cart');
         }
         
         if (results.length === 0) {
+            console.error('User not found');
             console.error('User not found');
             return res.status(404).send('User not found');
         }
@@ -1385,8 +1471,10 @@ app.get('/api/gettotaquatity', (req, res) => {
     connection.query(query, [userId], (error, results) => {
         if (error) {
             console.error('Error fetching total:', error);
+            console.error('Error fetching total:', error);
             return res.status(500).send('Error fetching total');
         }
+        console.log("success");
         console.log(results);
         res.json(results);
     });

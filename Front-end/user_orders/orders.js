@@ -42,10 +42,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         let last_order_id=0;
         let ordersHTML=``
         orders.forEach(order => {
+        if(order.order_status=='not paid'){
           if(order.order_id!=last_order_id){
             ordersHTML+=
             
             `<hr>
+            <button class="js-pay-button" data-order-id=${order.order_id}>Pay</button>
             <div class="js-order--status">order status: ${order.order_status}</div>
             <div class="js-order">
             <div class="js-book-name">Book Name: ${order.book_name}</div>
@@ -61,9 +63,55 @@ document.addEventListener('DOMContentLoaded', async () => {
               <image src='${order.book_image}' class="js-book-image"></image>`
             }
             document.querySelector('.container').innerHTML=ordersHTML
-  });}
+        }
+
+        else{
+            if(order.order_id!=last_order_id){
+                ordersHTML+=
+                
+                `<hr>
+                <div class="js-order--status">order status: ${order.order_status}</div>
+                <div class="js-order">
+                <div class="js-book-name">Book Name: ${order.book_name}</div>
+                <div class="js-book-quantity">quantity: ${order.Book_count}</div>
+                <image src='${order.book_image}' class="js-book-image"></image>`
+    
+                console.log(ordersHTML)
+                last_order_id+=1}
+                else{
+                  ordersHTML+=`
+                  <div class="js-book-name">Book Name: ${order.book_name}</div>
+                  <div class="js-book-quantity">quantity: ${order.Book_count}</div>
+                  <image src='${order.book_image}' class="js-book-image"></image>`
+                }
+                document.querySelector('.container').innerHTML=ordersHTML
+        }
+  });
+  const buttons=document.querySelectorAll('.js-pay-button')
+  buttons.forEach((button) => {
+      console.log('paying order');
+      button.addEventListener('click', () => {
+          console.log('paying order');
+          const order_id=button.getAttribute('data-order-id');
+          fetch('http://localhost:3000/checkoutgrouped', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({order_id}),
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+              alert('Error paying order. Please try again later.');
+          });
+
+      });
+  });
+
+}
          catch (error) {
         console.error('Error fetching books data:', error);
         alert('Error fetching books data. Please try again later.');
     }
   });
+
