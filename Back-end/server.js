@@ -61,6 +61,11 @@ app.get('/signin', (req, res) => {
 
 
 app.get('/checkout', (req, res) => {
+    if (req.session.user==undefined) {
+        // User is not logged in, redirect to sign-in page
+        res.redirect('/signin');;
+        
+    }
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'checkout', 'checkout.html');
     
@@ -101,6 +106,11 @@ app.get('/home2', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
+    if (req.session.admin==undefined) {
+        // User is not logged in, redirect to sign-in page
+        res.redirect('/signinadmin');;
+        
+    }
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'admin', 'admin acc.html');
     
@@ -156,6 +166,11 @@ app.get('/Back-end/cart.js', (req, res) => {
 
 // Route for profile page
 app.get('/profile', (req, res) => {
+    if (req.session.user==undefined) {
+        // User is not logged in, redirect to sign-in page
+        res.redirect('/signin');;
+        
+    }
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'profile.html');
     
