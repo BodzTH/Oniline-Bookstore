@@ -32,7 +32,7 @@ app.use(cors()); // Enable CORS for all requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-    secret: 'your_secret_key',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
 }));
@@ -1188,12 +1188,8 @@ app.post('/checkoutgrouped', (req, res) => {
                         }                          
                             res.status(200).send('Order placed successfully');
                     });
-
-
                 });
             });
-
-
             });
         });
     });
