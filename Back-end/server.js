@@ -1197,8 +1197,8 @@ app.post('/checkoutgrouped', (req, res) => {
                         return res.status(500).send('Error getting max order ID');
                     }
                     
-                    const updateStock = 'UPDATE books AS b JOIN cart_content AS cc ON b.book_ID = cc.books_book_ID SET b.books_instock = b.books_instock - cc.Book_counts, b.books_sold = b.books_sold + cc.Book_counts WHERE cc.user_user_id = ?';
-                    connection.query(updateStock,[userId], (error, results) => {
+                    const updateStock = 'UPDATE books AS b JOIN order_details AS cc ON b.book_ID = cc.books_book_ID SET b.books_instock = b.books_instock - cc.Book_count, b.books_sold = b.books_sold + cc.Book_count WHERE cc.orders_order_id = ?';
+                    connection.query(updateStock,[order_id], (error, results) => {
                         if(error){
                             console.error('Error adding removing books:', error);
                             return res.status(500).send('Error adding removing books');                        
