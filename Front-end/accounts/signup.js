@@ -18,6 +18,7 @@ const register_button = document.getElementById('register_button');
  register_button.addEventListener ('click',async () => {
     try {
         const password = document.getElementById('password').value;
+        const confirmPassword=document.getElementById('confirm').value;
         const first_name = document.getElementById('first_name').value;
         const last_name = document.getElementById('last_name').value;
         const email = document.getElementById('email').value;
@@ -32,7 +33,11 @@ const register_button = document.getElementById('register_button');
         const flat_no = document.getElementById('flatNumber').value;
         const floor_no = document.getElementById('floor').value;
         const encryptedPassword = encryptPassword(password);
-        console.log(gender)
+        if(password!=confirmPassword){
+            document.getElementById('error_message').innerText = 'Passwords do not match';
+            alert('Passwords do not match');
+            return;
+        }
         const response = await fetch('http://localhost:3000/signup', {
             method: 'POST',
             headers: {
