@@ -12,6 +12,10 @@ body {
     margin: 0;
 }
 
+.row{
+    margin-top: 0.5cm;
+}
+
 .bar {
     position: relative;
     background: #e5f5f6;
@@ -250,7 +254,7 @@ button:hover {
 }
 
 .navbar {
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
     list-style-type: none;
