@@ -7,7 +7,33 @@
     <title>Cheakout</title>
 </head>
 <body>
-    
+    <ul id="navbar" class="navbar">
+        <li><a href="http://localhost:3000/home">
+            <h2>Shopping</h2>
+        </a></li>
+        <li><div class="search-container">
+              <input class="search" type="text" placeholder="Search.." name="search">
+              <button><i class="fa fa-search js-search"></i></button>
+          </div>
+        </li>
+        <li><a href="http://localhost:3000/orders">
+            <div class="order">
+                <i class="bi bi-card-checklist"></i>
+            </div>
+        </a>
+        <li><a href="http://localhost:3000/profile">
+            <div class="person">
+                <i class="bi bi-person-circle"></i>
+            </div>
+        </a>
+    </li>
+        <li><a href="http://localhost:3000/cart">
+            <div class="cart">
+                <i class="bi bi-cart2"></i>
+                <div id="cartAmount" class="cartAmount">0</div>
+            </div>
+        </a></li>
+    </ul>    
 <div class="container">
     <div class="checkoutLayout">
 

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,75 +13,77 @@
 
 <body>
     <div class="wrapper">
-        <form action="http://localhost:3000/signup" method="post">
+        
             <h1>Sign Up</h1>
             <div class="name">
                 <div class="input-box">
-                    <input type="text" placeholder="First Name" name="first_name" required>
+                    <input type="text" placeholder="First Name" name="first_name" id="first_name" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Last Name" name="last_name" required>
+                    <input type="text" placeholder="Last Name" name="last_name" id="last_name" required>
                     <i class='bx bxs-user'></i>
                 </div>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="Gender" name="gender" required>
+                <input type="text" placeholder="Gender" name="gender" id="gender" required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="email" name="email" required>
+                <input type="text" placeholder="email" name="email" id="email" required>
                 <i class='bx bxs-envelope'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" name="password" required>
+                <input type="password" placeholder="Password" name="password" class="password" id="password" required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
             <div class="input-box">
-                <input type="date" placeholder="dob" name="dob"  required>
+                <input type="date" placeholder="dob" name="dob" id="dob"  required>
                 <i class='bx bxs-calendar-alt'></i>
             </div>
             <div class="input-box">
-                <input type="number" placeholder="phone number" name="phoneNumber"  required>
+                <input type="number" placeholder="phonenumber" name="phoneNumber" id="phoneNumber"  required>
                 <i class='bx bxs-calendar-alt'></i>
             </div>
             <div class="name">
                 <div class="input-box">
-                    <input type="text" placeholder="Country" name="country" required>
+                    <input type="text" placeholder="Country" name="country" id="country" required>
                     <i class='bx bxs-buildings'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="City" name="city" required>
+                    <input type="text" placeholder="City" name="city" id="city" required>
                     <i class='bx bxs-city'></i>
                 </div>
             </div>
             <div class="name">
                 <div class="input-box">
-                    <input type="text" placeholder="Area" name="area" required>
+                    <input type="text" placeholder="Area" name="area" id="area" required>
                     <i class='bx bx-buildings'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="Street" name="street" required>
+                    <input type="text" placeholder="Street" name="street" id="street" required>
                     <i class='bx bx-street-view'></i>
                 </div>
             </div>
             <div class="name">
                 <div class="input-box">
-                    <input type="number" placeholder="BuildingNumber" name="buildingNumber" required>
+                    <input type="number" placeholder="BuildingNumber" name="buildingNumber" id="buildingNumber" required>
                     <i class='bx bxs-home'></i>
                 </div>
                 <div class="input-box">
-                    <input type="number" placeholder="flatNumber" name="flatNumber" required>
+                    <input type="number" placeholder="flatNumber" name="flatNumber" id="flatNumber" required>
                     <i class='bx bxs-lock'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" placeholder="floor" name="floor" required>
+                    <input type="text" placeholder="floor" name="floor" id="floor" required>
                     <i class='bx bx-street-view'></i>
                 </div>
             </div>
-                <button type="submit" class="btn">Register</button>
-        </form>
+                <button type="submit" class="register_button btn" id="register_button">Register</button>
+            
+        <div class="error_message" id="error_message" ></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>password    <script src="signup.js"></script>
 </body>
 
 </html>

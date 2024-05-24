@@ -10,6 +10,7 @@ const path = require('path');
 // Using moment.js
 const moment = require('moment');
 const dotenv = require('dotenv');
+const e = require('express');
 dotenv.config(); 
 
 
@@ -126,6 +127,22 @@ app.get('/Back-end/orders.js', (req, res) => {
 app.get('/sign_up.css', (req, res) => {
     // Construct the file path relative to the current directory (__dirname)
     const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'sign_up.css');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/signup.js', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'signup.js');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
+
+app.get('/signin.js', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'accounts', 'signin.js');
     
     // Send the file as the response
     res.sendFile(filePath);
@@ -1196,10 +1213,10 @@ app.post('/checkoutgrouped', (req, res) => {
 }); 
 // Route for sign-up form submission
 app.post('/signup', (req, res) => {
-    const { email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, floor, phoneNumber, gender, password } = req.body;
+    const { email, first_name, last_name, dob, country, city, area, street, building_no, flat_no, floor_no, phone_number, gender, encryptedPassword } = req.body;
 
     // Validate input
-    if (!email || !first_name || !last_name || !dob || !password) {
+    if (!email || !first_name || !last_name || !dob || !encryptedPassword) {
         return res.status(400).send('Email, first name, last name, date of birth, and password are required');
     }
 
@@ -1213,12 +1230,12 @@ app.post('/signup', (req, res) => {
     // Encrypt password with AES
     const iv = crypto.randomBytes(16); // Generate initialization vector
     const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey, 'base64'), iv);
-    let encryptedPassword = cipher.update(password, 'utf8', 'base64');
-    encryptedPassword += cipher.final('base64');
-    console.log(encryptedPassword)
+    let second_encryptedPassword = cipher.update(encryptedPassword, 'utf8', 'base64');
+    second_encryptedPassword += cipher.final('base64');
+    console.log(second_encryptedPassword)
 
     // Hash the encrypted password with bcrypt
-    bcrypt.hash(encryptedPassword, 10, (error, hashedPassword) => {
+    bcrypt.hash(second_encryptedPassword, 10, (error, hashedPassword) => {
         if (error) {
             console.error('Error hashing password with bcrypt:', error);
             return res.status(500).send('Error signing up');
@@ -1239,7 +1256,7 @@ app.post('/signup', (req, res) => {
             console.log(iv)
             // Insert new user into the database with hashed password and initialization vector (iv)
             const insertUserQuery = 'INSERT INTO user (email, first_name, last_name, dob, country, city, area, street, bulding_no, flat_no, floor, phone_number, gender, hashed_password, iv, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            connection.query(insertUserQuery, [email, first_name, last_name, dob, country, city, area, street, buildingNumber, flatNumber, floor, phoneNumber, gender, hashedPassword, iv, 0], (error) => {
+            connection.query(insertUserQuery, [email, first_name, last_name, dob, country, city, area, street, building_no, flat_no, floor_no, phone_number, gender, hashedPassword, iv, 0], (error) => {
                 if (error) {
                     console.error('Error inserting user data:', error);
                     return res.status(500).send('Error signing up');
@@ -1247,7 +1264,7 @@ app.post('/signup', (req, res) => {
                 console.log('User signed up successfully');
 
                 // Redirect user to sign-in page after successful sign-up
-                res.redirect('/signin');
+                res.status(200).send('User signed up successfully');
             });
         });
     });
@@ -1255,10 +1272,10 @@ app.post('/signup', (req, res) => {
 
 // Route for sign-in form submission
 app.post('/signin', (req, res) => {
-    const { email, password } = req.body;
-
+    const { email, encryptedPassword } = req.body;
+    console.log(email, encryptedPassword)
     // Validate input
-    if (!email || !password) {
+    if (!email || !encryptedPassword) {
         return res.status(400).send('Email and password are required');
     }
 
@@ -1292,11 +1309,11 @@ app.post('/signin', (req, res) => {
             console.log(Buffer.from(encryptionKey, 'base64'))
             const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(encryptionKey, 'base64'), iv);
             console.log(cipher)
-            let encryptedPassword = cipher.update(password, 'utf8', 'base64');
-            encryptedPassword += cipher.final('base64');
-            console.log(encryptedPassword)
+            let srcond_encryptedPassword = cipher.update(encryptedPassword, 'utf8', 'base64');
+            srcond_encryptedPassword += cipher.final('base64');
+            console.log(srcond_encryptedPassword)
             // Compare decrypted password with input password using bcrypt
-            bcrypt.compare(encryptedPassword,user.hashed_password,(error, result) => {
+            bcrypt.compare(srcond_encryptedPassword,user.hashed_password,(error, result) => {
                 if (error) {
                     console.error('Error comparing passwords:', error);
                     return res.status(500).send('Error signing in');
