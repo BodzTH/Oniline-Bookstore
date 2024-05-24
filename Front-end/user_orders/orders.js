@@ -44,8 +44,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         orders.forEach(order => {
         if(order.order_status=='not paid'){
           if(order.order_id!=last_order_id){
-            ordersHTML+=
-            
+            console.log('order id',order.order_id)
+            console.log('last order id',last_order_id)
+            ordersHTML+=            
             `<hr>
             <button class="js-pay-button" data-order-id=${order.order_id}>Pay</button>
             <div class="js-order--status">order status: ${order.order_status}</div>
@@ -55,8 +56,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             <image src='${order.book_image}' class="js-book-image"></image>`
 
             console.log(ordersHTML)
-            last_order_id+=1}
+            last_order_id=order.order_id}
             else{
+              console.log('order id',order.order_id)
+              console.log('last order id',last_order_id)
               ordersHTML+=`
               <div class="js-book-name">Book Name: ${order.book_name}</div>
               <div class="js-book-quantity">quantity: ${order.Book_count}</div>
@@ -67,8 +70,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         else{
             if(order.order_id!=last_order_id){
-                ordersHTML+=
-                
+                console.log('order id',order.order_id)
+                console.log('last order id',last_order_id)
+                ordersHTML+=                
                 `<hr>
                 <div class="js-order--status">order status: ${order.order_status}</div>
                 <div class="js-order">
@@ -77,8 +81,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <image src='${order.book_image}' class="js-book-image"></image>`
     
                 console.log(ordersHTML)
-                last_order_id+=1}
+                last_order_id=order.order_id}
                 else{
+                  console.log('order id',order.order_id)
+                  console.log('last order id',last_order_id)
                   ordersHTML+=`
                   <div class="js-book-name">Book Name: ${order.book_name}</div>
                   <div class="js-book-quantity">quantity: ${order.Book_count}</div>
@@ -89,9 +95,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   const buttons=document.querySelectorAll('.js-pay-button')
   buttons.forEach((button) => {
-      console.log('paying order');
+       console.log('paying order');
       button.addEventListener('click', () => {
-          console.log('paying order');
+        const order_id=button.getAttribute('data-order-id');
+        window.location.href = `http://localhost:3000/checout_grouped?q=${encodeURIComponent(order_id)}`;
+/*           console.log('paying order');
           const order_id=button.getAttribute('data-order-id');
           fetch('http://localhost:3000/checkoutgrouped', {
               method: 'POST',
@@ -103,9 +111,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           .catch((error) => {
               console.error('Error:', error);
               alert('Error paying order. Please try again later.');
-          });
+          }); */
 
-      });
+      }); 
   });
 
 }

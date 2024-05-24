@@ -290,6 +290,22 @@ app.get('/category.js', (req, res) => {
         res.sendFile(filePath);
 });
 
+app.get('/checout_grouped', (req, res) => {
+    console.log(req.query.order_id);
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'checkout_grouped', 'checkout_grouped.html');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+})
+
+app.get('/checkout_grouped.js', (req, res) => {
+    // Construct the file path relative to the current directory (__dirname)
+    const filePath = path.join(__dirname, '..', 'Front-end', 'checkout_grouped', 'checkout_grouped.js');
+    
+    // Send the file as the response
+    res.sendFile(filePath);
+});
 
 // Route for home page
 app.get('/api/profile-data', (req, res) => {
@@ -1493,6 +1509,27 @@ app.get('/api/gettotaquatity', (req, res) => {
     });
 });
 })
+
+app.get('/api/getspecficorder', (req, res) => {
+    const orderID = req.query.q;
+    console.log(orderID);
+    // Query to fetch books data from the database including author's name
+    const query = `SELECT Book_count, book_name, book_ID, book_desc, book_price, book_image,name AS publisher_name,books_instock 
+    FROM books,order_details,publishers   
+    WHERE orders_order_ID = ? AND books_book_ID = book_ID AND publishers_publisher_ID = publisher_ID`;
+
+    // Execute the query
+    connection.query(query, [orderID], (error, results) => {
+        if (error) {
+            console.error('Error orders books from database:', error);
+            res.status(500).send('Error fetching books');
+            return;
+        }
+        // Send the fetched books data as JSON response
+        res.json(results);
+    });
+});
+
 // Start server
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
