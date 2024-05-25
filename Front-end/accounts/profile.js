@@ -56,10 +56,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         submitButton.addEventListener('click', () => {
             const amount = parseFloat(amountInput.value);
             if (!isNaN(amount) && amount > 0) {
-                balance += amount;
-                balanceElement.textContent = balance.toFixed(2);
-                amountInput.value = '';
-                inputContainer.classList.add('hidden');
+                try {
+                    balance += amount;
+                    balanceElement.textContent = balance;
+                    amountInput.value = '';
+                    inputContainer.classList.add('hidden');
+                    fetch('http://localhost:3000/addbalance', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({amount}),
+                    })
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error paying order. Please try again later.');
+                }
             } else {
                 alert('Please enter a valid amount');
             }

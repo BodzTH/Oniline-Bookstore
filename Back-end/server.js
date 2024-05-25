@@ -23,7 +23,7 @@ const port = 3000;
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Abdo2003',
+    password: 'Om@rEssam2003',
     database: 'bookstore-final'
 });
 
@@ -1076,9 +1076,9 @@ app.get('/api/getBooksByCategory', (req, res) => {
 
 app.post('/addbalance', (req, res) => {
     const userEmail = req.session.user;
-    const { balance } = req.body;
+    const { amount } = req.body;
     const query = 'UPDATE user SET balance = balance+? WHERE email = ?';
-    connection.query(query, [balance, userEmail], (error, results) => {
+    connection.query(query, [amount, userEmail], (error, results) => {
         if (error) {
             console.error('Error adding balance:', error);
             return res.status(500).json({ error: 'Failed to add balance' });
