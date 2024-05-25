@@ -237,5 +237,16 @@ let generatCheckout = async () => {
   }
 };
 
-
+document.getElementById('same-address').addEventListener('change', function() {
+  const specificInputs = [
+      document.getElementById('name'),
+      document.getElementById('phone'),
+      document.getElementById('address'),
+      document.getElementById('country'),
+      document.getElementById('city')
+  ];
+  specificInputs.forEach(input => {
+      input.disabled = this.checked;
+  });
+});
 generatCheckout();
