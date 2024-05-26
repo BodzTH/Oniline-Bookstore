@@ -198,7 +198,7 @@ header .totalQuantity{
     padding-bottom: 20px;
 }
 .checkoutLayout .form h1,
-.checkoutLayout .form .group:nth-child(-n+3){
+.checkoutLayout .form .group:nth-child(-n){
     grid-column-start: 1;
     grid-column-end: 3;
 }
@@ -233,8 +233,6 @@ header .totalQuantity{
     margin-top: 20px;
     font-weight: bold;
     color: #fff;
-
-
 }
 .returnCart h1{
     border-top: 1px solid #eee;  

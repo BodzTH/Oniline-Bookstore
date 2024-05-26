@@ -243,7 +243,12 @@ document.getElementById('same-address').addEventListener('change', function() {
       document.getElementById('phone'),
       document.getElementById('address'),
       document.getElementById('country'),
-      document.getElementById('city')
+      document.getElementById('area'),
+      document.getElementById('city'),
+      document.getElementById('street'),
+      document.getElementById('building_number'),
+      document.getElementById('floor'),
+      document.getElementById('flat_nmuber'),
   ];
   specificInputs.forEach(input => {
       input.disabled = this.checked;
