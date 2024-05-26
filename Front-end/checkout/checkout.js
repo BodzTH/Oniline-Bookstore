@@ -212,9 +212,10 @@ let generatCheckout = async () => {
       const totalPrice=document.querySelector('.totalPrice')
       totalPrice.innerHTML= getTotalPrice()+'EGP'
 
-
+      const checkButton = document.querySelector('.js-Check-button');
       const button=document.querySelector('.js-Checkout-button')
       button.addEventListener('click',async () => {
+        if(checkButton.checked){
         try {
           const response = await fetch('http://localhost:3000/checkout', {
               method: 'POST',
@@ -228,8 +229,46 @@ let generatCheckout = async () => {
       } catch (error) {
         alert('Error updating the cart. Please try again later.');
           console.error('Error updating the cart:', error);
-      }
-      });
+      }}
+      else{
+        const country= document.getElementById('country').value;
+        const city = document.getElementById('city').value;
+        const area = document.getElementById('area').value;
+        const street = document.getElementById('street').value;
+        const buildingNumber = document.getElementById('building_number').value;
+        const floor = document.getElementById('floor').value;
+        const flatNumber = document.getElementById('flat').value;
+        const phoneNumber = document.getElementById('phone').value;
+        console.log(country,city,area,street,buildingNumber,floor,flatNumber,phoneNumber)
+            try {
+                console.log('trying');
+                const response = await fetch('http://localhost:3000/checkoutcustme', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        country,
+                        city,
+                        area,
+                        street,
+                        buildingNumber,
+                        floor,
+                        flatNumber,
+                        phoneNumber
+                    }),
+                });
+
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                } else {
+                    const errorMessage = await response.text();
+                    alert(`Error adding book to cart: ${errorMessage}`);
+                }
+            } catch (error) {
+                alert('Error updating the cart. Please try again later.');
+                console.error('Error updating the cart:', error);
+            }}});
       
   } catch (error) {
       console.error('Error fetching cart data:', error);
@@ -239,16 +278,14 @@ let generatCheckout = async () => {
 
 document.getElementById('same-address').addEventListener('change', function() {
   const specificInputs = [
-      document.getElementById('name'),
       document.getElementById('phone'),
-      document.getElementById('address'),
       document.getElementById('country'),
       document.getElementById('area'),
       document.getElementById('city'),
       document.getElementById('street'),
       document.getElementById('building_number'),
       document.getElementById('floor'),
-      document.getElementById('flat_nmuber'),
+      document.getElementById('flat'),
   ];
   specificInputs.forEach(input => {
       input.disabled = this.checked;

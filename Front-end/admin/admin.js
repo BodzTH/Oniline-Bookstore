@@ -360,6 +360,8 @@ function addCategory(){
 function addadmin() {
   const button=document.querySelector('.js-add-admin-button');
   button.addEventListener('click', async () => {
+    let admin_of_adimins;
+     const check_admin_of_admins=document.querySelector('.js-check-admin-of-admins');
       const email = document.querySelector('.js-admin-email-add-admin-account').value;
       const password = document.querySelector('.js-admin-password-add-admin-account').value;
       const confirmPassword = document.querySelector('.js-admin-password-confirmtion-add-admin-account').value;
@@ -367,18 +369,30 @@ function addadmin() {
           alert('Passwords do not match. Please try again.');
           return;
       }
+      if(check_admin_of_admins.checked){
+        admin_of_adimins=1;
+      }
+      else{
+        admin_of_adimins=0;
+      }
       try {
           const response = await fetch('http://localhost:3000/addAdmin', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ email, password }),
+              body: JSON.stringify({ email, password, admin_of_adimins}),
           });
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          else{
           alert('Admin added successfully.');
+        }
       } catch (error) {
           console.error('Error adding admin:', error);
-          alert('Error adding admin. Please try again later.');
+          alert('Error adding admin: you are Unauthorized.');
+          
       }
   });
 }
