@@ -422,7 +422,6 @@ app.post('/addToCart', (req, res) => {
             return res.status(404).send('User not found');
         }
         console.log(results[0].user_id);
-        let indecator=false;
         let existIndecator=false;
         const userId = results[0].user_id;
         const getinCartQuery = 'select * from cart_content where user_user_id = ?';
@@ -444,7 +443,6 @@ app.post('/addToCart', (req, res) => {
                 existIndecator=true;    
                 if (results[i].Book_counts<bookStock && existIndecator==true) {
                     console.log("the book is already in the cart and can be added ")
-                    indecator = true;
                     const query = 'update cart_content set Book_counts = Book_counts + 1 where books_book_ID = ? and user_user_id = ?';
                     connection.query(query, [bookId, userId], (error, results) => {
                         if (error) {
@@ -834,7 +832,7 @@ app.post('/addBook', (req, res) => {
                         return res.status(500).json({ error: 'Failed to add book' });
                     }
 
-                    res.json({ message: 'Book added successfully' });
+                    return res.json({ message: 'Book added successfully' });
                 });
             });
         });
@@ -1343,8 +1341,8 @@ app.post('/signin', (req, res) => {
                 res.cookie('user', email); // Set user cookie
                 res.redirect('/home'); // Redirect to dashboard or send token for authentication
             });
-        } catch (err) {
-            console.error('Error decrypting password:', err);
+        } catch (error) {
+            console.error('Error decrypting password:', error)
             return res.status(500).send('Error signing in');
         }
     });
